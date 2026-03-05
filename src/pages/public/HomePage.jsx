@@ -3,10 +3,7 @@ import AboutUs from './AboutUs.jsx';
 
 const HomePage = () => {
   return (
-    <PageLayout>
-     <AboutUs />
-
-    </PageLayout>
+    <div></div>
   );
 };
 export default HomePage;

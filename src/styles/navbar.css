@@ -117,6 +117,7 @@
 }
 .nav-logo-name-highlight{
   color: var(--red);
+  text-align: center;
 }
 .nav-logo-sub {
   font-size: 9.5px; 
@@ -452,4 +453,133 @@
     height: 32px;
     flex-shrink: 0;
   }
+}
+/* ── LANGUAGE SWITCHER ── */
+.mob-lang {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px 0;
+}
+
+.nav-lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 3px;
+}
+
+.nav-lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all 0.2s;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.nav-lang-btn:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.nav-lang-btn.active {
+  background: var(--red);
+}
+
+.nav-lang-flag {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.nav-lang-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.45);
+  transition: color 0.2s;
+}
+
+.nav-lang-btn:hover .nav-lang-label {
+  color: rgba(255,255,255,0.8);
+}
+
+.nav-lang-btn.active .nav-lang-label {
+  color: var(--white);
+}
+
+.mob-lang {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 16px 0;
+}
+
+.mob-lang-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: var(--off-white);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+.mob-lang-btn:hover {
+  background: rgba(168,23,28,0.06);
+  border-color: rgba(168,23,28,0.2);
+}
+
+.mob-lang-btn.active {
+  background: rgba(168,23,28,0.08);
+  border-color: var(--red);
+}
+
+.mob-lang-btn span:first-child {
+  font-size: 24px;    /* flag */
+  line-height: 1;
+}
+
+.mob-lang-btn span:nth-child(2) {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--dark);
+}
+
+.mob-lang-btn.active span:nth-child(2) {
+  color: var(--red);
+}
+
+.mob-lang-name {
+  font-size: 10px !important;
+  color: var(--muted) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  white-space: nowrap;
+}
+
+.mob-lang-btn.active .mob-lang-name {
+  color: var(--red) !important;
+}
+
+.mob-lang-divider {
+  height: 1px;
+  background: rgba(168,23,28,0.08);
+  margin-bottom: 8px;
+}
+
+/* Ẩn label trên mobile nhỏ, chỉ hiện flag */
+@media (max-width: 480px) {
+  .nav-lang-label { display: none; }
+  .nav-lang-btn { padding: 4px 6px; }
+  .nav-lang-flag { font-size: 16px; }
 }

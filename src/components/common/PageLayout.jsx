@@ -1,16 +1,15 @@
-// src/components/common/PageLayout.jsx
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 const PageLayout = ({ children }) => {
   return (
-    <>
+    <div className="page-layout">
       <Navbar />
-      <main className='page-content'>
+      <main className="page-main">
         {children}
       </main>
       <Footer />
-    </>
+    </div>
   );
 };
 

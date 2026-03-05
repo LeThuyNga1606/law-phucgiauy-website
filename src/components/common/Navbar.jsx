@@ -1,152 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+
+import { useTranslation } from 'react-i18next';
+
 import '../../styles/navbar.css';
-// ─── NAV DATA ────────────────────────────────────────────────────────────────
-const NAV_ITEMS = [
-  {
-    id: "about",
-    label: "Giới Thiệu",
-    groups: [
-      {
-        title: "Giới Thiệu Chung",
-        items: [
-          { label: "Trang chủ",           to: "/trang-chu" },
-          { label: "Giới Thiệu",          to: "/gioi-thieu" },
-          { label: "Liên Hệ",             to: "/lien-he" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "civil",
-    label: "Dân Sự",
-    groups: [
-      {
-        title: "Tranh Chấp Dân Sự",
-        items: [
-          { label: "Tranh Chấp Đất Đai",           to: "/dan-su/tranh-chap-dat-dai" },
-          { label: "Tranh Chấp Thừa Kế",            to: "/dan-su/tranh-chap-thua-ke" },
-          { label: "Tranh Chấp Ly Hôn",             to: "/dan-su/tranh-chap-ly-hon" },
-          { label: "Tranh Chấp Lao Động",           to: "/dan-su/tranh-chap-lao-dong" },
-          { label: "Tranh Chấp Thương Mại",         to: "/dan-su/tranh-chap-thuong-mai" },
-          { label: "Tranh Chấp Hợp Đồng",          to: "/dan-su/tranh-chap-hop-dong" },
-          { label: "Tranh Chấp Sở Hữu Trí Tuệ",   to: "/dan-su/tranh-chap-so-huu-tri-tue" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "criminal",
-    label: "Hình Sự",
-    groups: [
-      {
-        title: "Dịch Vụ Hình Sự",
-        items: [
-          { label: "Bào Chữa Cho Người Bị Buộc Tội",                                                                          to: "/hinh-su/bao-chua-bi-buoc-toi" },
-          { label: "Bảo Vệ Quyền Lợi Người Bị Hại & Đương Sự",                                                               to: "/hinh-su/bao-ve-nguoi-bi-hai" },
-          { label: "Bảo Vệ Quyền Lợi Người Bị Tố Giác & Bị Kiến Nghị Khởi Tố",                                              to: "/hinh-su/bao-ve-nguoi-bi-to-giac" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "investment",
-    label: "Đầu Tư Nước Ngoài",
-    groups: [
-      {
-        title: "Đầu Tư Mới",
-        items: [
-          { label: "Tư Vấn Pháp Lý Trước Đầu Tư",                       to: "/dau-tu/tu-van-phap-ly-truoc-dau-tu" },
-          { label: "Thẩm Tra Pháp Lý Đất, Nhà Xưởng",                   to: "/dau-tu/tham-tra-phap-ly" },
-          { label: "Thành Lập Công Ty Vốn Đầu Tư Nước Ngoài",           to: "/dau-tu/thanh-lap-cong-ty-von-nuoc-ngoai" },
-          { label: "Thành Lập Văn Phòng Đại Diện Công Ty Nước Ngoài",   to: "/dau-tu/thanh-lap-van-phong-dai-dien" },
-        ],
-      },
-      {
-        title: "Thay Đổi Giấy Chứng Nhận Đăng Ký Đầu Tư",
-        items: [
-          { label: "Điều Chỉnh Mục Tiêu – Quy Mô Dự Án",               to: "/dau-tu/dieu-chinh-muc-tieu" },
-          { label: "Thay Đổi Địa Điểm Thực Hiện Dự Án",                 to: "/dau-tu/thay-doi-dia-diem" },
-          { label: "Thay Đổi Tổng Vốn Đầu Tư",                          to: "/dau-tu/thay-doi-tong-von" },
-          { label: "Gia Hạn Tiến Độ Góp Vốn",                           to: "/dau-tu/gia-han-tien-do-gop-von" },
-          { label: "Thay Đổi Nhà Đầu Tư Thực Hiện Dự Án",               to: "/dau-tu/thay-doi-nha-dau-tu" },
-          { label: "Cập Nhật Thông Tin Nhà Đầu Tư",                     to: "/dau-tu/cap-nhat-thong-tin" },
-          { label: "Gia Hạn Thời Gian Thuê Xưởng",                      to: "/dau-tu/gia-han-thue-xuong" },
-          { label: "Gia Hạn Thời Gian Hoạt Động Dự Án",                 to: "/dau-tu/gia-han-hoat-dong" },
-        ],
-      },
-      {
-        title: "Báo Cáo & Chấm Dứt",
-        items: [
-          { label: "Đăng Ký Khoản Vay Nước Ngoài",                      to: "/dau-tu/dang-ky-vay-nuoc-ngoai" },
-          { label: "Đăng Ký Thay Đổi Khoản Vay",                        to: "/dau-tu/thay-doi-khoan-vay" },
-          { label: "Báo Cáo Khoản Vay Nước Ngoài",                      to: "/dau-tu/bao-cao-khoan-vay" },
-          { label: "Chấm Dứt Dự Án Đầu Tư",                             to: "/dau-tu/cham-dut-du-an" },
-          { label: "Giải Thể Công Ty Vốn Nước Ngoài",                   to: "/dau-tu/giai-the-cong-ty" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "enterprise",
-    label: "Doanh Nghiệp",
-    groups: [
-      {
-        title: "Tư Vấn & Thành Lập Mới",
-        items: [
-          { label: "Tư Vấn Thường Xuyên",                               to: "/doanh-nghiep/tu-van-thuong-xuyen" },
-          { label: "Thành Lập Doanh Nghiệp",                            to: "/doanh-nghiep/thanh-lap-doanh-nghiep" },
-          { label: "Thành Lập Chi Nhánh",                                to: "/doanh-nghiep/thanh-lap-chi-nhanh" },
-          { label: "Thành Lập Văn Phòng Đại Diện",                      to: "/doanh-nghiep/thanh-lap-van-phong" },
-          { label: "Đăng Ký Địa Điểm Kinh Doanh",                       to: "/doanh-nghiep/dia-diem-kinh-doanh" },
-        ],
-      },
-      {
-        title: "Thay Đổi Đăng Ký Doanh Nghiệp",
-        items: [
-          { label: "Cập Nhật Thông Tin",                                 to: "/doanh-nghiep/cap-nhat-thong-tin" },
-          { label: "Đổi Tên Doanh Nghiệp",                               to: "/doanh-nghiep/doi-ten" },
-          { label: "Thay Đổi Địa Chỉ",                                   to: "/doanh-nghiep/thay-doi-dia-chi" },
-          { label: "Tăng Vốn Điều Lệ",                                   to: "/doanh-nghiep/tang-von-dieu-le" },
-          { label: "Giảm Vốn Điều Lệ",                                   to: "/doanh-nghiep/giam-von-dieu-le" },
-          { label: "Chuyển Nhượng Vốn",                                  to: "/doanh-nghiep/chuyen-nhuong-von" },
-          { label: "Thay Đổi Đại Diện Pháp Luật",                       to: "/doanh-nghiep/thay-doi-dai-dien" },
-          { label: "Thay Đổi Loại Hình Doanh Nghiệp",                   to: "/doanh-nghiep/thay-doi-loai-hinh" },
-          { label: "Thay Đổi Ngành Nghề Kinh Doanh",                    to: "/doanh-nghiep/thay-doi-nganh-nghe" },
-        ],
-      },
-      {
-        title: "Chấm Dứt Kinh Doanh",
-        items: [
-          { label: "Giải Thể Doanh Nghiệp",                             to: "/doanh-nghiep/giai-the" },
-          { label: "Tạm Ngừng Hoạt Động",                               to: "/doanh-nghiep/tam-ngung-hoat-dong" },
-          { label: "Chấm Dứt Chi Nhánh / Văn Phòng",                   to: "/doanh-nghiep/cham-dut-chi-nhanh" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "license",
-    label: "Giấy Phép Con",
-    groups: [
-      {
-        title: "Giấy Phép & Chứng Nhận",
-        items: [
-          { label: "Giấy Phép Môi Trường",           to: "/giay-phep/moi-truong" },
-          { label: "Giấy Phép Hóa Chất",             to: "/giay-phep/hoa-chat" },
-          { label: "Phòng Cháy Chữa Cháy",           to: "/giay-phep/phong-chay-chua-chay" },
-          { label: "Hoàn Công Nhà Xưởng",            to: "/giay-phep/hoan-cong-nha-xuong" },
-          { label: "Giấy Phép Lao Động",             to: "/giay-phep/lao-dong" },
-          { label: "Giấy An Ninh Trật Tự",           to: "/giay-phep/an-ninh-trat-tu" },
-          { label: "Visa – Thẻ Tạm Trú",            to: "/giay-phep/visa-the-tam-tru" },
-          { label: "Hộ Kinh Doanh",                  to: "/giay-phep/ho-kinh-doanh" },
-          { label: "Giấy Phép Kinh Doanh Rượu",     to: "/giay-phep/kinh-doanh-ruou" },
-          { label: "Nhập Khẩu Thiết Bị Y Tế",       to: "/giay-phep/nhap-khau-thiet-bi-y-te" },
-        ],
-      },
-    ],
-  },
-];
+
 
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
 const Navbar = () => {
@@ -154,9 +12,166 @@ const Navbar = () => {
   const [openId, setOpenId]         = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobOpenId, setMobOpenId]   = useState(null);
-  const [lang, setLang]             = useState("vi");
   const navRef                      = useRef(null);
   const location                    = useLocation();
+  const { t, i18n }                 = useTranslation();
+  const [lang, setLang] = useState(
+    () => localStorage.getItem('lang') || 'vi'
+  );
+
+  // ─── NAV DATA ────────────────────────────────────────────────────────────────
+  const NAV_ITEMS = [
+    {
+      id: "about",
+      label: t('nav_about'),
+      groups: [
+        {
+          title: t('nav_about_group_title'),
+          items: [
+            { label: t('nav_about_home') ,           to: "/trang-chu" },
+            { label: t('nav_about_intro'),          to: "/gioi-thieu" },
+            { label: t('nav_about_contact'),             to: "/lien-he" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "civil",
+      label: t('nav_civil'),
+      groups: [
+        {
+          title: t('nav_civil_group_title'),
+          items: [
+            { label: t('nav_civil_land'),           to: "/dan-su/tranh-chap-dat-dai" },
+            { label: t('nav_civil_inheritance'),            to: "/dan-su/tranh-chap-thua-ke" },
+            { label: t('nav_civil_divorce'),             to: "/dan-su/tranh-chap-ly-hon" },
+            { label: t('nav_civil_labor'),           to: "/dan-su/tranh-chap-lao-dong" },
+            { label: t('nav_civil_commerce'),         to: "/dan-su/tranh-chap-thuong-mai" },
+            { label: t('nav_civil_contract'),          to: "/dan-su/tranh-chap-hop-dong" },
+            { label: t('nav_civil_ip'),   to: "/dan-su/tranh-chap-so-huu-tri-tue" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "criminal",
+      label: t('nav_criminal'),
+      groups: [
+        {
+          title: t('nav_criminal_group_title'),
+          items: [
+            { label: t('nav_criminal_defense'),                                                                          to: "/hinh-su/bao-chua-bi-buoc-toi" },
+            { label: t('nav_criminal_victim'),                                                               to: "/hinh-su/bao-ve-nguoi-bi-hai" },
+            { label: t('nav_criminal_accused'),                                              to: "/hinh-su/bao-ve-nguoi-bi-to-giac" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "investment",
+      label: t('nav_investment'),
+      groups: [
+        {
+          title: t('nav_investment_group1_title'),
+          items: [
+            { label: t('nav_investment_consult'),                       to: "/dau-tu/tu-van-phap-ly-truoc-dau-tu" },
+            { label: t('nav_investment_due_diligence'),                   to: "/dau-tu/tham-tra-phap-ly" },
+            { label: t('nav_investment_establish_company'),           to: "/dau-tu/thanh-lap-cong-ty-von-nuoc-ngoai" },
+            { label: t('nav_investment_establish_office'),   to: "/dau-tu/thanh-lap-van-phong-dai-dien" },
+          ],
+        },
+        {
+          title: t('nav_investment_group2_title'),
+          items: [
+            { label: t('nav_investment_adjust_target'),               to: "/dau-tu/dieu-chinh-muc-tieu" },
+            { label: t('nav_investment_change_location'),                 to: "/dau-tu/thay-doi-dia-diem" },
+            { label: t('nav_investment_change_capital'),                          to: "/dau-tu/thay-doi-tong-von" },
+            { label: t('nav_investment_extend_schedule'),                           to: "/dau-tu/gia-han-tien-do-gop-von" },
+            { label: t('nav_investment_change_investor'),               to: "/dau-tu/thay-doi-nha-dau-tu" },
+            { label: t('nav_investment_update_info'),                     to: "/dau-tu/cap-nhat-thong-tin" },
+            { label: t('nav_investment_extend_lease'),                      to: "/dau-tu/gia-han-thue-xuong" },
+            { label: t('nav_investment_extend_operation'),                 to: "/dau-tu/gia-han-hoat-dong" },
+          ],
+        },
+        {
+          title: t('nav_investment_group3_title'),
+          items: [
+            { label: t('nav_investment_register_loan'),                      to: "/dau-tu/dang-ky-vay-nuoc-ngoai" },
+            { label: t('nav_investment_change_loan'),                        to: "/dau-tu/thay-doi-khoan-vay" },
+            { label: t('nav_investment_report_loan'),                      to: "/dau-tu/bao-cao-khoan-vay" },
+            { label: t('nav_investment_terminate_project'),                             to: "/dau-tu/cham-dut-du-an" },
+            { label: t('nav_investment_dissolve_company'),                   to: "/dau-tu/giai-the-cong-ty" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "enterprise",
+      label: t('nav_enterprise'),
+      groups: [
+        {
+          title: t('nav_enterprise_group1_title'),
+          items: [
+            { label: t('nav_enterprise_regular_consult'),                               to: "/doanh-nghiep/tu-van-thuong-xuyen" },
+            { label: t('nav_enterprise_establish'),                            to: "/doanh-nghiep/thanh-lap-doanh-nghiep" },
+            { label: t('nav_enterprise_branch'),                                to: "/doanh-nghiep/thanh-lap-chi-nhanh" },
+            { label: t('nav_enterprise_rep_office'),                      to: "/doanh-nghiep/thanh-lap-van-phong" },
+            { label: t('nav_enterprise_biz_location'),                       to: "/doanh-nghiep/dia-diem-kinh-doanh" },
+          ],
+        },
+        {
+          title: t('nav_enterprise_group2_title'),
+          items: [
+            { label: t('nav_enterprise_update_info'),                                 to: "/doanh-nghiep/cap-nhat-thong-tin" },
+            { label: t('nav_enterprise_rename'),                               to: "/doanh-nghiep/doi-ten" },
+            { label: t('nav_enterprise_change_address'),                                   to: "/doanh-nghiep/thay-doi-dia-chi" },
+            { label: t('nav_enterprise_increase_capital'),                                   to: "/doanh-nghiep/tang-von-dieu-le" },
+            { label: t('nav_enterprise_decrease_capital'),                                   to: "/doanh-nghiep/giam-von-dieu-le" },
+            { label: t('nav_enterprise_transfer_capital'),                                  to: "/doanh-nghiep/chuyen-nhuong-von" },
+            { label: t('nav_enterprise_change_legal_rep'),                       to: "/doanh-nghiep/thay-doi-dai-dien" },
+            { label: t('nav_enterprise_change_type'),                   to: "/doanh-nghiep/thay-doi-loai-hinh" },
+            { label: t('nav_enterprise_change_business'),                    to: "/doanh-nghiep/thay-doi-nganh-nghe" },
+          ],
+        },
+        {
+          title: t('nav_enterprise_group3_title'),
+          items: [
+            { label: t('nav_enterprise_dissolve'),                             to: "/doanh-nghiep/giai-the" },
+            { label: t('nav_enterprise_suspend'),                               to: "/doanh-nghiep/tam-ngung-hoat-dong" },
+            { label: t('nav_enterprise_terminate_branch'),                   to: "/doanh-nghiep/cham-dut-chi-nhanh" },
+          ],
+        },
+      ],
+    },
+    {
+      id: "license",
+      label: t('nav_license'),
+      groups: [
+        {
+          title: t('nav_license_group_title'),
+          items: [
+            { label: t('nav_license_environment'),           to: "/giay-phep/moi-truong" },
+            { label: t('nav_license_chemical'),             to: "/giay-phep/hoa-chat" },
+            { label: t('nav_license_fire'),           to: "/giay-phep/phong-chay-chua-chay" },
+            { label: t('nav_license_factory'),            to: "/giay-phep/hoan-cong-nha-xuong" },
+            { label: t('nav_license_labor'),             to: "/giay-phep/lao-dong" },
+            { label: t('nav_license_security'),           to: "/giay-phep/an-ninh-trat-tu" },
+            { label: t('nav_license_visa'),            to: "/giay-phep/visa-the-tam-tru" },
+            { label: t('nav_license_household'),                  to: "/giay-phep/ho-kinh-doanh" },
+            { label: t('nav_license_liquor'),     to: "/giay-phep/kinh-doanh-ruou" },
+            { label: t('nav_license_medical'),       to: "/giay-phep/nhap-khau-thiet-bi-y-te" },
+          ],
+        },
+      ],
+    },
+  ];
+
+  const LANGUAGES = [
+    { code: "vi", label: "VI", flag: "🇻🇳", name: "Tiếng Việt" },
+    { code: "en", label: "EN", flag: "🇺🇸", name: "English" },
+    { code: "ko", label: "KR", flag: "🇰🇷", name: "한국어" },
+    { code: "zh", label: "CN", flag: "🇨🇳", name: "中文" },
+  ];
 
   // Scroll shadow
   useEffect(() => {
@@ -184,6 +199,12 @@ const Navbar = () => {
   const toggleItem = (id) => setOpenId(prev => prev === id ? null : id);
   const toggleMob  = (id) => setMobOpenId(prev => prev === id ? null : id);
 
+  const changeLanguage = (code) => {
+    setLang(code);
+    i18n.changeLanguage(code);
+    localStorage.setItem('lang', code);
+  };
+
   // Determine dropdown column count
   const getColClass = (groups) => {
     if (!groups) return "";
@@ -204,12 +225,19 @@ const Navbar = () => {
             <span className="nav-topbar-item">⏰ Thứ 2 - Thứ 6, 8h - 17h30</span>
           </div>
           <div className="nav-topbar-right">
-            {["vi", "en"].map(l => (
-              <button key={l} className={`nav-topbar-lang ${lang === l ? "active" : ""}`}
-                onClick={() => setLang(l)}>
-                {l.toUpperCase()}
-              </button>
-            ))}
+            <div className="nav-lang-switcher">
+              {LANGUAGES.map(l => (
+                <button
+                  key={l.code}
+                  className={`nav-lang-btn ${lang === l.code ? "active" : ""}`}
+                  onClick={() => changeLanguage(l.code)}
+                  title={l.name}
+                >
+                  <span className="nav-lang-flag">{l.flag}</span>
+                  <span className="nav-lang-label">{l.label}</span>
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -219,9 +247,9 @@ const Navbar = () => {
           <Link to="/" className="nav-logo">
             <div className="nav-logo-emblem" />
             <div className="nav-logo-text">
-              <span className="nav-logo-name">CÔNG TY LUẬT TNHH</span>
-              <span className="nav-logo-name-highlight">PHÚC GIA UY & Cộng Sự</span>
-              <span className="nav-logo-sub">Thấu hiểu - Trách nhiệm - Phụng sự</span>
+              <span className="nav-logo-name">{t('footer_logo_name')}</span>
+              <span className="nav-logo-name-highlight">{t('footer_logo_highlight')}</span>
+              <span className="nav-logo-sub">{t('slogan')}</span>
             </div>
           </Link>
 
@@ -290,7 +318,7 @@ const Navbar = () => {
           {/* CTA */}
           <Link to="/lien-he" className="nav-cta">
             <span className="nav-cta-dot" />
-            Tư Vấn Miễn Phí
+            {t('nav_cta')}
           </Link>
 
           {/* Hamburger */}
@@ -305,6 +333,22 @@ const Navbar = () => {
 
         {/* ── MOBILE MENU ── */}
         <div className={`nav-mobile ${mobileOpen ? "open" : ""}`}>
+        {/* ── THÊM LANGUAGE SWITCHER VÀO ĐÂY ── */}
+          <div className="mob-lang">
+            {LANGUAGES.map(l => (
+              <button
+                key={l.code}
+                className={`mob-lang-btn ${lang === l.code ? "active" : ""}`}
+                onClick={() => changeLanguage(l.code)}
+                title={l.name}
+              >
+                <span>{l.flag}</span>
+                <span>{l.label}</span>
+                <span className="mob-lang-name">{l.name}</span>
+              </button>
+            ))}
+          </div>
+          <div className="mob-lang-divider" />
           {NAV_ITEMS.map(item => (
             <div key={item.id} className={`mob-item ${mobOpenId === item.id ? "open" : ""}`}>
               {item.single ? (
@@ -329,9 +373,8 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <Link to="/lien-he" className="mob-cta">Tư Vấn Miễn Phí</Link>
+          <Link to="/lien-he" className="mob-cta">{t('nav_cta')}</Link>
         </div>
-
       </header>
     </>
   );

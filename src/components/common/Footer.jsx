@@ -1,44 +1,34 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import '../../styles/footer.css';
 import logoImg from '../../assets/images/logo.png';
 
-// ─── DATA ─────────────────────────────────────────────────────────────────────
-const SERVICES = [
-  { label: "Dân sự",                 to: "/dan-su/tranh-chap-dat-dai" },
-  { label: "Hình sự",                  to: "/dan-su/tranh-chap-thua-ke" },
-  { label: "Đầu tư nước ngoài",                    to: "/hinh-su/bao-chua-bi-buoc-toi" },
-  { label: "Doanh nghiệp ",        to: "/dau-tu/thanh-lap-cong-ty-von-nuoc-ngoai" },
-  { label: "Giấy phép con ",              to: "/doanh-nghiep/thanh-lap-doanh-nghiep" },
-];
-
-const QUICK_LINKS = [
-  { label: "Giới Thiệu",     to: "/gioi-thieu" },
-  { label: "Dịch Vụ Dân Sự", to: "/dan-su" },
-  { label: "Dịch Vụ Hình Sự",to: "/hinh-su" },
-  { label: "Đầu Tư Nước Ngoài", to: "/dau-tu" },
-  { label: "Doanh Nghiệp",   to: "/doanh-nghiep" },
-  { label: "Giấy Phép Con",  to: "/giay-phep" },
-  { label: "Tin Tức",        to: "/tin-tuc" },
-  { label: "Liên Hệ",        to: "/lien-he" },
-];
-
-const CONTACT = [
-  { icon: "☎", label: "Hotline", value: "0909 724 768", href: "tel:0909724768" },
-  { icon: "✉", label: "Email", value: "luatsunguyen0909@gmail.com", href: "mailto:luatsunguyen0909@gmail.com" },
-  { icon: "⊙", label: "Văn Phòng", value: "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, TP.HCM", href: null },
-  { icon: "◷", label: "Giờ Làm Việc", value: "Thứ 2 - Thứ 6, 8h - 17h30", href: null },
-];
-
-const CERTIFICATIONS = [
-  "Mã số thuế: 0318740937",
-  "Giấy đăng ký hoạt động số: 79.2024.02.4633/TP/ĐKHĐ",
-  "Ngày cấp: 25/10/2024, cấp đổi ngày 29/7/2025",
-  "Được cấp phép hoạt động bởi Sở Tư Pháp TP.HCM",
-];
-
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 const Footer = () => {
+  const { t } = useTranslation();
   const year = new Date().getFullYear();
+  
+  // ─── DATA ─────────────────────────────────────────────────────────────────────
+  const SERVICES = [
+    { label: t("footer_service_civil"),                 to: "/dan-su/tranh-chap-dat-dai" },
+    { label: t("footer_service_criminal"),                  to: "/dan-su/tranh-chap-thua-ke" },
+    { label: t("footer_service_investment"),                    to: "/hinh-su/bao-chua-bi-buoc-toi" },
+    { label: t("footer_service_enterprise"),        to: "/dau-tu/thanh-lap-cong-ty-von-nuoc-ngoai" },
+    { label: t("footer_service_license"),              to: "/doanh-nghiep/thanh-lap-doanh-nghiep" },
+  ];
+  const CONTACT = [
+    { icon: "☎", label: t("footer_contact_hotline"), value: "0909 724 768", href: "tel:0909724768" },
+    { icon: "✉", label: t("footer_contact_email"), value: "luatsunguyen0909@gmail.com", href: "mailto:luatsunguyen0909@gmail.com" },
+    { icon: "⊙", label: t("footer_contact_office"), value: t("footer_contact_office_value"), href: null },
+    { icon: "◷", label: t("footer_contact_hours"), value: t("footer_contact_hours_value"), href: null },
+  ];
+
+  const CERTIFICATIONS = [
+    t("footer_cert_tax"),
+    t("footer_cert_license"),
+    t("footer_cert_date"),
+    t("footer_cert_issued"),
+  ];
 
   return (
     <footer className="footer">
@@ -51,15 +41,13 @@ const Footer = () => {
             <Link to="/" className="footer-logo">
               <div className="footer-logo-emblem"><img src={logoImg} alt="Logo" /></div>
               <div className="footer-logo-text">
-                <span className="footer-logo-name">CÔNG TY LUẬT TNHH<br /> <em>PHÚC GIA UY & CỘNG SỰ</em></span>
-                <span className="footer-logo-sub">Thấu hiểu - Trách nhiệm - Phụng sự</span>
+                <span className="footer-logo-name">{t('footer_logo_name')}<br /> <em>{t('footer_logo_highlight')}</em></span>
+                <span className="footer-logo-sub">{t('slogan')}</span>
               </div>
             </Link>
 
             <p className="footer-brand-desc">
-              Đồng hành pháp lý tin cậy — bảo vệ quyền lợi doanh nghiệp
-              và cá nhân tại Việt Nam với đội ngũ luật sư chuyên nghiệp,
-              tận tâm và có kinh nghiệm thực chiến.
+              {t('footer_brand_desc')}
             </p>
 
             {/* Certifications */}
@@ -103,7 +91,7 @@ const Footer = () => {
           <div className="footer-col">
             <h4 className="footer-col-title">
               <span className="footer-col-title-line" />
-              Dịch Vụ Nổi Bật
+              {t('footer_service_title')}
             </h4>
             <ul className="footer-link-list">
               {SERVICES.map((s, i) => (
@@ -121,7 +109,7 @@ const Footer = () => {
           <div className="footer-col">
             <h4 className="footer-col-title">
               <span className="footer-col-title-line" />
-              Thông Tin Liên Hệ
+              {t('footer_contact_title')}
             </h4>
             <div className="footer-contact-list">
               {CONTACT.map((c, i) => (
@@ -166,16 +154,16 @@ const Footer = () => {
       <div className="footer-bottom">
         <div className="footer-bottom-inner">
           <p className="footer-copyright">
-            © {year} Công ty Luật TNHH Phúc Gia Uy & Cộng sự . Bảo lưu mọi quyền.
+            © {year} {t('footer_logo_name')} {t('footer_logo_highlight')}. {t('footer_copyright')}
             <span className="footer-copyright-sep">|</span>
-            Giấy đăng ký hoạt động số: 79.2024.02.4633/TP/ĐKHĐ do Sở Tư Pháp TP.HCM cấp
+            {t('footer_cert_license')} {t('footer_cert_issued')}
           </p>
           <div className="footer-bottom-links">
-            <Link to="/chinh-sach-bao-mat">Chính Sách Bảo Mật</Link>
+            <Link to="/chinh-sach-bao-mat">{t('footer_privacy')}</Link>
             <span className="footer-bottom-sep" />
-            <Link to="/dieu-khoan-su-dung">Điều Khoản Sử Dụng</Link>
+            <Link to="/dieu-khoan-su-dung">{t('footer_terms')}</Link>
             <span className="footer-bottom-sep" />
-            <Link to="/sitemap">Sơ Đồ Trang</Link>
+            <Link to="/sitemap">{t('footer_sitemap')}</Link>
           </div>
         </div>
       </div>
