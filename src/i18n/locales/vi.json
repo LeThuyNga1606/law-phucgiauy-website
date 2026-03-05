@@ -227,5 +227,11 @@
   "about_form_field_other": "Khác",
   "about_form_desc": "Mô Tả Vấn Đề",
   "about_form_desc_placeholder": "Mô tả ngắn gọn vấn đề pháp lý của bạn...",
-  "about_form_submit": "Gửi Yêu Cầu Tư Vấn"
+  "about_form_submit": "Gửi Yêu Cầu Tư Vấn",
+
+  "float_zalo_qr": "Quét QR để chat Zalo",
+  "float_zalo_label": "Zalo",
+  "float_phone_label": "Gọi Ngay",
+  "float_consult_label": "Tư Vấn",
+  "float_top_label": "Lên Đầu Trang"
 }

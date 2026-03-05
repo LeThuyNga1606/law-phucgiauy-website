@@ -222,7 +222,7 @@ const Navbar = () => {
           <div className="nav-topbar-left">
             <span className="nav-topbar-item">📞 <a href="tel:0909724768">0909 724 768</a></span>
             <span className="nav-topbar-item">✉️ <a href="mailto:luatsunguyen0909@gmail.com">luatsunguyen0909@gmail.com</a></span>
-            <span className="nav-topbar-item">⏰ Thứ 2 - Thứ 6, 8h - 17h30</span>
+            <span className="nav-topbar-item">⏰ {t('footer_contact_hours_value')}</span>
           </div>
           <div className="nav-topbar-right">
             <div className="nav-lang-switcher">

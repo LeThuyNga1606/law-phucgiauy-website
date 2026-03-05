@@ -1,5 +1,6 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
+import FloatButtons from './FloatButtons';
 
 const PageLayout = ({ children }) => {
   return (
@@ -9,6 +10,7 @@ const PageLayout = ({ children }) => {
         {children}
       </main>
       <Footer />
+      <FloatButtons />
     </div>
   );
 };

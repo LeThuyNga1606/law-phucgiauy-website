@@ -240,5 +240,11 @@
   "about_form_field_other": "기타",
   "about_form_desc": "문제 설명",
   "about_form_desc_placeholder": "법적 문제를 간략히 설명해 주세요...",
-  "about_form_submit": "상담 요청 보내기"
+  "about_form_submit": "상담 요청 보내기",
+
+  "float_zalo_qr": "QR 스캔하여 Zalo 채팅",
+  "float_zalo_label": "Zalo",
+  "float_phone_label": "전화하기",
+  "float_consult_label": "상담",
+  "float_top_label": "맨 위로"
 }

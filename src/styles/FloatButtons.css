@@ -1,0 +1,265 @@
+/* ── FLOAT GROUP ── */
+.float-group {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ── BASE BUTTON ── */
+.float-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+  transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  position: relative;
+}
+.float-btn:hover {
+  transform: scale(1.12) translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+}
+.float-btn svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* ── LABEL TOOLTIP ── */
+.float-btn-label {
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15,15,15,0.88);
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s, transform 0.2s;
+  transform: translateY(-50%) translateX(6px);
+  font-family: 'Be Vietnam Pro', sans-serif;
+  letter-spacing: 0.04em;
+}
+.float-btn-label::after {
+  content: '';
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-left-color: rgba(15,15,15,0.88);
+}
+.float-btn:hover .float-btn-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* ── ZALO ── */
+.float-btn-zalo {
+  background: #0068FF;
+  color: white;
+  padding: 0;
+  overflow: hidden;
+}
+.float-btn-zalo svg {
+  width: 52px;
+  height: 52px;
+}
+/* Pulse animation */
+.float-btn-zalo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #0068FF;
+  animation: zalo-pulse 2s ease-out infinite;
+  z-index: -1;
+}
+@keyframes zalo-pulse {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.7); opacity: 0; }
+}
+
+/* ── PHONE ── */
+.float-btn-phone {
+  background: #A8171C;
+  color: white;
+}
+/* Ring animation */
+.float-btn-phone svg {
+  animation: phone-ring 2.5s ease-in-out infinite;
+}
+@keyframes phone-ring {
+  0%, 100% { transform: rotate(0deg); }
+  10%       { transform: rotate(-15deg); }
+  20%       { transform: rotate(15deg); }
+  30%       { transform: rotate(-10deg); }
+  40%       { transform: rotate(10deg); }
+  50%       { transform: rotate(0deg); }
+}
+
+/* ── CONSULT ── */
+.float-btn-consult {
+  background: #1F5E55;
+  color: white;
+}
+
+/* ── BACK TO TOP ── */
+.float-btn-top {
+  background: white;
+  color: #444;
+  border: 1px solid rgba(0,0,0,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+.float-btn-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.float-btn-top:hover {
+  background: #A8171C;
+  color: white;
+  border-color: transparent;
+}
+
+/* ── ZALO QR TOOLTIP ── */
+.float-zalo-tooltip {
+  position: absolute;
+  right: 64px;
+  bottom: 120px;
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(8px);
+  transition: all 0.25s;
+  width: 160px;
+}
+.float-zalo-tooltip.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.float-zalo-qr {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.float-zalo-tooltip p {
+  font-size: 11px;
+  color: #666;
+  font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* ── BASE BUTTON hover — xóa transition transform để animation mượt hơn ── */
+.float-btn:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+  /* bỏ transform ở đây, để từng nút tự handle */
+}
+
+/* ── PHONE hover ── */
+.float-btn-phone:hover {
+  transform: scale(1.12) translateY(-2px);
+  animation: shake-phone 0.6s ease-in-out;
+  box-shadow:
+    0 8px 24px rgba(168,23,28,0.4),
+    0 0 0 4px rgba(168,23,28,0.15),
+    0 0 0 8px rgba(168,23,28,0.06);
+}
+
+/* ── ZALO hover ── */
+.float-btn-zalo:hover {
+  transform: scale(1.12) translateY(-2px);
+  animation: shake-zalo 0.5s ease-in-out;
+  box-shadow:
+    0 8px 24px rgba(0,104,255,0.4),
+    0 0 0 4px rgba(0,104,255,0.15),
+    0 0 0 8px rgba(0,104,255,0.06);
+}
+
+/* ── CONSULT hover ── */
+.float-btn-consult:hover {
+  transform: scale(1.12) translateY(-4px);
+  animation: shake-consult 0.5s ease-in-out;
+  box-shadow:
+    0 8px 24px rgba(31,94,85,0.4),
+    0 0 0 4px rgba(31,94,85,0.15),
+    0 0 0 8px rgba(31,94,85,0.06);
+}
+
+/* ── BACK TO TOP hover ── */
+.float-btn-top:hover {
+  background: #A8171C;
+  color: white;
+  border-color: transparent;
+  animation: shake-top 0.4s ease-in-out;
+  box-shadow:
+    0 8px 24px rgba(168,23,28,0.35),
+    0 0 0 4px rgba(168,23,28,0.12);
+}
+
+/* ── SHAKE ANIMATIONS ── */
+@keyframes shake-phone {
+  0%, 100% { transform: scale(1.12) translateY(-2px) rotate(0deg); }
+  15%       { transform: scale(1.12) translateY(-2px) rotate(-12deg); }
+  30%       { transform: scale(1.12) translateY(-2px) rotate(12deg); }
+  45%       { transform: scale(1.12) translateY(-2px) rotate(-8deg); }
+  60%       { transform: scale(1.12) translateY(-2px) rotate(8deg); }
+  75%       { transform: scale(1.12) translateY(-2px) rotate(-4deg); }
+  90%       { transform: scale(1.12) translateY(-2px) rotate(4deg); }
+}
+
+@keyframes shake-zalo {
+  0%, 100% { transform: scale(1.12) translateY(-2px) rotate(0deg); }
+  20%       { transform: scale(1.12) translateY(-2px) rotate(-10deg); }
+  40%       { transform: scale(1.12) translateY(-2px) rotate(10deg); }
+  60%       { transform: scale(1.12) translateY(-2px) rotate(-6deg); }
+  80%       { transform: scale(1.12) translateY(-2px) rotate(6deg); }
+}
+
+@keyframes shake-consult {
+  0%, 100% { transform: scale(1.12) translateY(-4px); }
+  25%       { transform: scale(1.12) translateY(-2px); }
+  50%       { transform: scale(1.12) translateY(-6px); }
+  75%       { transform: scale(1.12) translateY(-2px); }
+}
+
+@keyframes shake-top {
+  0%, 100% { transform: translateY(-2px); }
+  33%       { transform: translateY(-6px); }
+  66%       { transform: translateY(0px); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .float-group { right: 14px; bottom: 16px; gap: 8px; }
+  .float-btn { width: 46px; height: 46px; }
+  .float-btn svg { width: 20px; height: 20px; }
+  .float-btn-zalo svg { width: 46px; height: 46px; }
+  .float-btn-label { display: none; }
+}

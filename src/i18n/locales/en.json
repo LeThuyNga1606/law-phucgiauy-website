@@ -227,5 +227,13 @@
   "about_form_field_other": "Other",
   "about_form_desc": "Describe Your Issue",
   "about_form_desc_placeholder": "Briefly describe your legal issue...",
-  "about_form_submit": "Send Consultation Request"
+  "about_form_submit": "Send Consultation Request",
+
+  "float_zalo_qr": "Scan QR to chat on Zalo",
+  "float_zalo_label": "Zalo",
+  "float_phone_label": "Call Now",
+  "float_consult_label": "Consult",
+  "float_top_label": "Back to Top"
+
+  
 }

@@ -227,5 +227,11 @@
   "about_form_field_other": "其他",
   "about_form_desc": "问题描述",
   "about_form_desc_placeholder": "请简要描述您的法律问题...",
-  "about_form_submit": "发送咨询请求"
+  "about_form_submit": "发送咨询请求",
+
+  "float_zalo_qr": "扫描二维码在Zalo上聊天",
+  "float_zalo_label": "Zalo",
+  "float_phone_label": "立即致电",
+  "float_consult_label": "咨询",
+  "float_top_label": "回到顶部"
 }
