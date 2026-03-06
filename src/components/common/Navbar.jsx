@@ -23,7 +23,7 @@ const Navbar = () => {
   const NAV_ITEMS = [
     {
       id: "about",
-      label: t('nav_about'),
+      label: "PGU LAW FIRM",
       groups: [
         {
           title: t('nav_about_group_title'),
@@ -164,6 +164,12 @@ const Navbar = () => {
         },
       ],
     },
+    {
+      id: "news",
+      label: t('about_news_eyebrow'),
+      single: true,
+      to: "/tin tuc",
+    }
   ];
 
   const LANGUAGES = [
@@ -246,11 +252,6 @@ const Navbar = () => {
           {/* Logo */}
           <Link to="/" className="nav-logo">
             <div className="nav-logo-emblem" />
-            <div className="nav-logo-text">
-              <span className="nav-logo-name">{t('footer_logo_name')}</span>
-              <span className="nav-logo-name-highlight">{t('footer_logo_highlight')}</span>
-              <span className="nav-logo-sub">{t('slogan')}</span>
-            </div>
           </Link>
 
           {/* Desktop links */}
@@ -315,12 +316,6 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* CTA */}
-          <Link to="/lien-he" className="nav-cta">
-            <span className="nav-cta-dot" />
-            {t('nav_cta')}
-          </Link>
-
           {/* Hamburger */}
           <button
             className={`nav-hamburger ${mobileOpen ? "open" : ""}`}
@@ -373,7 +368,6 @@ const Navbar = () => {
               )}
             </div>
           ))}
-          <Link to="/lien-he" className="mob-cta">{t('nav_cta')}</Link>
         </div>
       </header>
     </>

@@ -2,18 +2,23 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import "../../styles/aboutUs.css";
-
+import LogoSlogan from "../../assets/images/logo_slogan.png";
+import IconDanSu from "../../assets/images/icon_dan_su.png";
+import IconHinhSu from "../../assets/images/icon_hinh_su.png";
+import IconDauTu from "../../assets/images/icon_dau_tu_nuoc_ngoai.png";
+import IconDoanhNghiep from "../../assets/images/icon_doanh_nghiep.png";
+import IconGiayPhep from "../../assets/images/icon_giay_phep_con.png";
 
 const AboutPage = () => {
   const [activeService, setActiveService] = useState(null);
   const { t } = useTranslation();
   
   const SERVICES = [
-    { icon: "⚖", title: t("about_service_civil_title"), color: "#A8171C", intro: t("about_service_civil_item_1"), to: "/dan-su" },
-    { icon: "🏛", title: t("about_service_criminal_title"), color: "#1F5E55", intro: t("about_service_criminal_item_1"), to: "/hinh-su" },
-    { icon: "🌐", title: t("about_service_investment_title"), color: "#A8171C", intro: t("about_service_investment_item_1"), to: "/dau-tu" },
-    { icon: "🏢", title: t("about_service_enterprise_title"), color: "#1F5E55", intro: t("about_service_enterprise_item_1"), to: "/doanh-nghiep" },
-    { icon: "📋", title: t("about_service_license_title"), color: "#A8171C", intro: t("about_service_license_item_1"), to: "/giay-phep" },
+    { img: IconDanSu, title: t("about_service_civil_title"), color: "#A8171C", intro: t("about_service_civil_item_1"), to: "/dan-su" },
+    { img: IconHinhSu, title: t("about_service_criminal_title"), color: "#1F5E55", intro: t("about_service_criminal_item_1"), to: "/hinh-su" },
+    { img: IconDauTu, title: t("about_service_investment_title"), color: "#A8171C", intro: t("about_service_investment_item_1"), to: "/dau-tu" },
+    { img: IconDoanhNghiep, title: t("about_service_enterprise_title"), color: "#1F5E55", intro: t("about_service_enterprise_item_1"), to: "/doanh-nghiep" },
+    { img: IconGiayPhep, title: t("about_service_license_title"), color: "#A8171C", intro: t("about_service_license_item_1"), to: "/giay-phep" },
   ];
 
   const NEWS = [
@@ -21,6 +26,49 @@ const AboutPage = () => {
     { date: "08/02/2025", category: t("about_news_2_category"), title: t("about_news_2_title"), excerpt: t("about_news_2_excerpt"), slug: "thanh-lap-cong-ty-fdi-viet-nam" },
     { date: "01/02/2025", category: t("about_news_3_category"), title: t("about_news_3_title"), excerpt: t("about_news_3_excerpt"), slug: "giai-quyet-tranh-chap-dat-dai" },
   ];
+
+  const useTyping = (text, speed = 80, delay = 600, repeatDelay = 1000) => {
+    const [displayed, setDisplayed] = useState('');
+    const [done, setDone] = useState(false);
+
+    useEffect(() => {
+      let timeout, interval, repeatTimeout;
+
+      const startTyping = () => {
+        setDisplayed('');
+        setDone(false);
+        let i = 0;
+        interval = setInterval(() => {
+          setDisplayed(text.slice(0, i + 1));
+          i++;
+          if (i >= text.length) {
+            clearInterval(interval);
+            setDone(true);
+            // ← sau 10s thì xóa rồi gõ lại
+            repeatTimeout = setTimeout(() => {
+              startTyping();
+            }, repeatDelay);
+          }
+        }, speed);
+      };
+
+      // Delay lần đầu trước khi bắt đầu gõ
+      timeout = setTimeout(() => {
+        startTyping();
+      }, delay);
+
+      return () => {
+        clearTimeout(timeout);
+        clearTimeout(repeatTimeout);
+        clearInterval(interval);
+      };
+    }, [text, speed, delay, repeatDelay]);
+
+    return { displayed, done };
+  };
+
+  const slogan = t('slogan');
+  const { displayed, done } = useTyping(slogan, 70, 800);
   return (
     <div className="about-root">
 
@@ -28,65 +76,44 @@ const AboutPage = () => {
         <div className="about-hero-bg-grid" />
         <div className="about-hero-inner">
           <div className="about-hero-left">
-            <p className="about-eyebrow"><span className="about-eyebrow-line" />{t("about_eyebrow")}</p>
-            <h1 className="about-hero-title">{t("about_intro_title_1")} {t("about_intro_title_2")}<br /><br /><em>{t("slogan")}</em></h1>
-            <p className="about-hero-desc">{t("about_hero_title_1")} {t("about_hero_title_2")}</p>
+            <p className="about-eyebrow"><span className="about-eyebrow-line" />PGU LAW FIRM</p>
+            <h1 className="about-hero-title">
+              <span style={{color: "var(--red)", fontWeight: "bold", fontSize: 52}}>
+                {displayed}
+                {!done && <span className="about-typing-cursor">|</span>}
+              </span>
+            </h1>
             <div className="about-hero-actions">
               <Link to="/lien-he" className="about-btn-red">{t("about_btn_consult")}</Link>
-              <Link to="/tin-tuc" className="about-btn-outline">{t("about_btn_news")}</Link>
             </div>
           </div>
           <div className="about-hero-right">
-            <div className="about-hero-contact-grid">
-              <div className="about-hero-contact-card">
-                <div className="about-hero-contact-icon">📞</div>
-                <div><strong>0909 724 768</strong></div>
-              </div>
-              <div className="about-hero-contact-card">
-                <div className="about-hero-contact-icon">✉️</div>
-                <div><strong>luatsunguyen0909@gmail.com</strong></div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
 
       <section className="about-info">
         <div className="about-info-inner-single">
-          <p className="about-eyebrow about-eyebrow-dark">
-            <span className="about-eyebrow-line" />
-            {t("about_intro_eyebrow")}
-          </p>
-
           <div className="about-intro-grid">
             {/* Cột trái — 3 đoạn văn */}
-            <div className="about-intro-content">
-              <p className="about-intro-para">
-                {t("about_intro_para_1")}
-              </p>
-              <p className="about-intro-para">
-                {t("about_intro_para_2")}
-              </p>
-              <p className="about-intro-para">
-                {t("about_intro_para_3")}
-              </p>
+            <div className="about-intro-content" style={{alignSelf: 'center'}}>
+            <p className="about-eyebrow about-eyebrow-dark">
+              <span className="about-eyebrow-line" />
+              {t("about_intro_eyebrow")}
+            </p>
+            <p className="about-intro-para">
+              {t("about_intro_para_1")}
+            </p>
+            <p className="about-intro-para">
+              {t("about_intro_para_2")}
+            </p>
+            <Link to="/lien-he" className="about-btn-red">{t("about_intro_story")}</Link>
             </div>
+            
 
             {/* Cột phải — 3 giá trị cốt lõi */}
             <div className="about-intro-values">
-              {[
-                { icon: "👁", title: t("about_value_1_title"), desc: t("about_value_1_desc") },
-                { icon: "⚖", title: t("about_value_2_title"), desc: t("about_value_2_desc") },
-                { icon: "🤝", title: t("about_value_3_title"), desc: t("about_value_3_desc") },
-              ].map((v, i) => (
-                <div key={i} className="about-intro-value-card">
-                  <div className="about-intro-value-icon">{v.icon}</div>
-                  <div>
-                    <h4 className="about-intro-value-title">{v.title}</h4>
-                    <p className="about-intro-value-desc">{v.desc}</p>
-                  </div>
-                </div>
-              ))}
+              <img src={LogoSlogan} alt="Core Values" />
             </div>
           </div>
         </div>
@@ -95,18 +122,28 @@ const AboutPage = () => {
       <section className="about-services">
         <div className="about-services-inner">
           <div className="about-services-header">
-            <div>
-              <p className="about-eyebrow"><span className="about-eyebrow-line" />{t("about_service_eyebrow")}</p>
-              <h2 className="about-section-title">{t("about_service_title_1")}<br/><em>{t("about_service_title_2")}</em></h2>
-            </div>
-            <p className="about-services-desc">{t("about_service_desc")}</p>
+            <p className="about-eyebrow"><span className="about-eyebrow-line" /></p>
+            <h2 className="about-section-title">{t("about_service_title_1")}<br/></h2>
+            <p className="about-eyebrow"><span className="about-eyebrow-line" /></p>
           </div>
           <div className="about-services-grid">
-            {SERVICES.map((s, i) => (
+            {SERVICES.slice(0, 3).map((s, i) => (
               <div key={i} className={`about-service-card ${activeService === i ? "active" : ""}`} style={{"--accent": s.color}} onMouseEnter={() => setActiveService(i)} onMouseLeave={() => setActiveService(null)}>
-                <div className="about-service-icon">{s.icon}</div>
-                <h3 className="about-service-title">{s.title}</h3>
-                <p className="about-service-intro">{s.intro}</p>
+                <div className="about-service-header">
+                  <div className="about-service-icon"><img src={s.img} alt={s.title} /></div>
+                  <h3 className="about-service-title">{s.title}</h3>
+                </div>
+                <Link to={s.to} className="about-service-link">Xem Chi Tiết <span>→</span></Link>
+              </div>
+            ))}
+          </div>
+          <div className="about-services-grid-bottom">
+            {SERVICES.slice(3, 5).map((s, i) => (
+              <div key={i} className={`about-service-card ${activeService === i + 3 ? "active" : ""}`} style={{"--accent": s.color}} onMouseEnter={() => setActiveService(i + 3)} onMouseLeave={() => setActiveService(null)}>
+                <div className="about-service-header">
+                  <div className="about-service-icon"><img src={s.img} alt={s.title} /></div>
+                  <h3 className="about-service-title">{s.title}</h3>
+                </div>
                 <Link to={s.to} className="about-service-link">Xem Chi Tiết <span>→</span></Link>
               </div>
             ))}
@@ -117,10 +154,11 @@ const AboutPage = () => {
       <section className="about-news">
         <div className="about-news-inner">
           <div className="about-news-header">
-            <div>
-              <p className="about-eyebrow about-eyebrow-dark"><span className="about-eyebrow-line" />{t("about_news_eyebrow")}</p>
-              <h2 className="about-section-title">{t("about_news_title_1")}<br/><em>{t("about_news_title_2")}</em></h2>
-            </div>
+            <p className="about-eyebrow"><span className="about-eyebrow-line" /></p>
+            <h2 className="about-section-title">{t("about_news_eyebrow")}</h2>
+            <p className="about-eyebrow"><span className="about-eyebrow-line" /></p>           
+          </div>
+          <div style={{display: 'flex', justifyContent: 'end', marginBottom: 20}}> 
             <Link to="/tin-tuc" className="about-btn-outline-dark">{t("about_news_view_all")}</Link>
           </div>
           <div className="about-news-grid">
@@ -138,36 +176,6 @@ const AboutPage = () => {
           </div>
         </div>
       </section>
-
-      <section className="about-contact">
-        <div className="about-contact-bg-pattern" />
-        <div className="about-contact-inner">
-          <div className="about-contact-left">
-            <p className="about-eyebrow"><span className="about-eyebrow-line" />{t("about_contact_eyebrow")}</p>
-            <h2 className="about-contact-title">{t("about_contact_title_1")}<br/><em>{t("about_contact_title_2")}</em></h2>
-            <p className="about-contact-desc">{t("about_contact_desc")}</p>
-          </div>
-          <div className="about-contact-right">
-            <div className="about-contact-cards">
-              {[
-                { icon: "☎", title: "Hotline", value: "0909 724 768", sub: "Hỗ trợ 24/7", href: "tel:0909724768" },
-                { icon: "✉", title: "Email", value: "luatsunguyen0909@gmail.com", sub: "Phản hồi trong 24h", href: "mailto:luatsunguyen0909@gmail.com" },
-                { icon: "⊙", title: "Văn Phòng", value: "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh", sub: "T2–T6: 07:30–17:00", href: null },
-              ].map((c, i) => (
-                <div key={i} className="about-contact-card">
-                  <div className="about-contact-card-icon">{c.icon}</div>
-                  <div>
-                    <div className="about-contact-card-title">{t(c.title)}</div>
-                    {c.href ? <a href={c.href} className="about-contact-card-value link">{c.value}</a> : <div className="about-contact-card-value">{c.value}</div>}
-                    <div className="about-contact-card-sub">{t(c.sub)}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
     </div>
   );
 };

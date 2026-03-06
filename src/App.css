@@ -1,5 +1,5 @@
 html, body {
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
   overflow-x: hidden;
   width: 100%;
 }
@@ -9,7 +9,7 @@ html, body {
   padding: 0;
   text-align: left;    /* ← đổi từ center thành left */
   width: 100%;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .logo {

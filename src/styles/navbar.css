@@ -27,7 +27,7 @@
 
 /* ── TOP BAR ── */
 .nav-topbar {
-  background: var(--dark);
+  background: var(--red);
   height: 36px;
   display: flex; align-items: center;
   justify-content: space-between;
@@ -38,12 +38,14 @@
   display: flex; gap: 24px; align-items: center;
 }
 .nav-topbar-item {
-  font-size: 11.5px; color: rgba(255,255,255,0.45);
+  font-size: 11.5px; 
+  color: var(--white);
   letter-spacing: 0.04em;
   display: flex; align-items: center; gap: 6px;
 }
 .nav-topbar-item a {
-  color: rgba(255,255,255,0.45); text-decoration: none;
+  color: var(--white); 
+  text-decoration: none;
   transition: color 0.2s;
 }
 .nav-topbar-item a:hover { 
@@ -72,7 +74,7 @@
   background: var(--white);
   border-bottom: 2px solid var(--red);
   display: flex; align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0 48px;
   transition: box-shadow 0.3s;
   position: relative;
@@ -87,9 +89,12 @@
   text-decoration: none; flex-shrink: 0;
 }
 .nav-logo-emblem {
-  width: 42px; height: 42px;
-  background: var(--red);
-  display: flex; align-items: center; justify-content: center;
+  width: 100px; 
+  height: 70px;
+  /* background: var(--red); */
+  display: flex; 
+  align-items: center; 
+  justify-content: center;
   position: relative;
 }
 .nav-logo-emblem::after {
@@ -138,17 +143,25 @@
   display: flex; align-items: center;
 }
 .nav-item-btn {
-  display: flex; align-items: center; gap: 5px;
-  padding: 0 18px; height: 100%;
-  font-size: 13px; font-weight: 500;
-  color: var(--dark); letter-spacing: 0.02em;
-  background: none; border: none; cursor: pointer;
+  display: flex; 
+  align-items: 
+  center; gap: 5px;
+  padding: 0 18px; 
+  height: 100%;
+  font-size: 16px; 
+  font-weight: 500;
+  color: var(--dark); 
+  letter-spacing: 0.02em;
+  background: none; 
+  border: none; 
+  cursor: pointer;
   transition: color 0.2s;
   white-space: nowrap;
   text-decoration: none;
 }
 .nav-item-btn .arrow {
-  font-size: 8px; color: var(--muted);
+  font-size: 10px; 
+  color: var(--muted);
   transition: transform 0.25s, color 0.2s;
   margin-top: 1px;
 }
@@ -234,7 +247,8 @@
 }
 .drop-group:first-child { padding-left: 0; }
 .drop-group-title {
-  font-size: 10px; font-weight: 600;
+  font-size: 14px; 
+  font-weight: 600;
   letter-spacing: 0.18em; text-transform: uppercase;
   color: var(--red); margin-bottom: 14px;
   padding-bottom: 10px;
@@ -243,7 +257,8 @@
 .drop-group ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }
 .drop-group ul li a {
   display: block;
-  font-size: 13px; color: #444;
+  font-size: 16px; 
+  color: #444;
   text-decoration: none;
   padding: 7px 10px;
   border-left: 2px solid transparent;
@@ -264,7 +279,8 @@
 .drop-single a {
   display: flex; align-items: center; gap: 10px;
   padding: 12px 24px;
-  font-size: 13.5px; color: #333;
+  font-size: 16px; 
+  color: var(--dark);
   text-decoration: none;
   transition: all 0.18s;
   border-left: 3px solid transparent;
@@ -365,7 +381,10 @@
     width: min(860px, 94vw);
     padding: 24px;
   }
-  .drop-group ul li a { font-size: 12px; padding: 6px 8px; }
+  .drop-group ul li a { 
+    font-size: 12px; 
+    padding: 6px 8px; 
+  }
   .drop-group-title { font-size: 9px; }
   .nav-logo-name {
     font-size: 14px;
@@ -466,7 +485,7 @@
   display: flex;
   align-items: center;
   gap: 2px;
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.3);
   border: 1px solid rgba(255,255,255,0.08);
   padding: 3px;
 }
@@ -481,7 +500,7 @@
   cursor: pointer;
   border-radius: 2px;
   transition: all 0.2s;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .nav-lang-btn:hover {
@@ -530,7 +549,7 @@
   border: 2px solid transparent;
   cursor: pointer;
   transition: all 0.2s;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 .mob-lang-btn:hover {

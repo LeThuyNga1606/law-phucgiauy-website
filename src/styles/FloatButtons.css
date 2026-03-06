@@ -54,7 +54,7 @@
   pointer-events: none;
   transition: opacity 0.2s, transform 0.2s;
   transform: translateY(-50%) translateX(6px);
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
   letter-spacing: 0.04em;
 }
 .float-btn-label::after {
@@ -173,7 +173,7 @@
 .float-zalo-tooltip p {
   font-size: 11px;
   color: #666;
-  font-family: 'Be Vietnam Pro', sans-serif;
+  font-family: Arial, sans-serif;
 }
 
 /* ── BASE BUTTON hover — xóa transition transform để animation mượt hơn ── */
