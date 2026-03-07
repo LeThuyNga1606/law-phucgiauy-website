@@ -100,6 +100,7 @@
   background: var(--red);
   padding: 72px 60px 56px;
   border-top: 1px solid var(--border);
+  overflow: hidden;
 }
 .footer-grid {
   max-width: 1280px; 
@@ -107,6 +108,15 @@
   display: grid;
   grid-template-columns: 1.8fr 1.8fr 1.2fr;
   gap: 70px;
+  width: 100%;
+  min-width: 0;
+}
+.footer-col {
+  min-width: 0;       /* ← quan trọng — tránh col bị tràn ra ngoài grid */
+  overflow: hidden;
+}
+.footer-col-brand {
+  min-width: 0;
 }
 
 /* ── BRAND COL ── */
@@ -358,8 +368,50 @@
   .footer-cta-phone { width: 100%; }
   .footer-cta-btn { text-align: center; width: 100%; padding: 14px; }
   .footer-main { padding: 40px 24px 32px; }
-  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
-  .footer-col-brand { grid-column: auto; }
+  .footer-grid {
+    grid-template-columns: 1fr;  /* ← 1 cột trên mobile */
+    gap: 32px;
+  }
+
+  .footer-col-brand {
+    width: 100%;                 /* ← full width theo grid */
+    max-width: 100%;
+    min-width: 0;                /* ← tránh tràn */
+  }
+
+  /* Đảm bảo các element bên trong không tràn */
+  .footer-logo {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .footer-logo-name {
+    font-size: 14px;
+    word-break: break-word;
+  }
+
+  .footer-brand-desc {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .footer-certs {
+    width: 100%;
+  }
+
+  .footer-cert-item {
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
+
+  .footer-social {
+    flex-wrap: wrap;
+  }
+
+  .footer-map iframe {
+      width: 100% !important;  /* ← override width="400" trong HTML */
+      height: 180px;
+  }
   .footer-bottom { padding: 16px 24px; }
   .footer-bottom-inner { flex-direction: column; align-items: flex-start; gap: 12px; }
   .footer-cta-band::after { display: none; }

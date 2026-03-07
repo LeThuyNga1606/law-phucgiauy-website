@@ -518,14 +518,16 @@
   .about-hero, .about-info, .about-services, .about-news, .about-contact { padding: 72px 40px; }
   .about-hero-inner, .about-info-inner, .about-contact-inner { grid-template-columns: 1fr; gap: 48px; }
   .about-services-header, .about-news-header { flex-direction: column; align-items: flex-start; }
-  .about-services-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-services-grid, .about-services-grid-bottom { grid-template-columns: repeat(2, 1fr); }
   .about-news-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-services-grid-bottom { width: 100%; }
 }
 @media (max-width: 640px) {
   .about-root { padding-top: 64px; }
   .about-hero, .about-info, .about-services, .about-news, .about-contact { padding: 56px 24px; }
   .about-stats-grid { grid-template-columns: 1fr 1fr; }
-  .about-services-grid, .about-news-grid { grid-template-columns: 1fr; }
+  .about-services-grid, .about-services-grid-bottom, .about-news-grid { grid-template-columns: 1fr; }
   .about-form-row { grid-template-columns: 1fr; }
   .about-contact-form { padding: 28px 20px; }
+  .about-services-grid-bottom { width: 100%; }
 }

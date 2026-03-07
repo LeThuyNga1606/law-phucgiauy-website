@@ -173,11 +173,11 @@ const Navbar = () => {
   ];
 
   const LANGUAGES = [
-    { code: "vi", label: "VI", flag: "🇻🇳", name: "Tiếng Việt" },
-    { code: "en", label: "EN", flag: "🇺🇸", name: "English" },
-    { code: "ko", label: "KR", flag: "🇰🇷", name: "한국어" },
-    { code: "zh", label: "CN", flag: "🇨🇳", name: "中文" },
-  ];
+  { code: "vi", label: "VI", name: "Tiếng Việt", flag: "https://flagcdn.com/w40/vn.png" },
+  { code: "en", label: "EN", name: "English",    flag: "https://flagcdn.com/w40/us.png" },
+  { code: "ko", label: "KR", name: "한국어",      flag: "https://flagcdn.com/w40/kr.png" },
+  { code: "zh", label: "CN", name: "中文",        flag: "https://flagcdn.com/w40/cn.png" },
+];
 
   // Scroll shadow
   useEffect(() => {
@@ -239,7 +239,11 @@ const Navbar = () => {
                   onClick={() => changeLanguage(l.code)}
                   title={l.name}
                 >
-                  <span className="nav-lang-flag">{l.flag}</span>
+                  <img
+                    src={l.flag}
+                    alt={l.name}
+                    className="nav-lang-flag-img"
+                  />
                   <span className="nav-lang-label">{l.label}</span>
                 </button>
               ))}
@@ -335,9 +339,12 @@ const Navbar = () => {
                 key={l.code}
                 className={`mob-lang-btn ${lang === l.code ? "active" : ""}`}
                 onClick={() => changeLanguage(l.code)}
-                title={l.name}
               >
-                <span>{l.flag}</span>
+                <img
+                  src={l.flag}
+                  alt={l.name}
+                  className="mob-lang-flag-img"
+                />
                 <span>{l.label}</span>
                 <span className="mob-lang-name">{l.name}</span>
               </button>

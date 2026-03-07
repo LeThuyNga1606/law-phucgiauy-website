@@ -15,9 +15,9 @@ const AboutPage = () => {
   
   const SERVICES = [
     { img: IconDanSu, title: t("about_service_civil_title"), color: "#A8171C", intro: t("about_service_civil_item_1"), to: "/dan-su" },
-    { img: IconHinhSu, title: t("about_service_criminal_title"), color: "#1F5E55", intro: t("about_service_criminal_item_1"), to: "/hinh-su" },
+    { img: IconHinhSu, title: t("about_service_criminal_title"), color: "#A8171C", intro: t("about_service_criminal_item_1"), to: "/hinh-su" },
     { img: IconDauTu, title: t("about_service_investment_title"), color: "#A8171C", intro: t("about_service_investment_item_1"), to: "/dau-tu" },
-    { img: IconDoanhNghiep, title: t("about_service_enterprise_title"), color: "#1F5E55", intro: t("about_service_enterprise_item_1"), to: "/doanh-nghiep" },
+    { img: IconDoanhNghiep, title: t("about_service_enterprise_title"), color: "#A8171C", intro: t("about_service_enterprise_item_1"), to: "/doanh-nghiep" },
     { img: IconGiayPhep, title: t("about_service_license_title"), color: "#A8171C", intro: t("about_service_license_item_1"), to: "/giay-phep" },
   ];
 
@@ -131,7 +131,7 @@ const AboutPage = () => {
               <div key={i} className={`about-service-card ${activeService === i ? "active" : ""}`} style={{"--accent": s.color}} onMouseEnter={() => setActiveService(i)} onMouseLeave={() => setActiveService(null)}>
                 <div className="about-service-header">
                   <div className="about-service-icon"><img src={s.img} alt={s.title} /></div>
-                  <h3 className="about-service-title">{s.title}</h3>
+                  <h3 className="about-service-title" style={{color: s.color}}>{s.title}</h3>
                 </div>
                 <Link to={s.to} className="about-service-link">Xem Chi Tiết <span>→</span></Link>
               </div>
@@ -142,7 +142,7 @@ const AboutPage = () => {
               <div key={i} className={`about-service-card ${activeService === i + 3 ? "active" : ""}`} style={{"--accent": s.color}} onMouseEnter={() => setActiveService(i + 3)} onMouseLeave={() => setActiveService(null)}>
                 <div className="about-service-header">
                   <div className="about-service-icon"><img src={s.img} alt={s.title} /></div>
-                  <h3 className="about-service-title">{s.title}</h3>
+                  <h3 className="about-service-title" style={{color: s.color}}>{s.title}</h3>
                 </div>
                 <Link to={s.to} className="about-service-link">Xem Chi Tiết <span>→</span></Link>
               </div>

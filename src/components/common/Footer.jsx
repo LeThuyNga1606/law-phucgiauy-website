@@ -135,7 +135,7 @@ const Footer = () => {
                 <span>
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.1341088016766!2d106.71954187576188!3d10.877402989277577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7ff98e82a9d%3A0x6534745d3d1b53a5!2zMTcgxJDGsOG7nW5nIHPhu5EgNCwga2h1IHBo4buRIDUsIFRo4bunIMSQ4bupYywgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaWV0bmFt!5e0!3m2!1sen!2s!4v1772465710973!5m2!1sen!2s"
-                    width="400"
+                    width="280"
                     height="200"
                     style={{ borderRadius: 10 }}
                     allowFullScreen
