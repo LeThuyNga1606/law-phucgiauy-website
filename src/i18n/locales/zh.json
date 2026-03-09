@@ -1,6 +1,6 @@
 {
   "slogan": "理解 - 责任 - 奉献",
-
+  "company_name": "PGU律师事务所",
   "nav_cta": "免费咨询",
 
   "nav_about": "关于我们",
@@ -69,7 +69,7 @@
   "nav_enterprise_suspend": "暂停经营",
   "nav_enterprise_terminate_branch": "注销分支机构 / 代表处",
 
-  "nav_license": "附属许可",
+  "nav_license": "许可",
   "nav_license_group_title": "许可证与证书",
   "nav_license_environment": "环境许可证",
   "nav_license_chemical": "危化品许可证",
@@ -87,7 +87,7 @@
   "footer_service_criminal": "刑事",
   "footer_service_investment": "外商投资",
   "footer_service_enterprise": "企业",
-  "footer_service_license": "附属许可",
+  "footer_service_license": "许可",
 
   "footer_contact_title": "联系信息",
   "footer_contact_hotline": "热线",
@@ -171,7 +171,7 @@
   "about_service_enterprise_item_3": "解散",
   "about_service_enterprise_item_4": "常规咨询",
 
-  "about_service_license_title": "附属许可",
+  "about_service_license_title": "许可",
   "about_service_license_item_1": "环境许可证",
   "about_service_license_item_2": "消防安全",
   "about_service_license_item_3": "劳动许可证",
@@ -224,7 +224,7 @@
   "about_form_field_criminal": "刑事",
   "about_form_field_investment": "外商投资",
   "about_form_field_enterprise": "企业",
-  "about_form_field_license": "附属许可",
+  "about_form_field_license": "许可",
   "about_form_field_other": "其他",
   "about_form_desc": "问题描述",
   "about_form_desc_placeholder": "请简要描述您的法律问题...",

@@ -1,6 +1,6 @@
 {
   "slogan": "Empathetic - Responsible - Serving",
-
+  "company_name": "PGU LAW FIRM",
   "nav_cta": "Free Consultation",
 
   "nav_about": "About Us",
@@ -69,7 +69,7 @@
   "nav_enterprise_suspend": "Suspend operations",
   "nav_enterprise_terminate_branch": "Terminate branch / office",
 
-  "nav_license": "SUB-LICENSES",
+  "nav_license": "LICENSES",
   "nav_license_group_title": "Licenses & Certificates",
   "nav_license_environment": "Environmental license",
   "nav_license_chemical": "Chemical license",
@@ -87,7 +87,7 @@
   "footer_service_criminal": "Criminal",
   "footer_service_investment": "Foreign Investment",
   "footer_service_enterprise": "Enterprise",
-  "footer_service_license": "Sub-Licenses",
+  "footer_service_license": "Licenses",
 
   "footer_contact_title": "Contact Information",
   "footer_contact_hotline": "Hotline",
@@ -171,7 +171,7 @@
   "about_service_enterprise_item_3": "Dissolution",
   "about_service_enterprise_item_4": "Regular Consulting",
 
-  "about_service_license_title": "Sub-Licenses",
+  "about_service_license_title": "Licenses",
   "about_service_license_item_1": "Environmental License",
   "about_service_license_item_2": "Fire Prevention",
   "about_service_license_item_3": "Work Permit",
@@ -224,7 +224,7 @@
   "about_form_field_criminal": "Criminal",
   "about_form_field_investment": "Foreign Investment",
   "about_form_field_enterprise": "Enterprise",
-  "about_form_field_license": "Sub-Licenses",
+  "about_form_field_license": "Licenses",
   "about_form_field_other": "Other",
   "about_form_desc": "Describe Your Issue",
   "about_form_desc_placeholder": "Briefly describe your legal issue...",

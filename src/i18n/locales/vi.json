@@ -1,6 +1,6 @@
 {
   "slogan": "Thấu hiểu - Trách nhiệm - Phụng sự",
-
+  "company_name": "PGU LAW FIRM",
   "nav_cta": "Tư Vấn Miễn Phí",
 
   "nav_about": "Giới Thiệu",
@@ -31,8 +31,8 @@
   "nav_investment_due_diligence": "Thẩm tra pháp lý đất, nhà xưởng",
   "nav_investment_establish_company": "Thành lập công ty vốn đầu tư nước ngoài",
   "nav_investment_establish_office": "Thành lập văn phòng đại diện công ty nước ngoài",
-  "nav_investment_group2_title": "Thay đổi giấy chứng nhận đăng ký đầu tư",
-  "nav_investment_adjust_target": "Điều chỉnh mục tiêu – quy mô dự án",
+  "nav_investment_group2_title": "Thay đổi đăng ký đầu tư",
+  "nav_investment_adjust_target": "Điều chỉnh mục tiêu - quy mô dự án",
   "nav_investment_change_location": "Thay đổi địa điểm thực hiện dự án",
   "nav_investment_change_capital": "Thay đổi tổng vốn đầu tư",
   "nav_investment_extend_schedule": "Gia hạn tiến độ góp vốn",
@@ -69,7 +69,7 @@
   "nav_enterprise_suspend": "Tạm ngừng hoạt động",
   "nav_enterprise_terminate_branch": "Chấm dứt chi nhánh / văn phòng",
 
-  "nav_license": "GIẤY PHÉP CON",
+  "nav_license": "GIẤY PHÉP",
   "nav_license_group_title": "Giấy phép & Chứng nhận",
   "nav_license_environment": "Giấy phép môi trường",
   "nav_license_chemical": "Giấy phép hóa chất",
@@ -87,7 +87,7 @@
   "footer_service_criminal": "Hình Sự",
   "footer_service_investment": "Đầu Tư Nước Ngoài",
   "footer_service_enterprise": "Doanh Nghiệp",
-  "footer_service_license": "Giấy Phép Con",
+  "footer_service_license": "Giấy Phép",
 
   "footer_contact_title": "Thông Tin Liên Hệ",
   "footer_contact_hotline": "Hotline",
@@ -171,7 +171,7 @@
   "about_service_enterprise_item_3": "Giải Thể",
   "about_service_enterprise_item_4": "Tư Vấn Thường Xuyên",
 
-  "about_service_license_title": "Giấy Phép Con",
+  "about_service_license_title": "Giấy Phép",
   "about_service_license_item_1": "Giấy Phép Môi Trường",
   "about_service_license_item_2": "PCCC",
   "about_service_license_item_3": "Giấy Phép Lao Động",
@@ -224,7 +224,7 @@
   "about_form_field_criminal": "Hình Sự",
   "about_form_field_investment": "Đầu Tư Nước Ngoài",
   "about_form_field_enterprise": "Doanh Nghiệp",
-  "about_form_field_license": "Giấy Phép Con",
+  "about_form_field_license": "Giấy Phép",
   "about_form_field_other": "Khác",
   "about_form_desc": "Mô Tả Vấn Đề",
   "about_form_desc_placeholder": "Mô tả ngắn gọn vấn đề pháp lý của bạn...",

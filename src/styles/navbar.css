@@ -216,7 +216,7 @@
   max-width: 96vw;
   width: min(960px, 96vw);
   display: grid;
-  padding: 32px;
+  padding: 32px 10px;
   gap: 0;
   background: var(--white);
   border-top: 3px solid var(--red);
@@ -237,21 +237,20 @@
 
 /* Dropdown group */
 .drop-group {
-  padding: 0 24px 0 0;
+  padding: 0;
   border-right: 1px solid rgba(168,23,28,0.08);
 }
 .drop-group:last-child {
   border-right: none;
   padding-right: 0;
-  padding-left: 24px;
 }
 .drop-group:first-child { padding-left: 0; }
 .drop-group-title {
   font-size: 14px; 
   font-weight: 600;
-  letter-spacing: 0.18em; text-transform: uppercase;
+  text-transform: uppercase;
   color: var(--red); margin-bottom: 14px;
-  padding-bottom: 10px;
+  padding: 0 10px 10px 10px;
   border-bottom: 1px solid rgba(168,23,28,0.12);
 }
 .drop-group ul { list-style: none; display: flex; flex-direction: column; gap: 2px; }

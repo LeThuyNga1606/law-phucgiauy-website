@@ -1,5 +1,6 @@
 {
   "slogan": "이해 - 책임 - 헌신",
+  "company_name": "PGU 법무법인",
 
   "nav_cta": "무료 상담",
 
@@ -69,7 +70,7 @@
   "nav_enterprise_suspend": "영업 정지",
   "nav_enterprise_terminate_branch": "지점 / 사무소 폐쇄",
 
-  "nav_license": "부가 허가",
+  "nav_license": "허가",
   "nav_license_group_title": "허가증 및 인증서",
   "nav_license_environment": "환경 허가",
   "nav_license_chemical": "화학물질 허가",
@@ -87,7 +88,7 @@
   "footer_service_criminal": "형사",
   "footer_service_investment": "외국인 투자",
   "footer_service_enterprise": "기업",
-  "footer_service_license": "부가 허가",
+  "footer_service_license": "허가",
 
   "footer_contact_title": "연락처 정보",
   "footer_contact_hotline": "핫라인",
@@ -184,7 +185,7 @@
   "about_service_enterprise_item_3": "해산",
   "about_service_enterprise_item_4": "정기 자문",
 
-  "about_service_license_title": "부가 허가",
+  "about_service_license_title": "허가",
   "about_service_license_item_1": "환경 허가",
   "about_service_license_item_2": "소방 안전",
   "about_service_license_item_3": "노동 허가",
@@ -237,7 +238,7 @@
   "about_form_field_criminal": "형사",
   "about_form_field_investment": "외국인 투자",
   "about_form_field_enterprise": "기업",
-  "about_form_field_license": "부가 허가",
+  "about_form_field_license": "허가",
   "about_form_field_other": "기타",
   "about_form_desc": "문제 설명",
   "about_form_desc_placeholder": "법적 문제를 간략히 설명해 주세요...",

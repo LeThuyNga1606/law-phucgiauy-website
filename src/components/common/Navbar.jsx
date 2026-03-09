@@ -28,7 +28,7 @@ const Navbar = () => {
         {
           title: t('nav_about_group_title'),
           items: [
-            { label: t('nav_about_home') ,           to: "/trang-chu" },
+            { label: t('nav_about_home') ,           to: "/" },
             { label: t('nav_about_intro'),          to: "/gioi-thieu" },
             { label: t('nav_about_contact'),             to: "/lien-he" },
           ],
@@ -244,7 +244,7 @@ const Navbar = () => {
                     alt={l.name}
                     className="nav-lang-flag-img"
                   />
-                  <span className="nav-lang-label">{l.label}</span>
+                  {/* <span className="nav-lang-label">{l.label}</span> */}
                 </button>
               ))}
             </div>
@@ -346,7 +346,7 @@ const Navbar = () => {
                   className="mob-lang-flag-img"
                 />
                 <span>{l.label}</span>
-                <span className="mob-lang-name">{l.name}</span>
+                {/* <span className="mob-lang-name">{l.name}</span> */}
               </button>
             ))}
           </div>
