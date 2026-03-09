@@ -1,0 +1,220 @@
+.company-root {
+  background: var(--white);
+  color: var(--dark);
+  padding-top: 108px;
+}
+
+/* ── EYEBROW ── */
+.company-eyebrow {
+  display: flex; 
+  align-items: center; 
+  gap: 12px;
+  font-size: 16px; 
+  font-weight: 600; 
+  letter-spacing: 0.22em;
+  text-transform: uppercase; 
+  color: var(--red); 
+  margin-bottom: 35px;
+}
+.company-eyebrow-dark { color: var(--red); }
+.company-eyebrow-line {
+  display: block; 
+  width: 28px; 
+  height: 2.5px;
+  background: var(--red); 
+  flex-shrink: 0;
+}
+
+/* ── SECTION TITLE ── */
+.company-section-title {
+  font-size: clamp(34px, 3.8vw, 52px);
+  font-weight: 300; 
+  line-height: 1.1; 
+  color: var(--red); 
+  margin-bottom: 40px;
+  font-weight: 500;
+}
+.company-section-title-white {
+  color: var(--white);
+}
+.company-section-title-white em {
+  color: var(--red);
+}
+
+/* ══ HERO ══ */
+.company-hero {
+  background: var(--cream);
+  padding: 80px 60px;
+  position: relative;
+  overflow: hidden;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+}
+.company-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(168,23,28,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,23,28,0.06) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+.company-hero-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.company-hero-title {
+  font-size: clamp(40px, 5vw, 68px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--dark);
+  margin-bottom: 16px;
+}
+.company-hero-title span {
+  color: var(--red);
+  display: block;
+}
+.company-hero-slogan {
+  font-size: 16px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 48px;
+}
+.company-hero-stats {
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.company-hero-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 40px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  min-width: 140px;
+  transition: background 0.3s;
+}
+.company-hero-stat:hover {
+  background: rgba(168,23,28,0.06);
+}
+.company-hero-stat-num {
+  font-size: 42px;
+  font-weight: 600;
+  color: var(--red);
+  line-height: 1;
+}
+.company-hero-stat-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ================================================================
+   THÊM VÀO AboutPage.css
+   (xóa hoặc giữ các rule .about-intro-* cũ nếu trùng)
+================================================================ */
+
+/* ── SECTION WRAPPER ─────────────────────────────────── */
+.about-intro-section {
+  background: #fff;
+  padding: 80px 0 64px;
+}
+
+.about-intro-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;           /* khoảng cách giữa 3 block */
+}
+
+/* ── MỖI BLOCK (đoạn văn + ảnh) ─────────────────────── */
+.about-intro-block {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ── ĐOẠN VĂN ────────────────────────────────────────── */
+.about-intro-para {
+  font-size: 16.5px;
+  line-height: 1.95;
+  color: #2c2c2c;
+  text-align: justify;
+  /* Chữ cái đầu đoạn to hơn */
+}
+
+.about-intro-para::first-letter {
+  font-size: 2.6em;
+  font-weight: 800;
+  color: var(--red, #A8171C);
+  float: left;
+  line-height: 0.82;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.about-intro-para strong {
+  color: var(--red, #A8171C);
+  font-weight: 700;
+}
+
+/* ── ẢNH ─────────────────────────────────────────────── */
+.about-intro-img-wrap {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  /* Viền trang trí */
+  box-shadow: 0 0 20px rgba(168, 23, 28, 0.5);
+  position: relative;
+}
+
+.about-intro-img-wrap::before {
+  /* Đường kẻ trang trí trên ảnh */
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  box-shadow: 0 0 20px rgba(168, 23, 28, 0.5);
+  z-index: 1;
+}
+
+.about-intro-img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.about-intro-img-wrap:hover .about-intro-img {
+  transform: scale(1.02);
+}
+
+/* ── RESPONSIVE ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .about-intro-section { padding: 56px 0 48px; }
+  .about-intro-container { padding: 0 20px; gap: 48px; }
+  .about-intro-para { font-size: 15px; line-height: 1.85; }
+  .about-intro-para::first-letter { font-size: 2.2em; }
+  .about-intro-img { height: 240px; }
+  .about-intro-img-wrap { box-shadow: 0 4px 20px rgba(0,0,0,0.1), 3px 3px 0 0 var(--red, #A8171C); }
+}
+
+@media (max-width: 480px) {
+  .about-intro-img { height: 200px; }
+}

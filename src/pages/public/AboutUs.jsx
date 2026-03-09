@@ -14,11 +14,11 @@ const AboutPage = () => {
   const { t } = useTranslation();
   
   const SERVICES = [
-    { img: IconDanSu, title: t("about_service_civil_title"), color: "#A8171C", intro: t("about_service_civil_item_1"), to: "/dan-su" },
-    { img: IconHinhSu, title: t("about_service_criminal_title"), color: "#A8171C", intro: t("about_service_criminal_item_1"), to: "/hinh-su" },
-    { img: IconDauTu, title: t("about_service_investment_title"), color: "#A8171C", intro: t("about_service_investment_item_1"), to: "/dau-tu" },
-    { img: IconDoanhNghiep, title: t("about_service_enterprise_title"), color: "#A8171C", intro: t("about_service_enterprise_item_1"), to: "/doanh-nghiep" },
-    { img: IconGiayPhep, title: t("about_service_license_title"), color: "#A8171C", intro: t("about_service_license_item_1"), to: "/giay-phep" },
+    { img: IconDanSu, title: t("about_service_civil_title"), color: "#A8171C", intro: t("about_service_civil_item_1"), to: "/dich-vu/dan-su" },
+    { img: IconHinhSu, title: t("about_service_criminal_title"), color: "#A8171C", intro: t("about_service_criminal_item_1"), to: "/dich-vu/hinh-su" },
+    { img: IconDauTu, title: t("about_service_investment_title"), color: "#A8171C", intro: t("about_service_investment_item_1"), to: "/dich-vu/dau-tu" },
+    { img: IconDoanhNghiep, title: t("about_service_enterprise_title"), color: "#A8171C", intro: t("about_service_enterprise_item_1"), to: "/dich-vu/doanh-nghiep" },
+    { img: IconGiayPhep, title: t("about_service_license_title"), color: "#A8171C", intro: t("about_service_license_item_1"), to: "/dich-vu/giay-phep" },
   ];
 
   const NEWS = [

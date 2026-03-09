@@ -15,11 +15,11 @@ function App() {
     <BrowserRouter>
       <PageLayout>             {/* ← Navbar + Footer bọc ngoài */}
         <Routes>
-          <Route path="/"              element={<AboutUs />} />
-          <Route path="/gioi-thieu"    element={<CompanyInfor />} />
+          <Route path="/" element={<AboutUs />} />
+          <Route path="/gioi-thieu" element={<CompanyInfor />} />
           {/* <Route path="/tin-tuc"       element={<NewsPage />} /> */}
           {/* <Route path="/tin-tuc/:slug" element={<NewsDetailPage />} /> */}
-          <Route path="/lien-he"       element={<Contact />} />
+          <Route path="/lien-he" element={<Contact />} />
           <Route path="/dich-vu/:category" element={<ServiceCategoryPage />} />
           <Route path="/dich-vu/:category/:slug" element={<ServiceDetailPage />} />
         </Routes>

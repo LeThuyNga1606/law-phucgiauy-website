@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/contact.css";
+import { useTranslation } from 'react-i18next';
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 const Contact = () => {
+  const { t } = useTranslation();
   const today = new Date().getDay(); // 0 = CN, 1-5 = T2-T6, 6 = T7
   const isOpenNow = today >= 1 && today <= 5;
 
@@ -33,16 +35,15 @@ const Contact = () => {
         <div className="contact-hero-grid-bg" />
         <div className="contact-hero-inner">
           <h1 className="contact-hero-title">
-            Chúng Tôi Luôn <br/>Sẵn Sàng Hỗ Trợ
+            {t("contact_hero_title_1")} <br/>{t("contact_hero_title_2")}
           </h1>
           <p className="contact-hero-desc">
-            Đừng để vấn đề pháp lý trở thành rào cản. Hãy liên hệ với chúng tôi
-            để được tư vấn miễn phí và tìm ra giải pháp tốt nhất.
+            {t("contact_hero_desc")}
           </p>
           {/* Status badge */}
           <div className={`contact-status ${isOpenNow ? "open" : "closed"}`}>
             <span className="contact-status-dot" />
-            {isOpenNow ? "Đang mở cửa — Sẵn sàng tư vấn" : "Ngoài giờ làm việc — Vui lòng để lại tin nhắn"}
+            {isOpenNow ? t("contact_status_open") : t("contact_status_closed")}
           </div>
         </div>
       </section>
@@ -53,21 +54,21 @@ const Contact = () => {
           <div className="about-contact-left">
             <div className="contact-form-inner">
               <div className="contact-form-header">
-                <h2 className="contact-section-title contact-section-title-white"> Gửi Yêu Cầu Tư Vấn </h2>
+                <h2 className="contact-section-title contact-section-title-white"> {t("contact_form_title")} </h2>
               </div>
 
               {submitted ? (
                 <div className="contact-success">
                   <div className="contact-success-icon">✓</div>
-                  <h3 className="contact-success-title">Gửi Thành Công!</h3>
+                  <h3 className="contact-success-title">{t("contact_success_title")}</h3>
                   <p className="contact-success-desc">
-                    Cảm ơn bạn đã liên hệ. Chúng tôi sẽ phản hồi trong vòng 24 giờ làm việc.
+                    {t("contact_success_desc")}
                   </p>
                   <button
                     className="contact-success-reset"
                     onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", subject: "", message: "", address: "" }); }}
                   >
-                    Gửi Yêu Cầu Khác
+                    {t("contact_success_reset")}
                   </button>
                 </div>
               ) : (
@@ -75,74 +76,74 @@ const Contact = () => {
                   <div className="contact-form-grid">
 
                     <div className="contact-form-group">
-                      <label className="contact-form-label">Họ & Tên <span className="required">*</span></label>
+                      <label className="contact-form-label">{t("contact_form_name")} <span className="required">*</span></label>
                       <input
                         type="text"
                         name="name"
                         value={form.name}
                         onChange={handleChange}
-                        placeholder="Nguyễn Văn An"
+                        placeholder={t("contact_form_name_placeholder")}
                         required
                         className="contact-form-input"
                       />
                     </div>
 
                     <div className="contact-form-group">
-                      <label className="contact-form-label">Số Điện Thoại <span className="required">*</span></label>
+                      <label className="contact-form-label">{t("contact_form_phone")} <span className="required">*</span></label>
                       <input
                         type="tel"
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
-                        placeholder="0901 234 567"
+                        placeholder={t("contact_form_phone_placeholder")}
                         required
                         className="contact-form-input"
                       />
                     </div>
 
                     <div className="contact-form-group">
-                      <label className="contact-form-label">Email</label>
+                      <label className="contact-form-label">{t("contact_form_email")}</label>
                       <input
                         type="email"
                         name="email"
                         value={form.email}
                         onChange={handleChange}
-                        placeholder="email@example.com"
+                        placeholder={t("contact_form_email_placeholder")}
                         className="contact-form-input"
                       />
                     </div>
 
                     <div className="contact-form-group">
-                      <label className="contact-form-label">Địa Chỉ</label>
+                      <label className="contact-form-label">{t("contact_form_address")}</label>
                       <input
                         type="text"
                         name="address"
                         value={form.address}
                         onChange={handleChange}
-                        placeholder="123 Đường ABC, Phường XYZ, Quận 1, TP.HCM"
+                        placeholder={t("contact_form_address_placeholder")}
                         className="contact-form-input"
                       />
                     </div>
 
                     <div className="contact-form-group contact-form-group-full">
-                      <label className="contact-form-label">Chủ đề</label>
+                      <label className="contact-form-label">{t("contact_form_subject")}</label>
                       <input
                         type="text"
                         name="subject"
                         value={form.subject}
                         onChange={handleChange}
-                        placeholder="Mô tả ngắn gọn vấn đề pháp lý của bạn để chúng tôi chuẩn bị tốt hơn..."
+                        placeholder={t("contact_form_subject_placeholder")}
                         className="contact-form-input"
                       />
                     </div>
 
                     <div className="contact-form-group contact-form-group-full">
-                      <label className="contact-form-label">Mô Tả Vấn Đề</label>
+                      <label className="contact-form-label">{t("contact_form_message")}</label>
                       <textarea
                         name="message"
                         value={form.message}
                         onChange={handleChange}
-                        placeholder="Mô tả chi tiết vấn đề pháp lý của bạn để chúng tôi chuẩn bị tốt hơn..."
+                        placeholder={t("contact_form_message_placeholder")}
                         rows={5}
                         className="contact-form-input contact-form-textarea"
                       />
@@ -151,16 +152,16 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-footer">
-                    <p className="contact-form-note"> 🔒 Thông tin của bạn được bảo mật tuyệt đối và chỉ dùng để liên hệ tư vấn. </p>
+                    <p className="contact-form-note"> 🔒 {t("contact_form_note")} </p>
                     <button
                       type="submit"
                       className={`contact-form-submit ${loading ? "loading" : ""}`}
                       disabled={loading}
                     >
                       {loading ? (
-                        <><span className="contact-spinner" /> Đang Gửi...</>
+                        <><span className="contact-spinner" /> {t("contact_form_submitting")}</>
                       ) : (
-                        "Gửi Yêu Cầu Tư Vấn →"
+                        t("contact_form_submit")
                       )}
                     </button>
                   </div>
@@ -170,13 +171,13 @@ const Contact = () => {
           </div>
           <div className="about-contact-right">
             <div className="contact-form-header">
-              <h2 className="contact-section-title contact-section-title-white"> Thông tin liên hệ </h2>
+              <h2 className="contact-section-title contact-section-title-white">{t("contact_info_title")}</h2>
             </div>
             <div className="about-contact-cards">
               {[
-                { icon: "☎", title: "Hotline", value: "0909 724 768", sub: "Hỗ trợ 24/7", href: "tel:0909724768" },
-                { icon: "✉", title: "Email", value: "luatsunguyen0909@gmail.com", sub: "Phản hồi trong 24h", href: "mailto:luatsunguyen0909@gmail.com" },
-                { icon: "⊙", title: "Văn Phòng", value: "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh", sub: "T2–T6: 07:30–17:00", href: null },
+                { icon: "☎", title: t("contact_form_hotline"), value: "0909 724 768", sub: t("contact_info_hotline_sub"), href: "tel:0909724768" },
+                { icon: "✉", title: t("contact_form_email"), value: "luatsunguyen0909@gmail.com", sub: t("contact_info_email_sub"), href: "mailto:luatsunguyen0909@gmail.com" },
+                { icon: "⊙", title: t("contact_form_office"), value: "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh", sub: t("contact_info_office_sub"), href: null },
               ].map((c, i) => (
                 <div key={i} className="about-contact-card">
                   <div className="about-contact-card-icon">{c.icon}</div>
