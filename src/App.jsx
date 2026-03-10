@@ -4,8 +4,8 @@ import PageLayout from "./components/common/PageLayout";
 // Import các trang
 import AboutUs from "./pages/public/AboutUs";
 import CompanyInfor from "./pages/public/CompanyInfor";
-// import NewsPage       from './pages/public/NewsPage';
-// import NewsDetailPage from './pages/public/NewsDetailPage';
+import News from "./pages/public/News";
+import NewsDetail from "./pages/public/NewsDetail";
 import Contact from "./pages/public/Contact";
 import ServiceCategoryPage from "./pages/public/ServiceCategoryPage";
 import ServiceDetailPage from "./pages/public/ServiceDetailPage";
@@ -20,8 +20,8 @@ function App() {
         <Routes>
           <Route path="/" element={<AboutUs />} />
           <Route path="/gioi-thieu" element={<CompanyInfor />} />
-          {/* <Route path="/tin-tuc"       element={<NewsPage />} /> */}
-          {/* <Route path="/tin-tuc/:slug" element={<NewsDetailPage />} /> */}
+          <Route path="/tin-tuc" element={<News />} />
+          <Route path="/tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="/lien-he" element={<Contact />} />
           <Route path="/dich-vu/:category" element={<ServiceCategoryPage />} />
           <Route
