@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/contact.css";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import emailjs from "@emailjs/browser";
 
 import intro3 from "../../assets/images/introduce_3.jpg";
 
@@ -11,37 +12,75 @@ const Contact = () => {
   const today = new Date().getDay(); // 0 = CN, 1-5 = T2-T6, 6 = T7
   const isOpenNow = today >= 1 && today <= 5;
 
+  const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+  const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+  const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
   const [form, setForm] = useState({
-    name: "", phone: "", email: "", subject: "", message: "", address: "",
+    name: "",
+    phone: "",
+    email: "",
+    subject: "",
+    message: "",
+    address: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    await new Promise(r => setTimeout(r, 1200)); // simulate API
-    setLoading(false);
-    setSubmitted(true);
+    setError("");
+
+    const sentAt = new Date().toLocaleString("vi-VN", {
+      timeZone: "Asia/Ho_Chi_Minh",
+      dateStyle: "full",
+      timeStyle: "short",
+    });
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_phone: form.phone,
+          from_email: form.email || "(không cung cấp)",
+          from_address: form.address || "(không cung cấp)",
+          subject: form.subject || "(không có chủ đề)",
+          message: form.message || "(không có mô tả)",
+          sent_at: sentAt,
+          to_email: "luatphucgiauy@gmail.com",
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+      setSubmitted(true);
+    } catch (err) {
+      console.error("EmailJS error:", err);
+      setError(
+        "Gửi thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="contact-root">
-
       {/* ══ HERO ══ */}
       <section className="contact-hero">
         <div className="contact-hero-grid-bg" />
         <div className="contact-hero-inner">
           <h1 className="contact-hero-title">
-            {t("contact_hero_title_1")} <br/>{t("contact_hero_title_2")}
+            {t("contact_hero_title_1")} <br />
+            {t("contact_hero_title_2")}
           </h1>
-          <p className="contact-hero-desc">
-            {t("contact_hero_desc")}
-          </p>
+          <p className="contact-hero-desc">{t("contact_hero_desc")}</p>
           {/* Status badge */}
           <div className={`contact-status ${isOpenNow ? "open" : "closed"}`}>
             <span className="contact-status-dot" />
@@ -52,37 +91,72 @@ const Contact = () => {
 
       <section className="about-contact">
         <div className="contact-form-header">
-          <h2 className="contact-section-title contact-section-title-dark">{t("contact_info_title")}</h2>
+          <h2 className="contact-section-title contact-section-title-dark">
+            {t("contact_info_title")}
+          </h2>
         </div>
 
         <div className="about-contact-inner">
           <div className="about-contact-left">
             <div className="about-contact-cards">
               {[
-                { icon: "☎", title: t("about_contact_hotline_title"), value: "0909 724 768", sub: t("about_contact_hotline_sub"), href: "tel:0909724768" },
-                { icon: "✉", title: t("about_contact_email_title"), value: "luatsunguyen0909@gmail.com", sub: t("about_contact_email_sub"), href: "mailto:luatsunguyen0909@gmail.com" },
-                { icon: "⊙", title: t("about_contact_office_title"), value: "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh", sub: t("about_contact_office_sub"), href: null },
+                {
+                  icon: "☎",
+                  title: t("about_contact_hotline_title"),
+                  value: "0909 724 768",
+                  sub: t("about_contact_hotline_sub"),
+                  href: "tel:0909724768",
+                },
+                {
+                  icon: "✉",
+                  title: t("about_contact_email_title"),
+                  value: "luatsunguyen0909@gmail.com",
+                  sub: t("about_contact_email_sub"),
+                  href: "mailto:luatsunguyen0909@gmail.com",
+                },
+                {
+                  icon: "⊙",
+                  title: t("about_contact_office_title"),
+                  value:
+                    "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh",
+                  sub: t("about_contact_office_sub"),
+                  href: null,
+                },
               ].map((c, i) => (
                 <div key={i} className="about-contact-card">
                   <div className="about-contact-card-icon">{c.icon}</div>
                   <div>
                     <div className="about-contact-card-title">{c.title}</div>
-                    {c.href ? <a href={c.href} className="about-contact-card-value link">{c.value}</a> : <div className="about-contact-card-value">{c.value}</div>}
+                    {c.href ? (
+                      <a
+                        href={c.href}
+                        className="about-contact-card-value link"
+                      >
+                        {c.value}
+                      </a>
+                    ) : (
+                      <div className="about-contact-card-value">{c.value}</div>
+                    )}
                     <div className="about-contact-card-sub">{c.sub}</div>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-          
+
           <div className="about-contact-middle">
             <div className="about-intro-img-wrap">
-              <img src={intro3} alt={t("about_intro_img2_alt")} className="about-intro-img" style={{maxHeight: 465, objectFit: "fill"}}/>
+              <img
+                src={intro3}
+                alt={t("about_intro_img2_alt")}
+                className="about-intro-img"
+                style={{ maxHeight: 465, objectFit: "fill" }}
+              />
             </div>
           </div>
 
           <div className="about-contact-right">
-            <div className="contact-map-frame" style={{ borderRadius: 10}}>
+            <div className="contact-map-frame" style={{ borderRadius: 10 }}>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.1341088016766!2d106.71954187576188!3d10.877402989277577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7ff98e82a9d%3A0x6534745d3d1b53a5!2zMTcg4bqgxJBhbmcgc-G7kSA0LCBraHUgcGjhu5EgNSwgVGhhe%2BG9lCDEkOG7pWMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1svi!2s!4v1772465710973!5m2!1svi!2s"
                 width="100%"
@@ -151,19 +225,34 @@ const Contact = () => {
 
           <div className="contact-form-inner">
             <div className="contact-form-header">
-              <h2 className="contact-section-title contact-section-title-dark"> {t("contact_form_title")} </h2>
+              <h2 className="contact-section-title contact-section-title-dark">
+                {" "}
+                {t("contact_form_title")}{" "}
+              </h2>
             </div>
 
             {submitted ? (
               <div className="contact-success">
                 <div className="contact-success-icon">✓</div>
-                <h3 className="contact-success-title">{t("contact_success_title")}</h3>
+                <h3 className="contact-success-title">
+                  {t("contact_success_title")}
+                </h3>
                 <p className="contact-success-desc">
                   {t("contact_success_desc")}
                 </p>
                 <button
                   className="contact-success-reset"
-                  onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", subject: "", message: "", address: "" }); }}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setForm({
+                      name: "",
+                      phone: "",
+                      email: "",
+                      subject: "",
+                      message: "",
+                      address: "",
+                    });
+                  }}
                 >
                   {t("contact_success_reset")}
                 </button>
@@ -171,9 +260,11 @@ const Contact = () => {
             ) : (
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="contact-form-grid">
-
                   <div className="contact-form-group">
-                    <label className="contact-form-label">{t("contact_form_name")} <span className="required">*</span></label>
+                    <label className="contact-form-label">
+                      {t("contact_form_name")}{" "}
+                      <span className="required">*</span>
+                    </label>
                     <input
                       type="text"
                       name="name"
@@ -186,7 +277,10 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-group">
-                    <label className="contact-form-label">{t("contact_form_phone")} <span className="required">*</span></label>
+                    <label className="contact-form-label">
+                      {t("contact_form_phone")}{" "}
+                      <span className="required">*</span>
+                    </label>
                     <input
                       type="tel"
                       name="phone"
@@ -199,7 +293,9 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-group">
-                    <label className="contact-form-label">{t("contact_form_email")}</label>
+                    <label className="contact-form-label">
+                      {t("contact_form_email")}
+                    </label>
                     <input
                       type="email"
                       name="email"
@@ -211,7 +307,9 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-group">
-                    <label className="contact-form-label">{t("contact_form_address")}</label>
+                    <label className="contact-form-label">
+                      {t("contact_form_address")}
+                    </label>
                     <input
                       type="text"
                       name="address"
@@ -223,7 +321,9 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-group contact-form-group-full">
-                    <label className="contact-form-label">{t("contact_form_subject")}</label>
+                    <label className="contact-form-label">
+                      {t("contact_form_subject")}
+                    </label>
                     <input
                       type="text"
                       name="subject"
@@ -235,7 +335,9 @@ const Contact = () => {
                   </div>
 
                   <div className="contact-form-group contact-form-group-full">
-                    <label className="contact-form-label">{t("contact_form_message")}</label>
+                    <label className="contact-form-label">
+                      {t("contact_form_message")}
+                    </label>
                     <textarea
                       name="message"
                       value={form.message}
@@ -245,18 +347,23 @@ const Contact = () => {
                       className="contact-form-input contact-form-textarea"
                     />
                   </div>
-
                 </div>
 
                 <div className="contact-form-footer">
-                  <p className="contact-form-note"> 🔒 {t("contact_form_note")} </p>
+                  <p className="contact-form-note">
+                    {" "}
+                    🔒 {t("contact_form_note")}{" "}
+                  </p>
                   <button
                     type="submit"
                     className={`contact-form-submit ${loading ? "loading" : ""}`}
                     disabled={loading}
                   >
                     {loading ? (
-                      <><span className="contact-spinner" /> {t("contact_form_submitting")}</>
+                      <>
+                        <span className="contact-spinner" />{" "}
+                        {t("contact_form_submitting")}
+                      </>
                     ) : (
                       t("contact_form_submit")
                     )}
@@ -265,10 +372,8 @@ const Contact = () => {
               </form>
             )}
           </div>
-
         </div>
       </section>
-
     </div>
   );
 };
