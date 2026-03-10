@@ -31,7 +31,7 @@
   font-weight: 300;
   line-height: 1.1;
   color: var(--red);
-  margin-bottom: 10px;
+  margin-bottom: 36px;
 }
 .contact-section-title em {
   font-style: italic;
@@ -223,10 +223,9 @@
 .contact-map-inner {
   max-width: 1280px;
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 72px;
-  align-items: start;
+  display: flex;
+  align-items: center;
 }
 .contact-map-frame {
   border: 1px solid var(--border);

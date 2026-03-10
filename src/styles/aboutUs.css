@@ -423,7 +423,7 @@
 .about-news-link:hover { letter-spacing: 0.14em; }
 
 /* ══ CONTACT ══ */
-.about-contact { background: var(--green); padding: 60px; position: relative; overflow: hidden; }
+.about-contact { padding: 60px; position: relative; overflow: hidden; }
 .about-contact-bg-pattern {
   position: absolute; inset: 0; pointer-events: none;
   background-image:
@@ -432,8 +432,11 @@
   background-size: 44px 44px;
 }
 .about-contact-inner {
-  max-width: 1280px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  max-width: 1280px; 
+  margin: 0 auto;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  gap: 80px;
   position: relative; z-index: 1;
 }
 .about-contact-title {
@@ -444,15 +447,29 @@
 .about-contact-desc { font-size: 15px; line-height: 1.85; color: rgba(255,255,255,0.6); margin-bottom: 36px; }
 .about-contact-cards { display: flex; flex-direction: column; gap: 14px; }
 .about-contact-card {
-  display: flex; gap: 16px; align-items: flex-start; padding: 18px 20px;
-  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.1);
+  display: flex; 
+  gap: 16px; 
+  align-items: flex-start; 
+  padding: 18px 20px;
+  background: rgba(168,23,28,0.8); 
+  border: 1px solid rgba(255,255,255,0.1);
   transition: all 0.25s;
 }
-.about-contact-card:hover { background: rgba(168,23,28,0.2); border-color: rgba(168,23,28,0.4); }
-.about-contact-card-icon { font-size: 20px; flex-shrink: 0; padding-top: 2px; }
+.about-contact-card:hover { 
+  background: rgba(168,23,28,0.7); 
+  border-color: rgba(168,23,28,0.4); 
+}
+.about-contact-card-icon { 
+  font-size: 20px; 
+  flex-shrink: 0; 
+  padding-top: 2px; 
+}
 .about-contact-card-title {
-  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: rgba(255,255,255,0.45); margin-bottom: 3px;
+  font-size: 10px; 
+  letter-spacing: 0.14em; 
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.45); 
+  margin-bottom: 3px;
 }
 .about-contact-card-value { font-size: 14px; color: rgba(255,255,255,0.85); display: block; }
 .about-contact-card-value.link { text-decoration: none; transition: color 0.2s; }
