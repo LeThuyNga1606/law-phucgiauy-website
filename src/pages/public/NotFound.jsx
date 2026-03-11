@@ -74,7 +74,7 @@ export default function NotFound() {
 
       {/* Footer nhỏ */}
       <div className="nf-footer">
-        <span>© 2024 Công ty Luật TNHH Phúc Gia Uy & Cộng Sự</span>
+        <span>© 2026 Công ty Luật TNHH Phúc Gia Uy & Cộng Sự</span>
         <span>·</span>
         <a href="tel:0909724768">📞 0909 724 768</a>
       </div>
