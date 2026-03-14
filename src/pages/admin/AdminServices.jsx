@@ -1,118 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../../styles/adminServices.css";
+import {
+  getAllServicesAdmin,
+  createService,
+  updateService,
+  deleteService,
+  toggleServiceActive,
+} from "../../services/service";
+import {
+  getAllCategoriesAdmin,
+  FALLBACK_CATEGORIES,
+} from "../../services/categories";
 
-// ─── DATA (Phase 3: thay bằng Firestore) ─────────────────────────────────────
-const INITIAL_SERVICES = [
-  {
-    id: 1,
-    category: "dan-su",
-    categoryLabel: "Dân sự",
-    name: "Tư vấn ly hôn & hôn nhân gia đình",
-    desc: "Hỗ trợ thủ tục ly hôn thuận tình, ly hôn đơn phương, phân chia tài sản và quyền nuôi con.",
-    icon: "⚖️",
-    active: true,
-    order: 1,
-  },
-  {
-    id: 2,
-    category: "dan-su",
-    categoryLabel: "Dân sự",
-    name: "Tranh chấp đất đai & bất động sản",
-    desc: "Giải quyết các tranh chấp về quyền sử dụng đất, ranh giới đất, hợp đồng mua bán bất động sản.",
-    icon: "🏠",
-    active: true,
-    order: 2,
-  },
-  {
-    id: 3,
-    category: "dan-su",
-    categoryLabel: "Dân sự",
-    name: "Tư vấn thừa kế & di chúc",
-    desc: "Hỗ trợ lập di chúc hợp pháp, giải quyết tranh chấp thừa kế, phân chia tài sản thừa kế.",
-    icon: "📜",
-    active: true,
-    order: 3,
-  },
-  {
-    id: 4,
-    category: "hinh-su",
-    categoryLabel: "Hình sự",
-    name: "Bào chữa hình sự",
-    desc: "Bào chữa cho bị can, bị cáo trong các vụ án hình sự, bảo vệ quyền lợi hợp pháp tối đa.",
-    icon: "🔒",
-    active: true,
-    order: 1,
-  },
-  {
-    id: 5,
-    category: "hinh-su",
-    categoryLabel: "Hình sự",
-    name: "Bảo vệ quyền lợi bị hại",
-    desc: "Đại diện cho người bị hại trong quá trình tố tụng, yêu cầu bồi thường thiệt hại.",
-    icon: "🛡️",
-    active: true,
-    order: 2,
-  },
-  {
-    id: 6,
-    category: "doanh-nghiep",
-    categoryLabel: "Doanh nghiệp",
-    name: "Thành lập & giải thể doanh nghiệp",
-    desc: "Hỗ trợ thủ tục thành lập công ty TNHH, cổ phần, hộ kinh doanh và giải thể doanh nghiệp.",
-    icon: "🏢",
-    active: true,
-    order: 1,
-  },
-  {
-    id: 7,
-    category: "doanh-nghiep",
-    categoryLabel: "Doanh nghiệp",
-    name: "Tư vấn hợp đồng thương mại",
-    desc: "Soạn thảo, rà soát và tư vấn các loại hợp đồng thương mại, hợp đồng lao động.",
-    icon: "📋",
-    active: false,
-    order: 2,
-  },
-  {
-    id: 8,
-    category: "dau-tu",
-    categoryLabel: "Đầu tư - FDI",
-    name: "Tư vấn đầu tư nước ngoài (FDI)",
-    desc: "Hỗ trợ nhà đầu tư nước ngoài xin cấp giấy chứng nhận đăng ký đầu tư, thành lập pháp nhân.",
-    icon: "🌏",
-    active: true,
-    order: 1,
-  },
-  {
-    id: 9,
-    category: "giay-phep",
-    categoryLabel: "Giấy phép",
-    name: "Xin giấy phép kinh doanh có điều kiện",
-    desc: "Tư vấn và hỗ trợ xin các loại giấy phép kinh doanh có điều kiện theo quy định pháp luật.",
-    icon: "📄",
-    active: true,
-    order: 1,
-  },
-];
-
-const CATEGORIES = [
-  { key: "all", label: "Tất cả" },
-  { key: "dan-su", label: "Dân sự" },
-  { key: "hinh-su", label: "Hình sự" },
-  { key: "doanh-nghiep", label: "Doanh nghiệp" },
-  { key: "dau-tu", label: "Đầu tư - FDI" },
-  { key: "giay-phep", label: "Giấy phép" },
-];
-
-const EMPTY_FORM = {
-  name: "",
-  desc: "",
-  icon: "⚖️",
-  category: "dan-su",
-  categoryLabel: "Dân sự",
-  active: true,
-  order: 1,
-};
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
+// Categories được fetch từ Firestore trong useEffect
 
 const ICON_OPTIONS = [
   "⚖️",
@@ -132,25 +33,101 @@ const ICON_OPTIONS = [
   "🏛️",
 ];
 
+const EMPTY_FORM = {
+  name: "",
+  desc: "",
+  icon: "⚖️",
+  category: "dan-su",
+  categoryLabel: "Dân sự",
+  active: true,
+  order: 1,
+};
+
+// ─── SKELETON CARD ────────────────────────────────────────────────────────────
+function SkeletonCard() {
+  return (
+    <div className="as-card">
+      <div className="as-card-top">
+        <div
+          className="skeleton-box"
+          style={{ width: 40, height: 40, borderRadius: 8 }}
+        />
+      </div>
+      <div
+        className="skeleton-line"
+        style={{ width: "70%", marginBottom: 8 }}
+      />
+      <div
+        className="skeleton-line skeleton-line--sm"
+        style={{ marginBottom: 4 }}
+      />
+      <div
+        className="skeleton-line skeleton-line--sm"
+        style={{ width: "60%" }}
+      />
+    </div>
+  );
+}
+
+// ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function AdminServices() {
-  const [services, setServices] = useState(INITIAL_SERVICES);
+  const [services, setServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState([
+    { key: "all", label: "Tất cả" },
+    ...FALLBACK_CATEGORIES,
+  ]);
+  const [saving, setSaving] = useState(false);
   const [catFilter, setCatFilter] = useState("all");
-  const [modal, setModal] = useState(null); // null | { mode: 'add'|'edit', data }
+  const [modal, setModal] = useState(null); // null | { mode: 'add'|'edit', id? }
   const [deleteModal, setDeleteModal] = useState(null);
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [toast, setToast] = useState(null);
 
-  const filtered =
-    catFilter === "all"
-      ? services
-      : services.filter((s) => s.category === catFilter);
+  // ── Fetch từ Firestore ────────────────────────────────────────────────────
+  const loadServices = async () => {
+    setLoading(true);
+    try {
+      const [svcs, cats] = await Promise.all([
+        getAllServicesAdmin(),
+        getAllCategoriesAdmin(),
+      ]);
+      setServices(svcs);
+      if (cats.length)
+        setCategories([{ key: "all", label: "Tất cả" }, ...cats]);
+    } catch (err) {
+      console.error("loadServices:", err);
+      showToast("Không thể tải dữ liệu.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+    loadServices();
+  }, []);
+
+  // ── Helpers ───────────────────────────────────────────────────────────────
   const update = (f, v) => {
     setForm((p) => ({ ...p, [f]: v }));
     setErrors((e) => ({ ...e, [f]: "" }));
   };
 
+  const showToast = (msg) => {
+    setToast(msg);
+    setTimeout(() => setToast(null), 3000);
+  };
+
+  const validate = () => {
+    const e = {};
+    if (!form.name.trim()) e.name = "Vui lòng nhập tên dịch vụ";
+    if (!form.desc.trim()) e.desc = "Vui lòng nhập mô tả";
+    setErrors(e);
+    return !Object.keys(e).length;
+  };
+
+  // ── Mở modal ─────────────────────────────────────────────────────────────
   const openAdd = () => {
     setForm(EMPTY_FORM);
     setErrors({});
@@ -171,59 +148,77 @@ export default function AdminServices() {
     setModal({ mode: "edit", id: s.id });
   };
 
-  const validate = () => {
-    const e = {};
-    if (!form.name.trim()) e.name = "Vui lòng nhập tên dịch vụ";
-    if (!form.desc.trim()) e.desc = "Vui lòng nhập mô tả";
-    setErrors(e);
-    return !Object.keys(e).length;
-  };
-
-  const handleSave = () => {
+  // ── Lưu (thêm mới / cập nhật) ────────────────────────────────────────────
+  const handleSave = async () => {
     if (!validate()) return;
+    setSaving(true);
     const catLabel =
-      CATEGORIES.find((c) => c.key === form.category)?.label || "";
-    if (modal.mode === "add") {
-      const newItem = { ...form, categoryLabel: catLabel, id: Date.now() };
-      setServices((s) => [...s, newItem]);
-      showToast("Đã thêm dịch vụ mới.");
-    } else {
-      setServices((s) =>
-        s.map((x) =>
-          x.id === modal.id ? { ...x, ...form, categoryLabel: catLabel } : x,
-        ),
-      );
-      showToast("Đã cập nhật dịch vụ.");
+      categories.find((c) => c.key === form.category)?.label || "";
+    const payload = { ...form, categoryLabel: catLabel };
+
+    try {
+      if (modal.mode === "add") {
+        const newId = await createService(payload);
+        setServices((s) => [...s, { id: newId, ...payload }]);
+        showToast("Đã thêm dịch vụ mới.");
+      } else {
+        await updateService(modal.id, payload);
+        setServices((s) =>
+          s.map((x) => (x.id === modal.id ? { ...x, ...payload } : x)),
+        );
+        showToast("Đã cập nhật dịch vụ.");
+      }
+      setModal(null);
+    } catch (err) {
+      console.error("handleSave:", err);
+      showToast("Lưu thất bại. Vui lòng thử lại.");
+    } finally {
+      setSaving(false);
     }
-    setModal(null);
   };
 
-  const handleDelete = () => {
-    setServices((s) => s.filter((x) => x.id !== deleteModal.id));
-    setDeleteModal(null);
-    showToast("Đã xóa dịch vụ.");
+  // ── Xóa ──────────────────────────────────────────────────────────────────
+  const handleDelete = async () => {
+    try {
+      await deleteService(deleteModal.id);
+      setServices((s) => s.filter((x) => x.id !== deleteModal.id));
+      showToast("Đã xóa dịch vụ.");
+    } catch {
+      showToast("Xóa thất bại. Vui lòng thử lại.");
+    } finally {
+      setDeleteModal(null);
+    }
   };
 
-  const toggleActive = (id) => {
-    setServices((s) =>
-      s.map((x) => (x.id === id ? { ...x, active: !x.active } : x)),
-    );
-    showToast("Đã cập nhật trạng thái.");
+  // ── Toggle active ─────────────────────────────────────────────────────────
+  const toggleActive = async (s) => {
+    try {
+      const newVal = !s.active;
+      await toggleServiceActive(s.id, s.active);
+      setServices((prev) =>
+        prev.map((x) => (x.id === s.id ? { ...x, active: newVal } : x)),
+      );
+      showToast(newVal ? "Đã bật hiển thị." : "Đã ẩn dịch vụ.");
+    } catch {
+      showToast("Cập nhật thất bại.");
+    }
   };
 
-  const showToast = (msg) => {
-    setToast(msg);
-    setTimeout(() => setToast(null), 3000);
-  };
+  // ── Filter + group ────────────────────────────────────────────────────────
+  const filtered =
+    catFilter === "all"
+      ? services
+      : services.filter((s) => s.category === catFilter);
 
-  // Group by category để hiển thị
-  const grouped = CATEGORIES.filter((c) => c.key !== "all")
+  const grouped = categories
+    .filter((c) => c.key !== "all")
     .map((cat) => ({
       ...cat,
       items: filtered.filter((s) => s.category === cat.key),
     }))
     .filter((g) => g.items.length > 0);
 
+  // ── RENDER ────────────────────────────────────────────────────────────────
   return (
     <div className="as-root">
       {/* ── HEADER ── */}
@@ -231,8 +226,9 @@ export default function AdminServices() {
         <div>
           <h1 className="as-title">Quản lý dịch vụ</h1>
           <p className="as-subtitle">
-            {services.length} dịch vụ ·{" "}
-            {services.filter((s) => s.active).length} đang hiển thị
+            {loading
+              ? "Đang tải..."
+              : `${services.length} dịch vụ · ${services.filter((s) => s.active).length} đang hiển thị`}
           </p>
         </div>
         <button className="as-add-btn" onClick={openAdd}>
@@ -242,7 +238,7 @@ export default function AdminServices() {
 
       {/* ── FILTER TABS ── */}
       <div className="as-filter-tabs">
-        {CATEGORIES.map((c) => (
+        {categories.map((c) => (
           <button
             key={c.key}
             className={`as-filter-tab ${catFilter === c.key ? "active" : ""}`}
@@ -258,18 +254,37 @@ export default function AdminServices() {
         ))}
       </div>
 
-      {/* ── SERVICE GROUPS ── */}
-      <div className="as-groups">
-        {grouped.length === 0 ? (
-          <div className="as-empty">
-            <div className="as-empty-icon">📋</div>
-            <h3>Chưa có dịch vụ nào</h3>
-            <button className="as-empty-btn" onClick={openAdd}>
-              + Thêm dịch vụ đầu tiên
-            </button>
-          </div>
-        ) : (
-          grouped.map((group) => (
+      {/* ── CONTENT ── */}
+      {loading ? (
+        // Skeleton
+        <div className="as-groups">
+          {["Dân sự", "Hình sự", "Doanh nghiệp"].map((g) => (
+            <div key={g} className="as-group">
+              <div className="as-group-header">
+                <div
+                  className="skeleton-line skeleton-line--sm"
+                  style={{ width: 80 }}
+                />
+              </div>
+              <div className="as-grid">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <SkeletonCard key={i} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : grouped.length === 0 ? (
+        <div className="as-empty">
+          <div className="as-empty-icon">📋</div>
+          <h3>Chưa có dịch vụ nào</h3>
+          <button className="as-empty-btn" onClick={openAdd}>
+            + Thêm dịch vụ đầu tiên
+          </button>
+        </div>
+      ) : (
+        <div className="as-groups">
+          {grouped.map((group) => (
             <div key={group.key} className="as-group">
               <div className="as-group-header">
                 <span className="as-group-title">{group.label}</span>
@@ -286,10 +301,9 @@ export default function AdminServices() {
                     <div className="as-card-top">
                       <div className="as-card-icon">{s.icon}</div>
                       <div className="as-card-actions">
-                        {/* Toggle active */}
                         <button
                           className={`as-toggle ${s.active ? "on" : "off"}`}
-                          onClick={() => toggleActive(s.id)}
+                          onClick={() => toggleActive(s)}
                           title={
                             s.active
                               ? "Đang hiển thị — nhấn để ẩn"
@@ -324,17 +338,15 @@ export default function AdminServices() {
                     </div>
                   </div>
                 ))}
-
-                {/* Add card */}
                 <button className="as-add-card" onClick={openAdd}>
                   <span className="as-add-card-icon">+</span>
                   <span>Thêm dịch vụ</span>
                 </button>
               </div>
             </div>
-          ))
-        )}
-      </div>
+          ))}
+        </div>
+      )}
 
       {/* ── MODAL THÊM / SỬA ── */}
       {modal && (
@@ -350,7 +362,6 @@ export default function AdminServices() {
                 ✕
               </button>
             </div>
-
             <div className="as-modal-body">
               {/* Icon picker */}
               <div className="as-field">
@@ -411,11 +422,13 @@ export default function AdminServices() {
                     onChange={(e) => update("category", e.target.value)}
                     className="as-select"
                   >
-                    {CATEGORIES.filter((c) => c.key !== "all").map((c) => (
-                      <option key={c.key} value={c.key}>
-                        {c.label}
-                      </option>
-                    ))}
+                    {categories
+                      .filter((c) => c.key !== "all")
+                      .map((c) => (
+                        <option key={c.key} value={c.key}>
+                          {c.label}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="as-field">
@@ -454,7 +467,6 @@ export default function AdminServices() {
                 </div>
               </div>
             </div>
-
             <div className="as-modal-footer">
               <button
                 className="as-btn as-btn--ghost"
@@ -462,8 +474,16 @@ export default function AdminServices() {
               >
                 Hủy
               </button>
-              <button className="as-btn as-btn--primary" onClick={handleSave}>
-                {modal.mode === "add" ? "Thêm dịch vụ" : "Lưu thay đổi"}
+              <button
+                className="as-btn as-btn--primary"
+                onClick={handleSave}
+                disabled={saving}
+              >
+                {saving
+                  ? "Đang lưu..."
+                  : modal.mode === "add"
+                    ? "Thêm dịch vụ"
+                    : "Lưu thay đổi"}
               </button>
             </div>
           </div>

@@ -1,6 +1,7 @@
 {
   "slogan": "理解 - 责任 - 奉献",
   "company_name": "PGU律师事务所",
+  "about-us": "关于我们",
   "nav_cta": "免费咨询",
 
   "nav_about": "关于我们",
@@ -77,7 +78,7 @@
   "nav_license_factory": "厂房竣工验收",
   "nav_license_labor": "劳动许可证",
   "nav_license_security": "治安许可证",
-  "nav_license_visa": "签证 – 临时居留证",
+  "nav_license_visa": "签证 - 临时居留证",
   "nav_license_household": "个体工商户",
   "nav_license_liquor": "酒类经营许可证",
   "nav_license_medical": "医疗设备进口",
@@ -97,7 +98,7 @@
   "footer_contact_hours": "工作时间",
   "footer_contact_hours_value": "周一至周五，上午8:00 - 下午5:30",
 
-  "footer_brand_desc": "值得信赖的法律伙伴 — 以专业、尽职、经验丰富的律师团队，保护越南企业和个人的合法权益。",
+  "footer_brand_desc": "值得信赖的法律伙伴 - 以专业、尽职、经验丰富的律师团队，保护越南企业和个人的合法权益。",
   "footer_logo_name": "福嘉威律师事务所",
   "footer_logo_highlight": "及合伙人",
   "footer_logo_slogan": "理解 - 责任 - 奉献",
@@ -175,7 +176,7 @@
   "about_service_license_item_1": "环境许可证",
   "about_service_license_item_2": "消防安全",
   "about_service_license_item_3": "劳动许可证",
-  "about_service_license_item_4": "签证 – 居留证",
+  "about_service_license_item_4": "签证 - 居留证",
 
   "about_service_consult_title": "常规咨询",
   "about_service_consult_item_1": "合同起草",
@@ -237,13 +238,14 @@
   "float_top_label": "回到顶部",
 
   "about_intro_para1_plain": "福嘉威及合伙人有限责任律师事务所的成立，旨在打造一家专业、尽责、规范的法律执业机构。自开业伊始，本所便将",
-  "about_intro_para1_motto": "\"理解·责任·服务\"",
+  "about_intro_para1_motto": "\"理解 - 责任 - 服务\"",
   "about_intro_para1_suffix": "确立为核心价值观，作为一切咨询与诉讼工作的指引方针。",
-  "about_intro_img1_alt": "福嘉威及合伙人 – 公司简介",
+  "about_intro_img1_alt": "福嘉威及合伙人 - 公司简介",
+  "about_intro_img1_caption": "创始律师：律师 Nguyễn Trần Nhẫm",
   "about_intro_para2": "理解，意味着陪伴客户走过每一个案件；责任，意味着最大限度地维护其合法权益；服务，则是一种持久的职业承诺。正是基于这一理念，本所逐步树立起良好的声誉，成为国内外个人及企业值得信赖的法律合作伙伴。",
-  "about_intro_img2_alt": "福嘉威及合伙人 – 核心价值观",
+  "about_intro_img2_alt": "福嘉威及合伙人 - 核心价值观",
   "about_intro_para3": "本所专注于民事、刑事、外商直接投资（FDI）、企业法务及许可证审批等核心领域的法律服务。凭借经验丰富、诉讼能力突出、咨询深度专业的律师团队，福嘉威及合伙人始终致力于为客户提供最优法律解决方案，切实维护客户的合法权益。",
-  "about_intro_img3_alt": "福嘉威及合伙人 – 律师团队",
+  "about_intro_img3_alt": "福嘉威及合伙人 - 律师团队",
 
   "contact_hero_title_1": "我们随时",
   "contact_hero_title_2": "准备为您服务",

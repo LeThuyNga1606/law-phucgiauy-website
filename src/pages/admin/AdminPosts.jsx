@@ -1,151 +1,13 @@
-import { useState, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../styles/adminPosts.css";
+import {
+  getAllPostsAdmin,
+  deletePost,
+  togglePostStatus,
+} from "../../services/news";
 
-// ─── MOCK DATA (Phase 3: thay bằng Firestore) ────────────────────────────────
-const INITIAL_POSTS = [
-  {
-    id: 1,
-    title:
-      "Những quy định mới nhất về thủ tục ly hôn theo Luật Hôn nhân và Gia đình 2024",
-    category: "civil",
-    categoryLabel: "Dân sự",
-    status: "published",
-    author: "LS. Nguyễn Văn A",
-    date: "2024-12-15",
-    views: 1240,
-    featured: true,
-  },
-  {
-    id: 2,
-    title:
-      "Luật Đất đai 2024: Những điểm mới quan trọng ảnh hưởng đến người dân",
-    category: "civil",
-    categoryLabel: "Dân sự",
-    status: "published",
-    author: "LS. Trần Thị B",
-    date: "2024-12-10",
-    views: 2180,
-    featured: true,
-  },
-  {
-    id: 3,
-    title:
-      "Thủ tục thành lập công ty TNHH năm 2024: Hướng dẫn chi tiết từ A đến Z",
-    category: "enterprise",
-    categoryLabel: "Doanh nghiệp",
-    status: "published",
-    author: "LS. Lê Văn C",
-    date: "2024-12-05",
-    views: 890,
-    featured: false,
-  },
-  {
-    id: 4,
-    title:
-      "Quy trình cấp Giấy chứng nhận đăng ký đầu tư cho doanh nghiệp FDI tại Việt Nam",
-    category: "investment",
-    categoryLabel: "Đầu tư - FDI",
-    status: "published",
-    author: "LS. Phạm Thị D",
-    date: "2024-11-28",
-    views: 650,
-    featured: false,
-  },
-  {
-    id: 5,
-    title:
-      "Quyền của bị can, bị cáo trong tố tụng hình sự: Những điều cần biết",
-    category: "criminal",
-    categoryLabel: "Hình sự",
-    status: "draft",
-    author: "LS. Nguyễn Văn A",
-    date: "2024-11-20",
-    views: 0,
-    featured: false,
-  },
-  {
-    id: 6,
-    title:
-      "Danh mục ngành nghề kinh doanh có điều kiện và thủ tục xin giấy phép 2024",
-    category: "license",
-    categoryLabel: "Giấy phép",
-    status: "published",
-    author: "LS. Trần Thị B",
-    date: "2024-11-15",
-    views: 720,
-    featured: false,
-  },
-  {
-    id: 7,
-    title: "Giải quyết tranh chấp hợp đồng thương mại: Trọng tài hay Tòa án?",
-    category: "enterprise",
-    categoryLabel: "Doanh nghiệp",
-    status: "published",
-    author: "LS. Lê Văn C",
-    date: "2024-11-08",
-    views: 430,
-    featured: false,
-  },
-  {
-    id: 8,
-    title: "Di chúc hợp pháp: Điều kiện và hình thức theo Bộ luật Dân sự 2015",
-    category: "civil",
-    categoryLabel: "Dân sự",
-    status: "published",
-    author: "LS. Phạm Thị D",
-    date: "2024-10-30",
-    views: 980,
-    featured: false,
-  },
-  {
-    id: 9,
-    title: "Người lao động nghỉ việc đúng luật: Quyền lợi và thủ tục cần biết",
-    category: "news",
-    categoryLabel: "Tin pháp luật",
-    status: "published",
-    author: "LS. Nguyễn Văn A",
-    date: "2024-10-22",
-    views: 1890,
-    featured: false,
-  },
-  {
-    id: 10,
-    title:
-      "Đăng ký bảo hộ nhãn hiệu tại Việt Nam: Quy trình và những lưu ý quan trọng",
-    category: "license",
-    categoryLabel: "Giấy phép",
-    status: "draft",
-    author: "LS. Trần Thị B",
-    date: "2024-10-15",
-    views: 0,
-    featured: false,
-  },
-  {
-    id: 11,
-    title:
-      "Bồi thường thiệt hại do tai nạn giao thông: Mức bồi thường và trình tự khiếu nại",
-    category: "civil",
-    categoryLabel: "Dân sự",
-    status: "published",
-    author: "LS. Lê Văn C",
-    date: "2024-10-05",
-    views: 2340,
-    featured: false,
-  },
-  {
-    id: 12,
-    title: "Thủ tục giải thể công ty tự nguyện: Hướng dẫn từng bước năm 2024",
-    category: "enterprise",
-    categoryLabel: "Doanh nghiệp",
-    status: "published",
-    author: "LS. Phạm Thị D",
-    date: "2024-09-28",
-    views: 380,
-    featured: false,
-  },
-];
-
+// ─── CONFIG ───────────────────────────────────────────────────────────────────
 const CATEGORIES = [
   { key: "all", label: "Tất cả" },
   { key: "civil", label: "Dân sự" },
@@ -158,20 +20,89 @@ const CATEGORIES = [
 
 const POSTS_PER_PAGE = 8;
 
+// ─── SKELETON ROW ─────────────────────────────────────────────────────────────
+function SkeletonRow() {
+  return (
+    <tr className="ap-row">
+      <td className="ap-td-check">
+        <div className="ap-checkbox" />
+      </td>
+      <td className="ap-td-title">
+        <div className="skeleton-line" style={{ width: "80%" }} />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 60 }}
+        />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 80 }}
+        />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 60 }}
+        />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 70 }}
+        />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 40 }}
+        />
+      </td>
+      <td>
+        <div
+          className="skeleton-line skeleton-line--sm"
+          style={{ width: 60 }}
+        />
+      </td>
+    </tr>
+  );
+}
+
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function AdminPosts() {
   const navigate = useNavigate();
 
-  const [posts, setPosts] = useState(INITIAL_POSTS);
+  // ── Firestore state ──────────────────────────────────────────────────────
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // ── UI state ─────────────────────────────────────────────────────────────
   const [search, setSearch] = useState("");
   const [categoryFilter, setCategory] = useState("all");
   const [statusFilter, setStatus] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selected, setSelected] = useState([]); // ids được chọn
-  const [deleteModal, setDeleteModal] = useState(null); // post cần xóa
+  const [selected, setSelected] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(null);
   const [toast, setToast] = useState(null);
 
-  // Lọc + tìm kiếm
+  // ── Fetch từ Firestore ────────────────────────────────────────────────────
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const data = await getAllPostsAdmin();
+      setPosts(data);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  // ── Lọc + tìm kiếm (client-side) ────────────────────────────────────────
   const filtered = useMemo(() => {
     let r = posts;
     if (categoryFilter !== "all")
@@ -180,27 +111,26 @@ export default function AdminPosts() {
     if (search.trim())
       r = r.filter(
         (p) =>
-          p.title.toLowerCase().includes(search.toLowerCase()) ||
-          p.author.toLowerCase().includes(search.toLowerCase()),
+          p.title?.toLowerCase().includes(search.toLowerCase()) ||
+          p.author?.toLowerCase().includes(search.toLowerCase()),
       );
     return r;
   }, [posts, categoryFilter, statusFilter, search]);
 
-  // Pagination
+  // ── Pagination ────────────────────────────────────────────────────────────
   const totalPages = Math.ceil(filtered.length / POSTS_PER_PAGE);
   const paginated = filtered.slice(
     (currentPage - 1) * POSTS_PER_PAGE,
     currentPage * POSTS_PER_PAGE,
   );
 
-  // Reset page khi filter thay đổi
   const applyFilter = (setter, val) => {
     setter(val);
     setCurrentPage(1);
     setSelected([]);
   };
 
-  // Select all trên trang hiện tại
+  // ── Select ────────────────────────────────────────────────────────────────
   const allSelected =
     paginated.length > 0 && paginated.every((p) => selected.includes(p.id));
   const toggleAll = () =>
@@ -210,50 +140,68 @@ export default function AdminPosts() {
       s.includes(id) ? s.filter((x) => x !== id) : [...s, id],
     );
 
-  // Xóa 1 bài
+  // ── Xóa 1 bài ────────────────────────────────────────────────────────────
   const confirmDelete = (post) => setDeleteModal(post);
-  const doDelete = () => {
-    setPosts((p) => p.filter((x) => x.id !== deleteModal.id));
-    setDeleteModal(null);
-    showToast("Đã xóa bài viết thành công.");
+  const doDelete = async () => {
+    try {
+      await deletePost(deleteModal.id);
+      setPosts((p) => p.filter((x) => x.id !== deleteModal.id));
+      showToast("Đã xóa bài viết thành công.");
+    } catch {
+      showToast("Xóa thất bại. Vui lòng thử lại.");
+    } finally {
+      setDeleteModal(null);
+    }
   };
 
-  // Xóa nhiều bài
-  const bulkDelete = () => {
-    setPosts((p) => p.filter((x) => !selected.includes(x.id)));
-    setSelected([]);
-    showToast(`Đã xóa ${selected.length} bài viết.`);
+  // ── Xóa nhiều bài ────────────────────────────────────────────────────────
+  const bulkDelete = async () => {
+    try {
+      await Promise.all(selected.map((id) => deletePost(id)));
+      setPosts((p) => p.filter((x) => !selected.includes(x.id)));
+      showToast(`Đã xóa ${selected.length} bài viết.`);
+    } catch {
+      showToast("Xóa thất bại. Vui lòng thử lại.");
+    } finally {
+      setSelected([]);
+    }
   };
 
-  // Toggle trạng thái
-  const toggleStatus = (id) => {
-    setPosts((p) =>
-      p.map((x) =>
-        x.id === id
-          ? { ...x, status: x.status === "published" ? "draft" : "published" }
-          : x,
-      ),
-    );
-    showToast("Đã cập nhật trạng thái.");
+  // ── Toggle trạng thái ─────────────────────────────────────────────────────
+  const handleToggleStatus = async (post) => {
+    try {
+      const newStatus = await togglePostStatus(post.id, post.status);
+      setPosts((p) =>
+        p.map((x) => (x.id === post.id ? { ...x, status: newStatus } : x)),
+      );
+      showToast("Đã cập nhật trạng thái.");
+    } catch {
+      showToast("Cập nhật thất bại.");
+    }
   };
 
+  // ── Helpers ───────────────────────────────────────────────────────────────
   const showToast = (msg) => {
     setToast(msg);
     setTimeout(() => setToast(null), 3000);
   };
 
-  const formatDate = (d) =>
-    new Date(d).toLocaleDateString("vi-VN", {
+  const formatDate = (val) => {
+    if (!val) return "—";
+    const d = val?.toDate ? val.toDate() : new Date(val);
+    return d.toLocaleDateString("vi-VN", {
       day: "2-digit",
       month: "2-digit",
       year: "numeric",
     });
+  };
 
-  // Stats nhanh
+  // Stats
   const totalPublished = posts.filter((p) => p.status === "published").length;
   const totalDraft = posts.filter((p) => p.status === "draft").length;
-  const totalViews = posts.reduce((s, p) => s + p.views, 0);
+  const totalViews = posts.reduce((s, p) => s + (p.views || 0), 0);
 
+  // ── RENDER ────────────────────────────────────────────────────────────────
   return (
     <div className="ap-root">
       {/* ── HEADER ── */}
@@ -261,8 +209,9 @@ export default function AdminPosts() {
         <div>
           <h1 className="ap-title">Quản lý tin tức</h1>
           <p className="ap-subtitle">
-            {posts.length} bài viết · {totalPublished} đã đăng · {totalDraft}{" "}
-            bản nháp
+            {loading
+              ? "Đang tải..."
+              : `${posts.length} bài viết · ${totalPublished} đã đăng · ${totalDraft} bản nháp`}
           </p>
         </div>
         <Link to="/admin/posts/new" className="ap-new-btn">
@@ -280,7 +229,7 @@ export default function AdminPosts() {
             📝
           </div>
           <div>
-            <div className="ap-qs-val">{posts.length}</div>
+            <div className="ap-qs-val">{loading ? "—" : posts.length}</div>
             <div className="ap-qs-lbl">Tổng bài viết</div>
           </div>
         </div>
@@ -292,7 +241,7 @@ export default function AdminPosts() {
             ✓
           </div>
           <div>
-            <div className="ap-qs-val">{totalPublished}</div>
+            <div className="ap-qs-val">{loading ? "—" : totalPublished}</div>
             <div className="ap-qs-lbl">Đã đăng</div>
           </div>
         </div>
@@ -304,7 +253,7 @@ export default function AdminPosts() {
             ✎
           </div>
           <div>
-            <div className="ap-qs-val">{totalDraft}</div>
+            <div className="ap-qs-val">{loading ? "—" : totalDraft}</div>
             <div className="ap-qs-lbl">Bản nháp</div>
           </div>
         </div>
@@ -316,7 +265,9 @@ export default function AdminPosts() {
             👁
           </div>
           <div>
-            <div className="ap-qs-val">{(totalViews / 1000).toFixed(1)}K</div>
+            <div className="ap-qs-val">
+              {loading ? "—" : `${(totalViews / 1000).toFixed(1)}K`}
+            </div>
             <div className="ap-qs-lbl">Tổng lượt xem</div>
           </div>
         </div>
@@ -324,7 +275,6 @@ export default function AdminPosts() {
 
       {/* ── FILTERS ── */}
       <div className="ap-filters">
-        {/* Search */}
         <div className="ap-search-wrap">
           <svg
             className="ap-search-icon"
@@ -355,7 +305,6 @@ export default function AdminPosts() {
           )}
         </div>
 
-        {/* Category filter */}
         <select
           value={categoryFilter}
           onChange={(e) => applyFilter(setCategory, e.target.value)}
@@ -368,7 +317,6 @@ export default function AdminPosts() {
           ))}
         </select>
 
-        {/* Status filter */}
         <select
           value={statusFilter}
           onChange={(e) => applyFilter(setStatus, e.target.value)}
@@ -379,20 +327,20 @@ export default function AdminPosts() {
           <option value="draft">Bản nháp</option>
         </select>
 
-        {/* Bulk delete */}
         {selected.length > 0 && (
           <button className="ap-bulk-delete" onClick={bulkDelete}>
             🗑 Xóa {selected.length} bài đã chọn
           </button>
         )}
 
-        {/* Result count */}
-        <span className="ap-result-count">{filtered.length} kết quả</span>
+        <span className="ap-result-count">
+          {loading ? "…" : `${filtered.length} kết quả`}
+        </span>
       </div>
 
       {/* ── TABLE ── */}
       <div className="ap-table-wrap">
-        {paginated.length === 0 ? (
+        {!loading && paginated.length === 0 ? (
           <div className="ap-empty">
             <div className="ap-empty-icon">🔍</div>
             <h3>Không tìm thấy bài viết</h3>
@@ -430,122 +378,124 @@ export default function AdminPosts() {
               </tr>
             </thead>
             <tbody>
-              {paginated.map((post, i) => (
-                <tr
-                  key={post.id}
-                  className={`ap-row ${selected.includes(post.id) ? "ap-row--selected" : ""}`}
-                  style={{ animationDelay: `${i * 40}ms` }}
-                >
-                  {/* Checkbox */}
-                  <td className="ap-td-check">
-                    <input
-                      type="checkbox"
-                      checked={selected.includes(post.id)}
-                      onChange={() => toggleOne(post.id)}
-                      className="ap-checkbox"
-                    />
-                  </td>
-
-                  {/* Title */}
-                  <td className="ap-td-title">
-                    <div className="ap-post-title-wrap">
-                      {post.featured && (
-                        <span className="ap-featured-dot" title="Nổi bật" />
-                      )}
-                      <span className="ap-post-title" title={post.title}>
-                        {post.title}
-                      </span>
-                    </div>
-                  </td>
-
-                  {/* Category */}
-                  <td>
-                    <span className="ap-cat-chip">{post.categoryLabel}</span>
-                  </td>
-
-                  {/* Author */}
-                  <td className="ap-td-author">
-                    <div className="ap-author-wrap">
-                      <div className="ap-author-avatar">
-                        {post.author.split(" ").pop()[0]}
-                      </div>
-                      <span>{post.author}</span>
-                    </div>
-                  </td>
-
-                  {/* Status toggle */}
-                  <td>
-                    <button
-                      className={`ap-status-btn ap-status-btn--${post.status}`}
-                      onClick={() => toggleStatus(post.id)}
-                      title="Nhấn để đổi trạng thái"
+              {loading
+                ? Array.from({ length: POSTS_PER_PAGE }).map((_, i) => (
+                    <SkeletonRow key={i} />
+                  ))
+                : paginated.map((post, i) => (
+                    <tr
+                      key={post.id}
+                      className={`ap-row ${selected.includes(post.id) ? "ap-row--selected" : ""}`}
+                      style={{ animationDelay: `${i * 40}ms` }}
                     >
-                      {post.status === "published" ? "✓ Đã đăng" : "✎ Nháp"}
-                    </button>
-                  </td>
+                      <td className="ap-td-check">
+                        <input
+                          type="checkbox"
+                          checked={selected.includes(post.id)}
+                          onChange={() => toggleOne(post.id)}
+                          className="ap-checkbox"
+                        />
+                      </td>
 
-                  {/* Date */}
-                  <td className="ap-td-muted">{formatDate(post.date)}</td>
+                      <td className="ap-td-title">
+                        <div className="ap-post-title-wrap">
+                          {post.featured && (
+                            <span className="ap-featured-dot" title="Nổi bật" />
+                          )}
+                          <span className="ap-post-title" title={post.title}>
+                            {post.title}
+                          </span>
+                        </div>
+                      </td>
 
-                  {/* Views */}
-                  <td className="ap-td-muted">
-                    {post.views > 0 ? (
-                      <span className="ap-views">
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
+                      <td>
+                        <span className="ap-cat-chip">
+                          {post.categoryLabel}
+                        </span>
+                      </td>
+
+                      <td className="ap-td-author">
+                        <div className="ap-author-wrap">
+                          <div className="ap-author-avatar">
+                            {post.author?.split(" ").pop()[0]}
+                          </div>
+                          <span>{post.author}</span>
+                        </div>
+                      </td>
+
+                      <td>
+                        <button
+                          className={`ap-status-btn ap-status-btn--${post.status}`}
+                          onClick={() => handleToggleStatus(post)}
+                          title="Nhấn để đổi trạng thái"
                         >
-                          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
-                          <circle cx="12" cy="12" r="3" />
-                        </svg>
-                        {post.views.toLocaleString()}
-                      </span>
-                    ) : (
-                      "—"
-                    )}
-                  </td>
+                          {post.status === "published" ? "✓ Đã đăng" : "✎ Nháp"}
+                        </button>
+                      </td>
 
-                  {/* Actions */}
-                  <td>
-                    <div className="ap-actions">
-                      <button
-                        className="ap-action-btn ap-action-btn--edit"
-                        onClick={() => navigate(`/admin/posts/${post.id}/edit`)}
-                        title="Chỉnh sửa"
-                      >
-                        ✎
-                      </button>
-                      <a
-                        href={`/tin-tuc/${post.id}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="ap-action-btn ap-action-btn--view"
-                        title="Xem bài"
-                      >
-                        ↗
-                      </a>
-                      <button
-                        className="ap-action-btn ap-action-btn--delete"
-                        onClick={() => confirmDelete(post)}
-                        title="Xóa"
-                      >
-                        🗑
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+                      <td className="ap-td-muted">
+                        {formatDate(post.createdAt)}
+                      </td>
+
+                      <td className="ap-td-muted">
+                        {(post.views || 0) > 0 ? (
+                          <span className="ap-views">
+                            <svg
+                              width="12"
+                              height="12"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                            >
+                              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                              <circle cx="12" cy="12" r="3" />
+                            </svg>
+                            {post.views.toLocaleString()}
+                          </span>
+                        ) : (
+                          "—"
+                        )}
+                      </td>
+
+                      <td>
+                        <div className="ap-actions">
+                          <button
+                            className="ap-action-btn ap-action-btn--edit"
+                            onClick={() =>
+                              navigate(`/admin/posts/${post.id}/edit`)
+                            }
+                            title="Chỉnh sửa"
+                          >
+                            ✎
+                          </button>
+                          <a
+                            href={`/tin-tuc/${post.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ap-action-btn ap-action-btn--view"
+                            title="Xem bài"
+                          >
+                            ↗
+                          </a>
+                          <button
+                            className="ap-action-btn ap-action-btn--delete"
+                            onClick={() => confirmDelete(post)}
+                            title="Xóa"
+                          >
+                            🗑
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
         )}
       </div>
 
       {/* ── PAGINATION ── */}
-      {totalPages > 1 && (
+      {!loading && totalPages > 1 && (
         <div className="ap-pagination">
           <span className="ap-page-info">
             Trang {currentPage} / {totalPages} ({filtered.length} bài)
@@ -603,7 +553,7 @@ export default function AdminPosts() {
             <p className="ap-modal-desc">
               Bạn có chắc muốn xóa bài viết:
               <br />
-              <strong>"{deleteModal.title.slice(0, 60)}..."</strong>
+              <strong>"{deleteModal.title?.slice(0, 60)}..."</strong>
             </p>
             <p className="ap-modal-warn">⚠ Hành động này không thể hoàn tác.</p>
             <div className="ap-modal-actions">

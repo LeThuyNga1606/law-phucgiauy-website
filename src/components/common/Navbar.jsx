@@ -20,7 +20,7 @@ const Navbar = () => {
   const NAV_ITEMS = [
     {
       id: "about",
-      label: "PGU LAW FIRM",
+      label: t("about-us").toUpperCase(),
       groups: [
         {
           title: t("nav_about_group_title"),
@@ -388,8 +388,8 @@ const Navbar = () => {
             </span>
             <span className="nav-topbar-item">
               ✉️{" "}
-              <a href="mailto:luatsunguyen0909@gmail.com">
-                luatsunguyen0909@gmail.com
+              <a href="mailto:luatphucgiauy@gmail.com">
+                luatphucgiauy@gmail.com
               </a>
             </span>
             <span className="nav-topbar-item">
@@ -538,6 +538,10 @@ const Navbar = () => {
                   <div className="mob-sub">
                     {item.groups?.map((group, gi) => (
                       <div key={gi}>
+                        {(item.id === "enterprise" ||
+                          item.id === "investment") && (
+                          <div className="mob-group-title">{group.title}</div>
+                        )}
                         {group.items.map((sub) => (
                           <Link key={sub.to} to={sub.to}>
                             {sub.label}

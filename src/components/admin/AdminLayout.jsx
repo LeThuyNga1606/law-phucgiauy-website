@@ -90,6 +90,13 @@ export default function AdminLayout({ children, user }) {
       to: "/admin/contacts",
       single: true,
     },
+    {
+      id: "categories",
+      label: t("categories"),
+      to: "/admin/categories",
+      icon: "🏷️",
+      single: true,
+    },
   ];
 
   return (
@@ -104,8 +111,8 @@ export default function AdminLayout({ children, user }) {
             </span>
             <span className="nav-topbar-item">
               ✉️{" "}
-              <a href="mailto:luatsunguyen0909@gmail.com">
-                luatsunguyen0909@gmail.com
+              <a href="mailto:luatphucgiauy@gmail.com">
+                luatphucgiauy@gmail.com
               </a>
             </span>
             <span className="nav-topbar-item">

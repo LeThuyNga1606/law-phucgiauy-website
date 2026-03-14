@@ -3,34 +3,35 @@ import { Link } from "react-router-dom";
 import "../../styles/contact.css";
 import { useTranslation } from "react-i18next";
 import emailjs from "@emailjs/browser";
-
 import intro3 from "../../assets/images/introduce_3.jpg";
+import { submitContactRequest } from "../../services/contact";
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 const Contact = () => {
   const { t } = useTranslation();
-  const today = new Date().getDay(); // 0 = CN, 1-5 = T2-T6, 6 = T7
+  const today = new Date().getDay();
   const isOpenNow = today >= 1 && today <= 5;
 
   const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
   const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
   const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
-  const [form, setForm] = useState({
+  const EMPTY_FORM = {
     name: "",
     phone: "",
     email: "",
     subject: "",
     message: "",
     address: "",
-  });
+  };
+
+  const [form, setForm] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -44,27 +45,64 @@ const Contact = () => {
     });
 
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          from_name: form.name,
-          from_phone: form.phone,
-          from_email: form.email || "(không cung cấp)",
-          from_address: form.address || "(không cung cấp)",
-          subject: form.subject || "(không có chủ đề)",
-          message: form.message || "(không có mô tả)",
-          sent_at: sentAt,
-          to_email: "luatphucgiauy@gmail.com",
-        },
-        EMAILJS_PUBLIC_KEY,
-      );
+      // Gửi EmailJS + lưu Firestore song song
+      await Promise.all([
+        // 1. Gửi email thông báo cho công ty
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            from_name: form.name,
+            from_phone: form.phone,
+            from_email: form.email || "(không cung cấp)",
+            from_address: form.address || "(không cung cấp)",
+            subject: form.subject || "(không có chủ đề)",
+            message: form.message || "(không có mô tả)",
+            sent_at: sentAt,
+            to_email: "luatphucgiauy@gmail.com",
+          },
+          EMAILJS_PUBLIC_KEY,
+        ),
+
+        // 2. Lưu vào Firestore collection "contacts"
+        submitContactRequest({
+          name: form.name,
+          phone: form.phone,
+          email: form.email || "",
+          address: form.address || "",
+          subject: form.subject || "",
+          message: form.message || "",
+        }),
+      ]);
+
       setSubmitted(true);
     } catch (err) {
-      console.error("EmailJS error:", err);
-      setError(
-        "Gửi thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
-      );
+      console.error("Submit error:", err);
+
+      // Nếu EmailJS lỗi nhưng Firestore đã lưu → vẫn coi là thành công
+      // vì công ty vẫn có thể thấy trên dashboard
+      if (err?.text || err?.status) {
+        // Lỗi từ EmailJS — thử lưu Firestore riêng nếu chưa lưu
+        try {
+          await submitContactRequest({
+            name: form.name,
+            phone: form.phone,
+            email: form.email || "",
+            address: form.address || "",
+            subject: form.subject || "",
+            message: form.message || "",
+          });
+          setSubmitted(true); // Firestore OK → vẫn thành công
+        } catch {
+          setError(
+            "Gửi thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
+          );
+        }
+      } else {
+        setError(
+          "Gửi thất bại. Vui lòng thử lại hoặc liên hệ trực tiếp qua hotline.",
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -81,7 +119,6 @@ const Contact = () => {
             {t("contact_hero_title_2")}
           </h1>
           <p className="contact-hero-desc">{t("contact_hero_desc")}</p>
-          {/* Status badge */}
           <div className={`contact-status ${isOpenNow ? "open" : "closed"}`}>
             <span className="contact-status-dot" />
             {isOpenNow ? t("contact_status_open") : t("contact_status_closed")}
@@ -89,13 +126,13 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* ══ THÔNG TIN LIÊN HỆ ══ */}
       <section className="about-contact">
         <div className="contact-form-header">
           <h2 className="contact-section-title contact-section-title-dark">
             {t("contact_info_title")}
           </h2>
         </div>
-
         <div className="about-contact-inner">
           <div className="about-contact-left">
             <div className="about-contact-cards">
@@ -158,7 +195,7 @@ const Contact = () => {
           <div className="about-contact-right">
             <div className="contact-map-frame" style={{ borderRadius: 10 }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.1341088016766!2d106.71954187576188!3d10.877402989277577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3174d7ff98e82a9d%3A0x6534745d3d1b53a5!2zMTcg4bqgxJBhbmcgc-G7kSA0LCBraHUgcGjhu5EgNSwgVGhhe%2BG9lCDEkOG7pWMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1svi!2s!4v1772465710973!5m2!1svi!2s"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.7411363457977!2d106.72524787576133!3d10.831111489320994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317527007b833f21%3A0xf7b1c4b258278d1!2zQ8O0bmcgdHkgTHXhuq10IFROSEggUGjDumMgR2lhIFV5ICYgQ-G7mW5nIHPhu7E!5e0!3m2!1sen!2s!4v1773502718113!5m2!1sen!2s"
                 width="100%"
                 height="400"
                 style={{ border: 0, borderRadius: 0 }}
@@ -179,55 +216,13 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* ══ MAP + GIỜ LÀM VIỆC ══ */}
+      {/* ══ FORM ══ */}
       <section className="contact-map-section">
         <div className="contact-map-inner">
-          {/* <div className="contact-map-right">
-            <p className="contact-eyebrow">
-              <span className="contact-eyebrow-line" />
-              <h2 className="contact-section-title">Giờ Làm Việc</h2>
-              <span className="contact-eyebrow-line" />
-            </p>
-
-            <div className="contact-hours-table">
-              {WORKING_HOURS.map((h, i) => {
-                const isToday = (i === 6 ? 0 : i + 1) === today;
-                return (
-                  <div
-                    key={i}
-                    className={`contact-hours-row ${!h.open ? "closed" : ""} ${isToday ? "today" : ""}`}
-                  >
-                    <div className="contact-hours-day">
-                      {isToday && <span className="contact-today-badge">Hôm nay</span>}
-                      {h.day}
-                    </div>
-                    <div className="contact-hours-time">{h.hours}</div>
-                    <div className={`contact-hours-dot ${h.open ? "open" : "closed"}`} />
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="contact-hours-note">
-              <span>💡</span>
-              <p>Ngoài giờ hành chính, quý khách có thể liên hệ qua Zalo hoặc để lại tin nhắn — chúng tôi sẽ phản hồi sớm nhất vào ngày làm việc tiếp theo.</p>
-            </div>
-
-            <div className="contact-quick-actions">
-              <a href="tel:0909724768" className="contact-quick-btn contact-quick-btn-red">
-                ☎ Gọi Ngay
-              </a>
-              <a href="https://zalo.me/0909724768" target="_blank" rel="noreferrer" className="contact-quick-btn contact-quick-btn-outline">
-                Chat Zalo
-              </a>
-            </div>
-          </div> */}
-
           <div className="contact-form-inner">
             <div className="contact-form-header">
               <h2 className="contact-section-title contact-section-title-dark">
-                {" "}
-                {t("contact_form_title")}{" "}
+                {t("contact_form_title")}
               </h2>
             </div>
 
@@ -244,14 +239,7 @@ const Contact = () => {
                   className="contact-success-reset"
                   onClick={() => {
                     setSubmitted(false);
-                    setForm({
-                      name: "",
-                      phone: "",
-                      email: "",
-                      subject: "",
-                      message: "",
-                      address: "",
-                    });
+                    setForm(EMPTY_FORM);
                   }}
                 >
                   {t("contact_success_reset")}
@@ -275,7 +263,6 @@ const Contact = () => {
                       className="contact-form-input"
                     />
                   </div>
-
                   <div className="contact-form-group">
                     <label className="contact-form-label">
                       {t("contact_form_phone")}{" "}
@@ -291,7 +278,6 @@ const Contact = () => {
                       className="contact-form-input"
                     />
                   </div>
-
                   <div className="contact-form-group">
                     <label className="contact-form-label">
                       {t("contact_form_email")}
@@ -305,7 +291,6 @@ const Contact = () => {
                       className="contact-form-input"
                     />
                   </div>
-
                   <div className="contact-form-group">
                     <label className="contact-form-label">
                       {t("contact_form_address")}
@@ -319,7 +304,6 @@ const Contact = () => {
                       className="contact-form-input"
                     />
                   </div>
-
                   <div className="contact-form-group contact-form-group-full">
                     <label className="contact-form-label">
                       {t("contact_form_subject")}
@@ -333,7 +317,6 @@ const Contact = () => {
                       className="contact-form-input"
                     />
                   </div>
-
                   <div className="contact-form-group contact-form-group-full">
                     <label className="contact-form-label">
                       {t("contact_form_message")}
@@ -349,10 +332,11 @@ const Contact = () => {
                   </div>
                 </div>
 
+                {error && <div className="contact-form-error">⚠ {error}</div>}
+
                 <div className="contact-form-footer">
                   <p className="contact-form-note">
-                    {" "}
-                    🔒 {t("contact_form_note")}{" "}
+                    🔒 {t("contact_form_note")}
                   </p>
                   <button
                     type="submit"

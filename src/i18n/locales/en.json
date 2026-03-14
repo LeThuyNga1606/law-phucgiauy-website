@@ -1,6 +1,7 @@
 {
   "slogan": "Empathetic - Responsible - Serving",
   "company_name": "PGU LAW FIRM",
+  "about-us": "About Us",
   "nav_cta": "Free Consultation",
 
   "nav_about": "About Us",
@@ -77,7 +78,7 @@
   "nav_license_factory": "Factory completion certificate",
   "nav_license_labor": "Work permit",
   "nav_license_security": "Security & order certificate",
-  "nav_license_visa": "Visa – temporary residence card",
+  "nav_license_visa": "Visa - temporary residence card",
   "nav_license_household": "Household business",
   "nav_license_liquor": "Liquor business license",
   "nav_license_medical": "Medical equipment import",
@@ -97,7 +98,7 @@
   "footer_contact_hours": "Working Hours",
   "footer_contact_hours_value": "Monday - Friday, 8:00 AM - 5:30 PM",
 
-  "footer_brand_desc": "A trusted legal companion — protecting the rights of businesses and individuals in Vietnam with a team of professional, dedicated, and experienced lawyers.",
+  "footer_brand_desc": "A trusted legal companion - protecting the rights of businesses and individuals in Vietnam with a team of professional, dedicated, and experienced lawyers.",
   "footer_logo_name": "PHUС GIA UY LAW FIRM",
   "footer_logo_highlight": "& ASSOCIATES",
   "footer_logo_slogan": "Understanding - Responsibility - Dedication",
@@ -175,7 +176,7 @@
   "about_service_license_item_1": "Environmental License",
   "about_service_license_item_2": "Fire Prevention",
   "about_service_license_item_3": "Work Permit",
-  "about_service_license_item_4": "Visa – Residence Card",
+  "about_service_license_item_4": "Visa - Residence Card",
 
   "about_service_consult_title": "Regular Consulting",
   "about_service_consult_item_1": "Contract Drafting",
@@ -239,11 +240,12 @@
   "about_intro_para1_plain": "Phuc Gia Uy & Associates Law Company Limited was established with the vision of building a professional, dedicated, and principled legal practice. From our very first days of operation, the firm adopted the motto",
   "about_intro_para1_motto": "\"Empathetic - Responsible - Serving\"",
   "about_intro_para1_suffix": "as our core values and guiding principle for all advisory and litigation activities.",
-  "about_intro_img1_alt": "Phuc Gia Uy & Associates – Company Introduction",
+  "about_intro_img1_alt": "Phuc Gia Uy & Associates - Company Introduction",
+  "about_intro_img1_caption": "Managing Partner: Lawyer Nguyen Tran Nham",
   "about_intro_para2": "Understanding means walking alongside our clients through every case; Responsibility means safeguarding their legal rights and interests to the fullest extent; and Service represents a lasting professional commitment. Built on this foundation, the firm has steadily earned its reputation and become a trusted legal partner for individuals and businesses, both domestic and international.",
-  "about_intro_img2_alt": "Phuc Gia Uy & Associates – Core Values",
+  "about_intro_img2_alt": "Phuc Gia Uy & Associates - Core Values",
   "about_intro_para3": "The firm focuses on providing legal services across key practice areas including: Civil Law, Criminal Law, Foreign Direct Investment (FDI), Corporate Law, and Licensing. With a team of highly experienced lawyers, skilled in litigation and deeply specialized in advisory work, Phuc Gia Uy & Associates is committed to delivering optimal legal solutions that effectively protect the rights and legitimate interests of our clients.",
-  "about_intro_img3_alt": "Phuc Gia Uy & Associates – Our Legal Team",
+  "about_intro_img3_alt": "Phuc Gia Uy & Associates - Our Legal Team",
 
   "contact_hero_title_1": "We Are Always",
   "contact_hero_title_2": "Ready to Help",

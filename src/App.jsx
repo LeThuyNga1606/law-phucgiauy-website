@@ -23,6 +23,8 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminPosts from "./pages/admin/AdminPosts";
 import AdminPostEditor from "./pages/admin/AdminPostEditor";
 import AdminServices from "./pages/admin/AdminServices";
+import AdminCategories from "./pages/admin/AdminCategories";
+import AdminContacts from "./pages/admin/AdminContacts";
 
 // Wrapper dùng chung cho tất cả trang admin
 function AdminWrapper({ children }) {
@@ -99,6 +101,26 @@ function App() {
             <ProtectedRoute>
               <AdminWrapper>
                 <AdminServices />
+              </AdminWrapper>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/categories"
+          element={
+            <ProtectedRoute>
+              <AdminWrapper>
+                <AdminCategories />
+              </AdminWrapper>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/contacts"
+          element={
+            <ProtectedRoute>
+              <AdminWrapper>
+                <AdminContacts />
               </AdminWrapper>
             </ProtectedRoute>
           }

@@ -3,24 +3,22 @@ import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill-new";
 import "react-quill-new/dist/quill.snow.css";
 import "../../styles/adminPostEditor.css";
-
-// ─── CLOUDINARY CONFIG ────────────────────────────────────────────────────────
-// Thay bằng thông tin thật từ Cloudinary Dashboard
-const CLOUDINARY_CLOUD_NAME =
-  import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || "your-cloud-name";
-const CLOUDINARY_UPLOAD_PRESET =
-  import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET ||
-  "law-phucgiauy-website-preset";
+import {
+  getPostById,
+  createPost,
+  updatePost,
+  generateSlug,
+} from "../../services/news";
+import { getAllServicesAdmin } from "../../services/service";
+import {
+  getAllCategoriesAdmin,
+  getActiveCategories,
+  FALLBACK_CATEGORIES,
+} from "../../services/categories";
+import { CLOUD_NAME, UPLOAD_PRESET } from "../../cloudinary/config";
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const CATEGORIES = [
-  { key: "civil", label: "Dân sự" },
-  { key: "criminal", label: "Hình sự" },
-  { key: "investment", label: "Đầu tư - FDI" },
-  { key: "enterprise", label: "Doanh nghiệp" },
-  { key: "license", label: "Giấy phép" },
-  { key: "news", label: "Tin pháp luật" },
-];
+// Categories được fetch từ Firestore (xem useEffect bên dưới)
 
 const AUTHORS = [
   "LS. Nguyễn Văn A",
@@ -29,25 +27,9 @@ const AUTHORS = [
   "LS. Phạm Thị D",
 ];
 
-const SUGGESTED_TAGS = [
-  "Ly hôn",
-  "Đất đai",
-  "Doanh nghiệp",
-  "Hình sự",
-  "FDI",
-  "Thừa kế",
-  "Hợp đồng",
-  "Giấy phép",
-  "Bồi thường",
-  "Nhãn hiệu",
-  "Lao động",
-  "Thuế",
-  "Bảo hiểm",
-  "Tố tụng",
-  "Trọng tài",
-];
+// Tags được fetch từ collection services (xem useEffect bên dưới)
 
-// ─── QUILL TOOLBAR CONFIG ─────────────────────────────────────────────────────
+// ─── QUILL CONFIG ─────────────────────────────────────────────────────────────
 const QUILL_MODULES = {
   toolbar: {
     container: [
@@ -81,78 +63,124 @@ const QUILL_FORMATS = [
   "link",
   "image",
 ];
-// ─── UPLOAD ẢNH LÊN CLOUDINARY ────────────────────────────────────────────────
+
+// ─── UPLOAD CLOUDINARY ────────────────────────────────────────────────────────
 async function uploadToCloudinary(file) {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+  formData.append("upload_preset", UPLOAD_PRESET);
   formData.append("folder", "law-phucgiauy/news");
-
   const res = await fetch(
-    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+    `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`,
     { method: "POST", body: formData },
   );
   if (!res.ok) throw new Error("Upload thất bại");
-  const data = await res.json();
-  return data.secure_url;
+  return (await res.json()).secure_url;
 }
+
+// ─── FORM DEFAULT ─────────────────────────────────────────────────────────────
+const DEFAULT_FORM = {
+  title: "",
+  excerpt: "",
+  content: "",
+  category: "civil",
+  author: AUTHORS[0],
+  tags: [],
+  thumbnail: "",
+  featured: false,
+  status: "draft",
+  readTime: "5 phút",
+  seoTitle: "",
+  seoDesc: "",
+};
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function AdminPostEditor() {
   const navigate = useNavigate();
-  const { id } = useParams(); // có id = đang edit, không có = tạo mới
+  const { id } = useParams();
   const isEdit = Boolean(id);
   const quillRef = useRef(null);
   const thumbInput = useRef(null);
   const contentImgInput = useRef(null);
 
-  // ── Form state ──
-  const [form, setForm] = useState({
-    title: "",
-    excerpt: "",
-    content: "",
-    category: "civil",
-    author: AUTHORS[0],
-    tags: [],
-    thumbnail: "",
-    featured: false,
-    status: "draft",
-    seoTitle: "",
-    seoDesc: "",
-  });
-
+  // ── State ──────────────────────────────────────────────────────────────────
+  const [form, setForm] = useState(DEFAULT_FORM);
   const [tagInput, setTagInput] = useState("");
+  const [suggestedTags, setSuggestedTags] = useState([]);
+  const [categories, setCategories] = useState(FALLBACK_CATEGORIES);
   const [thumbUploading, setThumbUploading] = useState(false);
   const [contentImgUploading, setContentImgUploading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [loadingEdit, setLoadingEdit] = useState(false);
   const [errors, setErrors] = useState({});
-  const [activeTab, setActiveTab] = useState("content"); // content | seo
+  const [activeTab, setActiveTab] = useState("content");
 
-  // Load data nếu đang edit (Phase 3: fetch từ Firestore)
+  // ── Fetch suggested tags từ collection services ──────────────────────────────
   useEffect(() => {
-    if (isEdit) {
-      // TODO Phase 3: getDoc(doc(db, "posts", id)).then(snap => setForm(snap.data()))
-      setForm((f) => ({
-        ...f,
-        title:
-          "Những quy định mới nhất về thủ tục ly hôn theo Luật Hôn nhân và Gia đình 2024",
-        excerpt:
-          "Luật Hôn nhân và Gia đình sửa đổi năm 2024 đã có nhiều thay đổi quan trọng...",
-        category: "civil",
-        status: "published",
-        featured: true,
-        tags: ["Ly hôn", "Hôn nhân gia đình", "2024"],
-      }));
-    }
-  }, [isEdit, id]);
+    // Fetch categories
+    getAllCategoriesAdmin().then((cats) => {
+      if (cats.length) setCategories(cats);
+    });
 
+    // Fetch suggested tags từ services
+    getAllServicesAdmin()
+      .then((services) => {
+        // Lấy tên dịch vụ làm tag gợi ý, loại trùng, sắp xếp theo alphabet
+        const tags = [
+          ...new Set(
+            services.flatMap((s) => [
+              s.name,
+              // Tách từng từ có nghĩa từ tên dịch vụ (>= 4 ký tự)
+              ...s.name.split(/[\s&,\/]+/).filter((w) => w.length >= 4),
+            ]),
+          ),
+        ].sort();
+        setSuggestedTags(tags);
+      })
+      .catch(() => {
+        // Fallback nếu Firestore lỗi
+        setSuggestedTags([
+          "Ly hôn",
+          "Đất đai",
+          "Doanh nghiệp",
+          "Hình sự",
+          "FDI",
+          "Thừa kế",
+          "Hợp đồng",
+          "Giấy phép",
+          "Bồi thường",
+          "Nhãn hiệu",
+        ]);
+      });
+  }, []);
+
+  // ── Load bài viết khi edit ─────────────────────────────────────────────────
+  useEffect(() => {
+    if (!isEdit) return;
+    setLoadingEdit(true);
+    getPostById(id)
+      .then((data) => {
+        if (!data) {
+          alert("Không tìm thấy bài viết.");
+          navigate("/admin/posts");
+          return;
+        }
+        // Merge vào form — bỏ các field Firestore không cần (id, createdAt,...)
+        const { id: _id, createdAt, updatedAt, views, ...rest } = data;
+        setForm((f) => ({ ...f, ...rest }));
+      })
+      .catch(() => alert("Lỗi khi tải bài viết."))
+      .finally(() => setLoadingEdit(false));
+  }, [isEdit, id, navigate]);
+
+  // ── Helpers ────────────────────────────────────────────────────────────────
   const update = (field, val) => {
     setForm((f) => ({ ...f, [field]: val }));
     if (errors[field]) setErrors((e) => ({ ...e, [field]: "" }));
   };
 
-  // ── Tags ──
+  // ── Tags ───────────────────────────────────────────────────────────────────
   const addTag = (tag) => {
     const t = tag.trim();
     if (t && !form.tags.includes(t)) update("tags", [...form.tags, t]);
@@ -172,7 +200,7 @@ export default function AdminPostEditor() {
       update("tags", form.tags.slice(0, -1));
   };
 
-  // ── Upload thumbnail ──
+  // ── Upload thumbnail ───────────────────────────────────────────────────────
   const handleThumbUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -182,8 +210,7 @@ export default function AdminPostEditor() {
     }
     setThumbUploading(true);
     try {
-      const url = await uploadToCloudinary(file);
-      update("thumbnail", url);
+      update("thumbnail", await uploadToCloudinary(file));
     } catch {
       alert("Upload ảnh thất bại. Kiểm tra lại Cloudinary config.");
     } finally {
@@ -191,7 +218,7 @@ export default function AdminPostEditor() {
     }
   };
 
-  // ── Upload ảnh vào nội dung bài viết ──
+  // ── Upload ảnh vào nội dung ────────────────────────────────────────────────
   const handleContentImgUpload = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -212,7 +239,7 @@ export default function AdminPostEditor() {
     }
   };
 
-  // ── Validate ──
+  // ── Validate ───────────────────────────────────────────────────────────────
   const validate = () => {
     const e = {};
     if (!form.title.trim()) e.title = "Vui lòng nhập tiêu đề bài viết";
@@ -223,34 +250,34 @@ export default function AdminPostEditor() {
     return Object.keys(e).length === 0;
   };
 
-  // ── Save ──
+  // ── Save → Firestore ───────────────────────────────────────────────────────
   const handleSave = async (statusOverride) => {
     if (!validate()) return;
     setSaving(true);
+
+    // Lấy categoryLabel từ key
+    const catLabel =
+      categories.find((c) => c.key === form.category)?.label || form.category;
+
     const payload = {
       ...form,
       status: statusOverride || form.status,
-      slug: form.title
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")
-        .replace(/đ/g, "d")
-        .replace(/[^a-z0-9\s-]/g, "")
-        .trim()
-        .replace(/\s+/g, "-"),
-      updatedAt: new Date().toISOString(),
-      ...(!isEdit && { createdAt: new Date().toISOString(), views: 0 }),
+      categoryLabel: catLabel,
+      slug: generateSlug(form.title),
     };
 
     try {
-      // TODO Phase 3:
-      // if (isEdit) await updateDoc(doc(db, "posts", id), payload);
-      // else        await addDoc(collection(db, "posts"), payload);
-      await new Promise((r) => setTimeout(r, 800)); // giả lập delay
+      if (isEdit) {
+        await updatePost(id, payload);
+      } else {
+        await createPost(payload); // createPost tự thêm views:0, createdAt, updatedAt
+      }
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
+      // Sau khi đăng → về danh sách; sau khi lưu nháp → ở lại
       if (statusOverride === "published") navigate("/admin/posts");
-    } catch {
+    } catch (err) {
+      console.error(err);
       alert("Lưu thất bại. Vui lòng thử lại.");
     } finally {
       setSaving(false);
@@ -263,6 +290,27 @@ export default function AdminPostEditor() {
     .split(/\s+/)
     .filter(Boolean).length;
 
+  // ── Loading khi đang fetch bài edit ───────────────────────────────────────
+  if (loadingEdit) {
+    return (
+      <div
+        className="ape-root"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: 400,
+        }}
+      >
+        <div style={{ textAlign: "center", color: "#888" }}>
+          <span className="ape-spinner" style={{ width: 32, height: 32 }} />
+          <p style={{ marginTop: 16 }}>Đang tải bài viết...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // ── RENDER ────────────────────────────────────────────────────────────────
   return (
     <div className="ape-root">
       {/* ── TOPBAR ── */}
@@ -281,9 +329,7 @@ export default function AdminPostEditor() {
             {saved && <span className="ape-saved-badge">✓ Đã lưu</span>}
           </div>
         </div>
-
         <div className="ape-topbar-actions">
-          {/* Status toggle */}
           <div className="ape-status-toggle">
             <button
               className={`ape-status-opt ${form.status === "draft" ? "active" : ""}`}
@@ -298,7 +344,6 @@ export default function AdminPostEditor() {
               ✓ Đăng
             </button>
           </div>
-
           <button
             className="ape-save-btn ape-save-btn--ghost"
             onClick={() => handleSave("draft")}
@@ -306,7 +351,6 @@ export default function AdminPostEditor() {
           >
             {saving ? <span className="ape-spinner" /> : "Lưu nháp"}
           </button>
-
           <button
             className="ape-save-btn ape-save-btn--primary"
             onClick={() => handleSave("published")}
@@ -321,7 +365,6 @@ export default function AdminPostEditor() {
       <div className="ape-layout">
         {/* ── MAIN ── */}
         <div className="ape-main">
-          {/* Tabs */}
           <div className="ape-tabs">
             <button
               className={`ape-tab ${activeTab === "content" ? "active" : ""}`}
@@ -337,6 +380,7 @@ export default function AdminPostEditor() {
             </button>
           </div>
 
+          {/* ── TAB NỘI DUNG ── */}
           {activeTab === "content" && (
             <div className="ape-content-tab">
               {/* Tiêu đề */}
@@ -400,7 +444,6 @@ export default function AdminPostEditor() {
                     Nội dung bài viết <span className="ape-required">*</span>
                   </label>
                   <div className="ape-editor-tools">
-                    {/* Upload ảnh vào nội dung */}
                     <button
                       type="button"
                       className="ape-img-insert-btn"
@@ -426,7 +469,6 @@ export default function AdminPostEditor() {
                     <span className="ape-word-count">{wordCount} từ</span>
                   </div>
                 </div>
-
                 <ReactQuill
                   ref={quillRef}
                   value={form.content}
@@ -444,6 +486,7 @@ export default function AdminPostEditor() {
             </div>
           )}
 
+          {/* ── TAB SEO ── */}
           {activeTab === "seo" && (
             <div className="ape-seo-tab">
               <div className="ape-seo-info">
@@ -472,7 +515,6 @@ export default function AdminPostEditor() {
                     {form.seoTitle.length > 55 && " — Nên giữ dưới 55 ký tự"}
                   </span>
                 </div>
-                {/* Preview bar */}
                 <div className="ape-seo-bar">
                   <div
                     className="ape-seo-bar-fill"
@@ -538,10 +580,9 @@ export default function AdminPostEditor() {
 
         {/* ── SIDEBAR ── */}
         <aside className="ape-sidebar">
-          {/* Trạng thái + Nổi bật */}
+          {/* Xuất bản */}
           <div className="ape-sidebar-block">
             <div className="ape-sidebar-title">Xuất bản</div>
-
             <div className="ape-publish-row">
               <span className="ape-publish-label">Trạng thái</span>
               <span
@@ -550,7 +591,6 @@ export default function AdminPostEditor() {
                 {form.status === "published" ? "✓ Đã đăng" : "✎ Bản nháp"}
               </span>
             </div>
-
             <div className="ape-toggle-row">
               <div>
                 <div className="ape-toggle-label">Bài viết nổi bật</div>
@@ -563,12 +603,22 @@ export default function AdminPostEditor() {
                 <span className="ape-toggle-knob" />
               </button>
             </div>
+            {/* Thời gian đọc */}
+            <div className="ape-field ape-field--sm" style={{ marginTop: 12 }}>
+              <label className="ape-label">Thời gian đọc</label>
+              <input
+                type="text"
+                value={form.readTime}
+                onChange={(e) => update("readTime", e.target.value)}
+                placeholder="5 phút"
+                className="ape-input"
+              />
+            </div>
           </div>
 
           {/* Thumbnail */}
           <div className="ape-sidebar-block">
             <div className="ape-sidebar-title">Ảnh đại diện bài</div>
-
             {form.thumbnail ? (
               <div className="ape-thumb-preview">
                 <img src={form.thumbnail} alt="Thumbnail" />
@@ -609,7 +659,6 @@ export default function AdminPostEditor() {
                 )}
               </div>
             )}
-
             <input
               type="file"
               ref={thumbInput}
@@ -622,7 +671,6 @@ export default function AdminPostEditor() {
           {/* Danh mục + Tác giả */}
           <div className="ape-sidebar-block">
             <div className="ape-sidebar-title">Phân loại</div>
-
             <div className="ape-field ape-field--sm">
               <label className="ape-label">Danh mục</label>
               <select
@@ -630,20 +678,20 @@ export default function AdminPostEditor() {
                 onChange={(e) => update("category", e.target.value)}
                 className="ape-select"
               >
-                {CATEGORIES.map((c) => (
+                {categories.map((c) => (
                   <option key={c.key} value={c.key}>
                     {c.label}
                   </option>
                 ))}
               </select>
             </div>
-
             <div className="ape-field ape-field--sm">
               <label className="ape-label">Tác giả</label>
               <select
                 value={form.author}
                 onChange={(e) => update("author", e.target.value)}
                 className="ape-select"
+                disabled={true}
               >
                 {AUTHORS.map((a) => (
                   <option key={a} value={a}>
@@ -657,7 +705,6 @@ export default function AdminPostEditor() {
           {/* Tags */}
           <div className="ape-sidebar-block">
             <div className="ape-sidebar-title">Tags</div>
-
             <div className="ape-tags-input-wrap">
               {form.tags.map((t) => (
                 <span key={t} className="ape-tag">
@@ -680,11 +727,10 @@ export default function AdminPostEditor() {
               />
             </div>
             <p className="ape-tag-hint">Nhấn Enter hoặc dấu phẩy để thêm tag</p>
-
-            {/* Suggested tags */}
             <div className="ape-suggested-tags">
-              {SUGGESTED_TAGS.filter((t) => !form.tags.includes(t))
-                .slice(0, 8)
+              {suggestedTags
+                .filter((t) => !form.tags.includes(t))
+                .slice(0, 10)
                 .map((t) => (
                   <button
                     key={t}
