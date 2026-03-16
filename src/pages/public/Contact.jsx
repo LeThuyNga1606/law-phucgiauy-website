@@ -147,9 +147,9 @@ const Contact = () => {
                 {
                   icon: "✉",
                   title: t("about_contact_email_title"),
-                  value: "luatsunguyen0909@gmail.com",
+                  value: "luatphucgiauy@gmail.com",
                   sub: t("about_contact_email_sub"),
-                  href: "mailto:luatsunguyen0909@gmail.com",
+                  href: "mailto:luatphucgiauy@gmail.com",
                 },
                 {
                   icon: "⊙",

@@ -12,7 +12,6 @@ import {
 import { getAllServicesAdmin } from "../../services/service";
 import {
   getAllCategoriesAdmin,
-  getActiveCategories,
   FALLBACK_CATEGORIES,
 } from "../../services/categories";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../cloudinary/config";
@@ -83,7 +82,7 @@ const DEFAULT_FORM = {
   title: "",
   excerpt: "",
   content: "",
-  category: "civil",
+  category: "", // set sau khi fetch categories
   author: AUTHORS[0],
   tags: [],
   thumbnail: "",
@@ -113,15 +112,27 @@ export default function AdminPostEditor() {
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [loadingEdit, setLoadingEdit] = useState(false);
+  const [createdId, setCreatedId] = useState(null); // ID sau khi createPost lần đầu
   const [errors, setErrors] = useState({});
   const [activeTab, setActiveTab] = useState("content");
 
   // ── Fetch suggested tags từ collection services ──────────────────────────────
   useEffect(() => {
-    // Fetch categories
-    getAllCategoriesAdmin().then((cats) => {
-      if (cats.length) setCategories(cats);
-    });
+    // Fetch categories từ Firestore
+    getAllCategoriesAdmin()
+      .then((cats) => {
+        if (cats.length) {
+          setCategories(cats);
+          // Sau khi có danh sách thực từ Firestore:
+          // nếu category hiện tại rỗng hoặc không nằm trong danh sách → dùng cái đầu tiên
+          setForm((f) => {
+            const validKeys = cats.map((c) => c.key);
+            const isValid = f.category && validKeys.includes(f.category);
+            return isValid ? f : { ...f, category: cats[0].key };
+          });
+        }
+      })
+      .catch((err) => console.error("Lỗi fetch categories:", err));
 
     // Fetch suggested tags từ services
     getAllServicesAdmin()
@@ -268,9 +279,15 @@ export default function AdminPostEditor() {
 
     try {
       if (isEdit) {
+        // Đang edit bài cũ → update
         await updatePost(id, payload);
+      } else if (createdId) {
+        // Đã tạo mới lần trước trong cùng session → update thay vì tạo mới
+        await updatePost(createdId, payload);
       } else {
-        await createPost(payload); // createPost tự thêm views:0, createdAt, updatedAt
+        // Tạo mới lần đầu
+        const newId = await createPost(payload);
+        setCreatedId(newId); // lưu lại ID để lần save tiếp dùng updatePost
       }
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
@@ -691,7 +708,6 @@ export default function AdminPostEditor() {
                 value={form.author}
                 onChange={(e) => update("author", e.target.value)}
                 className="ape-select"
-                disabled={true}
               >
                 {AUTHORS.map((a) => (
                   <option key={a} value={a}>

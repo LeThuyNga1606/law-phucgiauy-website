@@ -323,17 +323,18 @@ const Navbar = () => {
       name: "English",
       flag: "https://flagcdn.com/w40/us.png",
     },
-    {
-      code: "ko",
-      label: "KR",
-      name: "한국어",
-      flag: "https://flagcdn.com/w40/kr.png",
-    },
+    ,
     {
       code: "zh",
       label: "CN",
       name: "中文",
       flag: "https://flagcdn.com/w40/cn.png",
+    },
+    {
+      code: "ko",
+      label: "KR",
+      name: "한국어",
+      flag: "https://flagcdn.com/w40/kr.png",
     },
   ];
 

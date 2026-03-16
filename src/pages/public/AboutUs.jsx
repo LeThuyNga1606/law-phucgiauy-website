@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/aboutUs.css";
-import LogoSlogan from "../../assets/images/introduce_3.jpg";
+import LogoSlogan from "../../assets/images/introduce_4.jpg";
 import IconDanSu from "../../assets/images/icon_dan_su.png";
 import IconHinhSu from "../../assets/images/icon_hinh_su.png";
 import IconDauTu from "../../assets/images/icon_dau_tu_nuoc_ngoai.png";

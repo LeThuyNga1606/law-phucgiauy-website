@@ -76,6 +76,7 @@ export default function NewsDetail() {
   const { slug } = useParams();
   const navigate = useNavigate();
   const articleRef = useRef(null);
+  const viewedRef = useRef(false);
 
   // ── Firestore state ──────────────────────────────────────────────────────
   const [post, setPost] = useState(null);
@@ -94,6 +95,7 @@ export default function NewsDetail() {
     setLoading(true);
     setNotFound(false);
     setPost(null);
+    viewedRef.current = false;
 
     getPostBySlug(slug).then(async (data) => {
       if (!data) {
@@ -101,10 +103,20 @@ export default function NewsDetail() {
         setLoading(false);
         return;
       }
+
+      // ← THÊM: chặn bài draft
+      if (data.status !== "published") {
+        setNotFound(true);
+        setLoading(false);
+        return;
+      }
       setPost(data);
 
       // Tăng lượt xem (không cần await)
-      incrementViews(data.id);
+      if (!viewedRef.current) {
+        viewedRef.current = true;
+        incrementViews(data.id);
+      }
 
       // Fetch bài liên quan + bài gần đây song song
       const [rel, rec] = await Promise.all([
