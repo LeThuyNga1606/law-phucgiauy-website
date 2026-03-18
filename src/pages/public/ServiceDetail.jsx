@@ -1,8 +1,9 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom"; // thêm useNavigate
+import { useState, useEffect } from "react";
 import "../../styles/serviceDetail.css";
 import { SERVICE_DATA } from "../../data/services";
-
-// ─── DATA ─────────────────────────────────────────────────────────────────────
+import LogoSlogan from "../../assets/images/background_aboutUs.png";
+import { getPublishedPosts } from "../../services/news";
 
 const DEFAULT_SERVICE = {
   name: "Dịch Vụ Pháp Lý",
@@ -15,23 +16,53 @@ const DEFAULT_SERVICE = {
 
 export default function ServiceDetail() {
   const { category, slug } = useParams();
+  const navigate = useNavigate(); // thêm
+
+  // Tách riêng 2 state
+  const [relatedServices, setRelatedServices] = useState([]); // dịch vụ liên quan
+  const [relatedPosts, setRelatedPosts] = useState([]); // bài viết tin tức
 
   const group = SERVICE_DATA[category];
   const service = group?.services?.[slug] || DEFAULT_SERVICE;
   const color = group?.color || "#A8171C";
   const groupLabel = group?.label || "Dịch vụ";
 
-  const related = group
-    ? Object.entries(group.services)
-        .filter(([s]) => s !== slug)
+  // Helper
+  const formatDateShort = (val) => {
+    if (!val) return "";
+    const d = val?.toDate ? val.toDate() : new Date(val);
+    return d.toLocaleDateString("vi-VN");
+  };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+
+    // 1. Dịch vụ liên quan — lấy từ SERVICE_DATA tĩnh (cùng nhóm, khác slug)
+    if (group?.services) {
+      const others = Object.entries(group.services)
+        .filter(([key]) => key !== slug)
         .slice(0, 3)
-        .map(([s, d]) => ({ slug: s, ...d }))
-    : [];
+        .map(([key, val]) => ({ slug: key, ...val }));
+      setRelatedServices(others);
+    }
+
+    // 2. Bài viết tin tức liên quan — lấy từ Firestore theo category key
+    const firestoreCategory = category;
+    if (firestoreCategory) {
+      getPublishedPosts({ category: firestoreCategory, limitCount: 4 })
+        .then(({ posts }) => setRelatedPosts(posts))
+        .catch(() => setRelatedPosts([]));
+    }
+  }, [category, slug]);
 
   return (
     <div className="sd-root">
       {/* ── HERO ── */}
-      <section className="sd-hero" style={{ "--accent": color }}>
+      <section className="sd-hero">
+        <div
+          className="nd-hero-bg"
+          style={{ backgroundImage: `url(${LogoSlogan})` }}
+        />
         <div className="sd-hero-grid" />
         <div className="sd-hero-inner">
           <div className="sd-hero-left">
@@ -41,29 +72,12 @@ export default function ServiceDetail() {
             <h1 className="sd-hero-title">{service.name}</h1>
             <p className="sd-hero-tagline">{service.tagline}</p>
           </div>
-
-          <div className="sd-hero-img-wrap">
-            {service.image ? (
-              <img
-                src={service.image}
-                alt={service.name}
-                className="sd-hero-img"
-              />
-            ) : (
-              <div
-                className="sd-hero-img-placeholder"
-                style={{ "--accent": color }}
-              >
-                <span>⚖</span>
-              </div>
-            )}
-          </div>
         </div>
       </section>
 
       {/* ── LAYOUT ── */}
       <div className="sd-layout">
-        <div className="sd-main">
+        <main className="sd-main">
           {/* Mô tả */}
           <section className="sd-section">
             <div className="sd-section-label" style={{ color }}>
@@ -130,18 +144,18 @@ export default function ServiceDetail() {
             </section>
           )}
 
-          {/* Liên quan */}
-          {related.length > 0 && (
+          {/* Dịch vụ liên quan */}
+          {relatedServices.length > 0 && (
             <section className="sd-section">
               <div className="sd-section-label" style={{ color }}>
                 <span className="sd-label-dot" style={{ background: color }} />
                 Dịch vụ liên quan
               </div>
               <div className="sd-related-grid">
-                {related.map((r) => (
+                {relatedServices.map((r) => (
                   <Link
                     key={r.slug}
-                    to={`/${category}/${r.slug}`}
+                    to={`/dich-vu/${category}/${r.slug}`}
                     className="sd-related-card"
                     style={{ "--accent": color }}
                   >
@@ -153,7 +167,48 @@ export default function ServiceDetail() {
               </div>
             </section>
           )}
-        </div>
+        </main>
+
+        {/* ── SIDEBAR ── */}
+        <aside className="nd-sidebar">
+          <div className="nd-sidebar-block">
+            <div className="nd-sidebar-title">
+              <span className="nd-sidebar-bar" />
+              Bài viết liên quan
+            </div>
+
+            {relatedPosts.length === 0 ? (
+              <p style={{ fontSize: 13, color: "#9ca3af", padding: "8px 0" }}>
+                Chưa có bài viết nào.
+              </p>
+            ) : (
+              relatedPosts.map((rp) => (
+                <div
+                  key={rp.id}
+                  className="nd-sidebar-recent"
+                  onClick={() => {
+                    navigate(`/tin-tuc/${rp.slug}`);
+                    window.scrollTo(0, 0);
+                  }}
+                >
+                  <div
+                    className="nd-sidebar-recent-img"
+                    style={{ backgroundImage: `url(${rp.thumbnail})` }}
+                  />
+                  <div className="nd-sidebar-recent-body">
+                    <span className="nd-sidebar-recent-cat">
+                      {rp.categoryLabel}
+                    </span>
+                    <p className="nd-sidebar-recent-title">{rp.title}</p>
+                    <span className="nd-sidebar-recent-date">
+                      {formatDateShort(rp.createdAt)}
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </aside>
       </div>
     </div>
   );

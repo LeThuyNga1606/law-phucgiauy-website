@@ -1,25 +1,7 @@
-/* ═══════════════════════════════════════════════════════
-   ServicesPage.css — Trang danh sách dịch vụ
-═══════════════════════════════════════════════════════ */
-
-:root {
-  --red: #a8171c;
-  --red-dk: #8a1217;
-  --gold: #c9a84c;
-  --cream: #faf7f2;
-  --border: #e8e0d4;
-  --text: #1a1210;
-  --muted: #7a6e68;
-}
-
-.sp-root {
-  font-family: Georgia, serif;
-}
-
 /* ── HERO ────────────────────────────────────────────── */
 .sp-hero {
   position: relative;
-  background: linear-gradient(150deg, #0f0204 0%, #2a0608 55%, #1a0507 100%);
+  background: var(--cream);
   overflow: hidden;
   padding: 96px 40px 80px;
   text-align: center;
@@ -29,8 +11,8 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(201, 168, 76, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 76, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(168, 23, 28, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 23, 28, 0.06) 1px, transparent 1px);
   background-size: 56px 56px;
   pointer-events: none;
 }
@@ -40,11 +22,6 @@
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(168, 23, 28, 0.18) 0%,
-    transparent 65%
-  );
   top: -200px;
   left: 50%;
   transform: translateX(-50%);
@@ -64,10 +41,9 @@
   justify-content: center;
   gap: 14px;
   font-size: 11px;
-  font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--green);
   margin-bottom: 24px;
   font-family: Arial, sans-serif;
 }
@@ -75,26 +51,25 @@
   display: block;
   width: 40px;
   height: 1px;
-  background: var(--gold);
+  background: var(--green);
   opacity: 0.5;
 }
 
 .sp-hero-title {
   font-size: clamp(2.4rem, 6vw, 4rem);
-  font-weight: 900;
-  color: #fff;
+  color: var(--green);
   line-height: 1.1;
   letter-spacing: -1.5px;
   margin-bottom: 20px;
 }
 .sp-hero-title em {
   font-style: normal;
-  color: var(--gold);
+  color: var(--green);
 }
 
 .sp-hero-desc {
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(0, 128, 0, 0.55);
   line-height: 1.8;
   max-width: 560px;
   margin: 0 auto 36px;
@@ -118,8 +93,7 @@
 .sp-stat-num {
   display: block;
   font-size: 22px;
-  font-weight: 900;
-  color: var(--gold);
+  color: var(--green);
   letter-spacing: -1px;
   line-height: 1;
 }
@@ -168,7 +142,6 @@
   border: none;
   border-bottom: 3px solid transparent;
   font-size: 13.5px;
-  font-weight: 700;
   color: var(--muted);
   cursor: pointer;
   white-space: nowrap;
@@ -192,7 +165,7 @@
 
 /* ── CONTENT ─────────────────────────────────────────── */
 .sp-content {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 52px 40px 80px;
 }
@@ -220,7 +193,6 @@
   gap: 7px;
   color: #fff;
   font-size: 12px;
-  font-weight: 700;
   padding: 5px 14px;
   border-radius: 50px;
   margin-bottom: 14px;
@@ -230,7 +202,6 @@
 
 .sp-group-title {
   font-size: clamp(1.6rem, 3vw, 2.2rem);
-  font-weight: 900;
   color: var(--text);
   letter-spacing: -1px;
   margin-bottom: 10px;
@@ -246,10 +217,13 @@
 
 /* ── SERVICE GRID ────────────────────────────────────── */
 .sp-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 👈 key */
   gap: 18px;
-  margin-bottom: 56px;
+}
+.sp-card {
+  width: calc(33.333% - 12px);
 }
 
 .sp-card {
@@ -308,7 +282,6 @@
 
 .sp-card-num {
   font-size: 28px;
-  font-weight: 900;
   color: var(--border);
   line-height: 1;
   letter-spacing: -1px;
@@ -341,7 +314,6 @@
 
 .sp-card-name {
   font-size: 15.5px;
-  font-weight: 800;
   color: var(--text);
   line-height: 1.4;
   letter-spacing: -0.2px;
@@ -366,7 +338,6 @@
 
 .sp-card-cta {
   font-size: 12.5px;
-  font-weight: 700;
   color: var(--accent, var(--red));
   font-family: Arial, sans-serif;
   letter-spacing: 0.3px;
@@ -381,6 +352,17 @@
 }
 .sp-card:hover .sp-card-bar {
   width: 40px;
+}
+@media (max-width: 900px) {
+  .sp-card {
+    width: calc(50% - 12px);
+  }
+}
+
+@media (max-width: 600px) {
+  .sp-card {
+    width: 100%;
+  }
 }
 
 /* ── CTA ─────────────────────────────────────────────── */
@@ -413,7 +395,6 @@
 
 .sp-cta-text h3 {
   font-size: 22px;
-  font-weight: 900;
   color: #fff;
   margin-bottom: 6px;
   letter-spacing: -0.3px;
@@ -437,7 +418,6 @@
   padding: 13px 24px;
   border-radius: 8px;
   font-size: 14px;
-  font-weight: 700;
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.25s;

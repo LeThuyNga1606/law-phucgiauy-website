@@ -33,7 +33,7 @@ const AboutPage = () => {
       title: t("about_service_investment_title"),
       color: "#A8171C",
       intro: t("about_service_investment_item_1"),
-      to: "/dich-vu/dau-tu",
+      to: "/dich-vu/dau-tu-nuoc-ngoai",
     },
     {
       img: IconDoanhNghiep,

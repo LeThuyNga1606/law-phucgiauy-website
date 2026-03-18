@@ -183,15 +183,19 @@
 .sd-layout {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 48px 70px;
   display: grid;
-  align-items: center;
+  grid-template-columns: 1fr 400px;
+  gap: 48px;
+  align-items: start;
 }
 
 /* ── MAIN ────────────────────────────────────────────── */
 .sd-main {
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: 40px;
+  min-width: 0;
 }
 
 .sd-section {

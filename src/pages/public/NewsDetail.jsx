@@ -330,7 +330,7 @@ export default function NewsDetail() {
           </div>
 
           {/* Author box */}
-          <div className="nd-author-box">
+          {/* <div className="nd-author-box">
             <div className="nd-author-box-avatar">
               {post.author?.split(" ").pop()[0]}
             </div>
@@ -344,7 +344,7 @@ export default function NewsDetail() {
                 khách hàng.
               </p>
             </div>
-          </div>
+          </div> */}
 
           {/* Bài viết liên quan */}
           {related.length > 0 && (

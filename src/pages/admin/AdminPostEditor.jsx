@@ -19,12 +19,7 @@ import { CLOUD_NAME, UPLOAD_PRESET } from "../../cloudinary/config";
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 // Categories được fetch từ Firestore (xem useEffect bên dưới)
 
-const AUTHORS = [
-  "LS. Nguyễn Văn A",
-  "LS. Trần Thị B",
-  "LS. Lê Văn C",
-  "LS. Phạm Thị D",
-];
+const AUTHORS = ["Administrator"];
 
 // Tags được fetch từ collection services (xem useEffect bên dưới)
 
@@ -708,6 +703,7 @@ export default function AdminPostEditor() {
                 value={form.author}
                 onChange={(e) => update("author", e.target.value)}
                 className="ape-select"
+                disabled={true}
               >
                 {AUTHORS.map((a) => (
                   <option key={a} value={a}>

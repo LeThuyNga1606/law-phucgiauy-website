@@ -38,61 +38,34 @@ export default function AdminLayout({ children, user }) {
     await signOut(auth);
     navigate("/admin/login");
   };
-
-  const LANGUAGES = [
-    {
-      code: "vi",
-      label: "VI",
-      name: "Tiếng Việt",
-      flag: "https://flagcdn.com/w40/vn.png",
-    },
-    {
-      code: "en",
-      label: "EN",
-      name: "English",
-      flag: "https://flagcdn.com/w40/us.png",
-    },
-    {
-      code: "ko",
-      label: "KR",
-      name: "한국어",
-      flag: "https://flagcdn.com/w40/kr.png",
-    },
-    {
-      code: "zh",
-      label: "CN",
-      name: "中文",
-      flag: "https://flagcdn.com/w40/cn.png",
-    },
-  ];
   const NAV_ITEMS = [
     {
       id: "dashboard",
-      label: t("Dashboard"),
+      label: "Dashboard",
       to: "/admin/dashboard",
       single: true,
     },
     {
       id: "posts",
-      label: t("about_news_eyebrow"),
+      label: "Tin tức",
       to: "/admin/posts",
       single: true,
     },
     {
       id: "services",
-      label: t("services"),
+      label: "Dịch vụ",
       to: "/admin/services",
       single: true,
     },
     {
       id: "contacts",
-      label: t("consultation_requests"),
+      label: "Yêu cầu tư vấn",
       to: "/admin/contacts",
       single: true,
     },
     {
       id: "categories",
-      label: t("categories"),
+      label: "Danh mục",
       to: "/admin/categories",
       icon: "🏷️",
       single: true,
@@ -103,43 +76,6 @@ export default function AdminLayout({ children, user }) {
     <div className="page-layout">
       {/* ══ HEADER ══ */}
       <header className="nav-root" ref={dropRef}>
-        {/* ── TOP BAR ── */}
-        <div className="nav-topbar">
-          <div className="nav-topbar-left">
-            <span className="nav-topbar-item">
-              📞 <a href="tel:0909724768">0909 724 768</a>
-            </span>
-            <span className="nav-topbar-item">
-              ✉️{" "}
-              <a href="mailto:luatphucgiauy@gmail.com">
-                luatphucgiauy@gmail.com
-              </a>
-            </span>
-            <span className="nav-topbar-item">
-              ⏰ {t("footer_contact_hours_value")}
-            </span>
-          </div>
-          <div className="nav-topbar-right">
-            <div className="nav-lang-switcher">
-              {LANGUAGES.map((l) => (
-                <button
-                  key={l.code}
-                  className={`nav-lang-btn ${lang === l.code ? "active" : ""}`}
-                  onClick={() => changeLanguage(l.code)}
-                  title={l.name}
-                >
-                  <img
-                    src={l.flag}
-                    alt={l.name}
-                    className="nav-lang-flag-img"
-                  />
-                  {/* <span className="nav-lang-label">{l.label}</span> */}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
         {/* ── MAIN NAV ── */}
         <nav className={`nav-main ${scrolled ? "shadow" : ""}`}>
           {/* Logo */}
@@ -209,21 +145,6 @@ export default function AdminLayout({ children, user }) {
                   ))}
               </li>
             ))}
-            <Link to="/" target="_blank" className="nav-item-btn">
-              <svg
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                <polyline points="15 3 21 3 21 9" />
-                <line x1="10" y1="14" x2="21" y2="3" />
-              </svg>
-              <span>Xem website</span>
-            </Link>
             <div className="al-user-wrap" ref={dropRef}>
               <button
                 className="nav-item-btn"
@@ -299,20 +220,6 @@ export default function AdminLayout({ children, user }) {
 
         {/* ── MOBILE MENU ── */}
         <div className={`nav-mobile ${mobileOpen ? "open" : ""}`}>
-          {/* ── THÊM LANGUAGE SWITCHER VÀO ĐÂY ── */}
-          <div className="mob-lang">
-            {LANGUAGES.map((l) => (
-              <button
-                key={l.code}
-                className={`mob-lang-btn ${lang === l.code ? "active" : ""}`}
-                onClick={() => changeLanguage(l.code)}
-              >
-                <img src={l.flag} alt={l.name} className="mob-lang-flag-img" />
-                <span>{l.label}</span>
-                {/* <span className="mob-lang-name">{l.name}</span> */}
-              </button>
-            ))}
-          </div>
           <div className="mob-lang-divider" />
           {NAV_ITEMS.map((item) => (
             <div
