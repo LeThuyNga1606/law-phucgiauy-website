@@ -164,6 +164,158 @@
 }
 
 /* ── CONTENT ─────────────────────────────────────────── */
+/* ── INTRO LAYOUT: ảnh trái 40% + nội dung phải 60% ── */
+/* ── INTRO LAYOUT ── */
+.sp-intro-layout {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.sp-intro-text-col {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── CỘT ẢNH ── */
+.sp-intro-img-col {
+  flex: 0 0 40%;
+  max-width: 40%;
+  position: sticky;
+  top: 100px;
+  /* padding để viền xoay không bị cắt */
+  padding: 8px;
+  transition: filter 0.4s ease;
+}
+
+.sp-intro-img-col:hover {
+  filter: drop-shadow(0 16px 40px rgba(168, 23, 28, 0.35));
+}
+
+/* ── WRAPPER: viền xoay ── */
+.sp-intro-img-wrap {
+  position: relative;
+  border-radius: 12px;
+  /* KHÔNG dùng overflow:hidden ở đây */
+  cursor: pointer;
+}
+
+/* Viền gradient xoay — nằm phía sau */
+.sp-intro-img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 16px;
+  background: linear-gradient(
+    135deg,
+    var(--red),
+    #ff6b6b,
+    var(--green),
+    #3dbba0,
+    #a8171c
+  );
+  background-size: 400% 400%;
+  animation: borderRotate 3s linear infinite;
+  z-index: 0;
+  filter: blur(6px);
+}
+
+@keyframes borderRotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ── INNER: overflow hidden chỉ ở đây để clip ảnh + overlay ── */
+.sp-intro-img-inner {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden; /* clip ảnh zoom không tràn ra ngoài */
+  z-index: 1;
+  background: #fff;
+}
+
+/* ── ẢNH ── */
+.sp-intro-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+  display: block;
+  transition:
+    transform 0.5s ease,
+    filter 0.5s ease;
+}
+
+.sp-intro-img-wrap:hover .sp-intro-img {
+  transform: scale(1.05);
+  filter: brightness(1.08);
+}
+
+/* ── OVERLAY đỏ từ dưới lên ── */
+.sp-intro-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 40%,
+    rgba(168, 23, 28, 0.6) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  border-radius: 10px;
+}
+
+.sp-intro-img-wrap:hover .sp-intro-img-overlay {
+  opacity: 1;
+}
+
+/* ── LABEL từ dưới lên ── */
+.sp-intro-img-label {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
+}
+
+.sp-intro-img-wrap:hover .sp-intro-img-label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .sp-intro-layout {
+    flex-direction: column;
+    gap: 24px;
+  }
+  .sp-intro-img-col {
+    flex: none;
+    max-width: 100%;
+    position: static;
+    padding: 4px;
+  }
+}
+
 .sp-content {
   max-width: 1280px;
   margin: 0 auto;
@@ -439,6 +591,51 @@
 }
 .sp-cta-btn--ghost:hover {
   background: rgba(255, 255, 255, 0.14);
+}
+
+.sp-title-heading {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 300;
+  line-height: 1.1;
+  color: var(--red);
+  margin-bottom: 36px;
+}
+
+.sp-title-subheading {
+  font-size: clamp(18px, 2vw, 22px);
+  color: var(--red);
+  margin-bottom: 24px;
+}
+
+.sp-explain-title {
+  font-size: 18px;
+  color: var(--red);
+  margin-bottom: 12px;
+}
+
+.sp-intro-para-first {
+  font-size: 16.5px;
+  line-height: 1.95;
+  color: #2c2c2c;
+  text-align: justify;
+  /* Chữ cái đầu đoạn to hơn */
+}
+
+.sp-intro-para-first::first-letter {
+  font-size: 2.6em;
+  color: var(--red, #a8171c);
+  float: left;
+  line-height: 0.82;
+  margin-right: 8px;
+  margin-top: 4px;
+}
+
+.sp-intro-para {
+  font-size: 16.5px;
+  line-height: 1.95;
+  color: #2c2c2c;
+  text-align: justify;
+  margin-bottom: 15px;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */

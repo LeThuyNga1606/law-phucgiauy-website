@@ -5,27 +5,17 @@ import { SERVICE_DATA } from "../../data/services";
 import LogoSlogan from "../../assets/images/background_aboutUs.png";
 import { getPublishedPosts } from "../../services/news";
 
-const DEFAULT_SERVICE = {
-  name: "Dịch Vụ Pháp Lý",
-  tagline: "Tư vấn và hỗ trợ pháp lý chuyên nghiệp",
-  image: "",
-  desc: "Liên hệ với chúng tôi để được tư vấn chi tiết về dịch vụ này.",
-  scope: [],
-  steps: [],
-};
-
 export default function ServiceDetail() {
-  const { category, slug } = useParams();
+  const { category, miniCategory, slug } = useParams();
   const navigate = useNavigate(); // thêm
 
   // Tách riêng 2 state
   const [relatedServices, setRelatedServices] = useState([]); // dịch vụ liên quan
   const [relatedPosts, setRelatedPosts] = useState([]); // bài viết tin tức
 
-  const group = SERVICE_DATA[category];
-  const service = group?.services?.[slug] || DEFAULT_SERVICE;
-  const color = group?.color || "#A8171C";
-  const groupLabel = group?.label || "Dịch vụ";
+  const current = SERVICE_DATA.find((g) => g.id === slug);
+  const color = current?.color || "#A8171C";
+  const groupLabel = current?.tagline || "Dịch vụ";
 
   // Helper
   const formatDateShort = (val) => {
@@ -38,8 +28,8 @@ export default function ServiceDetail() {
     window.scrollTo(0, 0);
 
     // 1. Dịch vụ liên quan — lấy từ SERVICE_DATA tĩnh (cùng nhóm, khác slug)
-    if (group?.services) {
-      const others = Object.entries(group.services)
+    if (current?.services) {
+      const others = Object.entries(current.services)
         .filter(([key]) => key !== slug)
         .slice(0, 3)
         .map(([key, val]) => ({ slug: key, ...val }));
@@ -61,16 +51,17 @@ export default function ServiceDetail() {
       <section className="sd-hero">
         <div
           className="nd-hero-bg"
-          style={{ backgroundImage: `url(${LogoSlogan})` }}
+          style={{ backgroundImage: `url(${current?.img})` }}
         />
+        <div className="nd-hero-overlay" />
         <div className="sd-hero-grid" />
         <div className="sd-hero-inner">
           <div className="sd-hero-left">
             <div className="sd-hero-badge" style={{ background: color }}>
               {groupLabel}
             </div>
-            <h1 className="sd-hero-title">{service.name}</h1>
-            <p className="sd-hero-tagline">{service.tagline}</p>
+            <h1 className="sd-hero-title">{current?.label}</h1>
+            {/* <p className="sd-hero-tagline">{current?.tagline}</p> */}
           </div>
         </div>
       </section>
@@ -84,68 +75,130 @@ export default function ServiceDetail() {
               <span className="sd-label-dot" style={{ background: color }} />
               Tổng quan dịch vụ
             </div>
-            <p className="sd-desc">{service.desc}</p>
+            {current?.descriptions?.length > 0 && (
+              <div className="sd-desc">
+                {current.descriptions.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            )}
           </section>
 
           {/* Phạm vi */}
-          {service.types?.items.length > 0 && (
+          {current.explains?.length > 0 && (
             <section className="sd-section">
-              <div className="sd-section-label" style={{ color }}>
-                <span className="sd-label-dot" style={{ background: color }} />
-                {service.types.name}
-              </div>
-              <div className="sd-scope-grid">
-                {service.types.items.map((item, i) => (
-                  <div key={i} className="sd-scope-item">
-                    <div
-                      className="sd-scope-check"
+              {current.explains.map((explain, i) => (
+                <>
+                  <div className="sd-section-label" style={{ color }}>
+                    <span
+                      className="sd-label-dot"
                       style={{ background: color }}
-                    >
-                      ✓
-                    </div>
-                    <span>{item}</span>
+                    />
+                    {explain.name}
                   </div>
-                ))}
-              </div>
+                  <div className="sd-scope-grid">
+                    {explain?.description?.map((item, i) => (
+                      <div>
+                        <div key={i} className="sd-scope-item">
+                          <div
+                            className="sd-scope-check"
+                            style={{ background: color }}
+                          >
+                            ✓
+                          </div>
+                          <span style={{ whiteSpace: "pre-line" }}>{item}</span>
+                        </div>
+                      </div>
+                    ))}
+
+                    {explain.items?.length > 0 && (
+                      <section className="sd-section" style={{ marginTop: 20 }}>
+                        <div className="sd-steps">
+                          {explain.items.map((item, index) => (
+                            <div key={index} className="sd-step">
+                              <p key={index} className="sd-step-desc">
+                                {item}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                    )}
+
+                    {explain.scopes?.length > 0 && (
+                      <section className="sd-section" style={{ marginTop: 20 }}>
+                        <div className="sd-steps">
+                          {explain.scopes.map((scope, index) => (
+                            <div key={index} className="sd-step">
+                              <div className="sd-step-body">
+                                <h4 className="sd-step-title">{scope.name}</h4>
+
+                                {scope.items?.length > 0 &&
+                                  scope.items.map((it, i) => (
+                                    <p key={i} className="sd-step-desc">
+                                      {it}
+                                    </p>
+                                  ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </section>
+                    )}
+                  </div>
+                </>
+              ))}
             </section>
           )}
 
           {/* Quy trình */}
-          {service.steps?.length > 0 && (
+          {current.processes?.length > 0 && (
             <section className="sd-section">
-              <div className="sd-section-label" style={{ color }}>
-                <span className="sd-label-dot" style={{ background: color }} />
-                Phạm vi dịch vụ cung cấp
-              </div>
-              <div className="sd-steps">
-                {service.steps.map((step, i) => (
-                  <div key={i} className="sd-step">
-                    <div className="sd-step-left">
-                      <div
-                        className="sd-step-num"
-                        style={{ color, borderColor: color }}
-                      >
-                        {step.num}
-                      </div>
-                      {i < service.steps.length - 1 && (
-                        <div
-                          className="sd-step-line"
-                          style={{ background: `${color}25` }}
-                        />
-                      )}
-                    </div>
-                    <div className="sd-step-body">
-                      <h4 className="sd-step-title">{step.title}</h4>
-                      <p className="sd-step-desc">{step.desc}</p>
-                    </div>
+              {current.processes.map((processGroup, gIndex) => (
+                <div key={gIndex}>
+                  {/* Title giai đoạn */}
+                  <div className="sd-section-label" style={{ color }}>
+                    <span
+                      className="sd-label-dot"
+                      style={{ background: color }}
+                    />
+                    {processGroup.title}
                   </div>
-                ))}
-              </div>
+
+                  {/* Steps */}
+                  <div className="sd-steps">
+                    {processGroup.steps.map((step, i) => (
+                      <div key={i} className="sd-step">
+                        <div className="sd-step-left">
+                          <div
+                            className="sd-step-num"
+                            style={{ color, borderColor: color }}
+                          >
+                            {step.num}
+                          </div>
+
+                          {i < processGroup.steps.length - 1 && (
+                            <div
+                              className="sd-step-line"
+                              style={{ background: `${color}25` }}
+                            />
+                          )}
+                        </div>
+
+                        <div className="sd-step-body">
+                          <h4 className="sd-step-title">{step.title}</h4>
+                          <p className="sd-step-desc">{step.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
             </section>
           )}
 
           {/* Dịch vụ liên quan */}
-          {relatedServices.length > 0 && (
+          {/* {relatedServices.length > 0 && (
             <section className="sd-section">
               <div className="sd-section-label" style={{ color }}>
                 <span className="sd-label-dot" style={{ background: color }} />
@@ -166,7 +219,46 @@ export default function ServiceDetail() {
                 ))}
               </div>
             </section>
+          )} */}
+
+          {current?.reasons && (
+            <section className="sd-section">
+              <div className="sd-section-label" style={{ color }}>
+                <span className="sd-label-dot" style={{ background: color }} />
+                {current.reasons.title}
+              </div>
+              <div className="sd-scope-grid">
+                {current?.reasons?.items?.length > 0 &&
+                  current.reasons.items.map((item, i) => (
+                    <div key={i}>
+                      <div className="sd-scope-item">
+                        <div
+                          className="sd-scope-check"
+                          style={{ background: color }}
+                        >
+                          ✓
+                        </div>
+                        <span style={{ whiteSpace: "pre-line" }}>{item}</span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </section>
           )}
+
+          <section className="sd-section">
+            <div className="sd-section-label" style={{ color }}>
+              <span className="sd-label-dot" style={{ background: color }} />
+              Kết luận
+            </div>
+            {current?.lastPara?.length > 0 && (
+              <div className="sd-desc">
+                {current.lastPara.map((para, i) => (
+                  <p key={i}>{para}</p>
+                ))}
+              </div>
+            )}
+          </section>
         </main>
 
         {/* ── SIDEBAR ── */}

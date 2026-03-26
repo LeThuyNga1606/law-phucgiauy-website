@@ -48,7 +48,18 @@ function App() {
           <Route path="/tin-tuc/:slug" element={<NewsDetail />} />
           <Route path="/lien-he" element={<Contact />} />
           <Route path="/dich-vu/:category" element={<ServiceCategory />} />
-          <Route path="/dich-vu/:category/:slug" element={<ServiceDetail />} />
+          <Route
+            path="/dich-vu/:category/:miniCategory"
+            element={<ServiceCategory />}
+          />
+          <Route
+            path="/dich-vu/:category/detail/:slug"
+            element={<ServiceDetail />}
+          />
+          <Route
+            path="/dich-vu/:category/:miniCategory/detail/:slug"
+            element={<ServiceDetail />}
+          />
           <Route path="*" element={<NotFound />} />
         </Route>
 

@@ -1,13 +1,18 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import "../../styles/serviceCategory.css";
-import { serviceGroup } from "../../data/serviceGroup";
+import { SERVICE_GROUP } from "../../data/serviceGroup";
 import {} from "react-router-dom";
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function ServicesCategory() {
-  const { category } = useParams();
+  const { category, miniCategory } = useParams();
 
-  const current = serviceGroup.find((g) => g.id === category);
+  let current = null;
+  if (miniCategory) {
+    current = SERVICE_GROUP.find((g) => g.id === miniCategory);
+  } else {
+    current = SERVICE_GROUP.find((g) => g.id === category);
+  }
   const desc = current?.description || [];
 
   const first = desc[0];
@@ -54,57 +59,72 @@ export default function ServicesCategory() {
       <div className="sp-content">
         {/* Group intro */}
         <div className="sp-group-intro">
-          {/* Đoạn đầu */}
-          {first && <p className="about-intro-para">{first}</p>}
-
-          {/* Ảnh */}
-          <div
-            className="about-intro-img-wrap"
-            style={{ marginTop: 50, marginBottom: 50 }}
-          >
-            <img
-              // src={`/images/${current.id}.jpg`}
-              src={current.img}
-              alt={current.name}
-              className="about-intro-img"
-            />
-          </div>
-
-          {/* Đoạn giữa */}
-          {middle.map((line, i) => (
-            <p key={i} className="about-intro-para">
-              {line}
-            </p>
-          ))}
-        </div>
-
-        {/* Services grid */}
-        <div className="sp-grid" style={{ marginBottom: last ? 50 : 0 }}>
-          {current.services.map((svc, i) => (
-            <Link
-              key={svc.key}
-              to={svc.to}
-              className="sp-card"
-              style={{ "--delay": `${i * 60}ms`, "--accent": current.color }}
-            >
-              <div className="sp-card-top">
-                <div className="sp-card-num">
-                  {String(i + 1).padStart(2, "0")}
+          <div className="sp-intro-layout" style={{ marginBottom: 50 }}>
+            {/* Cột trái — ảnh 40% */}
+            <div className="sp-intro-img-col">
+              <div className="sp-intro-img-wrap">
+                {/* inner để clip ảnh zoom, tách khỏi ::before viền xoay */}
+                <div className="sp-intro-img-inner">
+                  <img
+                    src={current.img}
+                    alt={current.name}
+                    className="sp-intro-img"
+                  />
+                  <div className="sp-intro-img-overlay" />
+                  <div className="sp-intro-img-label">{current.name}</div>
                 </div>
-                <div className="sp-card-arrow">→</div>
               </div>
-              <h3 className="sp-card-name">{svc.name}</h3>
-              <p className="sp-card-desc">{svc.desc}</p>
-              <div className="sp-card-footer">
-                <span className="sp-card-cta">Xem chi tiết</span>
-                <div className="sp-card-bar" />
-              </div>
-            </Link>
-          ))}
-        </div>
+            </div>
 
-        {/* Đoạn cuối */}
-        {last && <p className="about-intro-para">{last}</p>}
+            {/* Cột phải — nội dung 70% */}
+            <div className="sp-intro-text-col">
+              {first && <p className="sp-intro-para-first">{first}</p>}
+              {middle.map((line, i) => (
+                <p key={i} className="sp-intro-para">
+                  {line}
+                </p>
+              ))}
+              {current.explains && (
+                <div className="sp-explains">
+                  {current.explains.map((exp, i) => (
+                    <div key={i} className="sp-explain">
+                      <h3 className="sp-title-subheading">{exp.name}</h3>
+                      {exp.description?.map((line, j) => (
+                        <p key={j} className="sp-intro-para">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Services grid */}
+          {current.services && (
+            <div className="sp-grid" style={{ marginBottom: last ? 50 : 0 }}>
+              {current.services?.map((svc, i) => (
+                <Link key={svc.key} to={svc.to} className="sp-card">
+                  <div className="sp-card-top">
+                    <div className="sp-card-num">
+                      {String(i + 1).padStart(2, "0")}
+                    </div>
+                    <div className="sp-card-arrow">→</div>
+                  </div>
+                  <h3 className="sp-card-name">{svc.name}</h3>
+                  <p className="sp-card-desc">{svc.desc}</p>
+                  <div className="sp-card-footer">
+                    <span className="sp-card-cta">Xem chi tiết</span>
+                    <div className="sp-card-bar" />
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Đoạn cuối */}
+          {last && <p className="sp-intro-para">{last}</p>}
+        </div>
       </div>
     </div>
   );

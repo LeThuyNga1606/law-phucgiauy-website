@@ -39,24 +39,33 @@ const Navbar = () => {
         {
           title: t("nav_civil_group_title"),
           items: [
-            { label: t("nav_civil_land"), to: "/dan-su/tranh-chap-dat-dai" },
+            {
+              label: t("nav_civil_land"),
+              to: "/dich-vu/dan-su/detail/tranh-chap-dat-dai",
+            },
             {
               label: t("nav_civil_inheritance"),
-              to: "/dan-su/tranh-chap-thua-ke",
+              to: "/dich-vu/dan-su/detail/tranh-chap-thua-ke",
             },
-            { label: t("nav_civil_divorce"), to: "/dan-su/tranh-chap-ly-hon" },
-            { label: t("nav_civil_labor"), to: "/dan-su/tranh-chap-lao-dong" },
+            {
+              label: t("nav_civil_divorce"),
+              to: "/dich-vu/dan-su/detail/tranh-chap-ly-hon",
+            },
+            {
+              label: t("nav_civil_labor"),
+              to: "/dich-vu/dan-su/detail/tranh-chap-lao-dong",
+            },
             {
               label: t("nav_civil_commerce"),
-              to: "/dan-su/tranh-chap-thuong-mai",
+              to: "/dich-vu/dan-su/detail/tranh-chap-thuong-mai",
             },
             {
               label: t("nav_civil_contract"),
-              to: "/dan-su/tranh-chap-hop-dong",
+              to: "/dich-vu/dan-su/detail/tranh-chap-hop-dong",
             },
             {
               label: t("nav_civil_ip"),
-              to: "/dan-su/tranh-chap-so-huu-tri-tue",
+              to: "/dich-vu/dan-su/detail/tranh-chap-so-huu-tri-tue",
             },
           ],
         },
@@ -71,15 +80,15 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_criminal_defense"),
-              to: "/hinh-su/bao-chua-nguoi-bi-buoc-toi",
+              to: "/dich-vu/hinh-su/detail/bao-chua-nguoi-bi-buoc-toi",
             },
             {
               label: t("nav_criminal_victim"),
-              to: "/hinh-su/bao-ve-nguoi-bi-hai",
+              to: "/dich-vu/hinh-su/detail/bao-ve-nguoi-bi-hai-duong-su",
             },
             {
               label: t("nav_criminal_accused"),
-              to: "/hinh-su/bao-ve-nguoi-bi-to-giac",
+              to: "/dich-vu/hinh-su/detail/bao-ve-quyen-loi-nguoi-bi-to-giac-va-nguoi-to-giac-toi-pham",
             },
           ],
         },
@@ -94,19 +103,19 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_investment_consult"),
-              to: "/dau-tu/tu-van-phap-ly-truoc-dau-tu",
+              to: "/dich-vu/dau-tu/dau-tu-moi/detail/tu-van-phap-ly-truoc-dau-tu",
             },
             {
               label: t("nav_investment_due_diligence"),
-              to: "/dau-tu/tham-tra-phap-ly",
+              to: "/dich-vu/dau-tu/dau-tu-moi/detail/tham-tra-phap-ly-dat-nha-xuong",
             },
             {
               label: t("nav_investment_establish_company"),
-              to: "/dau-tu/thanh-lap-cong-ty-von-nuoc-ngoai",
+              to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-cong-ty-von-dau-tu-nuoc-ngoai",
             },
             {
               label: t("nav_investment_establish_office"),
-              to: "/dau-tu/thanh-lap-van-phong-dai-dien",
+              to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
             },
           ],
         },
@@ -115,35 +124,35 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_investment_adjust_target"),
-              to: "/dau-tu/dieu-chinh-muc-tieu",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/dieu-chinh-muc-tieu-quy-mo-du-an-dau-tu",
             },
             {
               label: t("nav_investment_change_location"),
-              to: "/dau-tu/thay-doi-dia-diem",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-dia-diem-thuc-hien-du-an-dau-tu",
             },
             {
               label: t("nav_investment_change_capital"),
-              to: "/dau-tu/thay-doi-tong-von",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-tong-von-dau-tu-von-gop-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_extend_schedule"),
-              to: "/dau-tu/gia-han-tien-do-gop-von",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-tien-do-gop-von-tien-do-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_change_investor"),
-              to: "/dau-tu/thay-doi-nha-dau-tu",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-nha-dau-tu-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_update_info"),
-              to: "/dau-tu/cap-nhat-thong-tin",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/cap-nhat-thong-tin-nha-dau-tu",
             },
             {
               label: t("nav_investment_extend_lease"),
-              to: "/dau-tu/gia-han-thue-xuong",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-thoi-gian-thue-xuong",
             },
             {
               label: t("nav_investment_extend_operation"),
-              to: "/dau-tu/gia-han-hoat-dong",
+              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-thoi-gian-hoat-dong-du-an",
             },
           ],
         },
@@ -152,23 +161,23 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_investment_register_loan"),
-              to: "/dau-tu/dang-ky-vay-nuoc-ngoai",
+              to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_change_loan"),
-              to: "/dau-tu/thay-doi-khoan-vay",
+              to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-thay-doi-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_report_loan"),
-              to: "/dau-tu/bao-cao-khoan-vay",
+              to: "/dich-vu/dau-tu/bao-cao/detail/bao-cao-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_terminate_project"),
-              to: "/dau-tu/cham-dut-du-an",
+              to: "/dich-vu/dau-tu/bao-cao/detail/cham-dut-du-an-dau-tu",
             },
             {
               label: t("nav_investment_dissolve_company"),
-              to: "/dau-tu/giai-the-cong-ty",
+              to: "/dich-vu/dau-tu/bao-cao/detail/giai-the-cong-ty-fdi",
             },
           ],
         },
@@ -183,23 +192,23 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_enterprise_regular_consult"),
-              to: "/doanh-nghiep/tu-van-thuong-xuyen",
+              to: "/dich-vu/doanh-nghiep/tu-van/detail/tu-van-phap-ly-thuong-xuyen",
             },
             {
               label: t("nav_enterprise_establish"),
-              to: "/doanh-nghiep/thanh-lap-doanh-nghiep",
+              to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-doanh-nghiep",
             },
             {
               label: t("nav_enterprise_branch"),
-              to: "/doanh-nghiep/thanh-lap-chi-nhanh",
+              to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-chi-nhanh",
             },
             {
               label: t("nav_enterprise_rep_office"),
-              to: "/doanh-nghiep/thanh-lap-van-phong",
+              to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-van-phong-dai-dien",
             },
             {
               label: t("nav_enterprise_biz_location"),
-              to: "/doanh-nghiep/dia-diem-kinh-doanh",
+              to: "/dich-vu/doanh-nghiep/thanh-lap/detail/dang-ky-dia-diem-kinh-doanh",
             },
           ],
         },
@@ -208,36 +217,39 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_enterprise_update_info"),
-              to: "/doanh-nghiep/cap-nhat-thong-tin",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/cap-nhat-thong-tin-doanh-nghiep",
             },
-            { label: t("nav_enterprise_rename"), to: "/doanh-nghiep/doi-ten" },
+            {
+              label: t("nav_enterprise_rename"),
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/doi-ten-doanh-nghiep",
+            },
             {
               label: t("nav_enterprise_change_address"),
-              to: "/doanh-nghiep/thay-doi-dia-chi",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-dia-chi-doanh-nghiep",
             },
             {
               label: t("nav_enterprise_increase_capital"),
-              to: "/doanh-nghiep/tang-von-dieu-le",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/tang-von-dieu-le",
             },
             {
               label: t("nav_enterprise_decrease_capital"),
-              to: "/doanh-nghiep/giam-von-dieu-le",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/giam-von-dieu-le",
             },
             {
               label: t("nav_enterprise_transfer_capital"),
-              to: "/doanh-nghiep/chuyen-nhuong-von",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/chuyen-nhuong-von",
             },
             {
               label: t("nav_enterprise_change_legal_rep"),
-              to: "/doanh-nghiep/thay-doi-dai-dien",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-dai-dien-phap-luat",
             },
             {
               label: t("nav_enterprise_change_type"),
-              to: "/doanh-nghiep/thay-doi-loai-hinh",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-loai-hinh-doanh-nghiep",
             },
             {
               label: t("nav_enterprise_change_business"),
-              to: "/doanh-nghiep/thay-doi-nganh-nghe",
+              to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-nganh-nghe-kinh-doanh",
             },
           ],
         },
@@ -246,15 +258,15 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_enterprise_dissolve"),
-              to: "/doanh-nghiep/giai-the",
+              to: "/dich-vu/doanh-nghiep/detail/giai-the-doanh-nghiep",
             },
             {
               label: t("nav_enterprise_suspend"),
-              to: "/doanh-nghiep/tam-ngung-hoat-dong",
+              to: "/dich-vu/doanh-nghiep/detail/tam-ngung-hoat-dong",
             },
             {
               label: t("nav_enterprise_terminate_branch"),
-              to: "/doanh-nghiep/cham-dut-chi-nhanh",
+              to: "/dich-vu/doanh-nghiep/detail/cham-dut-chi-nhanh",
             },
           ],
         },
@@ -269,34 +281,43 @@ const Navbar = () => {
           items: [
             {
               label: t("nav_license_environment"),
-              to: "/giay-phep/moi-truong",
+              to: "/dich-vu/giay-phep/detail/giay-phep-moi-truong",
             },
-            { label: t("nav_license_chemical"), to: "/giay-phep/hoa-chat" },
+            {
+              label: t("nav_license_chemical"),
+              to: "/dich-vu/giay-phep/detail/giay-phep-hoa-chat",
+            },
             {
               label: t("nav_license_fire"),
-              to: "/giay-phep/phong-chay-chua-chay",
+              to: "/dich-vu/giay-phep/detail/giay-phep-pccc",
             },
             {
               label: t("nav_license_factory"),
-              to: "/giay-phep/hoan-cong-nha-xuong",
+              to: "/dich-vu/giay-phep/detail/hoan-cong-nha-xuong",
             },
-            { label: t("nav_license_labor"), to: "/giay-phep/lao-dong" },
+            {
+              label: t("nav_license_labor"),
+              to: "/dich-vu/giay-phep/detail/giay-phep-lao-dong",
+            },
             {
               label: t("nav_license_security"),
-              to: "/giay-phep/an-ninh-trat-tu",
+              to: "/dich-vu/giay-phep/detail/giay-an-ninh-trat-tu",
             },
-            { label: t("nav_license_visa"), to: "/giay-phep/visa-the-tam-tru" },
+            {
+              label: t("nav_license_visa"),
+              to: "/dich-vu/giay-phep/detail/visa-the-tam-tru",
+            },
             {
               label: t("nav_license_household"),
-              to: "/giay-phep/ho-kinh-doanh",
+              to: "/dich-vu/giay-phep/detail/ho-kinh-doanh",
             },
             {
               label: t("nav_license_liquor"),
-              to: "/giay-phep/kinh-doanh-ruou",
+              to: "/dich-vu/giay-phep/detail/giay-phep-kinh-doanh-ruou",
             },
             {
               label: t("nav_license_medical"),
-              to: "/giay-phep/nhap-khau-thiet-bi-y-te",
+              to: "/dich-vu/giay-phep/detail/nhap-khau-thiet-bi-vat-tu-y-te",
             },
           ],
         },
