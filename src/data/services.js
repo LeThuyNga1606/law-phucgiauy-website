@@ -3789,7 +3789,7 @@ export const SERVICE_DATA = [
 
     descriptions: [
       "Trong bối cảnh công nghiệp phát triển mạnh, hóa chất giữ vai trò quan trọng nhưng cũng tiềm ẩn nhiều rủi ro đối với an toàn, sức khỏe và môi trường. Vì vậy, hoạt động quản lý, kinh doanh và sử dụng hóa chất phải tuân thủ các quy định pháp luật, trong đó Giấy phép hóa chất là yêu cầu quan trọng nhằm bảo đảm an toàn và đúng quy định.",
-      "Với kinh nghiệm thực tiễn và hiểu biết sâu về pháp luật chuyên ngành, PGU cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục xin Giấy phép hóa chất, giúp doanh nghiệp nhanh chóng hoàn tất hồ sơ, hạn chế rủi ro pháp lý và yên tâm tập trung vào hoạt động sản xuất – kinh doanh.",
+      "Với kinh nghiệm thực tiễn và hiểu biết sâu về pháp luật chuyên ngành, PGU cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục xin Giấy phép hóa chất, giúp doanh nghiệp nhanh chóng hoàn tất hồ sơ, hạn chế rủi ro pháp lý và yên tâm tập trung vào hoạt động sản xuất - kinh doanh.",
     ],
 
     explains: [
@@ -3829,7 +3829,7 @@ export const SERVICE_DATA = [
           {
             name: "Đại diện nộp hồ sơ và làm việc với cơ quan nhà nước",
             items: [
-              "- Đại diện doanh nghiệp nộp hồ sơ tại Cục Hóa chất – Bộ Công Thương hoặc Sở Công Thương",
+              "- Đại diện doanh nghiệp nộp hồ sơ tại Cục Hóa chất - Bộ Công Thương hoặc Sở Công Thương",
               "- Theo dõi tiến trình xử lý hồ sơ, bổ sung tài liệu và giải trình khi có yêu cầu",
             ],
           },
@@ -3909,7 +3909,7 @@ export const SERVICE_DATA = [
 
     descriptions: [
       "Trong bối cảnh đô thị hóa và phát triển công nghiệp ngày càng mạnh mẽ, nguy cơ cháy nổ luôn tiềm ẩn và có thể xảy ra bất cứ lúc nào nếu thiếu các biện pháp phòng ngừa hiệu quả. Phòng cháy chữa cháy (PCCC) không chỉ là yêu cầu bắt buộc theo quy định pháp luật mà còn là trách nhiệm của mỗi cơ quan, doanh nghiệp và cá nhân nhằm bảo vệ tính mạng con người, tài sản và môi trường sống.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục xin Giấy phép PCCC, hỗ trợ doanh nghiệp chuẩn bị đầy đủ hồ sơ, phối hợp với đơn vị thiết kế – thi công và làm việc với cơ quan công an PCCC, giúp tiết kiệm thời gian, chi phí và đảm bảo tuân thủ đúng quy định pháp luật hiện hành.",
+      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục xin Giấy phép PCCC, hỗ trợ doanh nghiệp chuẩn bị đầy đủ hồ sơ, phối hợp với đơn vị thiết kế - thi công và làm việc với cơ quan công an PCCC, giúp tiết kiệm thời gian, chi phí và đảm bảo tuân thủ đúng quy định pháp luật hiện hành.",
     ],
 
     explains: [
@@ -3997,7 +3997,7 @@ export const SERVICE_DATA = [
 
     descriptions: [
       "Trong quá trình xây dựng nhà xưởng, nhiều doanh nghiệp thường tập trung vào thiết kế và thi công mà quên mất một khâu pháp lý quan trọng là hoàn công. Đây là thủ tục bắt buộc nhằm xác nhận công trình đã được xây dựng đúng theo giấy phép và đủ điều kiện đưa vào sử dụng.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục hoàn công nhà xưởng, hỗ trợ doanh nghiệp từ khâu chuẩn bị hồ sơ, làm việc với đơn vị thiết kế – thi công và cơ quan nhà nước, giúp quá trình hoàn công diễn ra nhanh chóng, hợp pháp và hiệu quả.",
+      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự cung cấp dịch vụ tư vấn và thực hiện trọn gói thủ tục hoàn công nhà xưởng, hỗ trợ doanh nghiệp từ khâu chuẩn bị hồ sơ, làm việc với đơn vị thiết kế - thi công và cơ quan nhà nước, giúp quá trình hoàn công diễn ra nhanh chóng, hợp pháp và hiệu quả.",
     ],
 
     explains: [

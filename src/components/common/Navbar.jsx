@@ -125,7 +125,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_investment_group2_title"),
-          to: "/dich-vu/dau-tu/thay-doi-giay-chung-nhan-dang-ky-doanh-nghiep",
+          to: "/dich-vu/dau-tu/thay-doi-giay-chung-nhan-dang-ky-dau-tu",
           items: [
             {
               label: t("nav_investment_adjust_target"),
@@ -222,7 +222,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_enterprise_group2_title"),
-          to: "/dich-vu/doanh-nghiep/thay-doi-giay-chung-nhan-dang-ky-dau-tu",
+          to: "/dich-vu/doanh-nghiep/thay-doi-giay-chung-nhan-dang-ky-doanh-nghiep",
           items: [
             {
               label: t("nav_enterprise_update_info"),

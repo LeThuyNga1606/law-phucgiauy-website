@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../../styles/serviceCategory.css";
 import { SERVICE_GROUP } from "../../data/serviceGroup";
-import {} from "react-router-dom";
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function ServicesCategory() {
+  const { t } = useTranslation();
   const { category, miniCategory } = useParams();
 
   let current = null;
@@ -30,7 +31,7 @@ export default function ServicesCategory() {
             Lĩnh vực hoạt động
             <span className="sp-eyebrow-line" />
           </div>
-          <h1 className="sp-hero-title">{current.name}</h1>
+          <h1 className="sp-hero-title">{t(current.name)}</h1>
           {/* <p className="sp-hero-desc">
             Đội ngũ luật sư giàu kinh nghiệm của Phúc Gia Uy & Cộng Sự sẵn sàng
             đồng hành và bảo vệ quyền lợi hợp pháp của bạn trong mọi lĩnh vực
@@ -71,17 +72,17 @@ export default function ServicesCategory() {
                     className="sp-intro-img"
                   />
                   <div className="sp-intro-img-overlay" />
-                  <div className="sp-intro-img-label">{current.name}</div>
+                  <div className="sp-intro-img-label">{t(current.name)}</div>
                 </div>
               </div>
             </div>
 
             {/* Cột phải — nội dung 70% */}
             <div className="sp-intro-text-col">
-              {first && <p className="sp-intro-para-first">{first}</p>}
+              {first && <p className="sp-intro-para-first">{t(first)}</p>}
               {middle.map((line, i) => (
                 <p key={i} className="sp-intro-para">
-                  {line}
+                  {t(line)}
                 </p>
               ))}
             </div>
@@ -97,14 +98,14 @@ export default function ServicesCategory() {
 
                 return (
                   <div key={i} className="sp-explain">
-                    <h3 className="sp-title-subheading">{exp.name}</h3>
+                    <h3 className="sp-title-subheading">{t(exp.name)}</h3>
 
                     {isTwoColumn ? (
                       <div className="sp-desc-grid">
                         <div>
                           {desc.slice(0, mid).map((line, j) => (
                             <p key={j} className="sp-intro-para">
-                              {line}
+                              {t(line)}
                             </p>
                           ))}
                         </div>
@@ -112,7 +113,7 @@ export default function ServicesCategory() {
                         <div>
                           {desc.slice(mid).map((line, j) => (
                             <p key={j} className="sp-intro-para">
-                              {line}
+                              {t(line)}
                             </p>
                           ))}
                         </div>
@@ -120,7 +121,7 @@ export default function ServicesCategory() {
                     ) : (
                       desc.map((line, j) => (
                         <p key={j} className="sp-intro-para">
-                          {line}
+                          {t(line)}
                         </p>
                       ))
                     )}
@@ -140,10 +141,10 @@ export default function ServicesCategory() {
                     </div>
                     <div className="sp-card-arrow">→</div>
                   </div>
-                  <h3 className="sp-card-name">{svc.name}</h3>
-                  <p className="sp-card-desc">{svc.desc}</p>
+                  <h3 className="sp-card-name">{t(svc.name)}</h3>
+                  <p className="sp-card-desc">{t(svc.desc)}</p>
                   <div className="sp-card-footer">
-                    <span className="sp-card-cta">Xem chi tiết</span>
+                    <span className="sp-card-cta">{t("Xem chi tiết")}</span>
                     <div className="sp-card-bar" />
                   </div>
                 </Link>
@@ -152,7 +153,7 @@ export default function ServicesCategory() {
           )}
 
           {/* Đoạn cuối */}
-          {last && <p className="sp-intro-para">{last}</p>}
+          {last && <p className="sp-intro-para">{t(last)}</p>}
         </div>
       </div>
     </div>

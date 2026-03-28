@@ -222,7 +222,7 @@
   "about_contact_email_title": "이메일",
   "about_contact_email_sub": "24시간 내 답변",
   "about_contact_office_title": "사무소",
-  "about_contact_office_sub": "월–금: 08:00–17:30",
+  "about_contact_office_sub": "월-금: 08:00-17:30",
 
   "about_form_title": "상담 요청 보내기",
   "about_form_sub": "24 근무 시간 내에 연락드리겠습니다.",
@@ -291,5 +291,5 @@
   "contact_info_email_sub": "24시간 내 답변",
   "contact_info_office_title": "사무소",
   "contact_info_office_value": "호치민시 히엡빈 구 5블록 4번 도로 17번지 1층",
-  "contact_info_office_sub": "월–금: 07:30–17:00"
+  "contact_info_office_sub": "월-금: 07:30-17:00"
 }

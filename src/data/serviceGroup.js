@@ -4,50 +4,53 @@ import hinhsu from "../assets/images/hinh-su.png";
 import dautunuocngoai from "../assets/images/dau-tu-nuoc-ngoai.png";
 import doanhnghiep from "../assets/images/doanh-nghiep.png";
 import giayphep from "../assets/images/giay-phep.png";
+
 export const SERVICE_GROUP = [
   {
     id: "dan-su",
-    name: "Dân sự",
+    name: "civilname",
+
     description: [
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự với nhiều năm kinh nghiệm và chuyên môn trong nhiều lĩnh vực pháp luật như đất đai, thừa kế, ly hôn, lao động, hợp đồng, kinh doanh thương mại, sở hữu trí tuệ, luôn là đối tác pháp lý đáng tin cậy trong việc giải quyết tranh chấp dân sự.",
-      "Chúng tôi cung cấp các giải pháp tư vấn và đại diện pháp lý từ đàm phán, hòa giải đến tham gia tố tụng tại tòa án và trọng tài, nhằm bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng.",
-      "Dưới đây là các dịch vụ cụ thể mà Công ty cung cấp trong lĩnh vực giải quyết tranh chấp:",
-      "Nếu Quý khách có nhu cầu hỗ trợ pháp lý, Công ty Luật TNHH Phúc Gia Uy & Cộng sự luôn sẵn sàng đồng hành, cung cấp giải pháp phù hợp và bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng với chi phí hợp lý.",
+      "civildescription1",
+      "civildescription2",
+      "civildescription3",
+      "civildescription4",
     ],
+
     services: [
       {
         key: "tranh-chap-dat-dai",
-        name: "Tranh chấp Đất đai",
+        name: "civilservice_land",
         to: "/dich-vu/dan-su/detail/tranh-chap-dat-dai",
       },
       {
         key: "tranh-chap-thua-ke",
-        name: "Tranh chấp Thừa kế",
+        name: "civilservice_inheritance",
         to: "/dich-vu/dan-su/detail/tranh-chap-thua-ke",
       },
       {
         key: "tranh-chap-ly-hon",
-        name: "Tranh chấp Ly hôn",
+        name: "civilservice_divorce",
         to: "/dich-vu/dan-su/detail/tranh-chap-ly-hon",
       },
       {
         key: "tranh-chap-lao-dong",
-        name: "Tranh chấp Lao động",
+        name: "civilservice_labor",
         to: "/dich-vu/dan-su/detail/tranh-chap-lao-dong",
       },
       {
         key: "tranh-chap-thuong-mai",
-        name: "Tranh chấp Thương mại",
+        name: "civilservice_trade",
         to: "/dich-vu/dan-su/detail/tranh-chap-thuong-mai",
       },
       {
         key: "tranh-chap-hop-dong",
-        name: "Tranh chấp Hợp đồng",
+        name: "civilservice_contract",
         to: "/dich-vu/dan-su/detail/tranh-chap-hop-dong",
       },
       {
         key: "tranh-chap-so-huu-tri-tue",
-        name: "Tranh chấp Sở hữu trí tuệ",
+        name: "civilservice_ip",
         to: "/dich-vu/dan-su/detail/tranh-chap-so-huu-tri-tue",
       },
     ],
@@ -55,26 +58,28 @@ export const SERVICE_GROUP = [
   },
   {
     id: "hinh-su",
-    name: "Hình sự",
+    name: "criminalname",
+
     description: [
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự cung cấp dịch vụ luật sư tư vấn và bào chữa trong các vụ án hình sự, hỗ trợ khách hàng bảo vệ quyền và lợi ích hợp pháp trong suốt quá trình điều tra, truy tố và xét xử. Với kinh nghiệm thực tiễn và sự am hiểu pháp luật hình sự, đội ngũ luật sư của chúng tôi tư vấn giải pháp pháp lý phù hợp, tham gia bào chữa cho bị can, bị cáo, bảo vệ quyền lợi cho bị hại và các bên liên quan. Dịch vụ được thực hiện nhanh chóng, bảo mật và tuân thủ đúng quy định pháp luật, giúp khách hàng giảm thiểu rủi ro pháp lý và đảm bảo quyền lợi tối đa.",
-      "Dịch vụ chúng tôi cung cấp bao gồm: ",
-      "Nếu Quý khách có nhu cầu hỗ trợ pháp lý, Công ty Luật TNHH Phúc Gia Uy & Cộng sự luôn sẵn sàng đồng hành, cung cấp giải pháp phù hợp và bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng với chi phí hợp lý.",
+      "criminaldescription1",
+      "criminaldescription2",
+      "criminaldescription3",
     ],
+
     services: [
       {
         key: "bao-chua-nguoi-bi-buoc-toi",
-        name: "Bào chữa người bị buộc tội",
+        name: "criminalservice_defense",
         to: "/dich-vu/hinh-su/detail/bao-chua-nguoi-bi-buoc-toi",
       },
       {
         key: "bao-chua-bi-hai",
-        name: "Bảo vệ quyền và lợi ích hợp pháp cho bị hại, đương sự trong vụ án hình sự",
+        name: "criminalservice_victim",
         to: "/dich-vu/hinh-su/detail/bao-ve-nguoi-bi-hai-duong-su",
       },
       {
-        name: "Bảo vệ quyền và lợi ích hợp pháp cho người bị tố giác, người bị kiến nghị tố giác và người có đơn tố giác tội phạm",
         key: "bao-chua-nguoi-to-gia",
+        name: "criminalservice_denunciation",
         to: "/dich-vu/hinh-su/detail/bao-ve-quyen-loi-nguoi-bi-to-giac-va-nguoi-to-giac-toi-pham",
       },
     ],
@@ -82,50 +87,48 @@ export const SERVICE_GROUP = [
   },
   {
     id: "dau-tu-nuoc-ngoai",
-    name: "Tư vấn đầu tư nước ngoài (FDI)",
+    name: "fdiname",
+
     description: [
-      "Dịch vụ tư vấn đầu tư nước ngoài (FDI) tại Việt Nam của Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp giải pháp pháp lý toàn diện dành cho nhà đầu tư nước ngoài muốn thành lập doanh nghiệp, thực hiện dự án đầu tư và mở rộng hoạt động kinh doanh tại Việt Nam.",
-      "Với đội ngũ luật sư và chuyên viên giàu kinh nghiệm trong lĩnh vực đầu tư nước ngoài, doanh nghiệp và pháp luật thương mại, PGU hỗ trợ nhà đầu tư từ giai đoạn tư vấn trước đầu tư, lựa chọn hình thức đầu tư, thành lập công ty có vốn nước ngoài, xin cấp Giấy chứng nhận đăng ký đầu tư (IRC), Giấy chứng nhận đăng ký doanh nghiệp (ERC) đến điều chỉnh dự án đầu tư, thực hiện các thủ tục pháp lý trong quá trình hoạt động và chấm dứt dự án.",
-      "Chúng tôi cam kết mang đến dịch vụ tư vấn đầu tư nước ngoài tại Việt Nam nhanh chóng, đúng quy định pháp luật và tối ưu chi phí, giúp nhà đầu tư hạn chế rủi ro pháp lý và triển khai dự án hiệu quả, bền vững.",
-      "Các dịch vụ về đầu tư nước ngoài mà chúng tôi cung cấp:",
-      "Nếu Quý nhà đầu tư có nhu cầu hỗ trợ pháp lý, Công ty Luật TNHH Phúc Gia Uy & Cộng sự luôn sẵn sàng đồng hành, cung cấp giải pháp phù hợp và bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng với chi phí hợp lý.",
+      "fdidescription1",
+      "fdidescription2",
+      "fdidescription3",
+      "fdidescription4",
+      "fdidescription5",
     ],
     explains: [
       {
-        name: "1. Đầu tư mới",
-        key: "dau-tu-moi",
+        name: "fdiexplain_newinvestment",
         description: [
-          "- Tư vấn pháp lý trước đầu tư",
-          "- Thẩm tra pháp lý đất, nhà xưởng",
-          "- Thành lập công ty có vốn đầu tư nước ngoài",
-          "- Thành lập văn phòng đại diện công ty nước ngoài",
+          "fdinewinvestment1",
+          "fdinewinvestment2",
+          "fdinewinvestment3",
+          "fdinewinvestment4",
         ],
       },
       {
-        name: "2. Thay đổi giấy chứng nhận đăng ký đầu tư",
-        key: "thay-doi-giay-chung-nhan-dang-ky-dau-tu",
+        name: "fdiexplain_amendirc",
         description: [
-          "- Điều chỉnh mục tiêu - Quy mô dự án đầu tư",
-          "- Thay đổi địa điểm thực hiện dự án đầu tư",
-          "- Thay đổi tổng vốn đầu tư, vốn góp thực hiện dự án",
-          "- Gia hạn tiến độ góp vốn - Tiến độ thực hiện dự án",
-          "- Thay đổi nhà đầu tư thực hiện dự án",
-          "- Cập nhật thông tin nhà đầu tư",
-          "- Gia hạn thời gian thuê xưởng",
-          "- Gia hạn thời gian hoạt động dự án",
+          "fdiamendirc1",
+          "fdiamendirc2",
+          "fdiamendirc3",
+          "fdiamendirc4",
+          "fdiamendirc5",
+          "fdiamendirc6",
+          "fdiamendirc7",
+          "fdiamendirc8",
         ],
       },
       {
-        name: "3. Báo cáo dự án",
-        key: "bao-cao-du-an-dau-tu",
+        name: "fdiexplain_projectreport",
         description: [
-          "- Vay nước ngoài:",
-          "+ Đăng ký khoản vay nước ngoài",
-          "+ Đăng ký thay đổi khoản vay nước ngoài",
-          "+ Báo cáo khoản vay nước ngoài",
-          "- Chấm dứt dự án: ",
-          "+ Chấm dứt dự án đầu tư",
-          "+ Giải thể công ty có vốn đầu tư nước ngoài",
+          "fdiprojectreport_loan",
+          "fdiprojectloan1",
+          "fdiprojectloan2",
+          "fdiprojectloan3",
+          "fdiprojectreport_terminate",
+          "fdiprojectterminate1",
+          "fdiprojectterminate2",
         ],
       },
     ],
@@ -133,40 +136,39 @@ export const SERVICE_GROUP = [
   },
   {
     id: "doanh-nghiep",
-    name: "Doanh nghiệp",
+    name: "businessnamesection",
+
     description: [
-      "Trong bối cảnh môi trường kinh doanh ngày càng cạnh tranh, việc tuân thủ các quy định pháp luật không chỉ là yêu cầu bắt buộc mà còn là nền tảng quan trọng giúp doanh nghiệp phát triển bền vững. Một hệ thống pháp lý rõ ràng và chặt chẽ sẽ giúp doanh nghiệp quản lý hiệu quả các nguồn lực như nhân sự, tài chính, tài sản, công nghệ và hoạt động kinh doanh, đồng thời hạn chế các rủi ro pháp lý có thể phát sinh.",
-      "Thấu hiểu những nhu cầu đó, Công ty Luật Phúc Gia Uy cung cấp dịch vụ tư vấn pháp luật doanh nghiệp chuyên nghiệp và toàn diện, hỗ trợ doanh nghiệp từ giai đoạn thành lập đến quá trình vận hành và phát triển. Với đội ngũ luật sư và chuyên viên pháp lý giàu kinh nghiệm, Phúc Gia Uy luôn đưa ra các giải pháp pháp lý phù hợp, giúp doanh nghiệp tuân thủ đúng quy định pháp luật và yên tâm tập trung phát triển hoạt động kinh doanh.",
-      "Với đội ngũ luật sư giàu kinh nghiệm và am hiểu pháp luật doanh nghiệp, Công ty Luật Phúc Gia Uy cam kết mang đến dịch vụ tư vấn pháp lý thường xuyên chuyên nghiệp, hiệu quả và luôn đặt lợi ích của khách hàng lên hàng đầu.",
+      "businessdescription1",
+      "businessdescription2",
+      "businessdescription3",
     ],
     explains: [
       {
-        name: "1. Các dịch vụ tư vấn pháp luật doanh nghiệp của Phúc Gia Uy",
-        key: "cac-dich-vu-tu-van-phap-luat-doanh-nghiep-cua-phuc-gia-uy",
+        name: "businessserviceheading",
         description: [
-          "- Tư vấn thành lập doanh nghiệp",
-          "- Tư vấn thành lập chi nhánh, văn phòng đại diện, địa điểm kinh doanh",
-          "- Tư vấn thay đổi đăng ký doanh nghiệp",
-          "- Tư vấn chuyển đổi loại hình doanh nghiệp",
-          "- Tư vấn xử lý các vấn đề phát sinh trong quá trình hoạt động",
-          "- Tư vấn tạm ngừng kinh doanh",
-          "- Tư vấn giải thể doanh nghiệp",
-          "- Tư vấn pháp luật lao động",
-          "- Tư vấn pháp luật kế toán, thuế",
-          "- Tư vấn pháp luật về hợp đồng",
-          "- Tư vấn pháp luật về sở hữu trí tuệ",
-          "- Tư vấn giải quyết tranh chấp nội bộ doanh nghiệp",
+          "businessservice1",
+          "businessservice2",
+          "businessservice3",
+          "businessservice4",
+          "businessservice5",
+          "businessservice6",
+          "businessservice7",
+          "businessservice8",
+          "businessservice9",
+          "businessservice10",
+          "businessservice11",
+          "businessservice12",
         ],
       },
       {
-        name: "2. Lợi ích khi chọn dịch vụ của luật Phúc Gia Uy",
-        key: "loi-ich-khi-chon-dich-vu-cua-luat-phuc-gia-uy",
+        name: "businessbenefitheading",
         description: [
-          "- Công ty Luật Phúc Gia Uy không chỉ cung cấp dịch vụ pháp lý thông thường mà còn là đối tác pháp lý đồng hành cùng doanh nghiệp trong suốt quá trình hoạt động và phát triển. Chúng tôi luôn thấu hiểu nhu cầu pháp lý riêng của từng doanh nghiệp để đưa ra các giải pháp phù hợp, hiệu quả và đúng quy định pháp luật.",
-          "- Nền tảng pháp lý vững chắc: Phúc Gia Uy hỗ trợ doanh nghiệp từ giai đoạn thành lập đến quá trình vận hành, đảm bảo mọi hoạt động kinh doanh được thực hiện đúng quy định pháp luật.",
-          "- Hạn chế rủi ro pháp lý: Với đội ngũ luật sư và chuyên viên giàu kinh nghiệm, chúng tôi giúp doanh nghiệp nhận diện và phòng ngừa các rủi ro pháp lý liên quan đến hợp đồng, lao động, thuế và hoạt động kinh doanh.",
-          "- Đồng hành phát triển: Phúc Gia Uy cam kết mang đến giải pháp pháp lý kịp thời và hiệu quả, giúp doanh nghiệp yên tâm tập trung phát triển và mở rộng hoạt động kinh doanh một cách bền vững.",
-          "Với sự tận tâm và chuyên nghiệp, Công ty Luật Phúc Gia Uy luôn nỗ lực mang đến dịch vụ thành lập doanh nghiệp hiệu quả, giúp khách hàng nhanh chóng bắt đầu hoạt động kinh doanh với nền tảng pháp lý vững chắc.",
+          "businessbenefit1",
+          "businessbenefit2",
+          "businessbenefit3",
+          "businessbenefit4",
+          "businessbenefit5",
         ],
       },
     ],
@@ -174,61 +176,62 @@ export const SERVICE_GROUP = [
   },
   {
     id: "giay-phep",
-    name: "Giấy phép",
+    name: "licensesnamesection",
+
     description: [
-      "Giấy phép con là các loại giấy phép, chứng nhận hoặc văn bản chấp thuận do cơ quan nhà nước có thẩm quyền cấp cho doanh nghiệp khi kinh doanh trong những ngành nghề có điều kiện theo quy định của pháp luật. Việc xin cấp giấy phép con thường đòi hỏi doanh nghiệp phải đáp ứng nhiều điều kiện về nhân sự, cơ sở vật chất, an ninh, môi trường hoặc tiêu chuẩn kỹ thuật.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn và thực hiện thủ tục xin cấp các loại giấy phép con cho doanh nghiệp, hỗ trợ khách hàng từ khâu rà soát điều kiện pháp lý, chuẩn bị hồ sơ, nộp hồ sơ và làm việc với cơ quan có thẩm quyền cho đến khi giấy phép được cấp. Với kinh nghiệm thực tiễn và quy trình làm việc chuyên nghiệp, PGU giúp doanh nghiệp tiết kiệm thời gian, hạn chế rủi ro pháp lý và nhanh chóng đưa hoạt động kinh doanh vào vận hành hợp pháp.",
-      "PGU cung cấp dịch vụ tư vấn và thực hiện thủ tục xin cấp đa dạng các loại giấy phép con cho doanh nghiệp, bao gồm:",
-      "Nếu Quý khách có nhu cầu hỗ trợ pháp lý, Công ty Luật TNHH Phúc Gia Uy & Cộng sự luôn sẵn sàng đồng hành, cung cấp giải pháp phù hợp và bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng với chi phí hợp lý.",
+      "licensesdescription1",
+      "licensesdescription2",
+      "licensesdescription3",
+      "licensesdescription4",
     ],
     services: [
       {
-        name: "Giấy phép môi trường",
+        name: "licensesservice1",
         key: "giay-phep-moi-truong",
         to: "/dich-vu/giay-phep/detail/giay-phep-moi-truong",
       },
       {
-        name: "Giấy phép hóa chất",
+        name: "licensesservice2",
         key: "giay-phep-hoa-chat",
         to: "/dich-vu/giay-phep/detail/giay-phep-hoa-chat",
       },
       {
-        name: "Phòng cháy chữa cháy",
+        name: "licensesservice3",
         key: "giay-phep-phong-chay-chua-chay",
         to: "/dich-vu/giay-phep/detail/giay-phep-pccc",
       },
       {
-        name: "Hoàn công nhà xưởng",
+        name: "licensesservice4",
         key: "hoan-cong-nha-xuong",
         to: "/dich-vu/giay-phep/detail/hoan-cong-nha-xuong",
       },
       {
-        name: "Giấy phép lao động",
+        name: "licensesservice5",
         key: "giay-phep-lao-dong",
         to: "/dich-vu/giay-phep/detail/giay-phep-lao-dong",
       },
       {
-        name: "Giấy phép an ninh trật tự",
+        name: "licensesservice6",
         key: "giay-phep-an-ninh-trat-tu",
         to: "/dich-vu/giay-phep/detail/giay-an-ninh-trat-tu",
       },
       {
-        name: "Visa - Thẻ tạm trú",
+        name: "licensesservice7",
         key: "visa-the-tam-tru",
         to: "/dich-vu/giay-phep/detail/visa-the-tam-tru",
       },
       {
-        name: "Hộ kinh doanh",
+        name: "licensesservice8",
         key: "ho-kinh-doanh",
         to: "/dich-vu/giay-phep/detail/ho-kinh-doanh",
       },
       {
-        name: "Giấy phép kinh doanh rượu",
+        name: "licensesservice9",
         key: "giay-phep-kinh-doanh-ruou",
         to: "/dich-vu/giay-phep/detail/giay-phep-kinh-doanh-ruou",
       },
       {
-        name: "Nhập khẩu thiết bị, vật tư y tế",
+        name: "licensesservice10",
         key: "giay-phep-y-te",
         to: "/dich-vu/giay-phep/detail/nhap-khau-thiet-bi-vat-tu-y-te",
       },
@@ -280,30 +283,31 @@ export const SERVICE_GROUP = [
     img: introduce1,
   },
   {
-    name: "Thành lập mới",
     id: "thanh-lap-moi",
+    name: "businessestablishmentnamesection",
+
     description: [
-      "Trong quá trình phát triển kinh doanh, việc thành lập doanh nghiệp mới hoặc mở rộng hệ thống thông qua các đơn vị phụ thuộc là nhu cầu phổ biến của nhiều cá nhân và tổ chức. Tuy nhiên, các thủ tục pháp lý liên quan đến đăng ký kinh doanh, thành lập chi nhánh, văn phòng đại diện hay địa điểm kinh doanh thường khá phức tạp và đòi hỏi phải tuân thủ đúng quy định của pháp luật.",
-      "Nhằm hỗ trợ khách hàng giải quyết nhanh chóng các thủ tục pháp lý này, Công ty Luật Phúc Gia Uy cung cấp dịch vụ tư vấn và thực hiện thủ tục thành lập mới doanh nghiệp và các đơn vị phụ thuộc trọn gói. Với đội ngũ luật sư và chuyên viên pháp lý giàu kinh nghiệm, Phúc Gia Uy cam kết mang đến giải pháp tối ưu, giúp khách hàng tiết kiệm thời gian, chi phí và đảm bảo tuân thủ đúng quy định pháp luật.",
+      "businessestablishmentdescription1",
+      "businessestablishmentdescription2",
     ],
     services: [
       {
-        name: "Thành lập mới Doanh nghiệp",
+        name: "businessestablishmentservice1",
         key: "thanh-lap-moi-doanh-nghiep",
         to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-doanh-nghiep",
       },
       {
-        name: "Thành lập mới Chi nhánh",
+        name: "businessestablishmentservice2",
         key: "thanh-lap-moi-chi-nhanh",
         to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-chi-nhanh",
       },
       {
-        name: "Thành lập mới Văn phòng đại diện",
+        name: "businessestablishmentservice3",
         key: "thanh-lap-moi-van-phong-dai-dien",
         to: "/dich-vu/doanh-nghiep/thanh-lap/detail/thanh-lap-van-phong-dai-dien",
       },
       {
-        name: "Thành lập mới Địa điểm kinh doanh",
+        name: "businessestablishmentservice4",
         key: "thanh-lap-moi-dia-diem-kinh-doanh",
         to: "/dich-vu/doanh-nghiep/thanh-lap/detail/dang-ky-dia-diem-kinh-doanh",
       },
@@ -311,56 +315,56 @@ export const SERVICE_GROUP = [
     img: introduce1,
   },
   {
-    name: "Thay đổi giấy chứng nhận đăng ký doanh nghiệp",
     id: "thay-doi-giay-chung-nhan-dang-ky-doanh-nghiep",
+    name: "businessercamendmentnamesection",
+
     description: [
-      "Trong quá trình hoạt động, doanh nghiệp thường phải điều chỉnh thông tin trên Giấy chứng nhận đăng ký doanh nghiệp (hay thường gọi là Giấy phép kinh doanh) như: tên công ty, địa chỉ, ngành nghề, vốn điều lệ, người đại diện pháp luật hoặc loại hình doanh nghiệp. Việc thực hiện đúng thủ tục pháp lý là điều kiện cần thiết để đảm bảo hoạt động ổn định và tránh rủi ro pháp lý.",
-      "Với kinh nghiệm thực tiễn tại thành phố Hồ Chí Minh và các khu vực lân cận, PGU cam kết hỗ trợ doanh nghiệp thực hiện các thủ tục điều chỉnh nhanh chóng, chính xác và đúng quy định, giúp tiết kiệm thời gian và chi phí cho khách hàng.",
-      "Các loại dịch vụ làm thay đổi Giấy chứng nhận đăng ký doanh nghiệp gồm: ",
+      "businessercamendmentdescription1",
+      "businessercamendmentdescription2",
     ],
     services: [
       {
-        name: "Cập nhật thông tin",
+        name: "businessercamendmentservice1",
         key: "cap-nhat-thong-tin",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/cap-nhat-thong-tin-doanh-nghiep",
       },
       {
-        name: "Đổi tên doanh nghiệp",
+        name: "businessercamendmentservice2",
         key: "doi-ten-doanh-nghiep",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/doi-ten-doanh-nghiep",
       },
       {
-        name: "Thay đổi địa chỉ",
+        name: "businessercamendmentservice3",
         key: "thay-doi-dia-chi",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-dia-chi-doanh-nghiep",
       },
       {
-        name: "Tăng vốn điều lệ",
+        name: "businessercamendmentservice4",
         key: "tang-von-dieu-le",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/tang-von-dieu-le",
       },
       {
-        name: "Giảm vốn điều lệ",
+        name: "businessercamendmentservice5",
         key: "giam-von-dieu-le",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/giam-von-dieu-le",
       },
       {
-        name: "Chuyển nhượng vốn",
+        name: "businessercamendmentservice6",
         key: "chuyen-nhuong-von",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/chuyen-nhuong-von",
       },
       {
-        name: "Thay đổi đại diện pháp luật",
+        name: "businessercamendmentservice7",
         key: "thay-doi-dai-dien-phap-luat",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-dai-dien-phap-luat",
       },
       {
-        name: "Thay đổi loại hình doanh nghiệp",
+        name: "businessercamendmentservice8",
         key: "thay-doi-loai-hinh-doanh-nghiep",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-loai-hinh-doanh-nghiep",
       },
       {
-        name: "Thay đổi ngành nghề kinh doanh",
+        name: "businessercamendmentservice9",
         key: "thay-doi-nganh-nghe-kinh-doanh",
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-nganh-nghe-kinh-doanh",
       },
@@ -368,26 +372,27 @@ export const SERVICE_GROUP = [
     img: introduce1,
   },
   {
-    name: "Chấm dứt kinh doanh",
     id: "cham-dut-kinh-doanh",
+    name: "businessterminationnamesection",
+
     description: [
-      "Trong quá trình hoạt động, vì nhiều lý do như thay đổi chiến lược kinh doanh, tái cơ cấu hoặc khó khăn tài chính, doanh nghiệp và hộ kinh doanh có thể quyết định chấm dứt hoạt động kinh doanh. Việc này cần được thực hiện đúng quy định pháp luật nhằm đảm bảo hoàn tất các nghĩa vụ về thuế, tài chính và tránh các rủi ro pháp lý phát sinh.",
-      "Thủ tục chấm dứt kinh doanh thường bao gồm các bước như thông báo với cơ quan đăng ký kinh doanh, hoàn thành nghĩa vụ thuế, thanh lý tài sản và xử lý các nghĩa vụ liên quan. Nếu thực hiện không đúng quy trình, doanh nghiệp có thể gặp khó khăn trong việc đóng mã số thuế hoặc bị xử phạt hành chính.",
-      "Công ty Luật Phúc Gia Uy cung cấp dịch vụ tư vấn và hỗ trợ thủ tục chấm dứt kinh doanh nhanh chóng, đúng quy định, giúp doanh nghiệp hoàn tất các thủ tục pháp lý một cách thuận lợi và an toàn.",
+      "businessterminationdescription1",
+      "businessterminationdescription2",
+      "businessterminationdescription3",
     ],
     services: [
       {
-        name: "Giải thể doanh nghiệp",
+        name: "businessterminationservice1",
         key: "giai-the-doanh-nghiep",
         to: "/dich-vu/doanh-nghiep/giai-the-doanh-nghiep",
       },
       {
-        name: "Tạm ngừng hoạt động doanh nghiệp",
+        name: "businessterminationservice2",
         key: "tam-ngung-hoat-dong-doanh-nghiep",
         to: "/dich-vu/doanh-nghiep/tam-ngung-hoat-dong-doanh-nghiep",
       },
       {
-        name: "Chấm dứt chi nhánh, văn phòng đại diện",
+        name: "businessterminationservice3",
         key: "cham-dut-chi-nhanh-van-phong-dai-dien",
         to: "/dich-vu/doanh-nghiep/cham-dut-chi-nhanh-van-phong-dai-dien",
       },
@@ -396,30 +401,31 @@ export const SERVICE_GROUP = [
   },
   {
     id: "dau-tu-moi",
-    name: "Đầu tư mới",
+    name: "fdinewinvestmentname",
+
     description: [
-      "Đầu tư mới tại Việt Nam là bước khởi đầu quan trọng đối với nhà đầu tư nước ngoài khi muốn thành lập doanh nghiệp và triển khai dự án kinh doanh. Quá trình này đòi hỏi phải tuân thủ nhiều quy định pháp lý liên quan đến ngành nghề đầu tư, điều kiện tiếp cận thị trường, địa điểm thực hiện dự án, vốn đầu tư và các thủ tục cấp phép.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn pháp lý toàn diện cho nhà đầu tư nước ngoài khi thực hiện dự án đầu tư mới tại Việt Nam. Chúng tôi hỗ trợ từ giai đoạn tư vấn tiền khả thi, lựa chọn mô hình đầu tư, xin cấp Giấy chứng nhận đăng ký đầu tư (IRC), thành lập doanh nghiệp có vốn đầu tư nước ngoài đến các thủ tục pháp lý cần thiết để dự án đi vào hoạt động.",
-      "Với kinh nghiệm thực tiễn trong lĩnh vực đầu tư nước ngoài (FDI), PGU cam kết mang đến giải pháp pháp lý hiệu quả, thủ tục nhanh chóng, chi phí hợp lý, giúp nhà đầu tư triển khai dự án thuận lợi và tuân thủ đúng quy định pháp luật Việt Nam.",
+      "fdinewinvestmentdescription1",
+      "fdinewinvestmentdescription2",
+      "fdinewinvestmentdescription3",
     ],
     services: [
       {
-        name: "Tư vấn pháp lý trước đầu tư",
+        name: "fdinewinvestmentservice1",
         key: "tu-van-phap-ly-truoc-dau-tu",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/tu-van-phap-ly-truoc-dau-tu",
       },
       {
-        name: "Thẩm tra pháp lý đất, nhà xưởng",
+        name: "fdinewinvestmentservice2",
         key: "tham-tra-phap-ly-dat-nha-xuong",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/tham-tra-phap-ly-dat-nha-xuong",
       },
       {
-        name: "Thành lập công ty có vốn đầu tư nước ngoài",
+        name: "fdinewinvestmentservice3",
         key: "thanh-lap-cong-ty-co-von-dau-tu-nuoc-ngoai",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-cong-ty-co-von-dau-tu-nuoc-ngoai",
       },
       {
-        name: "Thành lập văn phòng đại diện công ty nước ngoài",
+        name: "fdinewinvestmentservice4",
         key: "thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
       },
@@ -428,50 +434,51 @@ export const SERVICE_GROUP = [
   },
   {
     id: "thay-doi-giay-chung-nhan-dang-ky-dau-tu",
-    name: "2. Thay đổi Giấy chứng nhận đăng ký đầu tư",
+    name: "fdiamendircnamesection",
+
     description: [
-      "Thay đổi Giấy chứng nhận đăng ký đầu tư (IRC) là thủ tục pháp lý cần thực hiện khi nhà đầu tư có sự điều chỉnh liên quan đến mục tiêu dự án, quy mô đầu tư, địa điểm thực hiện, vốn đầu tư, tiến độ góp vốn, nhà đầu tư hoặc các nội dung quan trọng khác của dự án. Việc thực hiện đúng và kịp thời thủ tục điều chỉnh giúp đảm bảo dự án hoạt động phù hợp với quy định pháp luật và nội dung đã được cơ quan nhà nước phê duyệt.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn và thực hiện thủ tục thay đổi Giấy chứng nhận đăng ký đầu tư cho nhà đầu tư nước ngoài tại Việt Nam. Chúng tôi hỗ trợ đánh giá điều kiện pháp lý, chuẩn bị hồ sơ, làm việc với cơ quan đăng ký đầu tư và theo dõi toàn bộ quá trình xử lý hồ sơ cho đến khi hoàn tất việc điều chỉnh.",
-      "Với kinh nghiệm thực tiễn trong lĩnh vực đầu tư nước ngoài (FDI), PGU giúp nhà đầu tư thực hiện thủ tục nhanh chóng, đúng quy định và hạn chế rủi ro pháp lý, đảm bảo dự án được điều chỉnh và tiếp tục triển khai thuận lợi.",
+      "fdiamendircdescription1",
+      "fdiamendircdescription2",
+      "fdiamendircdescription3",
     ],
     services: [
       {
-        name: "Điều chỉnh mục tiêu - Quy mô dự án đầu tư",
+        name: "fdiamendircservice1",
         key: "dieu-chinh-muc-tieu-quy-mo-du-an-dau-tu",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/dieu-chinh-muc-tieu-quy-mo-du-an-dau-tu",
       },
       {
-        name: "Thay đổi địa điểm thực hiện dự án đầu tư",
+        name: "fdiamendircservice2",
         key: "thay-doi-dia-diem-thuc-hien-du-an-dau-tu",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thay-doi-dia-diem-thuc-hien-du-an-dau-tu",
       },
       {
-        name: "Thay đổi tổng vốn đầu tư, vốn góp thực hiện dự án",
+        name: "fdiamendircservice3",
         key: "thay-doi-tong-von-dau-tu-von-gop-thuc-hien-du-an",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thay-doi-tong-von-dau-tu-von-gop-thuc-hien-du-an",
       },
       {
-        name: "Gia hạn tiến độ góp vốn - Tiến độ thực hiện dự án",
+        name: "fdiamendircservice4",
         key: "gia-han-tien-do-gop-von-tien-do-thuc-hien-du-an",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/gia-han-tien-do-gop-von-tien-do-thuc-hien-du-an",
       },
       {
-        name: "Thay đổi nhà đầu tư thực hiện dự án",
+        name: "fdiamendircservice5",
         key: "thay-doi-nha-dau-tu-thuc-hien-du-an",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thay-doi-nha-dau-tu-thuc-hien-du-an",
       },
       {
-        name: "Cập nhật thông tin nhà đầu tư",
+        name: "fdiamendircservice6",
         key: "cap-nhat-thong-tin-nha-dau-tu",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/cap-nhat-thong-tin-nha-dau-tu",
       },
       {
-        name: "Gia hạn thời gian thuê xưởng",
+        name: "fdiamendircservice7",
         key: "gia-han-thoi-gian-thue-xuong",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/gia-han-thoi-gian-thue-xuong",
       },
       {
-        name: "Gia hạn thời gian hoạt động dự án",
+        name: "fdiamendircservice8",
         key: "gia-han-thoi-gian-hoat-dong-du-an",
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/gia-han-thoi-gian-hoat-dong-du-an",
       },
@@ -480,35 +487,36 @@ export const SERVICE_GROUP = [
   },
   {
     id: "bao-cao-du-an",
-    name: "Báo cáo dự án đầu tư",
+    name: "fdiprojectreportnamesection",
+
     description: [
-      "Báo cáo dự án đầu tư là nghĩa vụ pháp lý bắt buộc của nhà đầu tư trong quá trình thực hiện dự án tại Việt Nam. Theo quy định, doanh nghiệp có vốn đầu tư nước ngoài phải thực hiện báo cáo định kỳ về tình hình triển khai dự án, vốn đầu tư, lao động, doanh thu và các thông tin liên quan thông qua hệ thống báo cáo đầu tư hoặc gửi đến cơ quan quản lý nhà nước có thẩm quyền.",
-      "Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp dịch vụ tư vấn và thực hiện báo cáo dự án đầu tư cho doanh nghiệp có vốn đầu tư nước ngoài, bao gồm: rà soát nghĩa vụ báo cáo, chuẩn bị nội dung báo cáo, thực hiện báo cáo trên hệ thống và hỗ trợ xử lý các vấn đề phát sinh với cơ quan quản lý.",
-      "Với kinh nghiệm trong lĩnh vực đầu tư nước ngoài (FDI), PGU giúp doanh nghiệp thực hiện nghĩa vụ báo cáo đúng thời hạn, đúng quy định, hạn chế rủi ro vi phạm hành chính và đảm bảo quá trình hoạt động của dự án diễn ra ổn định.",
+      "fdiprojectreportdescription1",
+      "fdiprojectreportdescription2",
+      "fdiprojectreportdescription3",
     ],
     services: [
       {
-        name: "Đăng ký khoản vay nước ngoài",
+        name: "fdiprojectreportservice1",
         key: "dang-ky-khoan-vay-nuoc-ngoai",
         to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-khoan-vay-nuoc-ngoai",
       },
       {
-        name: "Đăng ký thay đổi khoản vay nước ngoài",
+        name: "fdiprojectreportservice2",
         key: "dang-ky-thay-doi-khoan-vay-nuoc-ngoai",
         to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-thay-doi-khoan-vay-nuoc-ngoai",
       },
       {
-        name: "Báo cáo khoản vay nước ngoài",
+        name: "fdiprojectreportservice3",
         key: "bao-cao-khoan-vay-nuoc-ngoai",
         to: "/dich-vu/dau-tu/bao-cao/detail/bao-cao-khoan-vay-nuoc-ngoai",
       },
       {
-        name: "Chấm dứt dự án đầu tư",
+        name: "fdiprojectreportservice4",
         key: "cham-dut-du-an-dau-tu",
         to: "/dich-vu/dau-tu/bao-cao/detail/cham-dut-du-an-dau-tu",
       },
       {
-        name: "Giải thể công ty có vốn đầu tư nước ngoài",
+        name: "fdiprojectreportservice5",
         key: "giai-the-cong-ty-co-von-dau-tu-nuoc-ngoai",
         to: "/dich-vu/dau-tu/bao-cao/detail/giai-the-cong-ty-fdi",
       },

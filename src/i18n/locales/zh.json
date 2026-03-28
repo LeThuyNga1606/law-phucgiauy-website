@@ -209,7 +209,7 @@
   "about_contact_email_title": "邮箱",
   "about_contact_email_sub": "24小时内回复",
   "about_contact_office_title": "办公室",
-  "about_contact_office_sub": "周一至周五：08:00–17:30",
+  "about_contact_office_sub": "周一至周五：08:00-17:30",
 
   "about_form_title": "发送咨询请求",
   "about_form_sub": "我们将在24个工作小时内与您联系。",
@@ -278,5 +278,5 @@
   "contact_info_email_sub": "24小时内回复",
   "contact_info_office_title": "办公室地址",
   "contact_info_office_value": "胡志明市平协坊第5街区4号街17号一楼",
-  "contact_info_office_sub": "周一至周五：07:30–17:00"
+  "contact_info_office_sub": "周一至周五：07:30-17:00"
 }
