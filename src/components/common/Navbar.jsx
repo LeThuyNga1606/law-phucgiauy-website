@@ -35,6 +35,7 @@ const Navbar = () => {
     {
       id: "civil",
       label: t("nav_civil"),
+      to: "/dich-vu/dan-su",
       groups: [
         {
           title: t("nav_civil_group_title"),
@@ -74,6 +75,7 @@ const Navbar = () => {
     {
       id: "criminal",
       label: t("nav_criminal"),
+      to: "/dich-vu/hinh-su",
       groups: [
         {
           title: t("nav_criminal_group_title"),
@@ -97,9 +99,11 @@ const Navbar = () => {
     {
       id: "investment",
       label: t("nav_investment"),
+      to: "/dich-vu/dau-tu-nuoc-ngoai",
       groups: [
         {
           title: t("nav_investment_group1_title"),
+          to: "/dich-vu/dau-tu/dau-tu-moi",
           items: [
             {
               label: t("nav_investment_consult"),
@@ -121,6 +125,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_investment_group2_title"),
+          to: "/dich-vu/dau-tu/thay-doi-giay-chung-nhan-dang-ky-doanh-nghiep",
           items: [
             {
               label: t("nav_investment_adjust_target"),
@@ -158,6 +163,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_investment_group3_title"),
+          to: "/dich-vu/dau-tu/bao-cao-du-an",
           items: [
             {
               label: t("nav_investment_register_loan"),
@@ -186,9 +192,11 @@ const Navbar = () => {
     {
       id: "enterprise",
       label: t("nav_enterprise"),
+      to: "/dich-vu/doanh-nghiep",
       groups: [
         {
           title: t("nav_enterprise_group1_title"),
+          to: "/dich-vu/doanh-nghiep/thanh-lap-moi",
           items: [
             {
               label: t("nav_enterprise_regular_consult"),
@@ -214,6 +222,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_enterprise_group2_title"),
+          to: "/dich-vu/doanh-nghiep/thay-doi-giay-chung-nhan-dang-ky-dau-tu",
           items: [
             {
               label: t("nav_enterprise_update_info"),
@@ -255,6 +264,7 @@ const Navbar = () => {
         },
         {
           title: t("nav_enterprise_group3_title"),
+          to: "/dich-vu/doanh-nghiep/cham-dut-kinh-doanh",
           items: [
             {
               label: t("nav_enterprise_dissolve"),
@@ -275,6 +285,7 @@ const Navbar = () => {
     {
       id: "license",
       label: t("nav_license"),
+      to: "/dich-vu/giay-phep",
       groups: [
         {
           title: t("nav_license_group_title"),
@@ -382,7 +393,12 @@ const Navbar = () => {
     return () => document.removeEventListener("mousedown", fn);
   }, []);
 
-  const toggleItem = (id) => setOpenId((prev) => (prev === id ? null : id));
+  const toggleItem = (id, to) => {
+    setOpenId((prev) => (prev === id ? null : id));
+    if (to) {
+      window.location.href = to;
+    }
+  };
   const toggleMob = (id) => setMobOpenId((prev) => (prev === id ? null : id));
 
   const changeLanguage = (code) => {
@@ -469,7 +485,7 @@ const Navbar = () => {
                 ) : (
                   <button
                     className={`nav-item-btn ${location.pathname.includes(`/${item.id}`) ? "active" : ""}`}
-                    onClick={() => toggleItem(item.id)}
+                    onClick={() => toggleItem(item.id, item.to)}
                     aria-expanded={openId === item.id}
                   >
                     {item.label}
@@ -498,7 +514,9 @@ const Navbar = () => {
                     >
                       {item.groups.map((group, gi) => (
                         <div key={gi} className="drop-group">
-                          <div className="drop-group-title">{group.title}</div>
+                          <Link to={group.to} className="drop-group-title">
+                            {group.title}
+                          </Link>
                           <ul>
                             {group.items.map((sub) => (
                               <li key={sub.to}>
@@ -556,7 +574,7 @@ const Navbar = () => {
                 <>
                   <button
                     className="mob-header"
-                    onClick={() => toggleMob(item.id)}
+                    onClick={() => toggleMob(item.id, item.to)}
                   >
                     {item.label}
                     <span className="mob-arrow">▾</span>
@@ -566,7 +584,9 @@ const Navbar = () => {
                       <div key={gi}>
                         {(item.id === "enterprise" ||
                           item.id === "investment") && (
-                          <div className="mob-group-title">{group.title}</div>
+                          <Link to={group.to} className="mob-group-title">
+                            {group.title}
+                          </Link>
                         )}
                         {group.items.map((sub) => (
                           <Link key={sub.to} to={sub.to}>

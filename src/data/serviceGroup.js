@@ -1,5 +1,9 @@
-import { name } from "@cloudinary/url-gen/actions/namedTransformation";
 import introduce1 from "../assets/images/introduce_1.png";
+import dansu from "../assets/images/dan-su.png";
+import hinhsu from "../assets/images/hinh-su.png";
+import dautunuocngoai from "../assets/images/dau-tu-nuoc-ngoai.png";
+import doanhnghiep from "../assets/images/doanh-nghiep.png";
+import giayphep from "../assets/images/giay-phep.png";
 export const SERVICE_GROUP = [
   {
     id: "dan-su",
@@ -47,7 +51,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/dan-su/detail/tranh-chap-so-huu-tri-tue",
       },
     ],
-    img: introduce1,
+    img: dansu,
   },
   {
     id: "hinh-su",
@@ -74,7 +78,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/hinh-su/detail/bao-ve-quyen-loi-nguoi-bi-to-giac-va-nguoi-to-giac-toi-pham",
       },
     ],
-    img: introduce1,
+    img: hinhsu,
   },
   {
     id: "dau-tu-nuoc-ngoai",
@@ -86,7 +90,46 @@ export const SERVICE_GROUP = [
       "Các dịch vụ về đầu tư nước ngoài mà chúng tôi cung cấp:",
       "Nếu Quý nhà đầu tư có nhu cầu hỗ trợ pháp lý, Công ty Luật TNHH Phúc Gia Uy & Cộng sự luôn sẵn sàng đồng hành, cung cấp giải pháp phù hợp và bảo vệ tối đa quyền và lợi ích hợp pháp của khách hàng với chi phí hợp lý.",
     ],
-    img: introduce1,
+    explains: [
+      {
+        name: "1. Đầu tư mới",
+        key: "dau-tu-moi",
+        description: [
+          "- Tư vấn pháp lý trước đầu tư",
+          "- Thẩm tra pháp lý đất, nhà xưởng",
+          "- Thành lập công ty có vốn đầu tư nước ngoài",
+          "- Thành lập văn phòng đại diện công ty nước ngoài",
+        ],
+      },
+      {
+        name: "2. Thay đổi giấy chứng nhận đăng ký đầu tư",
+        key: "thay-doi-giay-chung-nhan-dang-ky-dau-tu",
+        description: [
+          "- Điều chỉnh mục tiêu - Quy mô dự án đầu tư",
+          "- Thay đổi địa điểm thực hiện dự án đầu tư",
+          "- Thay đổi tổng vốn đầu tư, vốn góp thực hiện dự án",
+          "- Gia hạn tiến độ góp vốn - Tiến độ thực hiện dự án",
+          "- Thay đổi nhà đầu tư thực hiện dự án",
+          "- Cập nhật thông tin nhà đầu tư",
+          "- Gia hạn thời gian thuê xưởng",
+          "- Gia hạn thời gian hoạt động dự án",
+        ],
+      },
+      {
+        name: "3. Báo cáo dự án",
+        key: "bao-cao-du-an-dau-tu",
+        description: [
+          "- Vay nước ngoài:",
+          "+ Đăng ký khoản vay nước ngoài",
+          "+ Đăng ký thay đổi khoản vay nước ngoài",
+          "+ Báo cáo khoản vay nước ngoài",
+          "- Chấm dứt dự án: ",
+          "+ Chấm dứt dự án đầu tư",
+          "+ Giải thể công ty có vốn đầu tư nước ngoài",
+        ],
+      },
+    ],
+    img: dautunuocngoai,
   },
   {
     id: "doanh-nghiep",
@@ -127,7 +170,7 @@ export const SERVICE_GROUP = [
         ],
       },
     ],
-    img: introduce1,
+    img: doanhnghiep,
   },
   {
     id: "giay-phep",
@@ -190,7 +233,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/giay-phep/detail/nhap-khau-thiet-bi-vat-tu-y-te",
       },
     ],
-    img: introduce1,
+    img: giayphep,
   },
   {
     id: "tu-van-thuong-xuyen",

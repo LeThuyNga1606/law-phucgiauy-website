@@ -613,6 +613,12 @@
   margin-bottom: 12px;
 }
 
+.sp-desc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
 .sp-intro-para-first {
   font-size: 16.5px;
   line-height: 1.95;

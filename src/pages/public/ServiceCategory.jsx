@@ -84,22 +84,51 @@ export default function ServicesCategory() {
                   {line}
                 </p>
               ))}
-              {current.explains && (
-                <div className="sp-explains">
-                  {current.explains.map((exp, i) => (
-                    <div key={i} className="sp-explain">
-                      <h3 className="sp-title-subheading">{exp.name}</h3>
-                      {exp.description?.map((line, j) => (
+            </div>
+          </div>
+
+          {/* Explains */}
+          {current.explains && (
+            <div className="sp-explains">
+              {current.explains.map((exp, i) => {
+                const desc = exp.description || [];
+                const isTwoColumn = desc.length > 4;
+                const mid = Math.ceil(desc.length / 2);
+
+                return (
+                  <div key={i} className="sp-explain">
+                    <h3 className="sp-title-subheading">{exp.name}</h3>
+
+                    {isTwoColumn ? (
+                      <div className="sp-desc-grid">
+                        <div>
+                          {desc.slice(0, mid).map((line, j) => (
+                            <p key={j} className="sp-intro-para">
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+
+                        <div>
+                          {desc.slice(mid).map((line, j) => (
+                            <p key={j} className="sp-intro-para">
+                              {line}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      desc.map((line, j) => (
                         <p key={j} className="sp-intro-para">
                           {line}
                         </p>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              )}
+                      ))
+                    )}
+                  </div>
+                );
+              })}
             </div>
-          </div>
+          )}
           {/* Services grid */}
           {current.services && (
             <div className="sp-grid" style={{ marginBottom: last ? 50 : 0 }}>
