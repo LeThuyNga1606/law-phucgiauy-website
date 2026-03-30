@@ -4,6 +4,12 @@ import hinhsu from "../assets/images/hinh-su.png";
 import dautunuocngoai from "../assets/images/dau-tu-nuoc-ngoai.png";
 import doanhnghiep from "../assets/images/doanh-nghiep.png";
 import giayphep from "../assets/images/giay-phep.png";
+import baocaochamdut from "../assets/images/bao-cao-cham-dut.png";
+import chamdutdoanhnghiep from "../assets/images/cham-dut-doanh-nghiep.png";
+import dautumoi from "../assets/images/dau-tu-moi.png";
+import thaydoidangkydoanhnghiep from "../assets/images/thay-doi-dang-ky-doanh-nghiep.png";
+import thaydoidautu from "../assets/images/thay-doi-dau-tu.png";
+import tuvanthanhlap from "../assets/images/tu-van-thanh-lap.png";
 
 export const SERVICE_GROUP = [
   {
@@ -312,7 +318,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/doanh-nghiep/thanh-lap/detail/dang-ky-dia-diem-kinh-doanh",
       },
     ],
-    img: introduce1,
+    img: tuvanthanhlap,
   },
   {
     id: "thay-doi-giay-chung-nhan-dang-ky-doanh-nghiep",
@@ -369,7 +375,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/doanh-nghiep/thay-doi-dang-ky/detail/thay-doi-nganh-nghe-kinh-doanh",
       },
     ],
-    img: introduce1,
+    img: thaydoidangkydoanhnghiep,
   },
   {
     id: "cham-dut-kinh-doanh",
@@ -397,7 +403,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/doanh-nghiep/cham-dut-chi-nhanh-van-phong-dai-dien",
       },
     ],
-    img: introduce1,
+    img: chamdutdoanhnghiep,
   },
   {
     id: "dau-tu-moi",
@@ -430,7 +436,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
       },
     ],
-    img: introduce1,
+    img: dautumoi,
   },
   {
     id: "thay-doi-giay-chung-nhan-dang-ky-dau-tu",
@@ -483,7 +489,7 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/dau-tu/dau-tu-moi/detail/gia-han-thoi-gian-hoat-dong-du-an",
       },
     ],
-    img: introduce1,
+    img: thaydoidautu,
   },
   {
     id: "bao-cao-du-an",
@@ -521,6 +527,6 @@ export const SERVICE_GROUP = [
         to: "/dich-vu/dau-tu/bao-cao/detail/giai-the-cong-ty-fdi",
       },
     ],
-    img: introduce1,
+    img: baocaochamdut,
   },
 ];

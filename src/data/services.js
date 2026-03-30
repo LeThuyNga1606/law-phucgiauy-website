@@ -682,32 +682,38 @@ export const SERVICE_DATA = [
         name: "1. Khái niệm người bị buộc tội",
         key: "khai-niem-nguoi-bi-buoc-toi",
         description: [
-          "Theo Bộ luật Tố tụng Hình sự năm 2015, người bị buộc tội bao gồm:\n - Người bị bắt \n - Người bị tạm giữ \n - Bị can \n - Bị cáo",
+          "Theo điểm đ khoản 1 Điều 4 Bộ luật Tố tụng Hình sự năm 2015 quy định về người bị buộc tội gồm:\n - Người bị bắt \n - Người bị tạm giữ \n - Bị can \n - Bị cáo",
         ],
       },
 
       {
         name: "2. Phạm vi dịch vụ",
         key: "pham-vi-dich-vu-bao-chua",
-        description: [
+        intros: [
           "Chúng tôi cung cấp các dịch vụ bào chữa và hỗ trợ pháp lý toàn diện cho người bị buộc tội",
         ],
-        items: [
-          "- Tư vấn pháp lý cho người bị tạm giữ, bị can, bị cáo và gia đình về quyền và nghĩa vụ trong quá trình tố tụng hình sự",
-          "- Tham gia bào chữa cho người bị buộc tội trong các giai đoạn điều tra, truy tố và xét xử",
-          "- Tham gia các buổi hỏi cung, lấy lời khai, đối chất để bảo vệ quyền lợi hợp pháp của thân chủ",
-          "- Nghiên cứu hồ sơ vụ án, thu thập chứng cứ, tài liệu có lợi cho người bị buộc tội",
-          "- Soạn thảo đơn từ, kiến nghị, khiếu nại các quyết định tố tụng không đúng quy định pháp luật",
-          "- Xây dựng chiến lược bào chữa phù hợp nhằm làm rõ sự thật khách quan của vụ án",
-          "- Tham gia tranh tụng tại phiên tòa để bảo vệ tốt nhất quyền và lợi ích hợp pháp của người bị buộc tội",
-          "- Tư vấn và thực hiện các thủ tục kháng cáo, kháng nghị, giám đốc thẩm, tái thẩm khi cần thiết",
+        description: [
+          "Tư vấn pháp lý cho người bị tạm giữ, bị can, bị cáo và gia đình về quyền và nghĩa vụ trong quá trình tố tụng hình sự",
+          "Tham gia bào chữa cho người bị buộc tội trong các giai đoạn điều tra, truy tố và xét xử",
+          "Tham gia các buổi hỏi cung, lấy lời khai, đối chất để bảo vệ quyền lợi hợp pháp của thân chủ",
+          "Nghiên cứu hồ sơ vụ án, thu thập chứng cứ, tài liệu có lợi cho người bị buộc tội",
+          "Soạn thảo đơn từ, kiến nghị, khiếu nại các quyết định tố tụng không đúng quy định pháp luật",
+          "Xây dựng chiến lược bào chữa phù hợp nhằm làm rõ sự thật khách quan của vụ án",
+          "Tham gia tranh tụng tại phiên tòa để bảo vệ tốt nhất quyền và lợi ích hợp pháp của người bị buộc tội",
+          "Tư vấn và thực hiện các thủ tục kháng cáo, kháng nghị, giám đốc thẩm, tái thẩm khi cần thiết",
         ],
       },
     ],
     reasons: {
       title: "3. Vì sao nên có Luật sư bào chữa sớm?",
+      intros: [
+        "Sự tham gia của luật sư ngay từ giai đoạn đầu của vụ án có ý nghĩa quan trọng như:",
+      ],
       items: [
-        "Sự tham gia của luật sư ngay từ giai đoạn đầu của vụ án có ý nghĩa quan trọng như: \n - Bảo đảm quyền lợi hợp pháp của người bị buộc tội theo quy định của pháp luật \n - Hạn chế nguy cơ bị ép cung, mớm cung hoặc ghi nhận lời khai không khách quan \n - Thu thập và bảo vệ các chứng cứ có lợi cho thân chủ \n - Định hướng chiến lược pháp lý phù hợp để giảm nhẹ trách nhiệm hình sự hoặc bảo vệ quyền lợi tốt nhất cho người bị buộc tội",
+        "Bảo đảm quyền lợi hợp pháp của người bị buộc tội theo quy định của pháp luật",
+        "Hạn chế nguy cơ bị ép cung, mớm cung hoặc ghi nhận lời khai không khách quan",
+        "Thu thập và bảo vệ các chứng cứ có lợi cho thân chủ",
+        "Định hướng chiến lược pháp lý phù hợp để giảm nhẹ trách nhiệm hình sự hoặc bảo vệ quyền lợi tốt nhất cho người bị buộc tội",
       ],
     },
     lastPara: [
@@ -905,6 +911,18 @@ export const SERVICE_DATA = [
         ],
       },
     ],
+
+    reasons: {
+      title: "Lý do nhà đầu tư nên lựa chọn PGU",
+      items: [
+        "Đội ngũ luật sư giàu kinh nghiệm: PGU có nhiều năm kinh nghiệm trong lĩnh vực đầu tư và doanh nghiệp, đã hỗ trợ nhiều nhà đầu tư trong và ngoài nước triển khai dự án tại Việt Nam.",
+        "Dịch vụ tư vấn toàn diện: Chúng tôi cung cấp dịch vụ tư vấn pháp lý trước đầu tư, thẩm định pháp lý dự án, tư vấn lựa chọn hình thức đầu tư và hỗ trợ các thủ tục pháp lý cần thiết để triển khai dự án.",
+        "Giải pháp tối ưu chi phí và thời gian: Với kinh nghiệm thực tiễn, PGU đưa ra các giải pháp và lộ trình pháp lý phù hợp, giúp nhà đầu tư triển khai dự án nhanh chóng, hiệu quả và tiết kiệm chi phí.",
+        "Hỗ trợ làm việc với nhà đầu tư nước ngoài: Đội ngũ luật sư của chúng tôi có khả năng làm việc bằng tiếng Anh, giúp quá trình trao đổi và thực hiện thủ tục pháp lý với nhà đầu tư nước ngoài thuận lợi.",
+        "Uy tín và trách nhiệm nghề nghiệp: PGU luôn đặt sự minh bạch, trách nhiệm và chất lượng dịch vụ lên hàng đầu trong quá trình tư vấn và hỗ trợ nhà đầu tư.",
+        "Đồng hành pháp lý lâu dài: Chúng tôi không chỉ hỗ trợ giai đoạn trước đầu tư mà còn sẵn sàng đồng hành cùng nhà đầu tư trong suốt quá trình triển khai và vận hành dự án tại Việt Nam.",
+      ],
+    },
     lastPara: [
       "Nếu Quý khách đang cân nhắc đầu tư tại Việt Nam và cần một đối tác pháp lý tin cậy đồng hành từ bước chuẩn bị ban đầu, Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU Law Firm) luôn sẵn sàng hỗ trợ kịp thời, tận tâm, hiệu quả, an toàn và phù hợp với mục tiêu đầu tư của Quý khách.",
     ],
@@ -923,26 +941,30 @@ export const SERVICE_DATA = [
       {
         name: "1. Tư vấn pháp lý về thuê, nhận chuyển nhượng địa điểm",
         key: "dich-vu-tham-tra-phap-ly",
-        description: [
-          "Thuê đất trong khu công nghiệp, khu chế xuất, khu công nghệ cao và cụm công nghiệp;",
+        intros: [
+          "Chúng tôi tư vấn chuyên sâu các quy định pháp luật liên quan đến",
         ],
-        items: [
-          "- Thuê nhà xưởng, kho bãi, văn phòng;",
-          "- Nhận chuyển nhượng nhà máy, cơ sở sản xuất đã xây dựng sẵn.",
-          "- Dịch vụ nhằm giúp nhà đầu tư lựa chọn phương án phù hợp với nhu cầu sử dụng và định hướng phát triển dự án.",
+        description: [
+          "Thuê đất trong khu công nghiệp, khu chế xuất, khu công nghệ cao và cụm công nghiệp",
+          "Thuê nhà xưởng, kho bãi, văn phòng;",
+          "Nhận chuyển nhượng nhà máy, cơ sở sản xuất đã xây dựng sẵn.",
+        ],
+        lastIntro: [
+          "Dịch vụ nhằm giúp nhà đầu tư lựa chọn phương án phù hợp với nhu cầu sử dụng và định hướng phát triển dự án.",
         ],
       },
       {
         name: "2. Thẩm định pháp lý toàn diện đất và tài sản",
         key: "tham-tra-phap-ly-dat-nha-xuong",
+        intros: [
+          "Chúng tôi thực hiện rà soát, đánh giá tính pháp lý của quyền sử dụng đất và tài sản gắn liền với đất dự kiến thuê hoặc mua, bao gồm",
+        ],
         description: [
           "Xác định chủ thể có quyền sử dụng đất và quyền sở hữu hợp pháp đối với nhà xưởng, kho bãi, văn phòng và công trình trên đất;",
-        ],
-        items: [
-          "- Kiểm tra mục đích sử dụng đất, tình trạng quy hoạch;",
-          "- Rà soát các hồ sơ, giấy phép liên quan như chủ trương đầu tư, giấy phép xây dựng, môi trường, phòng cháy và chữa cháy;",
-          "- Kiểm tra tình trạng pháp lý của tài sản: có đang bị tranh chấp, thế chấp, kê biên, thi hành án hoặc bị hạn chế giao dịch hay không;",
-          "- Phân tích các rủi ro tiềm ẩn và đề xuất phương án xử lý phù hợp.",
+          "Kiểm tra mục đích sử dụng đất, tình trạng quy hoạch;",
+          "Rà soát các hồ sơ, giấy phép liên quan như chủ trương đầu tư, giấy phép xây dựng, môi trường, phòng cháy và chữa cháy;",
+          "Kiểm tra tình trạng pháp lý của tài sản: có đang bị tranh chấp, thế chấp, kê biên, thi hành án hoặc bị hạn chế giao dịch hay không;",
+          "Phân tích các rủi ro tiềm ẩn và đề xuất phương án xử lý phù hợp.",
         ],
       },
       {
@@ -962,25 +984,25 @@ export const SERVICE_DATA = [
       {
         name: "5. Dịch vụ pháp lý tiếp theo",
         key: "dich-vu-phap-ly-tiep-theo",
-        description: [
+        intros: [
           "Bên cạnh hoạt động thẩm định địa điểm dự án, chúng tôi tiếp tục đồng hành cùng nhà đầu tư thông qua các dịch vụ:",
         ],
-        items: [
-          "- Thành lập doanh nghiệp để triển khai dự án;",
-          "- Tư vấn và thực hiện thủ tục mua lại công ty mục tiêu đang sở hữu quyền sử dụng đất hoặc tài sản;",
-          "- Thực hiện thủ tục đăng ký biến động, cập nhật thông tin trên Giấy chứng nhận quyền sử dụng đất và tài sản gắn liền với đất theo quy định pháp luật.",
+        description: [
+          "Thành lập doanh nghiệp để triển khai dự án;",
+          "Tư vấn và thực hiện thủ tục mua lại công ty mục tiêu đang sở hữu quyền sử dụng đất hoặc tài sản;",
+          "Thực hiện thủ tục đăng ký biến động, cập nhật thông tin trên Giấy chứng nhận quyền sử dụng đất và tài sản gắn liền với đất theo quy định pháp luật.",
         ],
       },
     ],
     reasons: {
       title: "5. Lý do nên chọn PGU",
       items: [
-        "- Đội ngũ luật sư giàu kinh nghiệm: PGU có đội ngũ luật sư am hiểu pháp luật về đất đai, đầu tư và kinh doanh bất động sản, đã hỗ trợ nhiều nhà đầu tư thực hiện thẩm tra pháp lý đối với đất đai, nhà xưởng và dự án tại Việt Nam.",
-        "- Thẩm tra pháp lý toàn diện: Thực hiện rà soát, đánh giá tình trạng pháp lý của quyền sử dụng đất, nhà xưởng, quy hoạch, mục đích sử dụng đất và các giấy tờ pháp lý liên quan trước khi nhà đầu tư quyết định thuê, nhận chuyển nhượng hoặc hợp tác đầu tư.",
-        "- Đánh giá rủi ro pháp lý: Phân tích các rủi ro pháp lý có thể phát sinh từ nguồn gốc đất, tình trạng quy hoạch, thế chấp, tranh chấp hoặc các hạn chế pháp lý khác.",
-        "- Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp nhà đầu tư nước ngoài dễ dàng tiếp cận thông tin pháp lý và đưa ra quyết định đầu tư phù hợp.",
-        "- Tư vấn phương án giao dịch an toàn: Đề xuất giải pháp pháp lý phù hợp để nhà đầu tư thực hiện giao dịch thuê, nhận chuyển nhượng hoặc hợp tác khai thác đất, nhà xưởng một cách an toàn và đúng quy định.",
-        "- Đồng hành trong quá trình triển khai dự án: PGU sẵn sàng hỗ trợ nhà đầu tư trong các bước tiếp theo như ký kết hợp đồng, thực hiện thủ tục pháp lý và triển khai dự án sau khi hoàn tất quá trình thẩm tra pháp lý.",
+        "Đội ngũ luật sư giàu kinh nghiệm: PGU có đội ngũ luật sư am hiểu pháp luật về đất đai, đầu tư và kinh doanh bất động sản, đã hỗ trợ nhiều nhà đầu tư thực hiện thẩm tra pháp lý đối với đất đai, nhà xưởng và dự án tại Việt Nam.",
+        "Thẩm tra pháp lý toàn diện: Thực hiện rà soát, đánh giá tình trạng pháp lý của quyền sử dụng đất, nhà xưởng, quy hoạch, mục đích sử dụng đất và các giấy tờ pháp lý liên quan trước khi nhà đầu tư quyết định thuê, nhận chuyển nhượng hoặc hợp tác đầu tư.",
+        "Đánh giá rủi ro pháp lý: Phân tích các rủi ro pháp lý có thể phát sinh từ nguồn gốc đất, tình trạng quy hoạch, thế chấp, tranh chấp hoặc các hạn chế pháp lý khác.",
+        "Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp nhà đầu tư nước ngoài dễ dàng tiếp cận thông tin pháp lý và đưa ra quyết định đầu tư phù hợp.",
+        "Tư vấn phương án giao dịch an toàn: Đề xuất giải pháp pháp lý phù hợp để nhà đầu tư thực hiện giao dịch thuê, nhận chuyển nhượng hoặc hợp tác khai thác đất, nhà xưởng một cách an toàn và đúng quy định.",
+        "Đồng hành trong quá trình triển khai dự án: PGU sẵn sàng hỗ trợ nhà đầu tư trong các bước tiếp theo như ký kết hợp đồng, thực hiện thủ tục pháp lý và triển khai dự án sau khi hoàn tất quá trình thẩm tra pháp lý.",
       ],
     },
     lastPara: [
@@ -1037,6 +1059,9 @@ export const SERVICE_DATA = [
     processes: [
       {
         title: "2. Quy trình thực hiện",
+        intros: [
+          "Để đảm bảo tính minh bạch và hiệu quả, chúng tôi triển khai dịch vụ theo quy trình chuyên nghiệp gồm 6 bước:",
+        ],
         steps: [
           {
             num: "01",
@@ -1074,12 +1099,12 @@ export const SERVICE_DATA = [
     reasons: {
       title: "3. Lý do nên chọn PGU",
       items: [
-        "- Đội ngũ luật sư am hiểu pháp luật đầu tư: PGU có nhiều năm kinh nghiệm trong lĩnh vực đầu tư nước ngoài (FDI), đã hỗ trợ nhiều nhà đầu tư thực hiện thủ tục thành lập doanh nghiệp và triển khai dự án tại Việt Nam",
+        "Đội ngũ luật sư am hiểu pháp luật đầu tư: PGU có nhiều năm kinh nghiệm trong lĩnh vực đầu tư nước ngoài (FDI), đã hỗ trợ nhiều nhà đầu tư thực hiện thủ tục thành lập doanh nghiệp và triển khai dự án tại Việt Nam",
         "Tư vấn và thực hiện thủ tục pháp lý trọn gói: Hỗ trợ nhà đầu tư trong toàn bộ quá trình thành lập công ty có vốn đầu tư nước ngoài, bao gồm tư vấn dự án đầu tư, xin Giấy chứng nhận đăng ký đầu tư (IRC), Giấy chứng nhận đăng ký doanh nghiệp (ERC) và các thủ tục pháp lý liên quan",
-        "- Giải pháp pháp lý phù hợp với từng dự án: Tư vấn lựa chọn mô hình doanh nghiệp, tỷ lệ góp vốn, ngành nghề kinh doanh và cơ cấu hoạt động phù hợp với quy định pháp luật và nhu cầu của nhà đầu tư.",
-        "- Tiết kiệm thời gian và chi phí: Với kinh nghiệm thực tiễn trong việc thực hiện thủ tục đầu tư, PGU giúp nhà đầu tư chuẩn bị hồ sơ đầy đủ, hạn chế sai sót và rút ngắn thời gian xử lý thủ tục hành chính",
-        "- Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp quá trình trao đổi thông tin và thực hiện thủ tục pháp lý thuận lợi.",
-        "- Đồng hành trong quá trình hoạt động của doanh nghiệp: Sau khi thành lập doanh nghiệp, PGU tiếp tục hỗ trợ nhà đầu tư trong các vấn đề pháp lý phát sinh như điều chỉnh dự án đầu tư, giấy phép con, hợp đồng và tuân thủ pháp luật trong quá trình hoạt động.",
+        "Giải pháp pháp lý phù hợp với từng dự án: Tư vấn lựa chọn mô hình doanh nghiệp, tỷ lệ góp vốn, ngành nghề kinh doanh và cơ cấu hoạt động phù hợp với quy định pháp luật và nhu cầu của nhà đầu tư.",
+        "Tiết kiệm thời gian và chi phí: Với kinh nghiệm thực tiễn trong việc thực hiện thủ tục đầu tư, PGU giúp nhà đầu tư chuẩn bị hồ sơ đầy đủ, hạn chế sai sót và rút ngắn thời gian xử lý thủ tục hành chính",
+        "Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp quá trình trao đổi thông tin và thực hiện thủ tục pháp lý thuận lợi.",
+        "Đồng hành trong quá trình hoạt động của doanh nghiệp: Sau khi thành lập doanh nghiệp, PGU tiếp tục hỗ trợ nhà đầu tư trong các vấn đề pháp lý phát sinh như điều chỉnh dự án đầu tư, giấy phép con, hợp đồng và tuân thủ pháp luật trong quá trình hoạt động.",
       ],
     },
 
@@ -1102,22 +1127,31 @@ export const SERVICE_DATA = [
     explains: [
       {
         name: "1. Văn phòng đại diện của công ty nước ngoài là gì?",
-        description: [
+        intros: [
           "Văn phòng đại diện là đơn vị phụ thuộc của thương nhân nước ngoài, được phép hoạt động tại Việt Nam với chức năng:",
+        ],
+        description: [
           "Xúc tiến thương mại",
           "Nghiên cứu thị trường",
           "Tìm kiếm, thúc đẩy cơ hội hợp tác",
           "Giám sát việc thực hiện hợp đồng của công ty mẹ",
+        ],
+        lastIntro: [
           "Lưu ý: Văn phòng đại diện không được trực tiếp thực hiện hoạt động kinh doanh sinh lợi tại Việt Nam và không được xuất hóa đơn.",
         ],
       },
       {
         name: "2. Điều kiện thành lập Văn phòng đại diện của công ty nước ngoài",
+        intros: [
+          "Thương nhân nước ngoài được phép thành lập Văn phòng đại diện tại Việt Nam khi đáp ứng các điều kiện sau:",
+        ],
         description: [
           "Được thành lập, đăng ký kinh doanh hợp pháp tại quốc gia/vùng lãnh thổ tham gia điều ước quốc tế mà Việt Nam là thành viên hoặc được pháp luật quốc gia/vùng lãnh thổ đó công nhận;",
           "Đã hoạt động tối thiểu 01 năm kể từ ngày thành lập hoặc đăng ký;",
           "Trường hợp giấy đăng ký kinh doanh có quy định thời hạn hoạt động thì phải còn hiệu lực ít nhất 01 năm tính đến ngày nộp hồ sơ;",
           "Nội dung hoạt động của Văn phòng đại diện phù hợp với cam kết quốc tế của Việt Nam.",
+        ],
+        lastIntro: [
           "Lưu ý: Trường hợp nội dung hoạt động không phù hợp với cam kết quốc tế hoặc thương nhân không thuộc quốc gia/vùng lãnh thổ có điều ước với Việt Nam, việc thành lập phải được sự chấp thuận của Bộ trưởng hoặc cơ quan quản lý chuyên ngành có thẩm quyền.",
         ],
       },
@@ -1157,7 +1191,10 @@ export const SERVICE_DATA = [
 
     processes: [
       {
-        title: "Quy trình thực hiện",
+        title: "4. Quy trình thực hiện",
+        intros: [
+          "Để đảm bảo hiệu quả và tiết kiệm thời gian cho khách hàng, chúng tôi triển khai theo quy trình:",
+        ],
         steps: [
           {
             num: "01",
@@ -1194,14 +1231,14 @@ export const SERVICE_DATA = [
     ],
 
     reasons: {
-      title: "Lý do nên chọn PGU",
+      title: "5. Lý do nên chọn PGU",
       items: [
-        "- Đội ngũ luật sư am hiểu pháp luật thương mại và đầu tư: PGU có nhiều năm kinh nghiệm trong lĩnh vực đầu tư và thương mại, đã hỗ trợ nhiều thương nhân nước ngoài thành lập và vận hành văn phòng đại diện tại Việt Nam.",
-        "- Tư vấn điều kiện và phạm vi hoạt động: Hỗ trợ nhà đầu tư hiểu rõ điều kiện thành lập, phạm vi hoạt động của văn phòng đại diện và các quy định pháp luật liên quan.",
-        "- Thực hiện thủ tục pháp lý trọn gói: Hỗ trợ chuẩn bị hồ sơ và thực hiện thủ tục xin Giấy phép thành lập văn phòng đại diện của thương nhân nước ngoài tại Việt Nam theo quy định pháp luật.",
-        "- Tiết kiệm thời gian và hạn chế rủi ro pháp lý: PGU hỗ trợ chuẩn bị hồ sơ đầy đủ, đúng quy định, giúp quá trình xin cấp phép diễn ra thuận lợi và nhanh chóng.",
-        "- Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp quá trình trao đổi thông tin và thực hiện thủ tục pháp lý thuận lợi.",
-        "- Đồng hành trong quá trình hoạt động: PGU tiếp tục hỗ trợ doanh nghiệp trong các vấn đề pháp lý phát sinh như gia hạn giấy phép, thay đổi nội dung đăng ký và tuân thủ các quy định pháp luật trong quá trình hoạt động của văn phòng đại diện.",
+        "Đội ngũ luật sư am hiểu pháp luật thương mại và đầu tư: PGU có nhiều năm kinh nghiệm trong lĩnh vực đầu tư và thương mại, đã hỗ trợ nhiều thương nhân nước ngoài thành lập và vận hành văn phòng đại diện tại Việt Nam.",
+        "Tư vấn điều kiện và phạm vi hoạt động: Hỗ trợ nhà đầu tư hiểu rõ điều kiện thành lập, phạm vi hoạt động của văn phòng đại diện và các quy định pháp luật liên quan.",
+        "Thực hiện thủ tục pháp lý trọn gói: Hỗ trợ chuẩn bị hồ sơ và thực hiện thủ tục xin Giấy phép thành lập văn phòng đại diện của thương nhân nước ngoài tại Việt Nam theo quy định pháp luật.",
+        "Tiết kiệm thời gian và hạn chế rủi ro pháp lý: PGU hỗ trợ chuẩn bị hồ sơ đầy đủ, đúng quy định, giúp quá trình xin cấp phép diễn ra thuận lợi và nhanh chóng.",
+        "Hỗ trợ nhà đầu tư nước ngoài: Luật sư của PGU có khả năng làm việc bằng tiếng Anh, giúp quá trình trao đổi thông tin và thực hiện thủ tục pháp lý thuận lợi.",
+        "Đồng hành trong quá trình hoạt động: PGU tiếp tục hỗ trợ doanh nghiệp trong các vấn đề pháp lý phát sinh như gia hạn giấy phép, thay đổi nội dung đăng ký và tuân thủ các quy định pháp luật trong quá trình hoạt động của văn phòng đại diện.",
       ],
     },
 
@@ -1225,8 +1262,10 @@ export const SERVICE_DATA = [
     explains: [
       {
         name: "1. Các trường hợp cần điều chỉnh",
-        description: [
+        intros: [
           "Doanh nghiệp phải thực hiện thủ tục điều chỉnh khi có một trong các thay đổi sau:",
+        ],
+        description: [
           "Thay đổi, bổ sung mục tiêu hoạt động của dự án",
           "Mở rộng hoặc thu hẹp quy mô sản xuất, kinh doanh",
           "Thay đổi công suất, sản lượng dự kiến",
@@ -1314,11 +1353,16 @@ export const SERVICE_DATA = [
     explains: [
       {
         name: "1. Các trường hợp cần thực hiện thủ tục",
+        intros: [
+          "Dự án đầu tư nước ngoài phải tiến hành điều chỉnh địa điểm thực hiện khi:",
+        ],
         description: [
           "Chuyển địa điểm dự án sang tỉnh/thành phố khác;",
           "Thay đổi địa chỉ trong cùng địa bàn hành chính;",
           "Chuyển dự án vào hoặc ra khỏi khu công nghiệp, khu chế xuất, khu kinh tế;",
           "Điều chỉnh diện tích đất, mặt bằng sử dụng cho dự án.",
+        ],
+        lastIntro: [
           "Việc thay đổi địa điểm khi chưa hoàn tất thủ tục pháp lý có thể dẫn đến xử phạt vi phạm hành chính hoặc ảnh hưởng đến tính hợp pháp của dự án.",
         ],
       },
@@ -1434,43 +1478,43 @@ export const SERVICE_DATA = [
           {
             name: "Hướng dẫn chuẩn bị hồ sơ pháp lý",
             items: [
-              "- PGU hỗ trợ khách hàng chuẩn bị đầy đủ và đúng quy định các tài liệu cần thiết, bao gồm:",
+              "PGU hỗ trợ khách hàng chuẩn bị đầy đủ và đúng quy định các tài liệu cần thiết, bao gồm:",
               "- Hồ sơ pháp lý của nhà đầu tư;",
               "- Tài liệu chứng minh năng lực tài chính;",
               "- Tài liệu chứng minh việc góp vốn thực tế;",
               "- Báo cáo tình hình thực hiện dự án.",
-              "- Việc chuẩn bị hồ sơ chính xác ngay từ đầu giúp tăng khả năng được chấp thuận, tiết kiệm thời gian và hạn chế tối đa việc sửa đổi, bổ sung nhiều lần.",
+              "Việc chuẩn bị hồ sơ chính xác ngay từ đầu giúp tăng khả năng được chấp thuận, tiết kiệm thời gian và hạn chế tối đa việc sửa đổi, bổ sung nhiều lần.",
             ],
           },
           {
             name: "Thực hiện thủ tục điều chỉnh Giấy chứng nhận đăng ký đầu tư (IRC)",
             items: [
-              "- PGU đại diện khách hàng thực hiện toàn bộ thủ tục điều chỉnh IRC liên quan đến:",
+              "PGU đại diện khách hàng thực hiện toàn bộ thủ tục điều chỉnh IRC liên quan đến:",
               "- Thay đổi tổng vốn đầu tư;",
               "- Thay đổi vốn góp thực hiện dự án;",
               "- Điều chỉnh tiến độ góp vốn (nếu có).",
-              "- Phạm vi công việc bao gồm:",
+              "Phạm vi công việc bao gồm:",
               "- Soạn thảo và hoàn thiện hồ sơ;",
               "- Đại diện theo ủy quyền nộp và nhận kết quả;",
               "- Làm việc, giải trình với cơ quan có thẩm quyền;",
               "- Theo dõi và xử lý các yêu cầu phát sinh.",
-              "- Thủ tục được thực hiện tại Sở Tài chính hoặc Ban Quản lý Khu công nghiệp/Khu chế xuất/Khu kinh tế tùy theo địa điểm triển khai dự án.",
+              "Thủ tục được thực hiện tại Sở Tài chính hoặc Ban Quản lý Khu công nghiệp/Khu chế xuất/Khu kinh tế tùy theo địa điểm triển khai dự án.",
             ],
           },
           {
             name: "Thực hiện thủ tục điều chỉnh Giấy chứng nhận đăng ký doanh nghiệp (ERC)",
             items: [
-              "- Trường hợp việc điều chỉnh vốn đầu tư làm thay đổi vốn điều lệ, PGU đồng thời thực hiện thủ tục điều chỉnh ERC, bao gồm:",
+              "Trường hợp việc điều chỉnh vốn đầu tư làm thay đổi vốn điều lệ, PGU đồng thời thực hiện thủ tục điều chỉnh ERC, bao gồm:",
               "- Soạn thảo hồ sơ thay đổi vốn điều lệ;",
               "- Đại diện nộp hồ sơ tại Phòng Đăng ký kinh doanh;",
               "- Nhận kết quả và bàn giao hồ sơ hoàn chỉnh cho doanh nghiệp.",
-              "- Thủ tục được thực hiện tại Phòng Đăng ký kinh doanh - Sở Tài chính nơi doanh nghiệp đặt trụ sở chính.",
+              "Thủ tục được thực hiện tại Phòng Đăng ký kinh doanh - Sở Tài chính nơi doanh nghiệp đặt trụ sở chính.",
             ],
           },
           {
             name: "Hỗ trợ làm việc với cơ quan thanh tra",
             items: [
-              "- Trong trường hợp phát sinh kiểm tra, thanh tra liên quan đến việc góp vốn, chậm góp vốn hoặc điều chỉnh dự án, PGU:",
+              "Trong trường hợp phát sinh kiểm tra, thanh tra liên quan đến việc góp vốn, chậm góp vốn hoặc điều chỉnh dự án, PGU:",
               "- Hỗ trợ doanh nghiệp chuẩn bị tài liệu, hồ sơ giải trình;",
               "- Tham gia làm việc cùng Thanh tra Sở Tài chính;",
               "- Tư vấn phương án xử lý nhằm hạn chế rủi ro xử phạt (nếu có).",
@@ -1479,7 +1523,7 @@ export const SERVICE_DATA = [
           {
             name: "Hỗ trợ thực hiện nghĩa vụ báo cáo dự án đầu tư",
             items: [
-              "- Nếu nhà đầu tư chưa thực hiện đầy đủ nghĩa vụ báo cáo hoạt động đầu tư theo quy định, PGU sẽ:",
+              "Nếu nhà đầu tư chưa thực hiện đầy đủ nghĩa vụ báo cáo hoạt động đầu tư theo quy định, PGU sẽ:",
               "- Rà soát tình trạng tuân thủ;",
               "- Hỗ trợ lập và nộp báo cáo bổ sung theo yêu cầu của cơ quan quản lý;",
               "- Tư vấn thiết lập quy trình báo cáo định kỳ nhằm tránh vi phạm trong tương lai.",
@@ -2255,43 +2299,14 @@ export const SERVICE_DATA = [
           },
         ],
       },
-      {
-        name: "2. Phạm vi dịch vụ cung cấp",
-        description: [
-          "Dịch vụ chấm dứt dự án đầu tư của PGU được triển khai theo từng giai đoạn cụ thể, bảo đảm nhà đầu tư hoàn tất đầy đủ các thủ tục pháp lý, tài chính và nghĩa vụ liên quan một cách chặt chẽ, đúng quy định.",
-        ],
-        scopes: [
-          {
-            name: "Tư vấn và đánh giá ban đầu",
-            items: [
-              "- Rà soát hồ sơ dự án, phân tích căn cứ pháp lý để xác định điều kiện chấm dứt phù hợp.",
-              "- Đánh giá các rủi ro có thể phát sinh về thuế, tài chính, lao động, đất đai và nghĩa vụ với đối tác.",
-              "- Xây dựng kế hoạch thực hiện và lộ trình thủ tục chấm dứt dự án.",
-            ],
-          },
-          {
-            name: "Chuẩn bị hồ sơ và thực hiện thủ tục hành chính",
-            items: [
-              "- Soạn thảo và hoàn thiện hồ sơ chấm dứt dự án theo quy định pháp luật.",
-              "- Đại diện nhà đầu tư làm việc với cơ quan đăng ký đầu tư và các cơ quan liên quan.",
-              "- Theo dõi tiến độ xử lý hồ sơ và bàn giao kết quả cho khách hàng.",
-            ],
-          },
-          {
-            name: "Xử lý các vấn đề liên quan sau chấm dứt",
-            items: [
-              "- Tư vấn quyết toán thuế, xử lý công nợ và các nghĩa vụ tài chính còn tồn đọng.",
-              "- Hướng dẫn thanh lý hoặc chuyển nhượng tài sản theo quy định pháp luật.",
-              "- Hỗ trợ thực hiện thủ tục liên quan đến người lao động và các nghĩa vụ pháp lý khác.",
-            ],
-          },
-        ],
-      },
     ],
 
     processes: [
       {
-        title: "3. Quy trình thực hiện dịch vụ tại PGU",
+        title: "2. Quy trình thực hiện dịch vụ tại PGU",
+        intros: [
+          "Dịch vụ chấm dứt dự án đầu tư của PGU được triển khai theo từng giai đoạn cụ thể, bảo đảm nhà đầu tư hoàn tất đầy đủ các thủ tục pháp lý, tài chính và nghĩa vụ liên quan một cách chặt chẽ, đúng quy định.",
+        ],
         steps: [
           {
             num: "01",
@@ -2313,7 +2328,7 @@ export const SERVICE_DATA = [
     ],
 
     reasons: {
-      title: "4. Lý do nhà đầu tư nên chọn PGU",
+      title: "3. Lý do nhà đầu tư nên chọn PGU",
       items: [
         "- Chuyên gia trong lĩnh vực đầu tư: PGU có đội ngũ luật sư am hiểu các quy định pháp luật liên quan đến việc chấm dứt hoạt động dự án đầu tư.",
         "- Rà soát nghĩa vụ pháp lý của dự án: Chúng tôi hỗ trợ kiểm tra tình trạng pháp lý của dự án và các nghĩa vụ liên quan trước khi thực hiện thủ tục chấm dứt.",
@@ -3386,13 +3401,15 @@ export const SERVICE_DATA = [
     explains: [
       {
         name: "1. Thay đổi loại hình doanh nghiệp là gì?",
-        description: [
+        intros: [
           "Thay đổi loại hình doanh nghiệp là việc chuyển đổi hình thức pháp lý của doanh nghiệp. Các hình thức chuyển đổi bao gồm:",
-          "- Chuyển đổi công ty TNHH thành công ty cổ phần",
-          "- Chuyển đổi công ty cổ phần thành công ty TNHH (một thành viên hoặc hai thành viên trở lên)",
-          "- Chuyển đổi công ty TNHH một thành viên thành công ty TNHH hai thành viên trở lên",
-          "- Chuyển đổi công ty TNHH hai thành viên trở lên thành công ty TNHH một thành viên",
-          "- Chuyển đổi doanh nghiệp tư nhân",
+        ],
+        description: [
+          "Chuyển đổi công ty TNHH thành công ty cổ phần",
+          "Chuyển đổi công ty cổ phần thành công ty TNHH (một thành viên hoặc hai thành viên trở lên)",
+          "Chuyển đổi công ty TNHH một thành viên thành công ty TNHH hai thành viên trở lên",
+          "Chuyển đổi công ty TNHH hai thành viên trở lên thành công ty TNHH một thành viên",
+          "Chuyển đổi doanh nghiệp tư nhân",
         ],
       },
 
@@ -3678,8 +3695,10 @@ export const SERVICE_DATA = [
 
     reasons: {
       title: "4. Lợi ích khi sử dụng dịch vụ",
-      items: [
+      intros: [
         "Lựa chọn Luật Phúc Gia Uy mang lại nhiều lợi ích cho doanh nghiệp: ",
+      ],
+      items: [
         "- Tiết kiệm thời gian và chi phí thực hiện thủ tục",
         "- Hồ sơ được chuẩn bị đầy đủ và chính xác",
         "- Đảm bảo tuân thủ quy định pháp luật",
@@ -3921,14 +3940,18 @@ export const SERVICE_DATA = [
       },
       {
         name: "2. Đối tượng cần thực hiện thủ tục",
-        description: [
+        intros: [
           "Dự án, công trình quy định tại Phụ lục V ban hành kèm theo Nghị định 50/2024/NĐ-CP khi xây dựng mới hoặc cải tạo, thay đổi tính chất sử dụng dẫn đến các trường hợp như:",
+        ],
+        description: [
           "Tăng quy mô về số tầng hoặc diện tích khoang cháy",
           "Thay đổi chủng loại hoặc vị trí thang bộ thoát nạn",
           "Giảm số lượng lối thoát nạn của tầng, khoang cháy hoặc công trình",
           "Lắp mới hoặc thay thế hệ thống báo cháy",
           "Lắp mới hoặc thay thế hệ thống chữa cháy",
           "Thay đổi công năng làm tăng yêu cầu an toàn cháy đối với công trình",
+        ],
+        lastIntro: [
           "Phương tiện giao thông cơ giới có yêu cầu đặc biệt về bảo đảm an toàn PCCC khi chế tạo mới hoặc hoán cải ảnh hưởng đến các yêu cầu an toàn theo quy định tại Nghị định 136/2020/NĐ-CP.",
         ],
       },
@@ -3974,9 +3997,11 @@ export const SERVICE_DATA = [
 
     reasons: {
       title: "4. Lợi ích khi lựa chọn dịch vụ tại PGU",
-      items: [
+      intros: [
         "Giấy phép Phòng cháy chữa cháy (PCCC) là một điều kiện pháp lý bắt buộc đối với nhiều công trình, cơ sở sản xuất, kinh doanh. Tuy nhiên, quá trình xin cấp phép thường phức tạp, đòi hỏi hồ sơ kỹ thuật chuyên sâu và sự phối hợp chặt chẽ với cơ quan chức năng.",
         "Công ty Luật TNHH Phúc Gia Uy & Cộng sự mang đến giải pháp pháp lý toàn diện, hỗ trợ doanh nghiệp từ khâu chuẩn bị đến khi hoàn tất cấp phép, với những lợi ích thiết thực sau:",
+      ],
+      items: [
         "Hiểu rõ chuyên môn - xử lý hồ sơ hiệu quả: Hồ sơ PCCC yêu cầu bản vẽ kỹ thuật, thuyết minh biện pháp phòng cháy, phương án thoát nạn, phương tiện chữa cháy, và nhiều tài liệu kỹ thuật khác. Phúc Gia Uy & Cộng sự phối hợp chặt chẽ với đơn vị thiết kế, thi công để chuẩn bị đầy đủ và chính xác từng hạng mục hồ sơ, giúp tăng tỷ lệ phê duyệt ngay từ lần đầu.",
         "Tiết kiệm thời gian - giảm áp lực thủ tục: Thay vì doanh nghiệp phải trực tiếp đi lại, nộp hồ sơ, bổ sung và giải trình, chúng tôi sẽ đại diện toàn bộ quá trình làm việc với cơ quan PCCC, giúp tiết kiệm thời gian, công sức và tránh vướng mắc do thiếu kinh nghiệm thực hiện",
         "Chi phí rõ ràng - dịch vụ trọn gói: Chúng tôi báo giá minh bạch, chi tiết theo từng loại công trình hoặc hoạt động, ký kết hợp đồng dịch vụ rõ ràng, cam kết không phát sinh chi phí ngoài thỏa thuận.",
@@ -4060,9 +4085,11 @@ export const SERVICE_DATA = [
 
     reasons: {
       title: "3. Lý do chọn dịch vụ Hoàn công nhà xưởng tại PGU",
-      items: [
+      intros: [
         "Thủ tục hoàn công nhà xưởng là bước bắt buộc để công trình được pháp lý công nhận và đảm bảo quyền lợi cho doanh nghiệp trong quá trình vận hành, chuyển nhượng hoặc đầu tư mở rộng. Với đặc thù pháp lý và kỹ thuật phức tạp, việc lựa chọn một đơn vị có kinh nghiệm và chuyên môn là yếu tố then chốt để thủ tục diễn ra thuận lợi, nhanh chóng",
         "Công ty Luật TNHH Phúc Gia Uy & Cộng sự là đơn vị tư vấn pháp lý uy tín, sẵn sàng đồng hành cùng doanh nghiệp với những lợi ích vượt trội:",
+      ],
+      items: [
         "Kinh nghiệm thực hiện đa dạng công trình: Chúng tôi đã xử lý hoàn công cho nhiều loại hình nhà xưởng: từ nhà máy sản xuất, kho bãi, xưởng cơ khí, đến các công trình xây dựng hạ tầng công nghiệp - mỗi hồ sơ đều được xử lý bài bản, đúng quy định pháp luật hiện hành.",
         "Hồ sơ đầy đủ, đúng kỹ thuật - đúng pháp lý: Đội ngũ chuyên viên của chúng tôi phối hợp chặt chẽ với đơn vị thiết kế, thi công và cơ quan chức năng để soạn thảo, kiểm tra và hoàn thiện hồ sơ đầy đủ, đúng mẫu biểu, đảm bảo tính pháp lý và kỹ thuật.",
         "Tiết kiệm thời gian, không phát sinh rắc rối: Doanh nghiệp không cần trực tiếp đi lại, làm việc với các bên liên quan. PGU đại diện trọn gói: từ nộp hồ sơ, bổ sung tài liệu đến theo dõi và xử lý các vấn đề phát sinh, giúp thủ tục hoàn công diễn ra nhanh gọn và hiệu quả.",
@@ -4251,7 +4278,7 @@ export const SERVICE_DATA = [
       {
         name: "1. Visa và thẻ tạm trú là gì?",
         description: [
-          "Visa (hay còn gọi là thị thực):\n - Bao gồm visa xuất cảnh cho người Việt Nam ra nước ngoài và visa nhập cảnh cho người nước ngoài vào Việt Nam\n - Có thời hạn tối đa 5 năm và mỗi visa sẽ được dán vào từng trang của sổ hộ chiếu (passport)",
+          "Visa (hay còn gọi là thị thực):\n - Bao gồm visa xuất cảnh cho người Việt Nam ra nước ngoài và visa nhập cảnh cho người nước ngoài vào Việt Nam\n - Có thời hạn tối đa 5 năm và mỗi visa thường sẽ được dán vào từng trang của sổ hộ chiếu (passport)",
           "Thẻ tạm trú:\n - Được xem như visa dài hạn và có giá trị thay thế visa\n - Có thời hạn tối đa 2 năm tùy vào từng loại thẻ tạm trú, nhưng phải ngắn hơn tối thiểu 30 ngày so với thời hạn còn lại trên sổ hộ chiếu",
         ],
       },
@@ -4463,9 +4490,11 @@ export const SERVICE_DATA = [
     explains: [
       {
         name: "1. Trang thiết bị y tế là gì?",
-        description: [
+        intros: [
           "Trang thiết bị y tế là các loại thiết bị, vật tư cấy ghép, dụng cụ, vật liệu, thuốc thử và chất hiệu chuẩn in vitro, phần mềm (software) đáp ứng đồng thời các yêu cầu sau đây:",
-          "Được sử dụng riêng lẻ hay phối hợp với nhau theo chỉ định của chủ sở hữu thiết bị y tế để phục vụ cho con người nhằm một hoặc nhiều mục đích.",
+        ],
+        description: [
+          "Được sử dụng riêng lẻ hay phối hợp với nhau theo chỉ định của chủ sở hữu thiết bị y tế để phục vụ cho con người nhằm một hoặc nhiều mục đích.",
           "Không sử dụng cơ chế dược lý, miễn dịch hoặc chuyển hóa trong hoặc trên cơ thể người hoặc nếu có sử dụng các cơ chế này thì chỉ mang tính chất hỗ trợ để đạt mục đích theo quy định pháp luật.",
         ],
       },
@@ -4489,8 +4518,6 @@ export const SERVICE_DATA = [
     ],
 
     processes: [],
-
-    reasons: {},
 
     lastPara: [
       "Nếu Quý khách có nhu cầu tư vấn hoặc thực hiện thủ tục pháp lý liên quan đến nhập khẩu thiết bị, vật tư y tế, vui lòng liên hệ Công ty Luật TNHH Phúc Gia Uy & Cộng sự để được đội ngũ luật sư và chuyên viên của chúng tôi hỗ trợ nhanh chóng, đúng quy định và hiệu quả. Chúng tôi luôn sẵn sàng đồng hành cùng doanh nghiệp trong quá trình thực hiện thủ tục pháp lý và triển khai hoạt động nhập khẩu tại Việt Nam.",

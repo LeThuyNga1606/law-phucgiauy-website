@@ -7,7 +7,7 @@ import { SERVICE_GROUP } from "../../data/serviceGroup";
 export default function ServicesCategory() {
   const { t } = useTranslation();
   const { category, miniCategory } = useParams();
-
+  window.scrollTo(0, 0);
   let current = null;
   if (miniCategory) {
     current = SERVICE_GROUP.find((g) => g.id === miniCategory);

@@ -4,6 +4,7 @@ import "../../styles/serviceDetail.css";
 import { SERVICE_DATA } from "../../data/services";
 import LogoSlogan from "../../assets/images/background_aboutUs.png";
 import { getPublishedPosts } from "../../services/news";
+import { bold } from "@cloudinary/url-gen/qualifiers/fontWeight";
 
 export default function ServiceDetail() {
   const { category, miniCategory, slug } = useParams();
@@ -75,6 +76,7 @@ export default function ServiceDetail() {
               <span className="sd-label-dot" style={{ background: color }} />
               Tổng quan dịch vụ
             </div>
+
             {current?.descriptions?.length > 0 && (
               <div className="sd-desc">
                 {current.descriptions.map((para, i) => (
@@ -96,6 +98,14 @@ export default function ServiceDetail() {
                     />
                     {explain.name}
                   </div>
+
+                  {explain?.intros?.length > 0 && (
+                    <div className="sd-desc">
+                      {explain.intros.map((para) => (
+                        <p key={para}>{para}</p>
+                      ))}
+                    </div>
+                  )}
                   <div className="sd-scope-grid">
                     {explain?.description?.map((item, i) => (
                       <div>
@@ -146,6 +156,13 @@ export default function ServiceDetail() {
                       </section>
                     )}
                   </div>
+                  {explain?.lastIntro?.length > 0 && (
+                    <div className="sd-desc">
+                      {explain.lastIntro.map((para) => (
+                        <p key={para}>{para}</p>
+                      ))}
+                    </div>
+                  )}
                 </>
               ))}
             </section>
@@ -164,6 +181,14 @@ export default function ServiceDetail() {
                     />
                     {processGroup.title}
                   </div>
+
+                  {processGroup?.intros?.length > 0 && (
+                    <div className="sd-desc">
+                      {processGroup.intros.map((para) => (
+                        <p key={para}>{para}</p>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Steps */}
                   <div className="sd-steps">
@@ -227,6 +252,13 @@ export default function ServiceDetail() {
                 <span className="sd-label-dot" style={{ background: color }} />
                 {current.reasons.title}
               </div>
+              {current?.reasons?.intros?.length > 0 && (
+                <div className="sd-desc">
+                  {current.reasons.intros.map((para) => (
+                    <p key={para}>{para}</p>
+                  ))}
+                </div>
+              )}
               <div className="sd-scope-grid">
                 {current?.reasons?.items?.length > 0 &&
                   current.reasons.items.map((item, i) => (

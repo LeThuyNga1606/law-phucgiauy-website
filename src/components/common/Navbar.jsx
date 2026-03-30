@@ -431,11 +431,11 @@ const Navbar = () => {
               </a>
             </span>
             <span className="nav-topbar-item">
-              📍 Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP.
-              HCM
+              ⏰ {t("footer_contact_hours_value")}
             </span>
             <span className="nav-topbar-item">
-              ⏰ {t("footer_contact_hours_value")}
+              📍 Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP.
+              HCM
             </span>
           </div>
           <div className="nav-topbar-right">
@@ -531,6 +531,17 @@ const Navbar = () => {
               </li>
             ))}
           </ul>
+
+          {/* Search */}
+          {/* <form className="nav-search" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder="Search..."
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <button type="submit">🔍</button>
+          </form> */}
 
           {/* Hamburger */}
           <button
