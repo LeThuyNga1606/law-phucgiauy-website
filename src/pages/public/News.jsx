@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/news.css";
 
@@ -57,6 +57,7 @@ export default function News() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const gridRef = useRef(null);
+  const location = useLocation();
 
   // ── State ──────────────────────────────────────────────────────────────────
   const [activeCategory, setActiveCategory] = useState("all");
@@ -111,6 +112,13 @@ export default function News() {
     setSearchInput("");
     fetchPage(activeCategory, null);
   }, [activeCategory, fetchPage]);
+
+  // Đọc keyword từ URL khi vào trang
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const q = params.get("search");
+    if (q) setSearch(decodeURIComponent(q));
+  }, [location.search]);
 
   // ── Phân trang ────────────────────────────────────────────────────────────
   const handlePageChange = async (page) => {

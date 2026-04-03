@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
@@ -15,6 +15,17 @@ const Navbar = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState(() => localStorage.getItem("lang") || "vi");
+const navigate = useNavigate();
+const [keyword, setKeyword] = useState("");
+
+const handleSearch = (e) => {
+  e.preventDefault();
+  const q = keyword.trim();
+  if (!q) return;
+  navigate(`/tin-tuc?search=${encodeURIComponent(q)}`);
+  setKeyword("");
+  setMobileOpen(false);
+};
 
   // ─── NAV DATA ────────────────────────────────────────────────────────────────
   const NAV_ITEMS = [
@@ -533,15 +544,15 @@ const Navbar = () => {
           </ul>
 
           {/* Search */}
-          {/* <form className="nav-search" onSubmit={handleSearch}>
-            <input
-              type="text"
-              placeholder="Search..."
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-            />
-            <button type="submit">🔍</button>
-          </form> */}
+<form className="nav-search" onSubmit={handleSearch}>
+  <input
+    type="text"
+    placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
+    value={keyword}
+    onChange={(e) => setKeyword(e.target.value)}
+  />
+  <button type="submit">🔍</button>
+</form>
 
           {/* Hamburger */}
           <button
@@ -572,6 +583,15 @@ const Navbar = () => {
             ))}
           </div>
           <div className="mob-lang-divider" />
+          <form className="mob-search" onSubmit={handleSearch}>
+  <input
+    type="text"
+    placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
+    value={keyword}
+    onChange={(e) => setKeyword(e.target.value)}
+  />
+  <button type="submit">🔍</button>
+</form>
           {NAV_ITEMS.map((item) => (
             <div
               key={item.id}

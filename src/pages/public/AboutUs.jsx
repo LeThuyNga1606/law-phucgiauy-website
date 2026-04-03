@@ -9,9 +9,16 @@ import IconDauTu from "../../assets/images/icon_dau_tu_nuoc_ngoai.png";
 import IconDoanhNghiep from "../../assets/images/icon_doanh_nghiep.png";
 import IconGiayPhep from "../../assets/images/icon_giay_phep_con.png";
 
+import { getPublishedPosts } from "../../services/news";
+
 const AboutPage = () => {
   const [activeService, setActiveService] = useState(null);
   const { t } = useTranslation();
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    getPublishedPosts({ pageSize: 3 }).then(({ posts }) => setNews(posts));
+  }, []);
 
   const SERVICES = [
     {
@@ -48,30 +55,6 @@ const AboutPage = () => {
       color: "#A8171C",
       intro: t("about_service_license_item_1"),
       to: "/dich-vu/giay-phep",
-    },
-  ];
-
-  const NEWS = [
-    {
-      date: "15/02/2025",
-      category: t("about_news_1_category"),
-      title: t("about_news_1_title"),
-      excerpt: t("about_news_1_excerpt"),
-      slug: "thay-doi-luat-doanh-nghiep-2024",
-    },
-    {
-      date: "08/02/2025",
-      category: t("about_news_2_category"),
-      title: t("about_news_2_title"),
-      excerpt: t("about_news_2_excerpt"),
-      slug: "thanh-lap-cong-ty-fdi-viet-nam",
-    },
-    {
-      date: "01/02/2025",
-      category: t("about_news_3_category"),
-      title: t("about_news_3_title"),
-      excerpt: t("about_news_3_excerpt"),
-      slug: "giai-quyet-tranh-chap-dat-dai",
     },
   ];
 
@@ -150,28 +133,23 @@ const AboutPage = () => {
       </section>
 
       <section className="about-info">
-        <div className="about-info-inner-single">
-          <div className="about-intro-grid">
-            {/* Cột trái — 3 đoạn văn */}
-            <div
-              className="about-intro-content"
-              style={{ alignSelf: "center" }}
-            >
-              <p className="about-eyebrow about-eyebrow-dark">
-                <span className="about-eyebrow-line" />
-                {t("about_intro_eyebrow")}
-              </p>
-              <p className="about-intro-para">{t("about_intro_para_1")}</p>
-              <p className="about-intro-para">{t("about_intro_para_2")}</p>
-              <Link to="/lien-he" className="about-btn-red">
-                {t("about_intro_story")}
-              </Link>
-            </div>
+        <div className="about-intro-grid">
+          {/* Cột trái — 3 đoạn văn */}
+          <div className="about-intro-content" style={{ alignSelf: "center" }}>
+            <p className="about-eyebrow about-eyebrow-dark">
+              <span className="about-eyebrow-line" />
+              {t("about_intro_eyebrow")}
+            </p>
+            <p className="about-intro-para">{t("about_intro_para_1")}</p>
+            <p className="about-intro-para">{t("about_intro_para_2")}</p>
+            <Link to="/lien-he" className="about-btn-red">
+              {t("about_intro_story")}
+            </Link>
+          </div>
 
-            {/* Cột phải — 3 giá trị cốt lõi */}
-            <div className="about-intro-values">
-              <img src={LogoSlogan} alt="Core Values" />
-            </div>
+          {/* Cột phải — 3 giá trị cốt lõi */}
+          <div className="about-intro-values">
+            <img src={LogoSlogan} alt="Core Values" />
           </div>
         </div>
       </section>
@@ -191,38 +169,12 @@ const AboutPage = () => {
             </p>
           </div>
           <div className="about-services-grid">
-            {SERVICES.slice(0, 3).map((s, i) => (
+            {SERVICES.map((s, i) => (
               <div
                 key={i}
                 className={`about-service-card ${activeService === i ? "active" : ""}`}
                 style={{ "--accent": s.color }}
                 onMouseEnter={() => setActiveService(i)}
-                onMouseLeave={() => setActiveService(null)}
-              >
-                <div className="about-service-header">
-                  <div className="about-service-icon">
-                    <img src={s.img} alt={s.title} />
-                  </div>
-                  <h3
-                    className="about-service-title"
-                    style={{ color: s.color }}
-                  >
-                    {s.title}
-                  </h3>
-                </div>
-                <Link to={s.to} className="about-service-link">
-                  Xem Chi Tiết <span>→</span>
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="about-services-grid-bottom">
-            {SERVICES.slice(3, 5).map((s, i) => (
-              <div
-                key={i}
-                className={`about-service-card ${activeService === i + 3 ? "active" : ""}`}
-                style={{ "--accent": s.color }}
-                onMouseEnter={() => setActiveService(i + 3)}
                 onMouseLeave={() => setActiveService(null)}
               >
                 <div className="about-service-header">
@@ -264,21 +216,54 @@ const AboutPage = () => {
             </Link>
           </div>
           <div className="about-news-grid">
-            {NEWS.map((n, i) => (
-              <article key={i} className="about-news-card">
-                <div className="about-news-card-top">
-                  <span className="about-news-category">{n.category}</span>
-                  <span className="about-news-date">📅 {n.date}</span>
-                </div>
-                <Link to={"/tin-tuc/" + n.slug}>
-                  <h3 className="about-news-title">{n.title}</h3>
-                </Link>
-                <p className="about-news-excerpt">{n.excerpt}</p>
-                <Link to={"/tin-tuc/" + n.slug} className="about-news-link">
-                  {t("about_news_read_more")} <span>→</span>
-                </Link>
-              </article>
-            ))}
+            {news.length === 0
+              ? // Skeleton loading
+                Array.from({ length: 3 }).map((_, i) => (
+                  <div
+                    key={i}
+                    className="about-news-card"
+                    style={{ opacity: 0.5 }}
+                  >
+                    <div
+                      className="skeleton-line"
+                      style={{ width: "60%", marginBottom: 12 }}
+                    />
+                    <div
+                      className="skeleton-line"
+                      style={{ marginBottom: 8 }}
+                    />
+                    <div className="skeleton-line" style={{ width: "80%" }} />
+                  </div>
+                ))
+              : news.map((n, i) => {
+                  const formatDate = (val) => {
+                    if (!val) return "";
+                    const d = val?.toDate ? val.toDate() : new Date(val);
+                    return d.toLocaleDateString("vi-VN");
+                  };
+                  return (
+                    <article key={i} className="about-news-card">
+                      <div className="about-news-card-top">
+                        <span className="about-news-category">
+                          {n.categoryLabel}
+                        </span>
+                        <span className="about-news-date">
+                          📅 {formatDate(n.createdAt)}
+                        </span>
+                      </div>
+                      <Link to={`/tin-tuc/${n.slug}`}>
+                        <h3 className="about-news-title">{n.title}</h3>
+                      </Link>
+                      <p className="about-news-excerpt">{n.excerpt}</p>
+                      <Link
+                        to={`/tin-tuc/${n.slug}`}
+                        className="about-news-link"
+                      >
+                        {t("about_news_read_more")}
+                      </Link>
+                    </article>
+                  );
+                })}
           </div>
         </div>
       </section>

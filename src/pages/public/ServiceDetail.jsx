@@ -4,9 +4,10 @@ import "../../styles/serviceDetail.css";
 import { SERVICE_DATA } from "../../data/services";
 import LogoSlogan from "../../assets/images/background_aboutUs.png";
 import { getPublishedPosts } from "../../services/news";
-import { bold } from "@cloudinary/url-gen/qualifiers/fontWeight";
+import { useTranslation } from "react-i18next";
 
 export default function ServiceDetail() {
+  const { t } = useTranslation();
   const { category, miniCategory, slug } = useParams();
   const navigate = useNavigate(); // thêm
 
@@ -59,9 +60,9 @@ export default function ServiceDetail() {
         <div className="sd-hero-inner">
           <div className="sd-hero-left">
             <div className="sd-hero-badge" style={{ background: color }}>
-              {groupLabel}
+              {t(groupLabel)}
             </div>
-            <h1 className="sd-hero-title">{current?.label}</h1>
+            <h1 className="sd-hero-title">{t(current?.label)}</h1>
             {/* <p className="sd-hero-tagline">{current?.tagline}</p> */}
           </div>
         </div>
@@ -74,13 +75,13 @@ export default function ServiceDetail() {
           <section className="sd-section">
             <div className="sd-section-label" style={{ color }}>
               <span className="sd-label-dot" style={{ background: color }} />
-              Tổng quan dịch vụ
+              {t("service_overview")}
             </div>
 
             {current?.descriptions?.length > 0 && (
               <div className="sd-desc">
                 {current.descriptions.map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i}>{t(para)}</p>
                 ))}
               </div>
             )}
@@ -96,13 +97,13 @@ export default function ServiceDetail() {
                       className="sd-label-dot"
                       style={{ background: color }}
                     />
-                    {explain.name}
+                    {t(explain.name)}
                   </div>
 
                   {explain?.intros?.length > 0 && (
                     <div className="sd-desc">
                       {explain.intros.map((para) => (
-                        <p key={para}>{para}</p>
+                        <p key={para}>{t(para)}</p>
                       ))}
                     </div>
                   )}
@@ -116,7 +117,9 @@ export default function ServiceDetail() {
                           >
                             ✓
                           </div>
-                          <span style={{ whiteSpace: "pre-line" }}>{item}</span>
+                          <span style={{ whiteSpace: "pre-line" }}>
+                            {t(item)}
+                          </span>
                         </div>
                       </div>
                     ))}
@@ -127,7 +130,7 @@ export default function ServiceDetail() {
                           {explain.items.map((item, index) => (
                             <div key={index} className="sd-step">
                               <p key={index} className="sd-step-desc">
-                                {item}
+                                {t(item)}
                               </p>
                             </div>
                           ))}
@@ -141,12 +144,14 @@ export default function ServiceDetail() {
                           {explain.scopes.map((scope, index) => (
                             <div key={index} className="sd-step">
                               <div className="sd-step-body">
-                                <h4 className="sd-step-title">{scope.name}</h4>
+                                <h4 className="sd-step-title">
+                                  {t(scope.name)}
+                                </h4>
 
                                 {scope.items?.length > 0 &&
                                   scope.items.map((it, i) => (
                                     <p key={i} className="sd-step-desc">
-                                      {it}
+                                      {t(it)}
                                     </p>
                                   ))}
                               </div>
@@ -159,7 +164,7 @@ export default function ServiceDetail() {
                   {explain?.lastIntro?.length > 0 && (
                     <div className="sd-desc">
                       {explain.lastIntro.map((para) => (
-                        <p key={para}>{para}</p>
+                        <p key={para}>{t(para)}</p>
                       ))}
                     </div>
                   )}
@@ -179,13 +184,13 @@ export default function ServiceDetail() {
                       className="sd-label-dot"
                       style={{ background: color }}
                     />
-                    {processGroup.title}
+                    {t(processGroup.title)}
                   </div>
 
                   {processGroup?.intros?.length > 0 && (
                     <div className="sd-desc">
                       {processGroup.intros.map((para) => (
-                        <p key={para}>{para}</p>
+                        <p key={para}>{t(para)}</p>
                       ))}
                     </div>
                   )}
@@ -199,7 +204,7 @@ export default function ServiceDetail() {
                             className="sd-step-num"
                             style={{ color, borderColor: color }}
                           >
-                            {step.num}
+                            {t(step.num)}
                           </div>
 
                           {i < processGroup.steps.length - 1 && (
@@ -211,8 +216,8 @@ export default function ServiceDetail() {
                         </div>
 
                         <div className="sd-step-body">
-                          <h4 className="sd-step-title">{step.title}</h4>
-                          <p className="sd-step-desc">{step.desc}</p>
+                          <h4 className="sd-step-title">{t(step.title)}</h4>
+                          <p className="sd-step-desc">{t(step.desc)}</p>
                         </div>
                       </div>
                     ))}
@@ -250,12 +255,12 @@ export default function ServiceDetail() {
             <section className="sd-section">
               <div className="sd-section-label" style={{ color }}>
                 <span className="sd-label-dot" style={{ background: color }} />
-                {current.reasons.title}
+                {t(current.reasons.title)}
               </div>
               {current?.reasons?.intros?.length > 0 && (
                 <div className="sd-desc">
                   {current.reasons.intros.map((para) => (
-                    <p key={para}>{para}</p>
+                    <p key={para}>{t(para)}</p>
                   ))}
                 </div>
               )}
@@ -270,7 +275,9 @@ export default function ServiceDetail() {
                         >
                           ✓
                         </div>
-                        <span style={{ whiteSpace: "pre-line" }}>{item}</span>
+                        <span style={{ whiteSpace: "pre-line" }}>
+                          {t(item)}
+                        </span>
                       </div>
                     </div>
                   ))}
@@ -281,12 +288,12 @@ export default function ServiceDetail() {
           <section className="sd-section">
             <div className="sd-section-label" style={{ color }}>
               <span className="sd-label-dot" style={{ background: color }} />
-              Kết luận
+              {t("conclusion")}
             </div>
             {current?.lastPara?.length > 0 && (
               <div className="sd-desc">
                 {current.lastPara.map((para, i) => (
-                  <p key={i}>{para}</p>
+                  <p key={i}>{t(para)}</p>
                 ))}
               </div>
             )}
@@ -298,12 +305,12 @@ export default function ServiceDetail() {
           <div className="nd-sidebar-block">
             <div className="nd-sidebar-title">
               <span className="nd-sidebar-bar" />
-              Bài viết liên quan
+              {t("related_posts")}
             </div>
 
             {relatedPosts.length === 0 ? (
               <p style={{ fontSize: 13, color: "#9ca3af", padding: "8px 0" }}>
-                Chưa có bài viết nào.
+                {t("no_related_posts")}
               </p>
             ) : (
               relatedPosts.map((rp) => (

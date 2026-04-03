@@ -205,7 +205,7 @@ const Contact = () => {
               />
             </div>
             <a
-              href="https://maps.google.com/?q=17+Duong+so+4+Hiep+Binh+Thu+Duc+HCM"
+              href="https://maps.app.goo.gl/onrFkZPKdNAgHkHv7"
               target="_blank"
               rel="noreferrer"
               className="contact-directions-btn"

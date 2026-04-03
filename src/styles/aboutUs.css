@@ -359,6 +359,10 @@
   }
 }
 
+.about-info {
+  padding: 60px;
+}
+
 /* ══ SERVICES ══ */
 .about-services {
   background: var(--cream);
@@ -383,9 +387,10 @@
   flex-shrink: 0;
 }
 .about-services-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 👈 key */
+  gap: 18px;
 }
 /* Hàng 2 — 2 ô căn giữa đều kích thước */
 .about-services-grid-bottom {
@@ -401,14 +406,14 @@
 }
 .about-service-card {
   background: var(--white);
-  border: 1px solid var(--red);
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
   padding: 36px 28px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
   cursor: default;
-  margin-right: 20px;
-  margin-bottom: 20px;
+  width: calc(33.333% - 12px);
 }
 .about-service-card:hover,
 .about-service-card.active {
@@ -808,5 +813,8 @@
   }
   .about-services-grid-bottom {
     width: 100%;
+  }
+  .about-service-card {
+    width: calc(50% - 12px);
   }
 }

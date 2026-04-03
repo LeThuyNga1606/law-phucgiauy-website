@@ -28,7 +28,7 @@ export default function ServicesCategory() {
         <div className="sp-hero-inner">
           <div className="sp-hero-eyebrow">
             <span className="sp-eyebrow-line" />
-            Lĩnh vực hoạt động
+            {t("field_of_activity")}
             <span className="sp-eyebrow-line" />
           </div>
           <h1 className="sp-hero-title">{t(current.name)}</h1>
