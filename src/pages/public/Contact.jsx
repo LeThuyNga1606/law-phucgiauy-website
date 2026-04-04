@@ -155,7 +155,7 @@ const Contact = () => {
                   icon: "⊙",
                   title: t("about_contact_office_title"),
                   value:
-                    "Tầng trệt, Số 17 Đường số 4, Khu phố 5, Phường Hiệp Bình, Thành phố Hồ Chí Minh",
+                    "Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP. HCM",
                   sub: t("about_contact_office_sub"),
                   href: null,
                 },

@@ -7,6 +7,7 @@ import {
   getMostReadPosts,
   incrementViews,
 } from "../../services/news";
+import { getAllServicesAdmin } from "../../services/service";
 
 // ─── SKELETON ─────────────────────────────────────────────────────────────────
 function SkeletonDetail() {
@@ -84,6 +85,7 @@ export default function NewsDetail() {
   const [recent, setRecent] = useState([]);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [suggestedTags, setSuggestedTags] = useState([]);
 
   // ── Reading progress ─────────────────────────────────────────────────────
   const [progress, setProgress] = useState(0);
@@ -129,6 +131,40 @@ export default function NewsDetail() {
     });
   }, [slug]);
 
+  // ── Fetch suggested tags từ collection services ──────────────────────────────
+  useEffect(() => {
+    // Fetch suggested tags từ services
+    getAllServicesAdmin()
+      .then((services) => {
+        // Lấy tên dịch vụ làm tag gợi ý, loại trùng, sắp xếp theo alphabet
+        const tags = [
+          ...new Set(
+            services.flatMap((s) => [
+              s.name,
+              // Tách từng từ có nghĩa từ tên dịch vụ (>= 4 ký tự)
+              ...s.name.split(/[\s&,\/]+/).filter((w) => w.length >= 4),
+            ]),
+          ),
+        ].sort();
+        setSuggestedTags(tags);
+      })
+      .catch(() => {
+        // Fallback nếu Firestore lỗi
+        setSuggestedTags([
+          "Ly hôn",
+          "Đất đai",
+          "Doanh nghiệp",
+          "Hình sự",
+          "FDI",
+          "Thừa kế",
+          "Hợp đồng",
+          "Giấy phép",
+          "Bồi thường",
+          "Nhãn hiệu",
+        ]);
+      });
+  }, []);
+
   // ── Reading progress scroll ──────────────────────────────────────────────
   useEffect(() => {
     const onScroll = () => {
@@ -169,10 +205,10 @@ export default function NewsDetail() {
     return (
       <div className="nd-notfound">
         <div className="nd-notfound-icon">📰</div>
-        <h2>Bài viết không tồn tại</h2>
-        <p>Bài viết bạn tìm kiếm đã bị xóa hoặc đường dẫn không đúng.</p>
+        <h2>{t("post_not_exist")}</h2>
+        <p>{t("post_deleted_or_invalid")}</p>
         <Link to="/tin-tuc" className="nd-notfound-btn">
-          ← Quay lại danh sách tin tức
+          ← {t("back_to_news_list")}
         </Link>
       </div>
     );
@@ -197,7 +233,7 @@ export default function NewsDetail() {
           <div className="nd-hero-top">
             <span className="nd-cat-badge">{post.categoryLabel}</span>
             {post.featured && (
-              <span className="nd-featured-badge">⭐ Nổi bật</span>
+              <span className="nd-featured-badge">⭐ {t("highlighted")}</span>
             )}
           </div>
 
@@ -246,7 +282,7 @@ export default function NewsDetail() {
                   <circle cx="12" cy="12" r="10" />
                   <path d="M12 6v6l4 2" />
                 </svg>
-                {post.readTime} đọc
+                {post.readTime} {t("read")}
               </div>
               <div className="nd-meta-item">
                 <svg
@@ -260,7 +296,7 @@ export default function NewsDetail() {
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
                   <circle cx="12" cy="12" r="3" />
                 </svg>
-                {(post.views || 0).toLocaleString()} lượt xem
+                {(post.views || 0).toLocaleString()} {t("view")}
               </div>
             </div>
           </div>
@@ -288,7 +324,7 @@ export default function NewsDetail() {
 
           {/* Share */}
           <div className="nd-share">
-            <span className="nd-share-label">Chia sẻ bài viết:</span>
+            <span className="nd-share-label">{t("share_post")}:</span>
             <div className="nd-share-btns">
               <a
                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}
@@ -324,7 +360,7 @@ export default function NewsDetail() {
                   <rect x="9" y="9" width="13" height="13" rx="2" />
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
                 </svg>
-                Sao chép link
+                {t("copy_link")}
               </button>
             </div>
           </div>
@@ -335,7 +371,7 @@ export default function NewsDetail() {
               {post.author?.split(" ").pop()[0]}
             </div>
             <div className="nd-author-box-body">
-              <p className="nd-author-box-label">Tác giả</p>
+              <p className="nd-author-box-label">{t("author")}</p>
               <h4 className="nd-author-box-name">{post.author}</h4>
               <p className="nd-author-box-desc">
                 Luật sư chuyên về lĩnh vực {post.categoryLabel?.toLowerCase()}{" "}
@@ -351,7 +387,7 @@ export default function NewsDetail() {
             <div className="nd-related">
               <h3 className="nd-related-title">
                 <span className="nd-related-bar" />
-                Bài viết liên quan
+                {t("related_posts")}
               </h3>
               <div className="nd-related-grid">
                 {related.map((rp) => (
@@ -373,7 +409,9 @@ export default function NewsDetail() {
                       <div className="nd-related-meta">
                         <span>{formatDateShort(rp.createdAt)}</span>
                         <span>·</span>
-                        <span>{rp.readTime} đọc</span>
+                        <span>
+                          {rp.readTime} {t("read")}
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -389,7 +427,7 @@ export default function NewsDetail() {
           <div className="nd-sidebar-block">
             <div className="nd-sidebar-title">
               <span className="nd-sidebar-bar" />
-              Bài viết gần đây
+              {t("recent_posts")}
             </div>
             {recent.map((rp) => (
               <div
@@ -421,29 +459,21 @@ export default function NewsDetail() {
           <div className="nd-sidebar-block">
             <div className="nd-sidebar-title">
               <span className="nd-sidebar-bar" />
-              Chủ đề phổ biến
+              {t("popular_topics")}
             </div>
             <div className="nd-sidebar-tags">
-              {[
-                "Ly hôn",
-                "Đất đai",
-                "Doanh nghiệp",
-                "Hình sự",
-                "FDI",
-                "Thừa kế",
-                "Hợp đồng",
-                "Giấy phép",
-                "Bồi thường",
-                "Nhãn hiệu",
-              ].map((tag) => (
-                <span
-                  key={tag}
-                  className="nd-sidebar-tag"
-                  onClick={() => navigate(`/tin-tuc?search=${tag}`)}
-                >
-                  {tag}
-                </span>
-              ))}
+              {suggestedTags
+                .filter((t) => post.tags.includes(t))
+                .slice(0, 10)
+                .map((tag) => (
+                  <span
+                    key={tag}
+                    className="nd-sidebar-tag"
+                    onClick={() => navigate(`/tin-tuc?search=${tag}`)}
+                  >
+                    {tag}
+                  </span>
+                ))}
             </div>
           </div>
         </aside>

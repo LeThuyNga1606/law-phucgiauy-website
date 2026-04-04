@@ -15,17 +15,17 @@ const Navbar = () => {
   const location = useLocation();
   const { t, i18n } = useTranslation();
   const [lang, setLang] = useState(() => localStorage.getItem("lang") || "vi");
-const navigate = useNavigate();
-const [keyword, setKeyword] = useState("");
+  const navigate = useNavigate();
+  const [keyword, setKeyword] = useState("");
 
-const handleSearch = (e) => {
-  e.preventDefault();
-  const q = keyword.trim();
-  if (!q) return;
-  navigate(`/tin-tuc?search=${encodeURIComponent(q)}`);
-  setKeyword("");
-  setMobileOpen(false);
-};
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const q = keyword.trim();
+    if (!q) return;
+    navigate(`/tin-tuc?search=${encodeURIComponent(q)}`);
+    setKeyword("");
+    setMobileOpen(false);
+  };
 
   // ─── NAV DATA ────────────────────────────────────────────────────────────────
   const NAV_ITEMS = [
@@ -410,7 +410,12 @@ const handleSearch = (e) => {
       window.location.href = to;
     }
   };
-  const toggleMob = (id) => setMobOpenId((prev) => (prev === id ? null : id));
+  const toggleMob = (id) => {
+    setMobOpenId((prev) => (prev === id ? null : id));
+    if (to) {
+      window.location.href = to;
+    }
+  };
 
   const changeLanguage = (code) => {
     setLang(code);
@@ -442,11 +447,11 @@ const handleSearch = (e) => {
               </a>
             </span>
             <span className="nav-topbar-item">
-              ⏰ {t("footer_contact_hours_value")}
-            </span>
-            <span className="nav-topbar-item">
               📍 Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP.
               HCM
+            </span>
+            <span className="nav-topbar-item">
+              ⏰ {t("footer_contact_hours_value")}
             </span>
           </div>
           <div className="nav-topbar-right">
@@ -544,15 +549,15 @@ const handleSearch = (e) => {
           </ul>
 
           {/* Search */}
-<form className="nav-search" onSubmit={handleSearch}>
-  <input
-    type="text"
-    placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
-    value={keyword}
-    onChange={(e) => setKeyword(e.target.value)}
-  />
-  <button type="submit">🔍</button>
-</form>
+          <form className="nav-search" onSubmit={handleSearch}>
+            <input
+              type="text"
+              placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <button type="submit">🔍</button>
+          </form>
 
           {/* Hamburger */}
           <button
@@ -584,14 +589,14 @@ const handleSearch = (e) => {
           </div>
           <div className="mob-lang-divider" />
           <form className="mob-search" onSubmit={handleSearch}>
-  <input
-    type="text"
-    placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
-    value={keyword}
-    onChange={(e) => setKeyword(e.target.value)}
-  />
-  <button type="submit">🔍</button>
-</form>
+            <input
+              type="text"
+              placeholder={t("nav_search_placeholder") || "Tìm kiếm..."}
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+            />
+            <button type="submit">🔍</button>
+          </form>
           {NAV_ITEMS.map((item) => (
             <div
               key={item.id}

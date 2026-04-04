@@ -16,6 +16,7 @@ export default function AdminLayout({ children, user }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobOpenId, setMobOpenId] = useState(null);
   const [openId, setOpenId] = useState(null);
+  window.scrollTo(0, 0);
 
   // Đóng dropdown khi click ngoài
   useEffect(() => {

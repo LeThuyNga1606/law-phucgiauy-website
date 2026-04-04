@@ -144,7 +144,9 @@ export default function ServicesCategory() {
                   <h3 className="sp-card-name">{t(svc.name)}</h3>
                   <p className="sp-card-desc">{t(svc.desc)}</p>
                   <div className="sp-card-footer">
-                    <span className="sp-card-cta">{t("Xem chi tiết")}</span>
+                    <span className="sp-card-cta">
+                      {t("about_service_view_details")}
+                    </span>
                     <div className="sp-card-bar" />
                   </div>
                 </Link>

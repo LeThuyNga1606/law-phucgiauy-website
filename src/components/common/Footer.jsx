@@ -55,7 +55,7 @@ const Footer = () => {
   const CERTIFICATIONS = [
     t("footer_cert_tax"),
     t("footer_cert_license"),
-    t("footer_cert_date"),
+    // t("footer_cert_date"),
     t("footer_cert_issued"),
   ];
 

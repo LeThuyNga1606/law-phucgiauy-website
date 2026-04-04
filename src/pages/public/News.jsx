@@ -177,10 +177,7 @@ export default function News() {
         <div className="news-hero-grid" />
         <div className="news-hero-content">
           <h1 className="news-hero-title">{t("about_news_eyebrow")}</h1>
-          <p className="news-hero-desc">
-            Cập nhật thông tin pháp lý mới nhất, hướng dẫn thủ tục và phân tích
-            chuyên sâu từ đội ngũ luật sư Phúc Gia Uy.
-          </p>
+          <p className="news-hero-desc">{t("news_hero_desc")}</p>
 
           <form className="news-hero-search" onSubmit={handleSearch}>
             <div className="news-hero-search-wrap">
@@ -217,19 +214,19 @@ export default function News() {
               )}
             </div>
             <button type="submit" className="news-hero-search-btn">
-              Tìm kiếm
+              {t("search")}
             </button>
           </form>
 
           <div className="news-hero-stats">
             <div className="news-hero-stat">
               <strong>{CATEGORIES.length - 1}</strong>
-              <span>Chuyên mục</span>
+              <span>{t("section")}</span>
             </div>
             <div className="news-hero-stat-divider" />
             <div className="news-hero-stat">
-              <strong>Hàng tuần</strong>
-              <span>Cập nhật</span>
+              <strong>{t("weekly")}</strong>
+              <span>{t("update")}</span>
             </div>
           </div>
         </div>
@@ -260,7 +257,9 @@ export default function News() {
                 <div className="news-hero-card-meta">
                   <span>{formatDate(featuredPosts[0].createdAt)}</span>
                   <span>·</span>
-                  <span>{featuredPosts[0].readTime} đọc</span>
+                  <span>
+                    {featuredPosts[0].readTime} {t("read")}
+                  </span>
                 </div>
               </div>
             </div>
@@ -284,8 +283,8 @@ export default function News() {
           </div>
           {search && (
             <div className="news-search-result-info">
-              Tìm thấy <strong>{displayed.length}</strong> kết quả cho "
-              <em>{search}</em>"
+              {t("search_results_found")} <strong>{displayed.length}</strong>{" "}
+              {t("search_results_for")} "<em>{search}</em>"
               <button
                 onClick={() => {
                   setSearch("");
@@ -293,7 +292,7 @@ export default function News() {
                 }}
                 className="news-clear-search"
               >
-                Xóa ✕
+                {t("delete")} ✕
               </button>
             </div>
           )}
@@ -312,8 +311,8 @@ export default function News() {
           ) : displayed.length === 0 ? (
             <div className="news-empty">
               <div className="news-empty-icon">🔍</div>
-              <h3>Không tìm thấy bài viết</h3>
-              <p>Thử tìm kiếm với từ khóa khác hoặc chọn chuyên mục khác.</p>
+              <h3>{t("not_found")}</h3>
+              <p>{t("try_different_keyword")}</p>
               <button
                 onClick={() => {
                   setSearch("");
@@ -322,7 +321,7 @@ export default function News() {
                 }}
                 className="news-empty-reset"
               >
-                Xem tất cả bài viết
+                {t("view_all_posts")}
               </button>
             </div>
           ) : (
@@ -344,7 +343,9 @@ export default function News() {
                         {post.categoryLabel}
                       </span>
                       {post.featured && (
-                        <span className="news-card-featured">Nổi bật</span>
+                        <span className="news-card-featured">
+                          {t("highlighted")}
+                        </span>
                       )}
                     </div>
 
@@ -355,7 +356,7 @@ export default function News() {
                         </span>
                         <span className="news-card-dot">·</span>
                         <span className="news-card-read">
-                          {post.readTime} đọc
+                          {post.readTime} {t("read")}
                         </span>
                       </div>
                       <h3 className="news-card-title">{post.title}</h3>
@@ -404,7 +405,7 @@ export default function News() {
                     disabled={currentPage === 1}
                     onClick={() => handlePageChange(currentPage - 1)}
                   >
-                    ← Trước
+                    ← {t("before")}
                   </button>
                   <div className="news-page-numbers">
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map(
@@ -440,7 +441,7 @@ export default function News() {
                     disabled={!hasMore && currentPage === totalPages}
                     onClick={() => handlePageChange(currentPage + 1)}
                   >
-                    Tiếp →
+                    {t("after")} →
                   </button>
                 </div>
               )}
@@ -454,7 +455,7 @@ export default function News() {
           <div className="news-sidebar-block">
             <div className="news-sidebar-title">
               <span className="news-sidebar-title-bar" />
-              Bài đọc nhiều nhất
+              {t("most_read")}
             </div>
             <div className="news-sidebar-most-read">
               {loadingSidebar
@@ -490,7 +491,7 @@ export default function News() {
                           <span>{formatDate(post.createdAt)}</span>
                           <span>·</span>
                           <span>
-                            {(post.views || 0).toLocaleString()} lượt xem
+                            {(post.views || 0).toLocaleString()} {t("view")}
                           </span>
                         </div>
                       </div>
@@ -503,7 +504,7 @@ export default function News() {
           <div className="news-sidebar-block">
             <div className="news-sidebar-title">
               <span className="news-sidebar-title-bar" />
-              Bài viết nổi bật
+              {t("featured-post")}
             </div>
             <div className="news-sidebar-featured">
               {loadingSidebar
@@ -547,7 +548,7 @@ export default function News() {
           <div className="news-sidebar-block">
             <div className="news-sidebar-title">
               <span className="news-sidebar-title-bar" />
-              Chuyên mục
+              {t("section")}
             </div>
             <div className="news-sidebar-cats">
               {CATEGORIES.filter((c) => c.key !== "all").map((cat) => (
