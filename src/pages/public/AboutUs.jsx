@@ -142,7 +142,8 @@ const AboutPage = () => {
             </p>
             <p className="about-intro-para">{t("about_intro_para_1")}</p>
             <p className="about-intro-para">{t("about_intro_para_2")}</p>
-            <Link to="/lien-he" className="about-btn-red">
+            <p className="about-intro-para">{t("about_intro_para_3")}</p>
+            <Link to="/gioi-thieu" className="about-btn-red">
               {t("about_intro_story")}
             </Link>
           </div>
@@ -189,7 +190,7 @@ const AboutPage = () => {
                   </h3>
                 </div>
                 <Link to={s.to} className="about-service-link">
-                  Xem Chi Tiết <span>→</span>
+                  {t("about_service_detail")} <span>→</span>
                 </Link>
               </div>
             ))}

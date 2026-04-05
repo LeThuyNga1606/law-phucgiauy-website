@@ -109,7 +109,7 @@
   flex-shrink: 0;
 }
 .nav-logo-emblem {
-  width: 100px;
+  width: 140px;
   height: 70px;
   /* background: var(--red); */
   display: flex;
@@ -847,8 +847,9 @@
   outline: none;
   font-size: 13px;
   color: #1a1a1a;
-  width: 160px;
+  width: 100%;
   padding: 7px 0;
+  min-width: 0;
 }
 
 .nav-search input::placeholder {

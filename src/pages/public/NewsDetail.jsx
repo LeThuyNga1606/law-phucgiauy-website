@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import "../../styles/newsDetail.css";
 import {
   getPostBySlug,
@@ -75,6 +76,7 @@ function SkeletonDetail() {
 // ─── COMPONENT ────────────────────────────────────────────────────────────────
 export default function NewsDetail() {
   const { slug } = useParams();
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const articleRef = useRef(null);
   const viewedRef = useRef(false);

@@ -1,10 +1,10 @@
-import '../../styles/loading.css';
+import "../../styles/loading.css";
 
-const Loading = ({ text = 'Đang tải...' }) => {
+const Loading = ({ text = "Loading..." }) => {
   return (
-    <div className='loading-wrapper'>
-      <div className='loading-spinner' />
-      <p className='loading-text'>{text}</p>
+    <div className="loading-wrapper">
+      <div className="loading-spinner" />
+      <p className="loading-text">{text}</p>
     </div>
   );
 };

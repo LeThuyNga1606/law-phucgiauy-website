@@ -447,8 +447,7 @@ const Navbar = () => {
               </a>
             </span>
             <span className="nav-topbar-item">
-              📍 Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP.
-              HCM
+              📍 {t("footer_contact_office_value")}
             </span>
             <span className="nav-topbar-item">
               ⏰ {t("footer_contact_hours_value")}
