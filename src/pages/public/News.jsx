@@ -195,7 +195,7 @@ export default function News() {
               </svg>
               <input
                 type="text"
-                placeholder="Tìm kiếm bài viết, chủ đề pháp lý..."
+                placeholder={t("search_placeholder")}
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
                 className="news-hero-search-input"

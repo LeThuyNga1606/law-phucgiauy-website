@@ -119,7 +119,7 @@
 }
 .nav-logo-emblem::after {
   content: "";
-  background: url("../assets/images/logo.jpg") no-repeat center center;
+  background: url("../assets/images/logo.png") no-repeat center center;
   background-size: contain;
   width: 100%;
   height: 100%;

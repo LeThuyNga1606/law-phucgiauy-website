@@ -447,10 +447,10 @@ const Navbar = () => {
               </a>
             </span>
             <span className="nav-topbar-item">
-              📍 {t("footer_contact_office_value")}
+              ⏰ {t("footer_contact_hours_value")}
             </span>
             <span className="nav-topbar-item">
-              ⏰ {t("footer_contact_hours_value")}
+              📍 {t("footer_contact_office_value")}
             </span>
           </div>
           <div className="nav-topbar-right">

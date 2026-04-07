@@ -154,8 +154,7 @@ const Contact = () => {
                 {
                   icon: "⊙",
                   title: t("about_contact_office_title"),
-                  value:
-                    "Số 17, Đường số 4, Khu phố 5, P. Hiệp Bình Chánh, Thủ Đức, TP. HCM",
+                  value: t("footer_contact_office_value"),
                   sub: t("about_contact_office_sub"),
                   href: null,
                 },
@@ -210,7 +209,7 @@ const Contact = () => {
               rel="noreferrer"
               className="contact-directions-btn"
             >
-              <span>⊙</span> Xem Chỉ Đường
+              <span>⊙</span> {t("about_service_get_directions")}
             </a>
           </div>
         </div>

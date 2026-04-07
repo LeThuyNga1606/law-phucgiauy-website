@@ -465,7 +465,7 @@ export const SERVICE_DATA = [
       ],
     },
 
-    lastPara: [" commercial_last_1", "commercial_last_2"],
+    lastPara: ["commercial_last_1", "commercial_last_2"],
   },
   {
     id: "tranh-chap-so-huu-tri-tue",
@@ -589,7 +589,6 @@ export const SERVICE_DATA = [
           "contract_service_3",
           "contract_service_4",
           "contract_service_5",
-          "contract_service_6",
         ],
       },
     ],
@@ -2141,7 +2140,7 @@ export const SERVICE_DATA = [
         ],
       },
       {
-        name: "2. Phạm vi dịch vụ của PGU",
+        name: "foreign_invested_pgu_service_scope_title",
         description: [],
         scopes: [
           {
@@ -2442,7 +2441,7 @@ export const SERVICE_DATA = [
       },
 
       {
-        name: "3. Phạm vi dịch vụ",
+        name: "branch_service_scope_section_title",
         description: [],
         scopes: [
           {
@@ -2463,7 +2462,7 @@ export const SERVICE_DATA = [
     processes: [],
 
     reasons: {
-      title: "branch_benefits_section_title",
+      title: "business_location_benefit_title",
       intro: ["branch_benefits_intro"],
       items: [
         "branch_benefits_full_legal_consulting",
@@ -2641,7 +2640,7 @@ export const SERVICE_DATA = [
     processes: [],
 
     reasons: {
-      title: "business_location_benefits_title",
+      title: "business_location_benefit_title",
       items: [
         "business_location_benefit_item_1",
         "business_location_benefit_item_2",
@@ -2673,7 +2672,7 @@ export const SERVICE_DATA = [
         name: "section_update_enterprise_information",
         description: [
           "enterprise_update_definition",
-          "enterprise_update_description_explain",
+          "enterprise_update_definition_explain",
         ],
         scopes: [
           {
@@ -3395,7 +3394,7 @@ export const SERVICE_DATA = [
 
     reasons: {
       title: "branch_termination_benefits_title",
-      intros: ["branch_termination_benefit_intro"],
+      intros: ["branch_termination_benefits_intro"],
       items: [
         "branch_termination_benefit_1",
         "branch_termination_benefit_2",
@@ -3502,8 +3501,8 @@ export const SERVICE_DATA = [
 
     explains: [
       {
-        name: "chemical_license_definition_title",
-        description: ["chemical_license_definition_content"],
+        name: "chemical_business_license_definition_title",
+        description: ["chemical_business_license_definition_content"],
       },
       {
         name: "chemical_license_types_title",
@@ -3514,11 +3513,11 @@ export const SERVICE_DATA = [
         ],
       },
       {
-        name: "chemical_license_scope_title",
+        name: "chemical_license_service_scope_title",
         description: [],
         scopes: [
           {
-            name: "chemical_license_service_scope_title",
+            name: "chemical_preliminary_consulting_title",
             items: [
               "chemical_preliminary_consulting_item_1",
               "chemical_preliminary_consulting_item_2",
@@ -3699,7 +3698,7 @@ export const SERVICE_DATA = [
         description: [],
         scopes: [
           {
-            name: "factory_completion_scope_initial_consultation",
+            name: "factory_completion_scope_initial_consultation_title",
             items: [
               "factory_completion_scope_initial_consultation_item_1",
               "factory_completion_scope_initial_consultation_item_2",
