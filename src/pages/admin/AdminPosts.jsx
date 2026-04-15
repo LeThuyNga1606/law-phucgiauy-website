@@ -6,17 +6,7 @@ import {
   deletePost,
   togglePostStatus,
 } from "../../services/news";
-
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
-const CATEGORIES = [
-  { key: "all", label: "Tất cả" },
-  { key: "civil", label: "Dân sự" },
-  { key: "criminal", label: "Hình sự" },
-  { key: "investment", label: "Đầu tư - FDI" },
-  { key: "enterprise", label: "Doanh nghiệp" },
-  { key: "license", label: "Giấy phép" },
-  { key: "news", label: "Tin pháp luật" },
-];
+import { getAllCategoriesAdmin } from "../../services/categories";
 
 const POSTS_PER_PAGE = 8;
 
@@ -87,6 +77,8 @@ export default function AdminPosts() {
   const [deleteModal, setDeleteModal] = useState(null);
   const [toast, setToast] = useState(null);
 
+  const [categories, setCategories] = useState([]);
+
   // ── Fetch từ Firestore ────────────────────────────────────────────────────
   const fetchPosts = async () => {
     setLoading(true);
@@ -100,6 +92,19 @@ export default function AdminPosts() {
 
   useEffect(() => {
     fetchPosts();
+  }, []);
+
+  // ── Fetch categories 1 lần ─────────────────────────────────────────────────
+  useEffect(() => {
+    setLoading(true);
+    getAllCategoriesAdmin()
+      .then((data) => {
+        setCategories([
+          { key: "all", label: "Tất cả" }, // thêm option All
+          ...data,
+        ]);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   // ── Lọc + tìm kiếm (client-side) ────────────────────────────────────────
@@ -310,7 +315,7 @@ export default function AdminPosts() {
           onChange={(e) => applyFilter(setCategory, e.target.value)}
           className="ap-select"
         >
-          {CATEGORIES.map((c) => (
+          {categories.map((c) => (
             <option key={c.key} value={c.key}>
               {c.label}
             </option>

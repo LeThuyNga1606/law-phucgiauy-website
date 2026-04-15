@@ -2,10 +2,54 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+
+    <!-- Favicon (đặt file trong public/) -->
     <link rel="icon" type="image/png" href="/src/assets/images/logo.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PHUС GIA UY Law Firm</title>
+
+    <!-- SEO Title -->
+    <title>Công ty Luật TNHH Phúc Gia Uy & Cộng sự</title>
+
+    <!-- Meta description -->
+    <meta
+      name="description"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý trong các lĩnh vực trọng tâm như: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
+    />
+
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+    />
+    <meta
+      property="og:description"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý trong các lĩnh vực trọng tâm như: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
+    />
+    <meta
+      property="og:image"
+      content="https://luatphucgiauy.vn/assets/images/logo.png"
+    />
+    <meta property="og:url" content="https://luatphucgiauy.vn" />
+
+    <!-- JSON-LD (QUAN TRỌNG) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự",
+        "url": "https://luatphucgiauy.vn",
+        "logo": "https://luatphucgiauy.vn/assets/images/logo.png",
+        "image": "https://luatphucgiauy.vn/assets/images/logo.png",
+        "description": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên tư vấn pháp lý và đầu tư tại Việt Nam",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "VN"
+        }
+      }
+    </script>
   </head>
+
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>

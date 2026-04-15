@@ -34,10 +34,26 @@ const QUILL_MODULES = {
       [{ indent: "-1" }, { indent: "+1" }],
       [{ align: [] }],
       ["blockquote", "code-block"],
-      ["link", "image"],
+      ["link"],
       ["clean"],
+      ["undo", "redo"],
     ],
+    handlers: {
+      undo: function () {
+        this.quill.history.undo();
+      },
+      redo: function () {
+        this.quill.history.redo();
+      },
+    },
   },
+
+  history: {
+    delay: 1000, // gom các thao tác trong 1s
+    maxStack: 100, // số lần undo tối đa
+    userOnly: true,
+  },
+
   clipboard: { matchVisual: false },
 };
 
@@ -55,7 +71,10 @@ const QUILL_FORMATS = [
   "blockquote",
   "code-block",
   "link",
-  "image",
+  // "image",// không cho phép upload trực tiếp qua toolbar, chỉ upload qua nút riêng để kiểm soát hơn
+  "undo",
+  "redo",
+  "clean",
 ];
 
 // ─── UPLOAD CLOUDINARY ────────────────────────────────────────────────────────
@@ -575,7 +594,9 @@ export default function AdminPostEditor() {
               <div className="ape-google-preview">
                 <div className="ape-gp-label">Xem trước trên Google</div>
                 <div className="ape-gp-box">
-                  <div className="ape-gp-url">phucgiauy.vn › tin-tuc</div>
+                  <div className="ape-gp-url">
+                    luatphucgiauy.vn {">"} tin-tuc
+                  </div>
                   <div className="ape-gp-title">
                     {form.seoTitle || form.title || "Tiêu đề bài viết"}
                   </div>

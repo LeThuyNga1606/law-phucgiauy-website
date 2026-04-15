@@ -197,15 +197,15 @@
 
 /* ── LAYOUT ──────────────────────────────────────────── */
 .ape-layout {
-  flex: 1;
+  margin: 0 auto;
+  padding: 24px;
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 24px;
-  padding: 24px 28px;
   align-items: start;
-  max-width: 1300px;
-  width: 100%;
-  margin: 0 auto;
+  /* display: flex; */
+  gap: 24px;
+  max-width: 1280px;
 }
 
 /* ── TABS ────────────────────────────────────────────── */
@@ -423,6 +423,13 @@
   border-radius: 0 0 8px 8px;
 }
 
+.ape-main {
+  display: flex;
+  flex-direction: column;
+  /* gap: 40px; */
+  min-width: 0;
+}
+
 .ape-quill .ql-toolbar {
   border: 1.5px solid var(--border) !important;
   border-bottom: 1px solid var(--border) !important;
@@ -438,6 +445,8 @@
   font-size: 15px !important;
   font-family: Arial, sans-serif !important;
   min-height: 360px;
+  max-height: 550px; /* chỉnh theo nhu cầu */
+  overflow-y: auto;
 }
 
 .ape-quill .ql-editor {
@@ -560,11 +569,12 @@
 
 /* ── SIDEBAR ─────────────────────────────────────────── */
 .ape-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
   position: sticky;
   top: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-width: 0;
 }
 
 .ape-sidebar-block {
@@ -836,6 +846,14 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.ql-undo::before {
+  content: "↺";
+}
+
+.ql-redo::before {
+  content: "↻";
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */

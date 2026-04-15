@@ -10,9 +10,9 @@
 .sp-hero-grid {
   position: absolute;
   inset: 0;
-  background-image:
+  /* background-image:
     linear-gradient(rgba(168, 23, 28, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(168, 23, 28, 0.06) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(168, 23, 28, 0.06) 1px, transparent 1px); */
   background-size: 56px 56px;
   pointer-events: none;
 }
@@ -61,6 +61,7 @@
   line-height: 1.1;
   letter-spacing: -1.5px;
   margin-bottom: 20px;
+  white-space: pre-line;
 }
 .sp-hero-title em {
   font-style: normal;

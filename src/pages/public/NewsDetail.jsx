@@ -114,7 +114,9 @@ export default function NewsDetail() {
         setLoading(false);
         return;
       }
-      setPost(data);
+
+      const cleanContent = data.content.replace(/&nbsp;/g, " ");
+      setPost({ ...data, content: cleanContent });
 
       // Tăng lượt xem (không cần await)
       if (!viewedRef.current) {

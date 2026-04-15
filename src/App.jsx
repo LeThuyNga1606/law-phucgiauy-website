@@ -38,16 +38,16 @@ function AdminWrapper({ children }) {
 }
 
 function App() {
-  const [authLoading, setAuthLoading] = useState(true);
+  // const [authLoading, setAuthLoading] = useState(true);
 
-  useEffect(() => {
-    const unsub = onAuthStateChanged(auth, () => {
-      setAuthLoading(false);
-    });
-    return () => unsub();
-  }, []);
+  // useEffect(() => {
+  //   const unsub = onAuthStateChanged(auth, () => {
+  //     setAuthLoading(false);
+  //   });
+  //   return () => unsub();
+  // }, []);
 
-  if (authLoading) return <Loading />;
+  // if (authLoading) return <Loading />;
 
   return (
     <BrowserRouter>

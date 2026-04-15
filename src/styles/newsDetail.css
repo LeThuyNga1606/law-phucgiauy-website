@@ -62,9 +62,9 @@
 .nd-hero-grid {
   position: absolute;
   inset: 0;
-  background-image:
+  /* background-image:
     linear-gradient(rgba(201, 168, 76, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px); */
   background-size: 56px 56px;
   pointer-events: none;
 }
@@ -259,9 +259,9 @@
 }
 
 .nd-content li {
-  display: flex;
+  /* display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 10px; */
   font-size: 15px;
   color: #3a3a3a;
   line-height: 1.7;
@@ -278,6 +278,7 @@
   font-size: 13px;
   flex-shrink: 0;
   margin-top: 2px;
+  padding: 5px;
 }
 
 .nd-content blockquote {

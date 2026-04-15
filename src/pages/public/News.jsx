@@ -2,23 +2,13 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/news.css";
+import { getAllCategoriesAdmin } from "../../services/categories";
 
 import {
   getPublishedPosts,
   getFeaturedPosts,
   getMostReadPosts,
 } from "../../services/news";
-
-// ─── CONFIG ───────────────────────────────────────────────────────────────────
-const CATEGORIES = [
-  { key: "all", label: "Tất cả" },
-  { key: "civil", label: "Dân sự" },
-  { key: "criminal", label: "Hình sự" },
-  { key: "investment", label: "Đầu tư - FDI" },
-  { key: "enterprise", label: "Doanh nghiệp" },
-  { key: "license", label: "Giấy phép" },
-  { key: "news", label: "Tin tức pháp luật" },
-];
 
 const POSTS_PER_PAGE = 9;
 
@@ -69,6 +59,7 @@ export default function News() {
   const [mostRead, setMostRead] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingSidebar, setLoadingSidebar] = useState(true);
+  const [categories, setCategories] = useState([]);
 
   // Firestore cursor-based pagination
   const [currentPage, setCurrentPage] = useState(1);
@@ -85,6 +76,19 @@ export default function News() {
         setLoadingSidebar(false);
       },
     );
+  }, []);
+
+  // ── Fetch categories 1 lần ─────────────────────────────────────────────────
+  useEffect(() => {
+    setLoading(true);
+    getAllCategoriesAdmin()
+      .then((data) => {
+        setCategories([
+          { key: "all", label: t("all") }, // thêm option All
+          ...data,
+        ]);
+      })
+      .finally(() => setLoading(false));
   }, []);
 
   // ── Fetch posts ───────────────────────────────────────────────────────────
@@ -220,7 +224,7 @@ export default function News() {
 
           <div className="news-hero-stats">
             <div className="news-hero-stat">
-              <strong>{CATEGORIES.length - 1}</strong>
+              <strong>{categories.length - 1}</strong>
               <span>{t("section")}</span>
             </div>
             <div className="news-hero-stat-divider" />
@@ -271,7 +275,7 @@ export default function News() {
       <div className="news-filter-bar" ref={gridRef}>
         <div className="news-filter-inner">
           <div className="news-filter-tabs">
-            {CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat.key}
                 className={`news-filter-tab ${activeCategory === cat.key ? "news-filter-tab--active" : ""}`}
@@ -551,18 +555,20 @@ export default function News() {
               {t("section")}
             </div>
             <div className="news-sidebar-cats">
-              {CATEGORIES.filter((c) => c.key !== "all").map((cat) => (
-                <button
-                  key={cat.key}
-                  className={`news-sidebar-cat ${activeCategory === cat.key ? "active" : ""}`}
-                  onClick={() => {
-                    setActiveCategory(cat.key);
-                    gridRef.current?.scrollIntoView({ behavior: "smooth" });
-                  }}
-                >
-                  <span>{cat.label}</span>
-                </button>
-              ))}
+              {categories
+                .filter((c) => c.key !== "all")
+                .map((cat) => (
+                  <button
+                    key={cat.key}
+                    className={`news-sidebar-cat ${activeCategory === cat.key ? "active" : ""}`}
+                    onClick={() => {
+                      setActiveCategory(cat.key);
+                      gridRef.current?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                  >
+                    <span>{cat.label}</span>
+                  </button>
+                ))}
             </div>
           </div>
         </aside>

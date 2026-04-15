@@ -304,7 +304,7 @@
   "criminalservice_victim": "Bảo vệ quyền và lợi ích hợp pháp cho bị hại, đương sự trong vụ án hình sự",
   "criminalservice_denunciation": "Bảo vệ quyền và lợi ích hợp pháp cho người bị tố giác, người bị kiến nghị tố giác và người có đơn tố giác tội phạm",
 
-  "fdiname": "Tư vấn đầu tư nước ngoài (FDI)",
+  "fdiname": "Tư vấn đầu tư\nnước ngoài (FDI)",
   "fdidescription1": "Dịch vụ tư vấn đầu tư nước ngoài (FDI) tại Việt Nam của Công ty Luật TNHH Phúc Gia Uy & Cộng sự (PGU) cung cấp giải pháp pháp lý toàn diện dành cho nhà đầu tư nước ngoài muốn thành lập doanh nghiệp, thực hiện dự án đầu tư và mở rộng hoạt động kinh doanh tại Việt Nam.",
   "fdidescription2": "Với đội ngũ luật sư và chuyên viên giàu kinh nghiệm trong lĩnh vực đầu tư nước ngoài, doanh nghiệp và pháp luật thương mại, PGU hỗ trợ nhà đầu tư từ giai đoạn tư vấn trước đầu tư, lựa chọn hình thức đầu tư, thành lập công ty có vốn nước ngoài, xin cấp Giấy chứng nhận đăng ký đầu tư (IRC), Giấy chứng nhận đăng ký doanh nghiệp (ERC) đến điều chỉnh dự án đầu tư, thực hiện các thủ tục pháp lý trong quá trình hoạt động và chấm dứt dự án.",
   "fdidescription3": "Chúng tôi cam kết mang đến dịch vụ tư vấn đầu tư nước ngoài tại Việt Nam nhanh chóng, đúng quy định pháp luật và tối ưu chi phí, giúp nhà đầu tư hạn chế rủi ro pháp lý và triển khai dự án hiệu quả, bền vững.",
@@ -2419,5 +2419,6 @@
   "search": "Tìm kiếm",
   "search_placeholder": "Tìm kiếm bài viết, chủ đề...",
   "search_results_found": "Tìm thấy",
-  "search_results_for": "kết quả cho"
+  "search_results_for": "kết quả cho",
+  "all": "Tất cả"
 }
