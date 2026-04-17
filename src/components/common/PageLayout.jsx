@@ -8,7 +8,7 @@ const PageLayout = () => {
   return (
     <div className="page-layout">
       <Navbar />
-      <main className="page-main" style={{ paddingTop: 108 }}>
+      <main className="page-main">
         <Outlet />
       </main>
       <Footer />

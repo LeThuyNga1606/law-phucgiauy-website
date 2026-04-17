@@ -71,7 +71,7 @@ const QUILL_FORMATS = [
   "blockquote",
   "code-block",
   "link",
-  // "image",// không cho phép upload trực tiếp qua toolbar, chỉ upload qua nút riêng để kiểm soát hơn
+  "image", // không cho phép upload trực tiếp qua toolbar, chỉ upload qua nút riêng để kiểm soát hơn
   "undo",
   "redo",
   "clean",
@@ -720,7 +720,7 @@ export default function AdminPostEditor() {
             </div>
             <div className="ape-field ape-field--sm">
               <label className="ape-label">Tác giả</label>
-              <select
+              {/* <select
                 value={form.author}
                 onChange={(e) => update("author", e.target.value)}
                 className="ape-select"
@@ -731,7 +731,14 @@ export default function AdminPostEditor() {
                     {a}
                   </option>
                 ))}
-              </select>
+              </select> */}
+              <input
+                type="text"
+                value={form.author}
+                onChange={(e) => update("author", e.target.value)}
+                placeholder="Tên tác giả"
+                className="ape-input"
+              />
             </div>
           </div>
 

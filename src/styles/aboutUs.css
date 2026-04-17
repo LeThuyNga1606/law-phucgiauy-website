@@ -815,6 +815,6 @@
     width: 100%;
   }
   .about-service-card {
-    width: calc(50% - 12px);
+    width: 100%;
   }
 }

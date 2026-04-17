@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Favicon (đặt file trong public/) -->
-    <link rel="icon" type="image/png" href="/src/assets/images/logo.png" />
+    <!-- Favicon (PHẢI để trong public/assets/) -->
+    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -14,17 +14,18 @@
     <!-- Meta description -->
     <meta
       name="description"
-      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý trong các lĩnh vực trọng tâm như: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
     />
 
     <!-- Open Graph -->
+    <meta property="og:type" content="website" />
     <meta
       property="og:title"
       content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
     />
     <meta
       property="og:description"
-      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý trong các lĩnh vực trọng tâm như: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý tại Việt Nam."
     />
     <meta
       property="og:image"
@@ -32,7 +33,34 @@
     />
     <meta property="og:url" content="https://luatphucgiauy.vn" />
 
-    <!-- JSON-LD (QUAN TRỌNG) -->
+    <!-- Canonical (TRÁNH TRÙNG KẾT QUẢ GOOGLE) -->
+    <link rel="canonical" href="https://luatphucgiauy.vn/" />
+
+    <!-- ================== SCHEMA QUAN TRỌNG ================== -->
+
+    <!-- 1. Website (QUAN TRỌNG NHẤT để đổi tên hiển thị) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Công ty Luật Phúc Gia Uy",
+        "alternateName": "Phúc Gia Uy Law Firm",
+        "url": "https://luatphucgiauy.vn"
+      }
+    </script>
+
+    <!-- 2. Organization (tăng độ tin cậy thương hiệu) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Công ty Luật Phúc Gia Uy",
+        "url": "https://luatphucgiauy.vn",
+        "logo": "https://luatphucgiauy.vn/assets/images/logo.png"
+      }
+    </script>
+
+    <!-- 3. LegalService (giữ lại từ code cũ - OK) -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",

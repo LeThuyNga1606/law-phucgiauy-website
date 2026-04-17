@@ -486,3 +486,13 @@
     padding: 10px 16px;
   }
 }
+
+.page-main {
+  padding-top: 108px !important;
+}
+
+@media (max-width: 640px) {
+  .page-main {
+    padding-top: 0 !important;
+  }
+}

@@ -55,10 +55,10 @@
 .company-hero-overlay {
   position: absolute;
   inset: 0;
-  background-image:
+  /* background-image:
     linear-gradient(rgba(168, 23, 28, 0.06) 1px, transparent 1px),
     linear-gradient(90deg, rgba(168, 23, 28, 0.06) 1px, transparent 1px);
-  background-size: 52px 52px;
+  background-size: 52px 52px; */
   pointer-events: none;
 }
 .company-hero-inner {

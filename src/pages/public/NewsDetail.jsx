@@ -328,7 +328,7 @@ export default function NewsDetail() {
 
           {/* Share */}
           <div className="nd-share">
-            <span className="nd-share-label">{t("share_post")}:</span>
+            <span className="nd-share-label">{t("share_post")}</span>
             <div className="nd-share-btns">
               <a
                 href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`}

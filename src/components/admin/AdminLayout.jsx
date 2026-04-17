@@ -264,9 +264,7 @@ export default function AdminLayout({ children, user }) {
       </header>
 
       {/* ══ PAGE CONTENT ══ */}
-      <main className="page-main" style={{ paddingTop: 108 }}>
-        {children}
-      </main>
+      <main className="page-main">{children}</main>
     </div>
   );
 }
