@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
+import Loading from "../../components/common/Loading";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/news.css";
 import { getAllCategoriesAdmin } from "../../services/categories";
+import { optimizeCloudinaryUrl } from "../../utils/cloudinary";
 
 import {
   getPublishedPosts,
@@ -59,15 +61,26 @@ export default function News() {
   const [mostRead, setMostRead] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingSidebar, setLoadingSidebar] = useState(true);
+  const [loadingCats, setLoadingCats] = useState(true);
   const [categories, setCategories] = useState([]);
 
   // Firestore cursor-based pagination
+  // Firestore cursor-based pagination
   const [currentPage, setCurrentPage] = useState(1);
-  const [lastDocStack, setLastDocStack] = useState([]); // cursor cho từng trang
+  const [cursors, setCursors] = useState({ 1: null }); // page → cursor bắt đầu trang đó
   const [hasMore, setHasMore] = useState(false);
+  const [totalPages, setTotalPages] = useState(1);
+
+  // Đảm bảo khi loading thì luôn scroll lên đầu trang
+  useEffect(() => {
+    if (loading) {
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  }, [loading]);
 
   // ── Fetch sidebar 1 lần ───────────────────────────────────────────────────
   useEffect(() => {
+    window.scrollTo(0, 0);
     setLoadingSidebar(true);
     Promise.all([getFeaturedPosts(3), getMostReadPosts(5)]).then(
       ([feat, most]) => {
@@ -80,7 +93,7 @@ export default function News() {
 
   // ── Fetch categories 1 lần ─────────────────────────────────────────────────
   useEffect(() => {
-    setLoading(true);
+    setLoadingCats(true);
     getAllCategoriesAdmin()
       .then((data) => {
         setCategories([
@@ -88,7 +101,7 @@ export default function News() {
           ...data,
         ]);
       })
-      .finally(() => setLoading(false));
+      .finally(() => setLoadingCats(false));
   }, []);
 
   // ── Fetch posts ───────────────────────────────────────────────────────────
@@ -109,12 +122,20 @@ export default function News() {
   }, []);
 
   // Reset khi đổi category
+  // Reset khi đổi category
   useEffect(() => {
     setCurrentPage(1);
-    setLastDocStack([]);
+    setCursors({ 1: null });
+    setTotalPages(1);
     setSearch("");
     setSearchInput("");
-    fetchPage(activeCategory, null);
+    fetchPage(activeCategory, null).then((nextCursor) => {
+      if (nextCursor) {
+        // Biết có trang 2 → lưu cursor trang 2
+        setCursors({ 1: null, 2: nextCursor });
+        setTotalPages(2);
+      }
+    });
   }, [activeCategory, fetchPage]);
 
   // Đọc keyword từ URL khi vào trang
@@ -129,19 +150,17 @@ export default function News() {
     if (page === currentPage) return;
     gridRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
-    if (page > currentPage) {
-      const cursor = lastDocStack[currentPage - 1] ?? null;
-      const newCursor = await fetchPage(activeCategory, cursor);
-      setLastDocStack((prev) => {
-        const next = [...prev];
-        next[page - 1] = newCursor;
-        return next;
-      });
-    } else {
-      const cursor = page === 1 ? null : (lastDocStack[page - 2] ?? null);
-      await fetchPage(activeCategory, cursor);
-    }
+    // Lấy cursor của trang cần đến (đã lưu sẵn)
+    const cursor = cursors[page] ?? null;
+    const nextCursor = await fetchPage(activeCategory, cursor);
+
     setCurrentPage(page);
+
+    // Nếu có trang tiếp theo và chưa biết cursor → lưu lại
+    if (nextCursor && !cursors[page + 1]) {
+      setCursors((prev) => ({ ...prev, [page + 1]: nextCursor }));
+      setTotalPages((prev) => Math.max(prev, page + 1));
+    }
   };
 
   // ── Filter client-side khi search ─────────────────────────────────────────
@@ -155,8 +174,6 @@ export default function News() {
         );
       })
     : posts;
-
-  const totalPages = hasMore ? currentPage + 1 : currentPage;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -174,6 +191,9 @@ export default function News() {
   };
 
   // ── RENDER ────────────────────────────────────────────────────────────────
+  if (loading) {
+    return <Loading text="Loading..." />;
+  }
   return (
     <div className="news-page">
       {/* ── HERO ── */}
@@ -341,7 +361,9 @@ export default function News() {
                     <div className="news-card-thumb">
                       <div
                         className="news-card-img"
-                        style={{ backgroundImage: `url(${post.thumbnail})` }}
+                        style={{
+                          backgroundImage: `url(${optimizeCloudinaryUrl(post.thumbnail, { width: 400 })})`,
+                        }}
                       />
                       <span className="news-card-cat">
                         {post.categoryLabel}
@@ -532,7 +554,9 @@ export default function News() {
                     >
                       <div
                         className="news-sidebar-feat-img"
-                        style={{ backgroundImage: `url(${post.thumbnail})` }}
+                        style={{
+                          backgroundImage: `url(${optimizeCloudinaryUrl(post.thumbnail, { width: 100 })})`,
+                        }}
                       />
                       <div className="news-sidebar-feat-body">
                         <span className="news-sidebar-feat-cat">

@@ -5,7 +5,7 @@ import "../../styles/companyInfor.css";
 import { useTranslation } from "react-i18next";
 
 import intro1 from "../../assets/images/introduce_1.png";
-import intro2 from "../../assets/images/introduce_2.jpg";
+import intro2 from "../../assets/images/introduce_2.png";
 import intro3 from "../../assets/images/introduce_3.jpg";
 
 // ─── COMPONENT ────────────────────────────────────────────────────────────────

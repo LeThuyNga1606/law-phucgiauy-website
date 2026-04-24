@@ -45,13 +45,49 @@ const QUILL_MODULES = {
       redo: function () {
         this.quill.history.redo();
       },
+      link: function (value) {
+        if (value) {
+          const quill = this.quill;
+          const range = quill.getSelection();
+          if (!range || range.length === 0) {
+            alert("Vui lòng bôi đen chữ muốn gắn link trước.");
+            return;
+          }
+          const url = prompt("Nhập URL (ví dụ: https://example.com):");
+          if (url && url.trim()) {
+            quill.format("link", url.trim());
+          }
+        } else {
+          this.quill.format("link", false);
+        }
+      },
+    },
+    clipboard: {
+      matchVisual: false,
+      matchers: [
+        [
+          Node.ELEMENT_NODE,
+          (node, delta) => {
+            delta.ops = delta.ops.filter((op) => {
+              if (
+                typeof op.insert === "object" &&
+                op.insert?.image?.startsWith?.("data:")
+              ) {
+                return false; // bỏ ảnh base64 khi paste
+              }
+              return true;
+            });
+            return delta;
+          },
+        ],
+      ],
     },
   },
 
   history: {
     delay: 1000, // gom các thao tác trong 1s
     maxStack: 100, // số lần undo tối đa
-    userOnly: true,
+    userOnly: false, // có undo/redo các thao tác tự động như setContents hay không
   },
 
   clipboard: { matchVisual: false },
@@ -72,9 +108,6 @@ const QUILL_FORMATS = [
   "code-block",
   "link",
   "image", // không cho phép upload trực tiếp qua toolbar, chỉ upload qua nút riêng để kiểm soát hơn
-  "undo",
-  "redo",
-  "clean",
 ];
 
 // ─── UPLOAD CLOUDINARY ────────────────────────────────────────────────────────
@@ -89,6 +122,26 @@ async function uploadToCloudinary(file) {
   );
   if (!res.ok) throw new Error("Upload thất bại");
   return (await res.json()).secure_url;
+}
+
+// ─── XỬ LÝ ẢNH BASE64 TRONG CONTENT ─────────────────────────────────────────
+async function replaceBase64Images(html) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, "text/html");
+  const images = doc.querySelectorAll("img[src^='data:']");
+
+  for (const img of images) {
+    try {
+      const res = await fetch(img.src);
+      const blob = await res.blob();
+      const file = new File([blob], "image.jpg", { type: blob.type });
+      const url = await uploadToCloudinary(file);
+      img.src = url;
+    } catch (err) {
+      console.error("Lỗi upload ảnh base64:", err);
+    }
+  }
+  return doc.body.innerHTML;
 }
 
 // ─── FORM DEFAULT ─────────────────────────────────────────────────────────────
@@ -280,12 +333,22 @@ export default function AdminPostEditor() {
     if (!validate()) return;
     setSaving(true);
 
-    // Lấy categoryLabel từ key
+    // ── Xử lý ảnh base64 trong content trước khi lưu ──────────────────────────
+    let cleanContent = form.content;
+    if (form.content.includes("data:image")) {
+      try {
+        cleanContent = await replaceBase64Images(form.content);
+        setForm((f) => ({ ...f, content: cleanContent }));
+      } catch (err) {
+        console.error("Lỗi xử lý ảnh base64:", err);
+      }
+    }
+
     const catLabel =
       categories.find((c) => c.key === form.category)?.label || form.category;
-
     const payload = {
       ...form,
+      content: cleanContent, // ← dùng content đã xử lý
       status: statusOverride || form.status,
       categoryLabel: catLabel,
       slug: generateSlug(form.title),
@@ -293,19 +356,15 @@ export default function AdminPostEditor() {
 
     try {
       if (isEdit) {
-        // Đang edit bài cũ → update
         await updatePost(id, payload);
       } else if (createdId) {
-        // Đã tạo mới lần trước trong cùng session → update thay vì tạo mới
         await updatePost(createdId, payload);
       } else {
-        // Tạo mới lần đầu
         const newId = await createPost(payload);
-        setCreatedId(newId); // lưu lại ID để lần save tiếp dùng updatePost
+        setCreatedId(newId);
       }
       setSaved(true);
       setTimeout(() => setSaved(false), 3000);
-      // Sau khi đăng → về danh sách; sau khi lưu nháp → ở lại
       if (statusOverride === "published") navigate("/admin/posts");
     } catch (err) {
       console.error(err);

@@ -114,87 +114,87 @@ const Navbar = () => {
       groups: [
         {
           title: t("nav_investment_group1_title"),
-          to: "/dich-vu/dau-tu/dau-tu-moi",
+          to: "/dich-vu/dau-tu-nuoc-ngoai/dau-tu-moi",
           items: [
             {
               label: t("nav_investment_consult"),
-              to: "/dich-vu/dau-tu/dau-tu-moi/detail/tu-van-phap-ly-truoc-dau-tu",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/dau-tu-moi/detail/tu-van-phap-ly-truoc-dau-tu",
             },
             {
               label: t("nav_investment_due_diligence"),
-              to: "/dich-vu/dau-tu/dau-tu-moi/detail/tham-tra-phap-ly-dat-nha-xuong",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/dau-tu-moi/detail/tham-tra-phap-ly-dat-nha-xuong",
             },
             {
               label: t("nav_investment_establish_company"),
-              to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-cong-ty-von-dau-tu-nuoc-ngoai",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/dau-tu-moi/detail/thanh-lap-cong-ty-von-dau-tu-nuoc-ngoai",
             },
             {
               label: t("nav_investment_establish_office"),
-              to: "/dich-vu/dau-tu/dau-tu-moi/detail/thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/dau-tu-moi/detail/thanh-lap-van-phong-dai-dien-cong-ty-nuoc-ngoai",
             },
           ],
         },
         {
           title: t("nav_investment_group2_title"),
-          to: "/dich-vu/dau-tu/thay-doi-giay-chung-nhan-dang-ky-dau-tu",
+          to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-giay-chung-nhan-dang-ky-dau-tu",
           items: [
             {
               label: t("nav_investment_adjust_target"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/dieu-chinh-muc-tieu-quy-mo-du-an-dau-tu",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/dieu-chinh-muc-tieu-quy-mo-du-an-dau-tu",
             },
             {
               label: t("nav_investment_change_location"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-dia-diem-thuc-hien-du-an-dau-tu",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/thay-doi-dia-diem-thuc-hien-du-an-dau-tu",
             },
             {
               label: t("nav_investment_change_capital"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-tong-von-dau-tu-von-gop-thuc-hien-du-an",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/thay-doi-tong-von-dau-tu-von-gop-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_extend_schedule"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-tien-do-gop-von-tien-do-thuc-hien-du-an",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/gia-han-tien-do-gop-von-tien-do-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_change_investor"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/thay-doi-nha-dau-tu-thuc-hien-du-an",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/thay-doi-nha-dau-tu-thuc-hien-du-an",
             },
             {
               label: t("nav_investment_update_info"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/cap-nhat-thong-tin-nha-dau-tu",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/cap-nhat-thong-tin-nha-dau-tu",
             },
             {
               label: t("nav_investment_extend_lease"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-thoi-gian-thue-xuong",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/gia-han-thoi-gian-thue-xuong",
             },
             {
               label: t("nav_investment_extend_operation"),
-              to: "/dich-vu/dau-tu/thay-doi-dang-ky/detail/gia-han-thoi-gian-hoat-dong-du-an",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/thay-doi-dang-ky/detail/gia-han-thoi-gian-hoat-dong-du-an",
             },
           ],
         },
         {
           title: t("nav_investment_group3_title"),
-          to: "/dich-vu/dau-tu/bao-cao-du-an",
+          to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao-du-an",
           items: [
             {
               label: t("nav_investment_register_loan"),
-              to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-khoan-vay-nuoc-ngoai",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao/detail/dang-ky-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_change_loan"),
-              to: "/dich-vu/dau-tu/bao-cao/detail/dang-ky-thay-doi-khoan-vay-nuoc-ngoai",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao/detail/dang-ky-thay-doi-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_report_loan"),
-              to: "/dich-vu/dau-tu/bao-cao/detail/bao-cao-khoan-vay-nuoc-ngoai",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao/detail/bao-cao-khoan-vay-nuoc-ngoai",
             },
             {
               label: t("nav_investment_terminate_project"),
-              to: "/dich-vu/dau-tu/bao-cao/detail/cham-dut-du-an-dau-tu",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao/detail/cham-dut-du-an-dau-tu",
             },
             {
               label: t("nav_investment_dissolve_company"),
-              to: "/dich-vu/dau-tu/bao-cao/detail/giai-the-cong-ty-fdi",
+              to: "/dich-vu/dau-tu-nuoc-ngoai/bao-cao/detail/giai-the-cong-ty-fdi",
             },
           ],
         },

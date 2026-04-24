@@ -322,6 +322,21 @@
     transform 0.4s ease,
     box-shadow 0.4s ease;
 }
+
+/* Tối ưu ảnh trong nội dung bài viết tránh giật lag trên mobile */
+@media (max-width: 640px) {
+  .nd-content img {
+    transition: none !important;
+    box-shadow: none !important;
+    transform: none !important;
+  }
+
+  .nd-content img:hover {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+}
+
 .nd-content img:hover {
   transform: scale(1.01);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
@@ -859,6 +874,20 @@
   background: var(--red-dk);
 }
 
+/* ── QUILL ALIGNMENT CLASSES ── */
+.nd-content .ql-align-justify {
+  text-align: justify;
+}
+.nd-content .ql-align-center {
+  text-align: center;
+}
+.nd-content .ql-align-right {
+  text-align: right;
+}
+.nd-content .ql-align-left {
+  text-align: left;
+}
+
 /* ── RESPONSIVE ──────────────────────────────────────── */
 @media (max-width: 1024px) {
   .nd-layout {
@@ -900,6 +929,7 @@
   }
   .nd-sidebar {
     grid-template-columns: 1fr;
+    position: static;
   }
   .nd-content h2 {
     font-size: 1.15rem;

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase/config";
 
-import Loading from "./components/common/Loading";
 import PageLayout from "./components/common/PageLayout";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
 import AdminLayout from "./components/admin/AdminLayout";
@@ -38,17 +37,6 @@ function AdminWrapper({ children }) {
 }
 
 function App() {
-  // const [authLoading, setAuthLoading] = useState(true);
-
-  // useEffect(() => {
-  //   const unsub = onAuthStateChanged(auth, () => {
-  //     setAuthLoading(false);
-  //   });
-  //   return () => unsub();
-  // }, []);
-
-  // if (authLoading) return <Loading />;
-
   return (
     <BrowserRouter>
       <Routes>

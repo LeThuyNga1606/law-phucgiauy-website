@@ -128,15 +128,18 @@ export async function getViewsChartData() {
       const key = date.toISOString().slice(0, 10);
       dayMap[key] = (dayMap[key] || 0) + (data.views || 0);
     });
+    console.log("DEBUG dayMap", dayMap);
 
     // Tạo mảng 7 ngày liên tục từ 6 ngày trước đến hôm nay
     const dayNames = ["CN", "T2", "T3", "T4", "T5", "T6", "T7"];
-    return Array.from({ length: 7 }, (_, i) => {
+    const arr = Array.from({ length: 7 }, (_, i) => {
       const d = new Date();
       d.setDate(d.getDate() - (6 - i));
       const key = d.toISOString().slice(0, 10);
       return { day: dayNames[d.getDay()], date: key, views: dayMap[key] || 0 };
     });
+    console.log("DEBUG chart array", arr);
+    return arr;
   } catch (err) {
     console.error("getViewsChartData:", err);
     // Fallback: 7 ngày với views = 0

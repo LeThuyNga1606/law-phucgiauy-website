@@ -5,6 +5,7 @@ import { SERVICE_DATA } from "../../data/services";
 import LogoSlogan from "../../assets/images/background_aboutUs.png";
 import { getPublishedPosts } from "../../services/news";
 import { useTranslation } from "react-i18next";
+import { optimizeCloudinaryUrl } from "../../utils/cloudinary";
 
 export default function ServiceDetail() {
   const { t } = useTranslation();
@@ -324,7 +325,9 @@ export default function ServiceDetail() {
                 >
                   <div
                     className="nd-sidebar-recent-img"
-                    style={{ backgroundImage: `url(${rp.thumbnail})` }}
+                    style={{
+                      backgroundImage: `url(${optimizeCloudinaryUrl(rp.thumbnail, { width: 100 })})`,
+                    }}
                   />
                   <div className="nd-sidebar-recent-body">
                     <span className="nd-sidebar-recent-cat">

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import Loading from "../../components/common/Loading";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "../../styles/newsDetail.css";
@@ -9,6 +10,8 @@ import {
   incrementViews,
 } from "../../services/news";
 import { getAllServicesAdmin } from "../../services/service";
+import { optimizeCloudinaryUrl } from "../../utils/cloudinary";
+import { processContent } from "../../utils/processContent";
 
 // ─── SKELETON ─────────────────────────────────────────────────────────────────
 function SkeletonDetail() {
@@ -170,20 +173,20 @@ export default function NewsDetail() {
   }, []);
 
   // ── Reading progress scroll ──────────────────────────────────────────────
-  useEffect(() => {
-    const onScroll = () => {
-      const article = articleRef.current;
-      if (!article) return;
-      const { top, height } = article.getBoundingClientRect();
-      const windowH = window.innerHeight;
-      const scrolled = Math.max(0, -top);
-      const total = height - windowH;
-      setProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0);
-      setShowBackTop(window.scrollY > 400);
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // useEffect(() => {
+  //   const onScroll = () => {
+  //     const article = articleRef.current;
+  //     if (!article) return;
+  //     const { top, height } = article.getBoundingClientRect();
+  //     const windowH = window.innerHeight;
+  //     const scrolled = Math.max(0, -top);
+  //     const total = height - windowH;
+  //     setProgress(total > 0 ? Math.min(100, (scrolled / total) * 100) : 0);
+  //     setShowBackTop(window.scrollY > 400);
+  //   };
+  //   window.addEventListener("scroll", onScroll, { passive: true });
+  //   return () => window.removeEventListener("scroll", onScroll);
+  // }, []);
 
   // ── Helpers ──────────────────────────────────────────────────────────────
   const formatDate = (val) => {
@@ -203,7 +206,8 @@ export default function NewsDetail() {
   };
 
   // ── States ───────────────────────────────────────────────────────────────
-  if (loading) return <SkeletonDetail />;
+
+  if (loading) return <Loading text="Loading..." />;
 
   if (notFound) {
     return (
@@ -222,13 +226,15 @@ export default function NewsDetail() {
   return (
     <div className="nd-page" ref={articleRef}>
       {/* ── PROGRESS BAR ── */}
-      <div className="nd-progress-bar" style={{ width: `${progress}%` }} />
+      {/* <div className="nd-progress-bar" style={{ width: `${progress}%` }} /> */}
 
       {/* ── HERO ── */}
       <section className="nd-hero">
         <div
           className="nd-hero-bg"
-          style={{ backgroundImage: `url(${post.thumbnail})` }}
+          style={{
+            backgroundImage: `url(${optimizeCloudinaryUrl(post.thumbnail, { width: 1200 })})`,
+          }}
         />
         <div className="nd-hero-overlay" />
         <div className="nd-hero-grid" />
@@ -323,7 +329,7 @@ export default function NewsDetail() {
           {/* Nội dung HTML từ Quill editor */}
           <div
             className="nd-content"
-            dangerouslySetInnerHTML={{ __html: post.content }}
+            dangerouslySetInnerHTML={{ __html: processContent(post.content) }}
           />
 
           {/* Share */}
@@ -405,7 +411,9 @@ export default function NewsDetail() {
                   >
                     <div
                       className="nd-related-img"
-                      style={{ backgroundImage: `url(${rp.thumbnail})` }}
+                      style={{
+                        backgroundImage: `url(${optimizeCloudinaryUrl(rp.thumbnail, { width: 100 })})`,
+                      }}
                     />
                     <div className="nd-related-body">
                       <span className="nd-related-cat">{rp.categoryLabel}</span>
@@ -444,7 +452,9 @@ export default function NewsDetail() {
               >
                 <div
                   className="nd-sidebar-recent-img"
-                  style={{ backgroundImage: `url(${rp.thumbnail})` }}
+                  style={{
+                    backgroundImage: `url(${optimizeCloudinaryUrl(rp.thumbnail, { width: 100 })})`,
+                  }}
                 />
                 <div className="nd-sidebar-recent-body">
                   <span className="nd-sidebar-recent-cat">
@@ -484,14 +494,14 @@ export default function NewsDetail() {
       </div>
 
       {/* ── BACK TO TOP ── */}
-      {showBackTop && (
+      {/* {showBackTop && (
         <button
           className="nd-back-top"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
           ↑
         </button>
-      )}
+      )} */}
     </div>
   );
 }

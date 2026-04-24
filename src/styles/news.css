@@ -919,6 +919,44 @@
   color: var(--gold);
 }
 
+/* Thêm vào newsDetail.css và news.css */
+
+/* Thumbnail card — background image */
+.news-card-img,
+.nd-hero-bg,
+.nd-sidebar-recent-img,
+.nd-sidebar-feat-img {
+  background-color: #f3f4f6; /* màu placeholder khi chưa load */
+  transition: opacity 0.3s ease;
+}
+
+/* Ảnh trong nội dung bài */
+.nd-content img {
+  background-color: #f3f4f6;
+  min-height: 200px; /* giữ chỗ khi chưa load xong */
+}
+
+.nd-content img.loaded {
+  min-height: unset;
+}
+
+/* Hiệu ứng shimmer placeholder cho ảnh đang load */
+.nd-content img:not([src]),
+.nd-content img[src=""] {
+  background: linear-gradient(90deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 /* ── RESPONSIVE ──────────────────────────────────────── */
 @media (max-width: 1100px) {
   .news-grid {

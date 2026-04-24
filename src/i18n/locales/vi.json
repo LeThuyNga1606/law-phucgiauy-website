@@ -2420,5 +2420,6 @@
   "search_placeholder": "Tìm kiếm bài viết, chủ đề...",
   "search_results_found": "Tìm thấy",
   "search_results_for": "kết quả cho",
-  "all": "Tất cả"
+  "all": "Tất cả",
+  "no_related_posts": "Không có bài viết liên quan nào."
 }

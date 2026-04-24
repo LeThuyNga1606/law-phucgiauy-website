@@ -2416,5 +2416,6 @@
   "search_placeholder": "Search articles, topics...",
   "search_results_found": "Found",
   "search_results_for": "results for",
-  "all": "All"
+  "all": "All",
+  "no_related_posts": "No related posts."
 }
