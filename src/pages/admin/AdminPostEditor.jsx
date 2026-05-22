@@ -15,6 +15,27 @@ import {
   FALLBACK_CATEGORIES,
 } from "../../services/categories";
 import { CLOUD_NAME, UPLOAD_PRESET } from "../../cloudinary/config";
+import Quill from "quill";
+
+// ─── TABLE EMBED BLOT ────────────────────────────────────────────────────────
+// Dùng BlockEmbed để Quill coi toàn bộ table là 1 khối nguyên tử,
+// không can thiệp vào cấu trúc bên trong (không bị strip/reshape)
+const BlockEmbed = Quill.import("blots/block/embed");
+
+class TableEmbed extends BlockEmbed {}
+TableEmbed.blotName = "table-embed";
+TableEmbed.tagName = "div";
+TableEmbed.className = "ql-table-wrapper";
+TableEmbed.create = function (tableHtml) {
+  const node = BlockEmbed.create.call(this);
+  node.innerHTML = tableHtml;
+  return node;
+};
+TableEmbed.value = function (node) {
+  return node.innerHTML;
+};
+
+Quill.register("formats/table-embed", TableEmbed, true);
 
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 // Categories được fetch từ Firestore (xem useEffect bên dưới)
@@ -83,14 +104,15 @@ const QUILL_MODULES = {
       ],
     },
   },
-
   history: {
-    delay: 1000, // gom các thao tác trong 1s
-    maxStack: 100, // số lần undo tối đa
-    userOnly: false, // có undo/redo các thao tác tự động như setContents hay không
+    delay: 1000,
+    maxStack: 100,
+    userOnly: false,
   },
-
   clipboard: { matchVisual: false },
+  keyboard: {
+    bindings: {},
+  },
 };
 
 const QUILL_FORMATS = [
@@ -107,7 +129,8 @@ const QUILL_FORMATS = [
   "blockquote",
   "code-block",
   "link",
-  "image", // không cho phép upload trực tiếp qua toolbar, chỉ upload qua nút riêng để kiểm soát hơn
+  "image",
+  "table-embed",
 ];
 
 // ─── UPLOAD CLOUDINARY ────────────────────────────────────────────────────────
@@ -169,6 +192,62 @@ export default function AdminPostEditor() {
   const thumbInput = useRef(null);
   const contentImgInput = useRef(null);
 
+  // ── Table dialog ────────────────────────────────────────────────────────────
+  const [showTableDialog, setShowTableDialog] = useState(false);
+  const [tableRows, setTableRows] = useState(3);
+  const [tableCols, setTableCols] = useState(3);
+  const [tableHasHeader, setTableHasHeader] = useState(true);
+
+  // ── Table context menu (thêm/xóa cột/hàng) ─────────────────────────────────
+  const [tableMenu, setTableMenu] = useState({ visible: false, x: 0, y: 0 });
+  const tableCellRef = useRef(null);
+  const tableElRef = useRef(null);
+  const tableMenuDivRef = useRef(null);
+
+  // ── Table format bar (bold/italic/... trong ô bảng) ────────────────────────
+  const [formatBar, setFormatBar] = useState({ visible: false, x: 0, y: 0 });
+  const formatBarRef = useRef(null);
+  const colorInputRef = useRef(null);
+  const bgColorInputRef = useRef(null);
+  const savedRangeRef = useRef(null);
+  const savedCellRef = useRef(null);
+
+  const handleInsertTable = () => {
+    const editor = quillRef.current?.getEditor();
+    if (!editor) return;
+
+    // Build table HTML với style inline để viền luôn hiển thị
+    // (BlockEmbed giữ nguyên innerHTML, không bị Quill can thiệp)
+    const cellStyle =
+      "border:1px solid #c8bfb5;padding:8px 10px;min-width:80px;vertical-align:top;";
+    const thStyle =
+      cellStyle + "background:#f0ebe4;font-weight:600;text-align:left;";
+    const tableStyle =
+      "border-collapse:collapse;width:100%;margin:12px 0;font-size:14px;";
+
+    let tableHtml = `<table style="${tableStyle}"><tbody>`;
+    for (let r = 0; r < tableRows; r++) {
+      tableHtml += "<tr>";
+      for (let c = 0; c < tableCols; c++) {
+        if (tableHasHeader && r === 0) {
+          tableHtml += `<th style="${thStyle}">Tiêu đề ${c + 1}</th>`;
+        } else {
+          tableHtml += `<td style="${cellStyle}">&nbsp;</td>`;
+        }
+      }
+      tableHtml += "</tr>";
+    }
+    tableHtml += "</tbody></table>";
+
+    // Chịn vị trí chèn và insertEmbed — Quill giữ nguyên HTML bạn truyền vào
+    const range = editor.getSelection() || { index: editor.getLength() - 1 };
+    editor.insertEmbed(range.index, "table-embed", tableHtml, "user");
+    // Di chuyển con trỏ ra ngoài bảng (sau embed)
+    editor.setSelection(range.index + 1, 0);
+
+    setShowTableDialog(false);
+  };
+
   // ── State ──────────────────────────────────────────────────────────────────
   const [form, setForm] = useState(DEFAULT_FORM);
   const [tagInput, setTagInput] = useState("");
@@ -210,7 +289,7 @@ export default function AdminPostEditor() {
             services.flatMap((s) => [
               s.name,
               // Tách từng từ có nghĩa từ tên dịch vụ (>= 4 ký tự)
-              ...s.name.split(/[\s&,\/]+/).filter((w) => w.length >= 4),
+              ...s.name.split(/[\s&,/]+/).filter((w) => w.length >= 4),
             ]),
           ),
         ].sort();
@@ -239,18 +318,271 @@ export default function AdminPostEditor() {
     setLoadingEdit(true);
     getPostById(id)
       .then((data) => {
-        if (!data) {
-          alert("Không tìm thấy bài viết.");
-          navigate("/admin/posts");
-          return;
-        }
-        // Merge vào form — bỏ các field Firestore không cần (id, createdAt,...)
-        const { id: _id, createdAt, updatedAt, views, ...rest } = data;
+        const { id: _id, ...rest } = data;
         setForm((f) => ({ ...f, ...rest }));
       })
       .catch(() => alert("Lỗi khi tải bài viết."))
       .finally(() => setLoadingEdit(false));
   }, [isEdit, id, navigate]);
+
+  // ── Keyboard handler cho table cells (Enter = thêm dòng, Tab = next cell) ──
+  useEffect(() => {
+    const editor = quillRef.current?.getEditor();
+    if (!editor) return;
+
+    const root = editor.root;
+
+    const handleTableKey = (e) => {
+      const cell = e.target.closest?.("td, th");
+      if (!cell) return; // không trong table → bỏ qua
+
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        const row = cell.closest("tr");
+        if (!row) return;
+        const cols = row.querySelectorAll("td, th").length;
+        const newRow = document.createElement("tr");
+        for (let i = 0; i < cols; i++) {
+          const td = document.createElement("td");
+          td.setAttribute(
+            "style",
+            "border:1px solid #c8bfb5;padding:8px 10px;min-width:80px;vertical-align:top;",
+          );
+          td.innerHTML = "\u00a0";
+          newRow.appendChild(td);
+        }
+        row.after(newRow);
+        newRow.firstElementChild?.focus();
+        return;
+      }
+
+      if (e.key === "Tab") {
+        e.preventDefault();
+        const table = cell.closest("table");
+        if (!table) return;
+        const cells = Array.from(table.querySelectorAll("td, th"));
+        const idx = cells.indexOf(cell);
+        if (idx < cells.length - 1) {
+          cells[idx + 1].focus();
+        } else {
+          // Ô cuối → thêm dòng mới
+          const row = cell.closest("tr");
+          const cols = row.querySelectorAll("td, th").length;
+          const newRow = document.createElement("tr");
+          for (let i = 0; i < cols; i++) {
+            const td = document.createElement("td");
+            td.setAttribute(
+              "style",
+              "border:1px solid #c8bfb5;padding:8px 10px;min-width:80px;vertical-align:top;",
+            );
+            td.innerHTML = "\u00a0";
+            newRow.appendChild(td);
+          }
+          row.after(newRow);
+          newRow.firstElementChild?.focus();
+        }
+      }
+    };
+
+    root.addEventListener("keydown", handleTableKey, true);
+    return () => root.removeEventListener("keydown", handleTableKey, true);
+  }, []);
+
+  // ── Detect chọn text trong ô → hiện format bar ─────────────────────────────
+  useEffect(() => {
+    const handleSel = () => {
+      const sel = window.getSelection();
+      if (!sel || sel.isCollapsed || sel.rangeCount === 0) {
+        if (!formatBarRef.current?.matches(":focus-within")) {
+          setFormatBar((f) => ({ ...f, visible: false }));
+        }
+        return;
+      }
+      const anchor = sel.anchorNode;
+      const el = anchor instanceof Element ? anchor : anchor?.parentElement;
+      const cell = el?.closest(".ql-table-wrapper td, .ql-table-wrapper th");
+      if (cell) {
+        savedCellRef.current = cell;
+        const rect = sel.getRangeAt(0).getBoundingClientRect();
+        setFormatBar({ visible: true, x: rect.left, y: rect.top - 46 });
+        // Ẩn table context menu khi đang chọn text
+        setTableMenu({ visible: false, x: 0, y: 0 });
+      } else {
+        setFormatBar((f) => ({ ...f, visible: false }));
+      }
+    };
+    document.addEventListener("selectionchange", handleSel);
+    return () => document.removeEventListener("selectionchange", handleSel);
+  }, []);
+
+  const applyFormat = (cmd, value) =>
+    document.execCommand(cmd, false, value ?? null);
+
+  const saveSelection = () => {
+    const sel = window.getSelection();
+    if (sel && sel.rangeCount > 0)
+      savedRangeRef.current = sel.getRangeAt(0).cloneRange();
+  };
+
+  const restoreSelection = () => {
+    const sel = window.getSelection();
+    if (savedRangeRef.current && sel) {
+      sel.removeAllRanges();
+      sel.addRange(savedRangeRef.current);
+    }
+  };
+
+  // ── Click vào ô → hiện floating menu thêm/xóa cột/hàng ─────────────────────
+  useEffect(() => {
+    const handleDocMouseDown = (e) => {
+      // Giữ menu nếu đang click vào chính menu
+      if (tableMenuDivRef.current?.contains(e.target)) return;
+
+      const cell = e.target.closest?.(
+        ".ql-table-wrapper td, .ql-table-wrapper th",
+      );
+      if (cell) {
+        tableCellRef.current = cell;
+        tableElRef.current = cell.closest("table");
+        const rect = cell.getBoundingClientRect();
+        setTableMenu({
+          visible: true,
+          x: rect.left + window.scrollX,
+          y: rect.bottom + window.scrollY + 4,
+        });
+      } else {
+        setTableMenu({ visible: false, x: 0, y: 0 });
+      }
+    };
+    document.addEventListener("mousedown", handleDocMouseDown);
+    return () => document.removeEventListener("mousedown", handleDocMouseDown);
+  }, []);
+
+  // ── Helpers inline style cho ô bảng ──────────────────────────────────────
+  const TCELL =
+    "border:1px solid #c8bfb5;padding:8px 10px;min-width:80px;vertical-align:top;";
+  const THEAD = TCELL + "background:#f0ebe4;font-weight:600;text-align:left;";
+
+  const makeCell = (isHeader) => {
+    const el = document.createElement(isHeader ? "th" : "td");
+    el.setAttribute("style", isHeader ? THEAD : TCELL);
+    el.innerHTML = "\u00a0";
+    return el;
+  };
+
+  // Đảm bảo hàng đầu tiên luôn là th+màu nền, các hàng còn lại là td thường
+  const syncTableHeader = (table) => {
+    if (!table) return;
+    table.querySelectorAll("tr").forEach((row, rIdx) => {
+      row.querySelectorAll("td, th").forEach((cell) => {
+        if (rIdx === 0) {
+          if (cell.tagName === "TD") {
+            const th = document.createElement("th");
+            th.setAttribute("style", THEAD);
+            th.innerHTML = cell.innerHTML;
+            cell.replaceWith(th);
+          } else {
+            cell.setAttribute("style", THEAD);
+          }
+        } else {
+          if (cell.tagName === "TH") {
+            const td = document.createElement("td");
+            td.setAttribute("style", TCELL);
+            td.innerHTML = cell.innerHTML;
+            cell.replaceWith(td);
+          }
+        }
+      });
+    });
+  };
+
+  const tableAddColRight = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell || !table) return;
+    const colIdx = Array.from(
+      cell.closest("tr").querySelectorAll("td, th"),
+    ).indexOf(cell);
+    table.querySelectorAll("tr").forEach((row) => {
+      const cells = row.querySelectorAll("td, th");
+      const newCell = makeCell(false);
+      const ref = cells[colIdx];
+      if (ref) ref.after(newCell);
+      else row.appendChild(newCell);
+    });
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
+
+  const tableAddColLeft = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell || !table) return;
+    const colIdx = Array.from(
+      cell.closest("tr").querySelectorAll("td, th"),
+    ).indexOf(cell);
+    table.querySelectorAll("tr").forEach((row) => {
+      const cells = row.querySelectorAll("td, th");
+      const newCell = makeCell(false);
+      const ref = cells[colIdx];
+      if (ref) row.insertBefore(newCell, ref);
+      else row.appendChild(newCell);
+    });
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
+
+  const tableAddRowBelow = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell) return;
+    const row = cell.closest("tr");
+    const cols = row.querySelectorAll("td, th").length;
+    const newRow = document.createElement("tr");
+    for (let i = 0; i < cols; i++) newRow.appendChild(makeCell(false));
+    row.after(newRow);
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
+
+  const tableAddRowAbove = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell) return;
+    const row = cell.closest("tr");
+    const cols = row.querySelectorAll("td, th").length;
+    const newRow = document.createElement("tr");
+    for (let i = 0; i < cols; i++) newRow.appendChild(makeCell(false));
+    row.before(newRow);
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
+
+  const tableDeleteRow = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell || !table) return;
+    if (table.querySelectorAll("tr").length <= 1) return; // ít nhất 1 hàng
+    cell.closest("tr").remove();
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
+
+  const tableDeleteCol = () => {
+    const cell = tableCellRef.current;
+    const table = tableElRef.current;
+    if (!cell || !table) return;
+    const colIdx = Array.from(
+      cell.closest("tr").querySelectorAll("td, th"),
+    ).indexOf(cell);
+    const firstRow = table.querySelector("tr");
+    if (firstRow?.querySelectorAll("td, th").length <= 1) return; // ít nhất 1 cột
+    table.querySelectorAll("tr").forEach((row) => {
+      row.querySelectorAll("td, th")[colIdx]?.remove();
+    });
+    syncTableHeader(table);
+    setTableMenu({ visible: false, x: 0, y: 0 });
+  };
 
   // ── Helpers ────────────────────────────────────────────────────────────────
   const update = (field, val) => {
@@ -534,6 +866,13 @@ export default function AdminPostEditor() {
                     Nội dung bài viết <span className="ape-required">*</span>
                   </label>
                   <div className="ape-editor-tools">
+                    <button
+                      type="button"
+                      className="ape-img-insert-btn"
+                      onClick={() => setShowTableDialog(true)}
+                    >
+                      📊 Chèn bảng
+                    </button>
                     <button
                       type="button"
                       className="ape-img-insert-btn"
@@ -873,6 +1212,249 @@ export default function AdminPostEditor() {
           </div>
         </aside>
       </div>
+
+      {/* ── TABLE FORMAT BAR ── */}
+      {formatBar.visible && (
+        <div
+          ref={formatBarRef}
+          className="ape-format-bar"
+          style={{ top: formatBar.y, left: formatBar.x }}
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          <button
+            title="Đậm (Ctrl+B)"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              applyFormat("bold");
+            }}
+          >
+            <b>B</b>
+          </button>
+          <button
+            title="Nghiêng (Ctrl+I)"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              applyFormat("italic");
+            }}
+          >
+            <i>I</i>
+          </button>
+          <button
+            title="Gạch chân (Ctrl+U)"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              applyFormat("underline");
+            }}
+          >
+            <u>U</u>
+          </button>
+          <button
+            title="Gạch ngang"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              applyFormat("strikethrough");
+            }}
+          >
+            <s>S</s>
+          </button>
+          <div className="ape-format-bar-sep" />
+          <button
+            title="Màu chữ"
+            className="ape-format-bar-color-btn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              saveSelection();
+            }}
+          >
+            A
+            <input
+              ref={colorInputRef}
+              type="color"
+              defaultValue="#c0392b"
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+                opacity: 0,
+                cursor: "pointer",
+                border: "none",
+                padding: 0,
+              }}
+              onChange={(e) => {
+                restoreSelection();
+                applyFormat("foreColor", e.target.value);
+              }}
+            />
+          </button>
+          <button
+            title="Tô màu nền ô"
+            className="ape-format-bar-bg-btn"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              saveSelection();
+            }}
+          >
+            ■
+            <input
+              ref={bgColorInputRef}
+              type="color"
+              defaultValue="#fff3cd"
+              style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+                opacity: 0,
+                cursor: "pointer",
+                border: "none",
+                padding: 0,
+              }}
+              onChange={(e) => {
+                // Tô màu nền của ô (td/th), không phải text highlight
+                const cell = savedCellRef.current;
+                if (cell) cell.style.backgroundColor = e.target.value;
+              }}
+            />
+          </button>
+          <button
+            title="Xóa định dạng"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              applyFormat("removeFormat");
+            }}
+          >
+            T̲
+          </button>
+        </div>
+      )}
+
+      {/* ── TABLE CONTEXT MENU ── */}
+      {tableMenu.visible && (
+        <div
+          ref={tableMenuDivRef}
+          className="ape-table-menu"
+          style={{ top: tableMenu.y, left: tableMenu.x }}
+        >
+          <button
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableAddColLeft();
+            }}
+          >
+            ← Cột trái
+          </button>
+          <button
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableAddColRight();
+            }}
+          >
+            → Cột phải
+          </button>
+          <button
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableAddRowAbove();
+            }}
+          >
+            ↑ Hàng trên
+          </button>
+          <button
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableAddRowBelow();
+            }}
+          >
+            ↓ Hàng dưới
+          </button>
+          <div className="ape-table-menu-sep" />
+          <button
+            className="ape-table-menu-del"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableDeleteCol();
+            }}
+          >
+            ✕ Xóa cột
+          </button>
+          <button
+            className="ape-table-menu-del"
+            onMouseDown={(e) => {
+              e.preventDefault();
+              tableDeleteRow();
+            }}
+          >
+            ✕ Xóa hàng
+          </button>
+        </div>
+      )}
+
+      {/* ── TABLE DIALOG ── */}
+      {showTableDialog && (
+        <div
+          className="ape-table-dialog-overlay"
+          onClick={() => setShowTableDialog(false)}
+        >
+          <div
+            className="ape-table-dialog"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="ape-table-dialog-title">📊 Chèn bảng</div>
+            <div className="ape-table-dialog-row">
+              <label>Số hàng</label>
+              <input
+                type="number"
+                min={1}
+                max={20}
+                value={tableRows}
+                onChange={(e) =>
+                  setTableRows(Math.max(1, parseInt(e.target.value) || 1))
+                }
+                className="ape-table-dialog-input"
+              />
+            </div>
+            <div className="ape-table-dialog-row">
+              <label>Số cột</label>
+              <input
+                type="number"
+                min={1}
+                max={10}
+                value={tableCols}
+                onChange={(e) =>
+                  setTableCols(Math.max(1, parseInt(e.target.value) || 1))
+                }
+                className="ape-table-dialog-input"
+              />
+            </div>
+            <div className="ape-table-dialog-row">
+              <label>Có hàng tiêu đề (header)</label>
+              <input
+                type="checkbox"
+                checked={tableHasHeader}
+                onChange={(e) => setTableHasHeader(e.target.checked)}
+                style={{ width: "auto", cursor: "pointer" }}
+              />
+            </div>
+            <div className="ape-table-dialog-actions">
+              <button
+                className="ape-save-btn ape-save-btn--ghost"
+                onClick={() => setShowTableDialog(false)}
+              >
+                Hủy
+              </button>
+              <button
+                className="ape-save-btn ape-save-btn--primary"
+                onClick={handleInsertTable}
+              >
+                Chèn bảng
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
