@@ -436,6 +436,68 @@
   }
 }
 
+/* ── BẢNG TRONG BÀI VIẾT ────────────────────────────── */
+.nd-content .ql-table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 20px 0;
+  border-radius: 8px;
+  border: 1px solid #e0d8d0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.nd-content .ql-table-wrapper table {
+  border-collapse: collapse;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 !important;
+  /* Không dùng width:100% — để table tự co giãn theo nội dung */
+  /* min-width đủ lớn buộc scroll ngang thay vì ép cột quá hẹp */
+  min-width: 560px;
+}
+
+.nd-content .ql-table-wrapper td,
+.nd-content .ql-table-wrapper th {
+  border: 1px solid #c8bfb5;
+  padding: 10px 14px;
+  vertical-align: top;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  min-width: 120px;
+}
+
+.nd-content .ql-table-wrapper th {
+  background: #f0ebe4;
+  font-weight: 600;
+  text-align: left;
+  white-space: normal;
+}
+
+.nd-content .ql-table-wrapper td {
+  background: #fff;
+}
+
+.nd-content .ql-table-wrapper tr:hover td {
+  background: #faf7f4;
+}
+
+/* Trên mobile: giảm padding ô, font nhỏ hơn */
+@media (max-width: 640px) {
+  .nd-content .ql-table-wrapper {
+    border-radius: 6px;
+  }
+
+  .nd-content .ql-table-wrapper table {
+    font-size: 13px;
+  }
+
+  .nd-content .ql-table-wrapper td,
+  .nd-content .ql-table-wrapper th {
+    padding: 8px 10px;
+    min-width: 110px;
+  }
+}
+
 /* Share */
 .nd-share {
   display: flex;
@@ -824,7 +886,128 @@
   background: var(--red-dk);
   transform: translateY(-3px);
 }
+.nd-content img {
+  display: block;
+  width: auto;
+  max-width: min(100%, 900px);
+  height: auto;
+  margin: 32px auto;
+  border-radius: 16px;
+  object-fit: contain;
+}
+.nd-content img {
+  max-width: 100%;
+  max-height: 700px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
 
+.nd-content {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #1f2937;
+}
+
+.nd-content p {
+  margin: 16px 0;
+}
+
+/* Heading */
+.nd-content h1 {
+  color: var(--red) !important;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 32px 0 20px;
+  line-height: 1.3;
+}
+
+.nd-content h2 {
+  color: var(--red) !important;
+  font-size: 30px;
+  font-weight: 700;
+  margin: 28px 0 18px;
+  line-height: 1.4;
+}
+
+.nd-content h3 {
+  color: var(--red) !important;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 24px 0 16px;
+  line-height: 1.5;
+}
+
+.nd-content .text-tiny {
+  font-size: 0.7em;
+}
+
+.nd-content .text-small {
+  font-size: 0.85em;
+}
+
+.nd-content .text-big {
+  font-size: 1.4em;
+}
+
+.nd-content .text-huge {
+  font-size: 1.8em;
+}
+
+/* List */
+.nd-content ul,
+.nd-content ol {
+  padding-left: 24px;
+  margin: 16px 0;
+}
+
+.nd-content li {
+  margin: 8px 0;
+}
+
+/* Table */
+.nd-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.nd-content table th,
+.nd-content table td {
+  border: 1px solid #d1d5db;
+  padding: 12px;
+  vertical-align: top;
+}
+
+.nd-content table th {
+  background: #f3f4f6;
+  font-weight: 700;
+}
+
+/* Blockquote */
+.nd-content blockquote {
+  border-left: 4px solid #991b1b;
+  background: #f9f5f5;
+  padding: 16px 20px;
+  margin: 24px 0;
+  font-style: italic;
+}
+
+/* Image */
+.nd-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 20px auto;
+  display: block;
+}
+
+/* Link */
+.nd-content a {
+  color: #b91c1c;
+  text-decoration: underline;
+}
 @keyframes fadeInUp {
   from {
     opacity: 0;

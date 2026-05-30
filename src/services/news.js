@@ -106,6 +106,35 @@ export async function getPostById(id) {
 }
 
 /**
+ * Lấy TẤT CẢ bài viết đã đăng để tìm kiếm toàn văn (không phân trang)
+ * @param {string} category - lọc theo danh mục (bỏ qua nếu "all")
+ */
+export async function getAllPublishedPostsForSearch(category = "all") {
+  try {
+    let q;
+    if (category !== "all") {
+      q = query(
+        collection(db, COL),
+        where("status", "==", "published"),
+        where("category", "==", category),
+        orderBy("createdAt", "desc"),
+      );
+    } else {
+      q = query(
+        collection(db, COL),
+        where("status", "==", "published"),
+        orderBy("createdAt", "desc"),
+      );
+    }
+    const snap = await getDocs(q);
+    return snap.docs.map(toPost);
+  } catch (err) {
+    console.error("getAllPublishedPostsForSearch error:", err);
+    return [];
+  }
+}
+
+/**
  * Lấy bài viết liên quan (cùng danh mục, trừ bài hiện tại)
  */
 export async function getRelatedPosts(category, excludeId, count = 3) {

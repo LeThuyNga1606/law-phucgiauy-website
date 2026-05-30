@@ -10,6 +10,7 @@ import {
   getPublishedPosts,
   getFeaturedPosts,
   getMostReadPosts,
+  getAllPublishedPostsForSearch,
 } from "../../services/news";
 
 const POSTS_PER_PAGE = 9;
@@ -63,6 +64,9 @@ export default function News() {
   const [loadingSidebar, setLoadingSidebar] = useState(true);
   const [loadingCats, setLoadingCats] = useState(true);
   const [categories, setCategories] = useState([]);
+
+  // Search results (toàn bộ bài viết phù hợp khi đang tìm kiếm)
+  const [searchResults, setSearchResults] = useState([]);
 
   // Firestore cursor-based pagination
   // Firestore cursor-based pagination
@@ -145,6 +149,27 @@ export default function News() {
     if (q) setSearch(decodeURIComponent(q));
   }, [location.search]);
 
+  // Khi có từ khóa: fetch toàn bộ bài viết rồi lọc client-side
+  useEffect(() => {
+    if (!search.trim()) {
+      setSearchResults([]);
+      return;
+    }
+    setLoading(true);
+    getAllPublishedPostsForSearch(activeCategory)
+      .then((allPosts) => {
+        const q = search.toLowerCase();
+        const filtered = allPosts.filter(
+          (p) =>
+            p.title?.toLowerCase().includes(q) ||
+            p.excerpt?.toLowerCase().includes(q) ||
+            p.tags?.some((tag) => tag.toLowerCase().includes(q)),
+        );
+        setSearchResults(filtered);
+      })
+      .finally(() => setLoading(false));
+  }, [search, activeCategory]);
+
   // ── Phân trang ────────────────────────────────────────────────────────────
   const handlePageChange = async (page) => {
     if (page === currentPage) return;
@@ -163,17 +188,8 @@ export default function News() {
     }
   };
 
-  // ── Filter client-side khi search ─────────────────────────────────────────
-  const displayed = search.trim()
-    ? posts.filter((p) => {
-        const q = search.toLowerCase();
-        return (
-          p.title?.toLowerCase().includes(q) ||
-          p.excerpt?.toLowerCase().includes(q) ||
-          p.tags?.some((tag) => tag.toLowerCase().includes(q))
-        );
-      })
-    : posts;
+  // ── Kết quả hiển thị ──────────────────────────────────────────────────────
+  const displayed = search.trim() ? searchResults : posts;
 
   const handleSearch = (e) => {
     e.preventDefault();
