@@ -31,6 +31,7 @@ import {
   TableCaption,
   TableEditing,
   TableUI,
+  PasteFromOffice,
 } from "ckeditor5";
 import "ckeditor5/ckeditor5.css";
 
@@ -99,6 +100,7 @@ const editorConfig = {
     TableCaption,
     TableEditing,
     TableUI,
+    PasteFromOffice,
   ],
 
   toolbar: [
@@ -148,19 +150,39 @@ const editorConfig = {
     },
 
     tableCellProperties: {
-      borderColors: true,
-      backgroundColors: true,
+      borderColors: [
+        { color: "#A8171C", label: "Đỏ chủ đạo" },
+        { color: "#1e3a5f", label: "Xanh navy" },
+        { color: "#374151", label: "Xám đậm" },
+        { color: "#D1D5DB", label: "Xám nhạt" },
+        { color: "#1a1a1a", label: "Đen" },
+        { color: "#ffffff", label: "Trắng", hasBorder: true },
+      ],
+      backgroundColors: [
+        { color: "#FCA5A5", label: "Đỏ" },
+        { color: "#FB923C", label: "Cam" },
+        { color: "#FDE047", label: "Vàng" },
+        { color: "#86EFAC", label: "Xanh lá" },
+        { color: "#7DD3FC", label: "Xanh dương" },
+        { color: "#818CF8", label: "Xanh tím" },
+        { color: "#C084FC", label: "Tím" },
+        { color: "#F9A8D4", label: "Hồng" },
+        { color: "#D1D5DB", label: "Xám" },
+        { color: "#F0EBE4", label: "Kem" },
+        { color: "#ffffff", label: "Trắng", hasBorder: true },
+        { color: "#1a1a1a", label: "Đen" },
+      ],
     },
     // columnWidths: true,
   },
 
+  // ← SỬA: disallow font-family, font-size, color từ paste
   htmlSupport: {
-    allow: [
+    allow: [{ name: /.*/, styles: true, attributes: true, classes: true }],
+    disallow: [
       {
         name: /.*/,
-        styles: true,
-        attributes: true,
-        classes: true,
+        styles: ["font-family", "font-size", "mso-*", "color"],
       },
     ],
   },
@@ -191,6 +213,32 @@ const editorConfig = {
         class: "ck-heading_heading3",
       },
     ],
+  },
+
+  fontColor: {
+    colors: [
+      // Màu chính của website
+      { color: "#A8171C", label: "Đỏ chủ đạo" },
+      { color: "#1e3a5f", label: "Xanh navy" },
+      { color: "#0f5c3a", label: "Xanh lá" },
+      { color: "#5c3a0f", label: "Nâu" },
+      { color: "#2d5a27", label: "Xanh đậm" },
+      { color: "#6b21a8", label: "Tím" },
+      // Màu trung tính
+      { color: "#1a1a1a", label: "Đen" },
+      { color: "#374151", label: "Xám đậm" },
+      { color: "#6b7280", label: "Xám" },
+      { color: "#9ca3af", label: "Xám nhạt" },
+      { color: "#ffffff", label: "Trắng", hasBorder: true },
+      // Màu bổ sung
+      { color: "#DC2626", label: "Đỏ" },
+      { color: "#D97706", label: "Cam" },
+      { color: "#16A34A", label: "Xanh lá sáng" },
+      { color: "#2563EB", label: "Xanh dương" },
+      { color: "#7C3AED", label: "Tím đậm" },
+    ],
+    columns: 5, // số cột hiển thị
+    documentColors: 0, // ← ẩn "Document colors" (màu đã dùng trong doc)
   },
 };
 
@@ -473,6 +521,32 @@ export default function AdminPostEditor() {
 
     setSaving(true);
 
+    const stripInlineStyles = (html) => {
+      return html
+        .replace(/style="([^"]*)"/gi, (match, styles) => {
+          const cleaned = styles
+            .split(";")
+            .map((s) => s.trim())
+            .filter((s) => {
+              const prop = s.split(":")[0]?.trim().toLowerCase();
+              const removeProps = [
+                "font-family",
+                "font-size",
+                "color",
+                "mso-",
+                "background-color",
+              ];
+              return s && !removeProps.some((r) => prop?.startsWith(r));
+            })
+            .join("; ")
+            .trim();
+          return cleaned ? `style="${cleaned}"` : "";
+        })
+        .replace(/<font[^>]*>(.*?)<\/font>/gi, "$1")
+        .replace(/<span style="">(.*?)<\/span>/gi, "$1")
+        .replace(/<span\s*>(.*?)<\/span>/gi, "$1");
+    };
+
     let cleanContent = liveContent;
 
     if (liveContent.includes("data:image")) {
@@ -708,6 +782,26 @@ export default function AdminPostEditor() {
                     data={form.content}
                     onReady={(editor) => {
                       editorRef.current = editor;
+                      // Ẩn Border và Dimensions trong Cell properties bằng CSS inject
+                      const style = document.createElement("style");
+                      style.textContent = `
+    /* Ẩn section Border */
+    .ck-table-cell-properties-form .ck-form__row:has(
+      input[class*="border"]
+    ) { display: none !important; }
+
+    /* Ẩn label Border */
+    .ck-table-cell-properties-form > label:first-child,
+    .ck-table-cell-properties-form > .ck-label {
+      display: none !important;
+    }
+
+    /* Ẩn Dimensions (width, height, padding) */
+    .ck-table-cell-properties-form .ck-form__row:has(
+      [class*="width"], [class*="height"], [class*="padding"]
+    ) { display: none !important; }
+  `;
+                      document.head.appendChild(style);
                     }}
                     onChange={(event, editor) => {
                       const data = editor.getData();

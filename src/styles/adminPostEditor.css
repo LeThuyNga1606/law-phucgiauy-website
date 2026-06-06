@@ -74,7 +74,6 @@
 }
 .ape-topbar-title {
   font-size: 16px;
-
   color: var(--text);
   letter-spacing: -0.2px;
 }
@@ -98,7 +97,7 @@
   }
 }
 
-/* Status toggle */
+/* ── STATUS TOGGLE ───────────────────────────────────── */
 .ape-status-toggle {
   display: flex;
   background: var(--bg);
@@ -128,7 +127,7 @@
   color: var(--red);
 }
 
-/* Save buttons */
+/* ── SAVE BUTTONS ────────────────────────────────────── */
 .ape-save-btn {
   display: inline-flex;
   align-items: center;
@@ -148,7 +147,6 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
-
 .ape-save-btn--ghost {
   background: var(--bg);
   color: var(--text);
@@ -158,7 +156,6 @@
   border-color: var(--red);
   color: var(--red);
 }
-
 .ape-save-btn--primary {
   background: var(--red);
   color: #fff;
@@ -169,12 +166,11 @@
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(168, 23, 28, 0.35);
 }
-
 .ape-save-btn--full {
   width: 100%;
 }
 
-/* Spinner */
+/* ── SPINNER ─────────────────────────────────────────── */
 .ape-spinner {
   width: 15px;
   height: 15px;
@@ -203,15 +199,14 @@
   grid-template-columns: 1fr 300px;
   gap: 24px;
   align-items: start;
-  /* display: flex; */
-  gap: 24px;
   max-width: 1280px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 /* ── TABS ────────────────────────────────────────────── */
 .ape-tabs {
   display: flex;
-  gap: 0;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px 10px 0 0;
@@ -240,7 +235,7 @@
   background: rgba(168, 23, 28, 0.03);
 }
 
-/* ── CONTENT AREA ────────────────────────────────────── */
+/* ── CONTENT / SEO TAB ───────────────────────────────── */
 .ape-content-tab,
 .ape-seo-tab {
   background: var(--surface);
@@ -259,13 +254,11 @@
   flex-direction: column;
   gap: 7px;
 }
-
 .ape-field--error .ape-input,
 .ape-field--error .ape-textarea {
   border-color: #dc2626;
   background: rgba(220, 38, 38, 0.02);
 }
-
 .ape-field--sm {
   margin-bottom: 12px;
 }
@@ -296,6 +289,7 @@
     box-shadow 0.2s;
   font-family: Arial, sans-serif;
   width: 100%;
+  box-sizing: border-box;
 }
 .ape-input:focus {
   border-color: var(--red);
@@ -304,7 +298,6 @@
 .ape-input::placeholder {
   color: #bbb;
 }
-
 .ape-input--title {
   font-size: 17px;
   font-weight: 700;
@@ -326,6 +319,7 @@
   font-family: Arial, sans-serif;
   line-height: 1.65;
   width: 100%;
+  box-sizing: border-box;
 }
 .ape-textarea:focus {
   border-color: var(--red);
@@ -347,6 +341,7 @@
   transition: border-color 0.2s;
   font-family: Arial, sans-serif;
   width: 100%;
+  box-sizing: border-box;
 }
 .ape-select:focus {
   border-color: var(--red);
@@ -356,7 +351,6 @@
   display: flex;
   justify-content: flex-end;
 }
-
 .ape-char-count {
   font-size: 11.5px;
   color: var(--muted);
@@ -371,7 +365,7 @@
   font-weight: 600;
 }
 
-/* ── QUILL EDITOR ────────────────────────────────────── */
+/* ── EDITOR LABEL ROW ────────────────────────────────── */
 .ape-editor-label-row {
   display: flex;
   align-items: center;
@@ -379,13 +373,11 @@
   gap: 12px;
   flex-wrap: wrap;
 }
-
 .ape-editor-tools {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-
 .ape-img-insert-btn {
   display: inline-flex;
   align-items: center;
@@ -408,7 +400,6 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
-
 .ape-word-count {
   font-size: 12px;
   color: var(--muted);
@@ -421,7 +412,6 @@
 .ape-main {
   display: flex;
   flex-direction: column;
-  /* gap: 40px; */
   min-width: 0;
 }
 
@@ -438,7 +428,6 @@
   color: var(--muted);
   line-height: 1.65;
 }
-
 .ape-seo-bar {
   height: 4px;
   background: var(--border);
@@ -454,7 +443,7 @@
     background 0.3s;
 }
 
-/* Google preview */
+/* ── GOOGLE PREVIEW ──────────────────────────────────── */
 .ape-google-preview {
   margin-top: 8px;
 }
@@ -466,7 +455,6 @@
   color: var(--muted);
   margin-bottom: 10px;
 }
-
 .ape-gp-box {
   padding: 16px 18px;
   background: #fff;
@@ -474,7 +462,6 @@
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
-
 .ape-gp-url {
   font-size: 12px;
   color: #16a34a;
@@ -505,17 +492,14 @@
   gap: 20px;
   min-width: 0;
 }
-
 .ape-sidebar-block {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 18px;
 }
-
 .ape-sidebar-title {
   font-size: 11.5px;
-
   letter-spacing: 1.5px;
   text-transform: uppercase;
   color: var(--muted);
@@ -524,7 +508,7 @@
   border-bottom: 1px solid var(--border);
 }
 
-/* Publish */
+/* ── PUBLISH ─────────────────────────────────────────── */
 .ape-publish-row {
   display: flex;
   align-items: center;
@@ -551,7 +535,7 @@
   color: var(--muted);
 }
 
-/* Toggle switch */
+/* ── TOGGLE SWITCH ───────────────────────────────────── */
 .ape-toggle-row {
   display: flex;
   align-items: center;
@@ -568,7 +552,6 @@
   font-size: 11px;
   color: var(--muted);
 }
-
 .ape-toggle-btn {
   width: 44px;
   height: 24px;
@@ -585,7 +568,6 @@
 .ape-toggle-btn.off {
   background: #d1cbc4;
 }
-
 .ape-toggle-knob {
   position: absolute;
   width: 18px;
@@ -603,7 +585,7 @@
   left: 3px;
 }
 
-/* Thumbnail */
+/* ── THUMBNAIL ───────────────────────────────────────── */
 .ape-thumb-upload {
   display: flex;
   flex-direction: column;
@@ -623,7 +605,6 @@
   border-color: var(--red);
   background: rgba(168, 23, 28, 0.03);
 }
-
 .ape-thumb-icon {
   font-size: 28px;
 }
@@ -636,7 +617,6 @@
   font-size: 11.5px;
   color: var(--muted);
 }
-
 .ape-thumb-preview {
   position: relative;
   border-radius: 8px;
@@ -664,7 +644,6 @@
 .ape-thumb-preview:hover .ape-thumb-overlay {
   opacity: 1;
 }
-
 .ape-thumb-change,
 .ape-thumb-remove {
   padding: 7px 12px;
@@ -684,7 +663,7 @@
   color: #fff;
 }
 
-/* Tags */
+/* ── TAGS ────────────────────────────────────────────── */
 .ape-tags-input-wrap {
   display: flex;
   flex-wrap: wrap;
@@ -700,7 +679,6 @@
 .ape-tags-input-wrap:focus-within {
   border-color: var(--red);
 }
-
 .ape-tag {
   display: inline-flex;
   align-items: center;
@@ -713,7 +691,6 @@
   font-weight: 600;
   color: var(--red);
 }
-
 .ape-tag-remove {
   background: none;
   border: none;
@@ -728,7 +705,6 @@
 .ape-tag-remove:hover {
   opacity: 1;
 }
-
 .ape-tag-input {
   flex: 1;
   min-width: 80px;
@@ -746,7 +722,6 @@
   font-size: 11px;
   color: var(--muted);
 }
-
 .ape-suggested-tags {
   display: flex;
   flex-wrap: wrap;
@@ -770,80 +745,135 @@
   background: rgba(168, 23, 28, 0.04);
 }
 
-/* Sidebar save */
+/* ── SIDEBAR SAVE ────────────────────────────────────── */
 .ape-sidebar-save {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.ql-undo::before {
-  content: "↺";
+/* ═══════════════════════════════════════════════════════
+   CKEDITOR — TOOLBAR & EDITABLE
+═══════════════════════════════════════════════════════ */
+.ape-ckeditor .ck-editor {
+  width: 100%;
+}
+.ape-ckeditor .ck-toolbar {
+  border: 1.5px solid var(--border) !important;
+  border-bottom: none !important;
+  border-radius: 8px 8px 0 0 !important;
+  background: var(--bg) !important;
+}
+.ape-ckeditor .ck-editor__editable {
+  min-height: 420px;
+  max-height: 700px;
+
+  border: 1.5px solid var(--border) !important;
+  border-radius: 0 0 8px 8px !important;
+  padding: 20px 24px !important;
+
+  font-size: 15px;
+  line-height: 1.8;
+  background: #fff;
+
+  /* Cho phép scroll ngang khi bảng rộng hơn editor,
+     tránh reflow liên tục khi kéo resize cột */
+  overflow-x: auto;
 }
 
-.ql-redo::before {
-  content: "↻";
-}
-/* Align buttons trong format bar */
-.ape-format-bar button[title^="Căn"] {
-  font-size: 11px;
-  letter-spacing: -1px;
-  min-width: 28px;
-}
-
-.ape-ckeditor img {
-  max-width: 100%;
+/* ═══════════════════════════════════════════════════════
+   CKEDITOR — ẢNH TRONG NỘI DUNG
+═══════════════════════════════════════════════════════ */
+.ape-ckeditor .ck-content img {
+  max-width: min(100%, 900px);
+  width: auto;
   height: auto;
   display: block;
   margin: 12px auto;
   border-radius: 8px;
-}
-
-.ape-ckeditor img {
-  max-width: 100%;
-  max-height: 600px;
-  height: auto;
   object-fit: contain;
 }
-
 .ape-ckeditor .ck-content {
   overflow-wrap: break-word;
+  word-break: break-word;
+
+  /* Chỉ isolate style, không block layout/paint
+     → tránh giật khi browser tính lại layout bảng */
+  contain: style;
 }
 
-.ape-ckeditor .ck-content table {
-  width: 100%;
+/* ═══════════════════════════════════════════════════════
+   CKEDITOR — BẢNG (TABLE)
+   Nguyên tắc: KHÔNG override width / table-layout
+   để CKEditor TableColumnResize tự điều khiển.
+═══════════════════════════════════════════════════════ */
+
+/* Wrapper figure — scroll ngang khi bảng vượt chiều rộng */
+.ape-ckeditor .ck-content figure.table {
   display: block;
+  width: 100%;
   overflow-x: auto;
+  margin: 20px 0;
+
+  /* Tạo stacking context riêng, giảm repaint lan rộng */
+  isolation: isolate;
 }
 
-.ape-ckeditor img {
-  width: auto;
-  max-width: min(100%, 900px);
+/* Table core
+   - KHÔNG đặt width: 100% !important
+   - KHÔNG đặt table-layout: fixed !important
+   → để CKEditor tự set khi người dùng resize cột */
+.ape-ckeditor .ck-content table {
+  border-collapse: collapse;
+  background: #fff;
+
+  /* GPU layer nhẹ, giảm repaint khi kéo cột
+     (dùng translateZ thay vì will-change: transform
+      để tránh promote toàn bộ bảng lên composite layer
+      gây sync cost mỗi frame) */
+  transform: translateZ(0);
+}
+
+/* Cell */
+.ape-ckeditor .ck-content th,
+.ape-ckeditor .ck-content td {
+  border: 1px solid #d6d6d6;
+  padding: 8px 10px;
+  box-sizing: border-box;
+  vertical-align: top;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Header */
+.ape-ckeditor .ck-content th {
+  background: #f5f5f5;
+  font-weight: 700;
+}
+
+/* Ảnh bên trong ô bảng */
+.ape-ckeditor .ck-content table img {
+  max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* ===== TABLE CKEDITOR ===== */
-
+/* ═══════════════════════════════════════════════════════
+   CKEDITOR — TABLE (HIỂN THỊ NGOÀI EDITOR / FRONTEND)
+═══════════════════════════════════════════════════════ */
 .nd-content figure.table {
   width: 100%;
   overflow-x: auto;
   margin: 24px 0;
 }
-
-.nd-content table {
-  width: max-content;
-  min-width: 100%;
-  border-collapse: collapse;
-  table-layout: auto;
-}
-
+.nd-content table,
 .nd-content figure.table table {
   border-collapse: collapse;
   width: max-content;
   min-width: 100%;
   table-layout: auto;
 }
-
 .nd-content figure.table td,
 .nd-content figure.table th {
   border: 1px solid #d1d5db;
@@ -851,10 +881,202 @@
   vertical-align: top;
   word-break: break-word;
 }
-
 .nd-content figure.table th {
   background: #f3f4f6;
   font-weight: 700;
+}
+
+/* ═══════════════════════════════════════════════════════
+   TABLE DIALOG
+═══════════════════════════════════════════════════════ */
+.ape-table-dialog-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ape-table-dialog {
+  background: #fff;
+  border-radius: 10px;
+  padding: 28px 32px;
+  min-width: 320px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.ape-table-dialog-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a1210;
+  margin-bottom: 4px;
+}
+.ape-table-dialog-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 14px;
+  color: #3a3230;
+}
+.ape-table-dialog-input {
+  width: 80px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+.ape-table-dialog-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
+/* ── Table context menu ──────────────────────────────── */
+.ape-table-menu {
+  position: absolute;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid #d4c9bb;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 6px;
+  max-width: 340px;
+}
+.ape-table-menu button {
+  font-size: 12px;
+  padding: 5px 10px;
+  border: 1px solid #d4c9bb;
+  border-radius: 4px;
+  background: #faf8f5;
+  color: #5a4a3a;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.ape-table-menu button:hover {
+  background: #f0ebe4;
+}
+.ape-table-menu-sep {
+  width: 100%;
+  height: 1px;
+  background: #e8e0d5;
+  margin: 2px 0;
+}
+.ape-table-menu-del {
+  color: #c0392b !important;
+  border-color: #f5c6c6 !important;
+  background: #fff5f5 !important;
+}
+.ape-table-menu-del:hover {
+  background: #fde8e8 !important;
+}
+
+/* ── Table format bar ────────────────────────────────── */
+.ape-format-bar {
+  position: fixed;
+  z-index: 10000;
+  background: #2c2c2c;
+  border-radius: 6px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  padding: 3px 5px;
+  user-select: none;
+}
+.ape-format-bar button {
+  font-size: 13px;
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #f0f0f0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.12s;
+  padding: 0;
+}
+.ape-format-bar button:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+.ape-format-bar-sep {
+  width: 1px;
+  height: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 0 3px;
+}
+.ape-format-bar-color-btn {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: #e74c3c;
+  text-underline-offset: 2px;
+}
+.ape-format-bar-bg-btn {
+  font-size: 15px;
+  color: #f9ca24;
+  text-shadow: 0 0 1px #888;
+}
+/* ── FORCE FONT MẶC ĐỊNH TRONG CKEDITOR ── */
+.ape-ckeditor .ck-editor__editable,
+.ape-ckeditor .ck-editor__editable p,
+.ape-ckeditor .ck-editor__editable li,
+.ape-ckeditor .ck-editor__editable td,
+.ape-ckeditor .ck-editor__editable th,
+.ape-ckeditor .ck-editor__editable span {
+  font-family: Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.8 !important;
+  color: #1a1a1a !important;
+}
+
+.ape-ckeditor .ck-editor__editable h1,
+.ape-ckeditor .ck-editor__editable h1 * {
+  font-size: 28px !important;
+}
+.ape-ckeditor .ck-editor__editable h2,
+.ape-ckeditor .ck-editor__editable h2 * {
+  font-size: 24px !important;
+}
+.ape-ckeditor .ck-editor__editable h3,
+.ape-ckeditor .ck-editor__editable h3 * {
+  font-size: 20px !important;
+}
+
+.ape-ckeditor .ck-editor__editable strong,
+.ape-ckeditor .ck-editor__editable b {
+  font-weight: 700 !important;
+}
+.ape-ckeditor .ck-editor__editable em,
+.ape-ckeditor .ck-editor__editable i {
+  font-style: italic !important;
+}
+/* ── ẨN DIMENSIONS VÀ BORDER TRONG CELL PROPERTIES ── */
+.ck.ck-form__row.ck-table-cell-properties-form__border-row,
+.ck.ck-form__row:has(.ck-table-cell-properties-form__border-style),
+.ck.ck-form__row:has(.ck-table-cell-properties-form__border-color),
+.ck.ck-form__row:has(.ck-table-cell-properties-form__border-width),
+.ck.ck-form__row:has(.ck-table-cell-properties-form__width),
+.ck.ck-form__row:has(.ck-table-cell-properties-form__height),
+.ck.ck-form__row:has(.ck-table-cell-properties-form__padding),
+.ck-table-cell-properties-form .ck-form__row:first-child,
+/* Label "Border" */
+.ck-table-cell-properties-form > .ck-label:first-of-type,
+/* Label "Dimensions" */  
+.ck-table-cell-properties-form > .ck-label:nth-of-type(3) {
+  display: none !important;
 }
 
 /* ── RESPONSIVE ──────────────────────────────────────── */
@@ -885,290 +1107,4 @@
   .ape-seo-tab {
     padding: 16px;
   }
-}
-
-/* ═══════════════════════════════════════════════════════
-   TABLE DIALOG
-═══════════════════════════════════════════════════════ */
-.ape-table-dialog-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.45);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.ape-table-dialog {
-  background: #fff;
-  border-radius: 10px;
-  padding: 28px 32px;
-  min-width: 320px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.ape-table-dialog-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: #1a1210;
-  margin-bottom: 4px;
-}
-
-.ape-table-dialog-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  font-size: 14px;
-  color: #3a3230;
-}
-
-.ape-table-dialog-input {
-  width: 80px;
-  padding: 6px 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 14px;
-  text-align: center;
-}
-
-.ape-table-dialog-actions {
-  display: flex;
-  gap: 10px;
-  justify-content: flex-end;
-  margin-top: 4px;
-}
-
-/* ── Table context menu (floating) ─────────────────────────────────────────── */
-.ape-table-menu {
-  position: absolute;
-  z-index: 9999;
-  background: #fff;
-  border: 1px solid #d4c9bb;
-  border-radius: 6px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.14);
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 2px;
-  padding: 6px;
-  max-width: 340px;
-}
-
-.ape-table-menu button {
-  font-size: 12px;
-  padding: 5px 10px;
-  border: 1px solid #d4c9bb;
-  border-radius: 4px;
-  background: #faf8f5;
-  color: #5a4a3a;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background 0.15s;
-}
-
-.ape-table-menu button:hover {
-  background: #f0ebe4;
-}
-
-.ape-table-menu-sep {
-  width: 100%;
-  height: 1px;
-  background: #e8e0d5;
-  margin: 2px 0;
-}
-
-.ape-table-menu-del {
-  color: #c0392b !important;
-  border-color: #f5c6c6 !important;
-  background: #fff5f5 !important;
-}
-
-.ape-table-menu-del:hover {
-  background: #fde8e8 !important;
-}
-
-/* ── Table format bar (bold/italic/color...) ─────────────────────────────── */
-.ape-format-bar {
-  position: fixed;
-  z-index: 10000;
-  background: #2c2c2c;
-  border-radius: 6px;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
-  display: flex;
-  align-items: center;
-  gap: 1px;
-  padding: 3px 5px;
-  user-select: none;
-  pointer-events: all;
-}
-
-.ape-format-bar button {
-  font-size: 13px;
-  width: 28px;
-  height: 28px;
-  border: none;
-  border-radius: 4px;
-  background: transparent;
-  color: #f0f0f0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.12s;
-  padding: 0;
-}
-
-.ape-format-bar button:hover {
-  background: rgba(255, 255, 255, 0.15);
-}
-
-.ape-format-bar-sep {
-  width: 1px;
-  height: 18px;
-  background: rgba(255, 255, 255, 0.2);
-  margin: 0 3px;
-}
-
-.ape-format-bar-color-btn {
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-color: #e74c3c;
-  text-underline-offset: 2px;
-  position: relative;
-  overflow: hidden;
-}
-
-.ape-format-bar-bg-btn {
-  font-size: 15px;
-  color: #f9ca24;
-  text-shadow: 0 0 1px #888;
-  position: relative;
-  overflow: hidden;
-} /* ===== CKEDITOR ===== */
-
-.ape-ckeditor .ck-editor {
-  width: 100%;
-}
-
-.ape-ckeditor .ck-toolbar {
-  border: 1.5px solid var(--border) !important;
-  border-bottom: none !important;
-  border-radius: 8px 8px 0 0 !important;
-  background: var(--bg) !important;
-}
-
-.ape-ckeditor .ck-editor__editable {
-  min-height: 420px;
-  max-height: 700px;
-  /* overflow-y: auto; */
-
-  border: 1.5px solid var(--border) !important;
-  border-radius: 0 0 8px 8px !important;
-
-  padding: 20px 24px !important;
-
-  font-size: 15px;
-  line-height: 1.8;
-
-  background: #fff;
-}
-/* ===== TABLE CKEDITOR ===== */
-
-/*.ape-ckeditor .ck-content figure.table {
-  width: 100%;
-  overflow-x: auto;
-  margin: 20px 0;
-}
-
-.ape-ckeditor .ck-content table {
-  border-collapse: collapse;
-
-  width: 100% !important;
-  table-layout: fixed;
-
-  min-width: unset;
-}
-
-.ape-ckeditor .ck-content th,
-.ape-ckeditor .ck-content td {
-  border: 1px solid #d6d6d6;
-  padding: 10px 12px;
-  vertical-align: top;
-}
-
-.ape-ckeditor .ck-content th {
-  background: #f5f5f5;
-  font-weight: 700;
-}
-.ape-ckeditor .ck-content img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  margin: 16px auto;
-  border-radius: 8px;
-}
-.ape-ckeditor .ck-content {
-  overflow-wrap: break-word;
-  word-break: break-word;
-}*/
-/* ================================
-   CKEDITOR TABLE SYSTEM - STABLE
-================================ */
-
-.ape-ckeditor .ck-content figure.table {
-  width: 100%;
-  display: block;
-  overflow-x: auto;
-  margin: 20px 0;
-}
-
-/* TABLE CORE - FIX DRAG STABILITY */
-.ape-ckeditor .ck-content table {
-  border-collapse: collapse;
-
-  width: 100% !important;
-  table-layout: fixed !important;
-
-  background: #fff;
-  will-change: transform;
-}
-
-/* CELL */
-.ape-ckeditor .ck-content th,
-.ape-ckeditor .ck-content td {
-  border: 1px solid #d6d6d6;
-  padding: 8px 10px;
-  box-sizing: border-box;
-
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: normal;
-}
-
-/* HEADER */
-.ape-ckeditor .ck-content th {
-  background: #f5f5f5;
-  font-weight: 700;
-}
-
-/* IMAGE INSIDE TABLE */
-.ape-ckeditor .ck-content table img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* FIX CKEDITOR EDITABLE SCROLL */
-.ck.ck-editor__editable {
-  overflow-x: hidden !important;
-}
-
-/* PREVENT REPAINT JITTER */
-.ape-ckeditor .ck-content {
-  contain: layout paint;
 }
