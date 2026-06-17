@@ -1039,7 +1039,7 @@
   font-family: Arial, sans-serif !important;
   font-size: 15px !important;
   line-height: 1.8 !important;
-  color: #1a1a1a !important;
+  /* color: #1a1a1a !important; */
 }
 
 .ape-ckeditor .ck-editor__editable h1,

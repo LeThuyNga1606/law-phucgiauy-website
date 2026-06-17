@@ -244,7 +244,7 @@
 }
 
 .nd-content strong {
-  color: var(--text);
+  /* color: var(--text); */
   font-weight: 700;
 }
 
@@ -271,7 +271,7 @@
   border-left: 3px solid var(--red);
 }
 
-.nd-content li::before {
+/* .nd-content li::before {
   content: "✓";
   color: var(--red);
   font-weight: 700;
@@ -279,6 +279,48 @@
   flex-shrink: 0;
   margin-top: 2px;
   padding: 5px;
+} */
+.nd-content ul {
+  padding-left: 24px;
+  list-style: none !important;
+  display: block;
+}
+/* UL có dấu tick */
+.nd-content ul li {
+  position: relative;
+  padding-left: 28px;
+}
+
+.nd-content ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+  margin: 20px 0;
+}
+
+.nd-content ul li {
+  position: relative;
+  margin: 12px 0;
+  padding: 10px !important;
+  background: #f9f5f5 !important;
+  border-left: 4px solid var(--red) !important;
+  border-radius: 5px !important;
+
+  line-height: 1.8;
+}
+
+.nd-content ul li::before {
+  content: "✓";
+  color: var(--red);
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 2px;
+  padding: 5px;
+}
+
+/* OL không dùng tick */
+.nd-content ol li::before {
+  display: none;
 }
 
 .nd-content blockquote {
@@ -915,7 +957,7 @@
 
 /* Heading */
 .nd-content h1 {
-  color: var(--red) !important;
+  /* color: var(--red) !important; */
   font-size: 36px;
   font-weight: 700;
   margin: 32px 0 20px;
@@ -923,7 +965,7 @@
 }
 
 .nd-content h2 {
-  color: var(--red) !important;
+  /* color: var(--red) !important; */
   font-size: 30px;
   font-weight: 700;
   margin: 28px 0 18px;
@@ -931,11 +973,28 @@
 }
 
 .nd-content h3 {
-  color: var(--red) !important;
+  /* color: var(--red) !important; */
   font-size: 24px;
   font-weight: 600;
   margin: 24px 0 16px;
   line-height: 1.5;
+}
+
+.nd-content h1 {
+  color: var(--red);
+}
+.nd-content h2 {
+  color: var(--red);
+}
+.nd-content h3 {
+  color: var(--red);
+}
+
+/* Chỉ dùng khi tiêu đề KHÔNG có inline color */
+.nd-content h1:not([style*="color"]),
+.nd-content h2:not([style*="color"]),
+.nd-content h3:not([style*="color"]) {
+  color: var(--red);
 }
 
 .nd-content .text-tiny {
@@ -1017,6 +1076,45 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Chỉ áp dụng style li cho bài viết cũ dùng Quill */
+.nd-content .ql-table-wrapper ~ ul li,
+.nd-content > ul li,
+.nd-content > ol li {
+  padding: 10px 16px;
+  background: var(--cream);
+  border-radius: 6px;
+  border-left: 3px solid var(--red);
+}
+
+/* Li từ CKEditor — dùng list thông thường */
+.nd-content ul li,
+.nd-content ol li {
+  font-size: 15px;
+  color: #3a3a3a;
+  line-height: 1.7;
+  margin: 6px 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+}
+
+/* .nd-content ul li::before {
+  display: none;
+} */
+
+/* Restore padding-left cho list */
+.nd-content ul,
+.nd-content ol {
+  padding-left: 24px;
+  list-style: disc;
+  display: block;
+}
+
+.nd-content ol {
+  list-style: decimal;
 }
 
 /* ── NOT FOUND ───────────────────────────────────────── */

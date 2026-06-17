@@ -182,7 +182,7 @@ const editorConfig = {
     disallow: [
       {
         name: /.*/,
-        styles: ["font-family", "font-size", "mso-*", "color"],
+        styles: ["font-family", "font-size", "mso-*"],
       },
     ],
   },
@@ -532,7 +532,7 @@ export default function AdminPostEditor() {
               const removeProps = [
                 "font-family",
                 "font-size",
-                "color",
+                // "color",
                 "mso-",
                 "background-color",
               ];
@@ -782,25 +782,55 @@ export default function AdminPostEditor() {
                     data={form.content}
                     onReady={(editor) => {
                       editorRef.current = editor;
+                      // Cho phép paste ảnh từ clipboard
+                      editor.editing.view.document.on(
+                        "clipboardInput",
+                        (evt, data) => {
+                          const files = Array.from(
+                            data.dataTransfer?.files || [],
+                          );
+                          const imageFile = files.find((f) =>
+                            f.type.startsWith("image/"),
+                          );
+                          if (!imageFile) return;
+
+                          evt.stop();
+
+                          uploadToCloudinary(imageFile)
+                            .then((url) => {
+                              const viewFragment = editor.data.processor.toView(
+                                `<p><img src="${url}" alt="image" /></p>`,
+                              );
+                              const modelFragment =
+                                editor.data.toModel(viewFragment);
+                              editor.model.insertContent(
+                                modelFragment,
+                                editor.model.document.selection,
+                              );
+                              update("content", editor.getData());
+                            })
+                            .catch(() => alert("Upload ảnh thất bại."));
+                        },
+                      );
                       // Ẩn Border và Dimensions trong Cell properties bằng CSS inject
                       const style = document.createElement("style");
                       style.textContent = `
-    /* Ẩn section Border */
-    .ck-table-cell-properties-form .ck-form__row:has(
-      input[class*="border"]
-    ) { display: none !important; }
+                        /* Ẩn section Border */
+                        .ck-table-cell-properties-form .ck-form__row:has(
+                          input[class*="border"]
+                        ) { display: none !important; }
 
-    /* Ẩn label Border */
-    .ck-table-cell-properties-form > label:first-child,
-    .ck-table-cell-properties-form > .ck-label {
-      display: none !important;
-    }
+                        /* Ẩn label Border */
+                        .ck-table-cell-properties-form > label:first-child,
+                        .ck-table-cell-properties-form > .ck-label {
+                          display: none !important;
+                        }
 
-    /* Ẩn Dimensions (width, height, padding) */
-    .ck-table-cell-properties-form .ck-form__row:has(
-      [class*="width"], [class*="height"], [class*="padding"]
-    ) { display: none !important; }
-  `;
+                        /* Ẩn Dimensions (width, height, padding) */
+                        .ck-table-cell-properties-form .ck-form__row:has(
+                          [class*="width"], [class*="height"], [class*="padding"]
+                        ) { display: none !important; }
+                      `;
                       document.head.appendChild(style);
                     }}
                     onChange={(event, editor) => {
