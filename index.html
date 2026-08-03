@@ -3,77 +3,199 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- Favicon (PHẢI để trong public/assets/) -->
-    <link rel="icon" type="image/png" href="/assets/images/logo.png" />
+    <!-- ==================================================
+         FAVICON
+         Các file này phải nằm trực tiếp trong thư mục public
+    =================================================== -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="/favicon-48x48.png"
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="96x96"
+      href="/favicon-96x96.png"
+    />
+
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png"
+    />
+
+    <!-- Màu giao diện trình duyệt trên thiết bị di động -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- ==================================================
+         CẤU HÌNH CƠ BẢN
+    =================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- SEO Title -->
-    <title>Công ty Luật TNHH Phúc Gia Uy & Cộng sự</title>
+    <title>Công ty Luật TNHH Phúc Gia Uy &amp; Cộng sự</title>
 
-    <!-- Meta description -->
     <meta
       name="description"
       content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý: Dân sự, Hình sự, Đầu tư nước ngoài (FDI), Doanh nghiệp và Giấy phép."
     />
 
-    <!-- Open Graph -->
+    <meta
+      name="author"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+    />
+
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+
+    <!-- Đường dẫn chính thức của trang -->
+    <link rel="canonical" href="https://luatphucgiauy.vn/" />
+
+    <!-- ==================================================
+         OPEN GRAPH
+         Dùng khi chia sẻ website qua Facebook, Zalo...
+    =================================================== -->
     <meta property="og:type" content="website" />
+
+    <meta property="og:locale" content="vi_VN" />
+
+    <meta property="og:url" content="https://luatphucgiauy.vn/" />
+
     <meta
       property="og:title"
       content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
     />
+
     <meta
       property="og:description"
       content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý tại Việt Nam."
     />
+
+    <!-- File public/logo.png -->
     <meta
       property="og:image"
-      content="https://luatphucgiauy.vn/assets/images/logo.png"
+      content="https://luatphucgiauy.vn/logo.png"
     />
-    <meta property="og:url" content="https://luatphucgiauy.vn" />
-    <meta property="og:site_name" content="Công ty Luật Phúc Gia Uy" />
 
-    <!-- Canonical (TRÁNH TRÙNG KẾT QUẢ GOOGLE) -->
-    <link rel="canonical" href="https://luatphucgiauy.vn/" />
+    <meta
+      property="og:image:secure_url"
+      content="https://luatphucgiauy.vn/logo.png"
+    />
 
-    <!-- ================== SCHEMA QUAN TRỌNG ================== -->
+    <meta property="og:image:type" content="image/png" />
 
-    <!-- 1. Website (QUAN TRỌNG NHẤT để đổi tên hiển thị) -->
+    <meta
+      property="og:image:alt"
+      content="Logo Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+    />
+
+    <meta
+      property="og:site_name"
+      content="Công ty Luật Phúc Gia Uy"
+    />
+
+    <!-- ==================================================
+         TWITTER / X CARD
+    =================================================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta
+      name="twitter:title"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+    />
+
+    <meta
+      name="twitter:description"
+      content="Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý tại Việt Nam."
+    />
+
+    <meta
+      name="twitter:image"
+      content="https://luatphucgiauy.vn/logo.png"
+    />
+
+    <meta
+      name="twitter:image:alt"
+      content="Logo Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+    />
+
+    <!-- ==================================================
+         STRUCTURED DATA: WEBSITE
+    =================================================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
+        "@id": "https://luatphucgiauy.vn/#website",
         "name": "Công ty Luật Phúc Gia Uy",
-        "alternateName": "Phúc Gia Uy Law Firm",
-        "url": "https://luatphucgiauy.vn"
+        "alternateName": [
+          "Luật Phúc Gia Uy",
+          "Phúc Gia Uy Law Firm"
+        ],
+        "url": "https://luatphucgiauy.vn/",
+        "inLanguage": "vi-VN",
+        "publisher": {
+          "@id": "https://luatphucgiauy.vn/#organization"
+        }
       }
     </script>
 
-    <!-- 2. Organization (tăng độ tin cậy thương hiệu) -->
+    <!-- ==================================================
+         STRUCTURED DATA: ORGANIZATION
+    =================================================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Công ty Luật Phúc Gia Uy",
-        "url": "https://luatphucgiauy.vn",
-        "logo": "https://luatphucgiauy.vn/assets/images/logo.png"
+        "@id": "https://luatphucgiauy.vn/#organization",
+        "name": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự",
+        "alternateName": "Công ty Luật Phúc Gia Uy",
+        "url": "https://luatphucgiauy.vn/",
+        "logo": {
+          "@type": "ImageObject",
+          "@id": "https://luatphucgiauy.vn/#logo",
+          "url": "https://luatphucgiauy.vn/logo.png",
+          "contentUrl": "https://luatphucgiauy.vn/logo.png",
+          "caption": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự"
+        },
+        "image": {
+          "@id": "https://luatphucgiauy.vn/#logo"
+        }
       }
     </script>
 
-    <!-- 3. LegalService (giữ lại từ code cũ - OK) -->
+    <!-- ==================================================
+         STRUCTURED DATA: LEGAL SERVICE
+    =================================================== -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@type": "LegalService",
+        "@id": "https://luatphucgiauy.vn/#legal-service",
         "name": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự",
-        "url": "https://luatphucgiauy.vn",
-        "logo": "https://luatphucgiauy.vn/assets/images/logo.png",
-        "image": "https://luatphucgiauy.vn/assets/images/logo.png",
-        "description": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên tư vấn pháp lý và đầu tư tại Việt Nam",
+        "alternateName": "Luật Phúc Gia Uy",
+        "url": "https://luatphucgiauy.vn/",
+        "logo": "https://luatphucgiauy.vn/logo.png",
+        "image": "https://luatphucgiauy.vn/logo.png",
+        "description": "Công ty Luật TNHH Phúc Gia Uy & Cộng sự chuyên cung cấp dịch vụ pháp lý về dân sự, hình sự, đầu tư nước ngoài, doanh nghiệp và giấy phép tại Việt Nam.",
+        "telephone": "+84909724768",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "17 Số 4, Khu phố 5",
+          "addressLocality": "Hiệp Bình",
+          "addressRegion": "Thành phố Hồ Chí Minh",
           "addressCountry": "VN"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "Việt Nam"
+        },
+        "parentOrganization": {
+          "@id": "https://luatphucgiauy.vn/#organization"
         }
       }
     </script>
