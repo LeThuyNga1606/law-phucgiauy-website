@@ -248,49 +248,8 @@
   font-weight: 700;
 }
 
-.nd-content ul,
-.nd-content ol {
-  margin: 16px 0 20px 0;
-  padding-left: 0;
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.nd-content li {
-  /* display: flex;
-  align-items: flex-start;
-  gap: 10px; */
-  font-size: 15px;
-  color: #3a3a3a;
-  line-height: 1.7;
-  padding: 10px 16px;
-  background: var(--cream);
-  border-radius: 6px;
-  border-left: 3px solid var(--red);
-}
-
-/* .nd-content li::before {
-  content: "✓";
-  color: var(--red);
-  font-weight: 700;
-  font-size: 13px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  padding: 5px;
-} */
-.nd-content ul {
-  padding-left: 24px;
-  list-style: none !important;
-  display: block;
-}
-/* UL có dấu tick */
-.nd-content ul li {
-  position: relative;
-  padding-left: 28px;
-}
-
+/* ── LIST / CHECKLIST TRONG NỘI DUNG BÀI VIẾT ───────────── */
+/* UL: checklist với dấu ✓ */
 .nd-content ul {
   list-style: none !important;
   padding-left: 0 !important;
@@ -298,29 +257,75 @@
 }
 
 .nd-content ul li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
   position: relative;
+  box-sizing: border-box;
   margin: 12px 0;
-  padding: 10px !important;
+  padding: 10px 16px !important;
   background: #f9f5f5 !important;
   border-left: 4px solid var(--red) !important;
   border-radius: 5px !important;
-
+  font-size: 15px;
+  color: #3a3a3a;
   line-height: 1.8;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .nd-content ul li::before {
   content: "✓";
+  flex: 0 0 16px;
   color: var(--red);
   font-weight: 700;
   font-size: 13px;
-  flex-shrink: 0;
-  margin-top: 2px;
-  padding: 5px;
+  line-height: 1.8;
+  padding: 0;
+  margin: 0;
 }
 
-/* OL không dùng tick */
+/* Khi editor sinh <p> bên trong <li>, bỏ margin để chữ bắt đầu cùng hàng với tick. */
+.nd-content ul li > p {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* OL: danh sách đánh số bình thường, không dùng tick */
+.nd-content ol {
+  padding-left: 24px !important;
+  margin: 16px 0;
+  list-style: decimal !important;
+}
+
+.nd-content ol li {
+  display: list-item;
+  margin: 8px 0;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  border-radius: 0 !important;
+  font-size: 15px;
+  color: #3a3a3a;
+  line-height: 1.7;
+}
+
 .nd-content ol li::before {
-  display: none;
+  content: none !important;
+}
+
+/* Danh sách lồng nhau */
+.nd-content ul li > ul,
+.nd-content ol li > ul {
+  flex: 1 1 100%;
+  width: 100%;
+  margin: 8px 0 0;
+}
+
+.nd-content ol li > ol {
+  margin: 8px 0 0;
 }
 
 .nd-content blockquote {
@@ -1013,17 +1018,6 @@
   font-size: 1.8em;
 }
 
-/* List */
-.nd-content ul,
-.nd-content ol {
-  padding-left: 24px;
-  margin: 16px 0;
-}
-
-.nd-content li {
-  margin: 8px 0;
-}
-
 /* Table */
 .nd-content table {
   width: 100%;
@@ -1076,45 +1070,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* Chỉ áp dụng style li cho bài viết cũ dùng Quill */
-.nd-content .ql-table-wrapper ~ ul li,
-.nd-content > ul li,
-.nd-content > ol li {
-  padding: 10px 16px;
-  background: var(--cream);
-  border-radius: 6px;
-  border-left: 3px solid var(--red);
-}
-
-/* Li từ CKEditor — dùng list thông thường */
-.nd-content ul li,
-.nd-content ol li {
-  font-size: 15px;
-  color: #3a3a3a;
-  line-height: 1.7;
-  margin: 6px 0;
-  padding: 0;
-  background: none;
-  border: none;
-  border-radius: 0;
-}
-
-/* .nd-content ul li::before {
-  display: none;
-} */
-
-/* Restore padding-left cho list */
-.nd-content ul,
-.nd-content ol {
-  padding-left: 24px;
-  list-style: disc;
-  display: block;
-}
-
-.nd-content ol {
-  list-style: decimal;
 }
 
 /* ── NOT FOUND ───────────────────────────────────────── */
