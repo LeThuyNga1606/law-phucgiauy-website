@@ -1174,3 +1174,139 @@
     font-size: 15px;
   }
 }
+
+/* ============================================================================
+   TYPOGRAPHY NORMALIZATION — NỘI DUNG BÀI VIẾT
+   Mục tiêu: nội dung thường dùng cùng một cỡ chữ; tiêu đề và thành phần
+   đặc biệt vẫn được phép lớn hơn theo cấp độ.
+   ============================================================================ */
+
+/* Cỡ chữ chuẩn cho toàn bộ nội dung bài viết */
+.nd-content {
+  font-size: 16px !important;
+  line-height: 1.8;
+  color: #1f2937;
+}
+
+/* Nội dung văn bản thông thường */
+.nd-content p,
+.nd-content li {
+  font-size: 16px !important;
+  line-height: 1.8;
+}
+
+.nd-content p {
+  margin: 16px 0;
+}
+
+/* Tiêu đề: lớn hơn nội dung nhưng giữ cấp độ rõ ràng */
+.nd-content h1 {
+  font-size: 32px !important;
+  line-height: 1.3;
+  font-weight: 700;
+}
+
+.nd-content h2 {
+  font-size: 28px !important;
+  line-height: 1.4;
+  font-weight: 700;
+}
+
+.nd-content h3 {
+  font-size: 22px !important;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+/* Danh sách vẫn dùng đúng cỡ chữ chuẩn */
+.nd-content ul,
+.nd-content ol {
+  font-size: 16px !important;
+}
+
+.nd-content ul li,
+.nd-content ol li {
+  font-size: 16px !important;
+  line-height: 1.8;
+}
+
+/* Nếu editor tạo <p> bên trong <li>, không để nó có cỡ chữ khác */
+.nd-content li > p {
+  font-size: inherit !important;
+  line-height: inherit;
+  margin: 0 !important;
+}
+
+/* Bảng nhỏ hơn một chút để nhiều dữ liệu vẫn dễ đọc */
+.nd-content table,
+.nd-content table th,
+.nd-content table td {
+  font-size: 15px !important;
+  line-height: 1.6;
+}
+
+/* Trích dẫn đồng bộ với body */
+.nd-content blockquote {
+  font-size: 16px !important;
+  line-height: 1.75;
+}
+
+/* Caption ảnh */
+.nd-content figcaption {
+  font-size: 13px !important;
+  line-height: 1.5;
+}
+
+/* Các class do editor sinh ra: vẫn cho phép chủ động làm chữ nhỏ/lớn */
+.nd-content .text-tiny {
+  font-size: 11px !important;
+}
+
+.nd-content .text-small {
+  font-size: 13px !important;
+}
+
+.nd-content .text-big {
+  font-size: 22px !important;
+}
+
+.nd-content .text-huge {
+  font-size: 29px !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nd-content {
+    font-size: 15px !important;
+  }
+
+  .nd-content p,
+  .nd-content li,
+  .nd-content ul li,
+  .nd-content ol li {
+    font-size: 15px !important;
+    line-height: 1.8;
+  }
+
+  .nd-content h1 {
+    font-size: 28px !important;
+  }
+
+  .nd-content h2 {
+    font-size: 24px !important;
+  }
+
+  .nd-content h3 {
+    font-size: 20px !important;
+  }
+
+  .nd-content table,
+  .nd-content table th,
+  .nd-content table td {
+    font-size: 14px !important;
+  }
+
+  .nd-content blockquote {
+    font-size: 15px !important;
+  }
+}
